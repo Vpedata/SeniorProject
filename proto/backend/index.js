@@ -6,6 +6,9 @@ const cookieSession = require('cookie-session')
 const bodyParser = require('body-parser')
 const passport = require('passport')
 
+//database connection
+var connection = require ("./db.js");
+
 // getting the local authentication type
 const LocalStrategy = require('passport-oauth').Strategy
 
@@ -37,6 +40,6 @@ app.use (passport.session())
 
 
 app.listen(3000, () => {
-    console.log("Example app listening on port 3000")
+    console.log("proto  app listening on port 3000")
   })
 
