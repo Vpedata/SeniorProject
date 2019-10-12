@@ -1,0 +1,22 @@
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+        <script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
+        <script type="text/javascript" src="node_modules/vuetify/dist/vuetify.js"></script>
+        <script type="text/javascript" src="node_modules/vuex/dist/vuex.js"></script>
+        <script src="javascript/main.js" defer></script>
+        <script src="javascript/store.js" defer></script>
+    </head>
+    <body>
+        <div id="app1">
+            <h1>{{welcome}}</h1>
+            <h2>{{message}}</h2>
+            <h3>{{get_uid}}</h3>
+            <button @click="press_set_uid">Enter Student ID</button>
+            <input type="text" id="uid_input" name="uid_input" value="916000000">
+        </div>        
+
+    </body>
+</html>
