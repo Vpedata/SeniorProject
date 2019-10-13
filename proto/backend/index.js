@@ -17,12 +17,11 @@ passport.use(
   new GoogleStrategy({
     clientID: keys.google.clientID,
     clientSecret: keys.google.clientSecret,
-  }), () => {
+  }, () => {
       //google callback
   }
-);
+  ));
 
-//THIS HAS TO CHANGE
 const publicRoot = '/home/ubuntu/SeniorProject/proto/dist'
 
 const authMiddleware = (req, res, next) => {
@@ -34,7 +33,7 @@ const authMiddleware = (req, res, next) => {
   };
   
 
-app.use(express.static(publicRoot));
+app.use(express.static(publicRoot))
 app.use(routes);
 app.use (bodyParser.json());
 
