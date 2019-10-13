@@ -1,8 +1,10 @@
 const router = require('express').Router();
-var db = require ("./db");
+var db = require ("./db.js");
 bodyParser = require('body-parser');
 router.use(bodyParser.json()); 
-
+router.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 router.get("/", (req, res, next) => {
   res.sendFile("index.html", { root: publicRoot })
@@ -11,7 +13,7 @@ router.get("/", (req, res, next) => {
 
 //Get all users
 router.get("/users", function(req, res, next){
-  db.connect(function(err) {
+  connection.connect(function(err) {
     if (err) throw err;
     var sql = "SELECT * FROM User";
 	  db.query(sql,function(err, rows, fields){
