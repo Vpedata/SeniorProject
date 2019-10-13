@@ -7,16 +7,7 @@ router.use(bodyParser.json());
 router.get("/", (req, res, next) => {
   res.sendFile("index.html", { root: publicRoot })
 });
-//Get all users
-router.get("/users", function (req, res, next) {
-	var sql = "SELECT * FROM User";
-	db.query(sql,function(err, rows, fields) {
-    if (err)
-      console.log(err);
-    else
-      res.send(rows);
-  })
-});
+
 
 //Get all users
 router.get("/users", (req, res, next) =>{
@@ -25,7 +16,7 @@ router.get("/users", (req, res, next) =>{
     if (err)
       console.log(err);
     else
-      res.send(rows);
+      res.json(rows);
   })
 });
 
@@ -37,7 +28,7 @@ router.get("/user/:id", (req, res, next) => {
     if (err)
       console.log(err);
     else
-      res.send(rows);
+      res.json(rows[0]);
   })
 });
 
@@ -49,7 +40,7 @@ router.delete("/user/:id", (req, res, next) => {
     if (err)
       console.log(err);
     else
-      res.send(rows);
+      res.json({'status': 'success'});
   })
 });
 
@@ -61,7 +52,7 @@ router.post("/user", (req, res, next) => {
     if (err)
       console.log(err);
     else
-      res.send(rows);
+      res.json({'status': 'success'});
   })
 });
 
@@ -74,7 +65,7 @@ router.put("/user", (req, res, next) => {
     if (err)
       console.log(err);
     else
-      res.send(rows);
+      res.json({'status': 'success'});
   })
 });
 
@@ -85,7 +76,7 @@ router.put("/user/getmyid/:email",(req, res, next) => {
     if (err)
       console.log(err);
     else
-      res.send(rows);
+      res.senjsond(rows);
  })
 });
 
