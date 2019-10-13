@@ -11,10 +11,10 @@ router.get("/", (req, res, next) => {
 router.get("/users", function (req, res, next) {
 	var sql = "SELECT * FROM User";
 	db.query(sql,function(err, rows, fields) {
-    if (!err)
-      res.send(rows);
-    else
+    if (err)
       console.log(err);
+    else
+      res.send(rows);
   })
 });
 
@@ -22,10 +22,10 @@ router.get("/users", function (req, res, next) {
 router.get("/users", (req, res, next) =>{
 	var sql = "SELECT * FROM User";
 	db.query(sql,(err, rows, fields) =>{
-    if (!err)
-      res.send(rows);
-    else
+    if (err)
       console.log(err);
+    else
+      res.send(rows);
   })
 });
 
@@ -34,10 +34,10 @@ router.get("/users", (req, res, next) =>{
 router.get("/user/:id", (req, res, next) => {
   var sql = "SELECT * FROM User WHERE user_id = ?";
   db.query(sql, [req.params.id], (err, rows, fields) => {
-    if (!err)
-      res.send(rows);
-    else
+    if (err)
       console.log(err);
+    else
+      res.send(rows);
   })
 });
 
@@ -46,10 +46,10 @@ router.get("/user/:id", (req, res, next) => {
 router.delete("/user/:id", (req, res, next) => {
   var sql = "DELETE FROM User WHERE user_id = ?";
   db.query(sql, [req.params.id], (err, rows, fields) => {
-      if (!err)
-        res.send(rows);
-      else
-        console.log(err);
+    if (err)
+      console.log(err);
+    else
+      res.send(rows);
   })
 });
 
@@ -58,10 +58,10 @@ router.post("/user", (req, res, next) => {
   let user = req.body.user;
   var sql = "INSERT INTO User SET ? ";
   db.query(sql, { user: user }, (err, rows, fields) => {
-    if (!err)
-      res.send(rows);
-    else
+    if (err)
       console.log(err);
+    else
+      res.send(rows);
   })
 });
 
@@ -71,10 +71,10 @@ router.put("/user", (req, res, next) => {
   let user = req.body.user;
   var sql = "UPDATE User SET user = ? WHERE user_id = ?";
   db.query(sql, [user, user_id], (err, rows, fields) => {
-      if (!err)
-          res.send(rows);
-      else
-          console.log(err);
+    if (err)
+      console.log(err);
+    else
+      res.send(rows);
   })
 });
 
@@ -82,10 +82,10 @@ router.put("/user", (req, res, next) => {
 router.put("/user/getmyid/:email",(req, res, next) => {
   var sql = "SELECT user_id FROM User WHERE email = ?";
   db.query(sql, [req.params.email], (err, rows, fields) => {
-    if (!err)
-      res.send(rows);
-    else
+    if (err)
       console.log(err);
+    else
+      res.send(rows);
  })
 });
 

@@ -12,5 +12,5 @@ var connection = mysql.createConnection({
 });
 
 
-module.exports = {con : connection};
+module.exports = connection;
 
