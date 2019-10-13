@@ -1,5 +1,8 @@
 const router = require('express').Router();
 var db = require ("./db");
+bodyParser = require('body-parser');
+router.use(bodyParser.json()); 
+
 
 router.get("/", (req, res, next) => {
   res.sendFile("index.html", { root: publicRoot })
