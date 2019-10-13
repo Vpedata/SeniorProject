@@ -11,7 +11,7 @@ router.get("/", (req, res, next) => {
 
 //Get all users
 router.get("/users", (req, res, next) =>{
-	var sql = "SELECT * FROM User";
+	var sql = "SELECT * FROM SeniorProject.User";
 	db.query(sql,(err, rows, fields) =>{
     if (err)
       console.log(err);
@@ -23,7 +23,7 @@ router.get("/users", (req, res, next) =>{
 
 //Get an user
 router.get("/user/:id", (req, res, next) => {
-  var sql = "SELECT * FROM User WHERE user_id = ?";
+  var sql = "SELECT * FROM User WHERE user_ID = ?";
   db.query(sql, [req.params.id], (err, rows, fields) => {
     if (err)
       console.log(err);
@@ -35,7 +35,7 @@ router.get("/user/:id", (req, res, next) => {
 
 //Delete an user
 router.delete("/user/:id", (req, res, next) => {
-  var sql = "DELETE FROM User WHERE user_id = ?";
+  var sql = "DELETE FROM User WHERE user_ID = ?";
   db.query(sql, [req.params.id], (err, rows, fields) => {
     if (err)
       console.log(err);
@@ -58,10 +58,10 @@ router.post("/user", (req, res, next) => {
 
 //Update an user
 router.put("/user", (req, res, next) => {
-  let user_id = req.body.user_id;
+  let user_ID = req.body.user_ID;
   let user = req.body.user;
-  var sql = "UPDATE User SET user = ? WHERE user_id = ?";
-  db.query(sql, [user, user_id], (err, rows, fields) => {
+  var sql = "UPDATE User SET user = ? WHERE user_ID= ?";
+  db.query(sql, [user, user_ID], (err, rows, fields) => {
     if (err)
       console.log(err);
     else
@@ -71,7 +71,7 @@ router.put("/user", (req, res, next) => {
 
 //Get id by an email
 router.put("/user/getmyid/:email",(req, res, next) => {
-  var sql = "SELECT user_id FROM User WHERE email = ?";
+  var sql = "SELECT user_ID FROM User WHERE email = ?";
   db.query(sql, [req.params.email], (err, rows, fields) => {
     if (err)
       console.log(err);
