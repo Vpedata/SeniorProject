@@ -1,7 +1,7 @@
-const routes = require('./index.js')
+const router = require('express').Router();
 
-app.get("/", (req, res, next) => {
+router.get("/", (req, res, next) => {
   res.sendFile("index.html", { root: publicRoot })
-})
+});
 
 
