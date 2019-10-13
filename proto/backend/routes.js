@@ -7,7 +7,16 @@ router.use(bodyParser.json());
 router.get("/", (req, res, next) => {
   res.sendFile("index.html", { root: publicRoot })
 });
-
+//Get all users
+router.get("/users", function (req, res, next) {
+	var sql = "SELECT * FROM User";
+	db.query(sql,function(err, rows, fields) {
+    if (!err)
+      res.send(rows);
+    else
+      console.log(err);
+  })
+});
 
 //Get all users
 router.get("/users", (req, res, next) =>{
