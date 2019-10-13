@@ -12,7 +12,7 @@ router.get("/", (req, res, next) => {
 //Get all users
 router.get("/users", (req, res, next) =>{
 	var sql = "SELECT * FROM SeniorProject.User";
-	db.query(sql,(err, rows, fields) =>{
+	db.connection.query(sql,(err, rows, fields) =>{
     if (err)
       console.log(err);
     else
