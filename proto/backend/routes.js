@@ -10,14 +10,15 @@ router.get("/", (req, res, next) => {
 
 
 //Get all users
-router.get("/users", (req, res, next) =>{
-	var sql = "SELECT * FROM SeniorProject.User";
-	db.connection.query(sql,(err, rows, fields) =>{
-    if (err)
-      console.log(err);
-    else
-      res.json(rows);
-  })
+router.get("/users", function(req, res, next){
+  con.connect(function(err) {
+    if (err) throw err;
+    var sql = "SELECT * FROM User";
+	  db.query(sql,function(err, rows, fields){
+    if (err) throw err;
+    res.json(rows);
+    })
+  });
 });
 
 
