@@ -1,37 +1,39 @@
 const router = require('express').Router();
+var db = require ("./db");
 
 router.get("/", (req, res, next) => {
   res.sendFile("index.html", { root: publicRoot })
 });
 
-var mysqlConnection = require ("./db");
 
 //Get all users
-router.get('/users', (req, res) => {
-  mysqlConnection.query("SELECT * FROM User", 
-    (err, rows, fields) => {
-      if (!err)
-        res.send(rows);
-      else
-        console.log(err);
+router.get("/users", (req, res, next) =>{
+	var sql = "SELECT * FROM User";
+	db.query(sql,(err, rows, fields) =>{
+    if (!err)
+      res.send(rows);
+    else
+      console.log(err);
   })
 });
 
+
 //Get an user
-router.get('/user/:id', (req, res) => {
-  mysqlConnection.query('SELECT * FROM User WHERE user_id = ?', 
-  [req.params.id], (err, rows, fields) => {
-      if (!err)
-        res.send(rows);
-      else
-        console.log(err);
+router.get("/user/:id", (req, res, next) => {
+  var sql = "SELECT * FROM User WHERE user_id = ?";
+  db.query(sql, [req.params.id], (err, rows, fields) => {
+    if (!err)
+      res.send(rows);
+    else
+      console.log(err);
   })
 });
 
 
 //Delete an user
-router.delete('/user/:id', (req, res) => {
-  mysqlConnection.query('DELETE FROM User WHERE user_id = ?', [req.params.id], (err, rows, fields) => {
+router.delete("/user/:id", (req, res, next) => {
+  var sql = "DELETE FROM User WHERE user_id = ?";
+  db.query(sql, [req.params.id], (err, rows, fields) => {
       if (!err)
         res.send(rows);
       else
@@ -40,22 +42,23 @@ router.delete('/user/:id', (req, res) => {
 });
 
 //Insert an user
-router.post('/user', (req, res) => {
+router.post("/user", (req, res, next) => {
   let user = req.body.user;
-  mysqlConnection.query('INSERT INTO User SET ? ', { user: user }, (err, rows, fields) => {
-      if (!err)
-        res.send(rows);
-      else
-        console.log(err);
+  var sql = "INSERT INTO User SET ? ";
+  db.query(sql, { user: user }, (err, rows, fields) => {
+    if (!err)
+      res.send(rows);
+    else
+      console.log(err);
   })
 });
 
 //Update an user
-router.put('/user', (req, res) => {
+router.put("/user", (req, res, next) => {
   let user_id = req.body.user_id;
   let user = req.body.user;
-  mysqlConnection.query()
-  mysqlConnection.query('UPDATE User SET user = ? WHERE user_id = ?', [user, user_id], (err, rows, fields) => {
+  var sql = "UPDATE User SET user = ? WHERE user_id = ?";
+  db.query(sql, [user, user_id], (err, rows, fields) => {
       if (!err)
           res.send(rows);
       else
@@ -64,8 +67,9 @@ router.put('/user', (req, res) => {
 });
 
 //Get id by an email
-router.put('/user/getmyid/:email',(req, res) => {
-  mysqlConnection.query('SELECT user_id FROM User WHERE email = ?', [req.params.email], (err, rows, fields) => {
+router.put("/user/getmyid/:email",(req, res, next) => {
+  var sql = "SELECT user_id FROM User WHERE email = ?";
+  db.query(sql, [req.params.email], (err, rows, fields) => {
     if (!err)
       res.send(rows);
     else
