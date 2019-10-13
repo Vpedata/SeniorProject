@@ -4,7 +4,7 @@ router.get("/", (req, res, next) => {
   res.sendFile("index.html", { root: publicRoot })
 });
 
-var mysqlConnection = require ("./db.js");
+var mysqlConnection = require ("./db");
 
 //Get all users
 router.get('/users', (req, res) => {
