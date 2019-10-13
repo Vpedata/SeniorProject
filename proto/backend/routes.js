@@ -13,15 +13,13 @@ router.get("/", (req, res, next) => {
 
 //Get all users
 router.get("/users", function(req, res, next){
-  db.connect(function(err) {
-    if (err) throw err;
     var sql = "SELECT * FROM User";
 	  db.query(sql,function(err, rows, fields){
     if (err) throw err;
-    res.json(rows);
-    })
-  });
+    res.send(rows);
+  })
 });
+
 
 
 //Get an user
