@@ -11,7 +11,7 @@ router.get("/", (req, res, next) => {
 
 //Get all users
 router.get("/users", function(req, res, next){
-  con.connect(function(err) {
+  db.connect(function(err) {
     if (err) throw err;
     var sql = "SELECT * FROM User";
 	  db.query(sql,function(err, rows, fields){
