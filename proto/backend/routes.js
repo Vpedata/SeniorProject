@@ -12,11 +12,11 @@ router.get("/", (req, res, next) => {
 
 
 //Get all users
-router.get("/users", function(req, res, next){
+router.get("/users", (req, res, next)=>{
     var sql = "SELECT * FROM User";
-	  db.query(sql,function(err, rows, fields){
+	  db.query(sql,(err, rows, fields)=>{
     if (err) throw err;
-    res.send(rows);
+    res.json(rows);
   })
 });
 
@@ -71,9 +71,9 @@ router.put("/user", (req, res, next) => {
 });
 
 //Get id by an email
-router.put("/user/getmyid/:email",(req, res, next) => {
+router.put("/user?getmyid=email",(req, res, next) => {
   var sql = "SELECT user_ID FROM User WHERE email = ?";
-  db.query(sql, [req.params.email], (err, rows, fields) => {
+  db.query(sql, [req.query.email], (err, rows, fields) => {
     if (err)
       console.log(err);
     else
