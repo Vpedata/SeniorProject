@@ -1,5 +1,5 @@
 const router = require('express').Router();
-
+var db = require ("./db.js");
 
 //Get all users
 router.get("/user/all", (req, res, next)=>{
