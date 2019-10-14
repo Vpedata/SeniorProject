@@ -2,7 +2,7 @@ const router = require('express').Router();
 var db = require (".././db.js");
 
 //Get all users
-router.get("/user/all", (req, res, next)=>{
+router.get("/all", (req, res, next)=>{
     var sql = "SELECT * FROM User";
 	  db.query(sql,(err, rows, fields)=>{
     if (err) throw err;
@@ -13,7 +13,7 @@ router.get("/user/all", (req, res, next)=>{
 
 
 //Get an user
-router.get("/user/:id", (req, res, next) => {
+router.get("/:id", (req, res, next) => {
   var sql = "SELECT * FROM User WHERE user_ID = ?";
   db.query(sql, [req.params.id], (err, rows, fields) => {
     if (err)
@@ -25,7 +25,7 @@ router.get("/user/:id", (req, res, next) => {
 
 
 //Delete an user
-router.delete("/user/:id", (req, res, next) => {
+router.delete("/:id", (req, res, next) => {
   var sql = "DELETE FROM User WHERE user_ID = ?";
   db.query(sql, [req.params.id], (err, rows, fields) => {
     if (err)
@@ -36,7 +36,7 @@ router.delete("/user/:id", (req, res, next) => {
 });
 
 //Insert an user
-router.post("/user", (req, res, next) => {
+router.post("/", (req, res, next) => {
   let user = req.body.user;
   var sql = "INSERT INTO User SET ? ";
   db.query(sql, { user: user }, (err, rows, fields) => {
@@ -48,7 +48,7 @@ router.post("/user", (req, res, next) => {
 });
 
 //Update an user
-router.put("/user", (req, res, next) => {
+router.put("/", (req, res, next) => {
   let user_ID = req.body.user_ID;
   let user = req.body.user;
   var sql = "UPDATE User SET user = ? WHERE user_ID= ?";
@@ -61,7 +61,7 @@ router.put("/user", (req, res, next) => {
 });
 
 //Get id of the current user 
-router.put("/user/getmyid",(req, res, next) => {
+router.put("/getmyid",(req, res, next) => {
     res.send('id: ' + req.query.id);
 });
 
