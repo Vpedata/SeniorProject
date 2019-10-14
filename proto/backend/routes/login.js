@@ -6,7 +6,7 @@ router.get('/login', (req,res)=>{
 });
 
 // auth logout
-router.get('/login', (req,res)=>{
+router.get('/logout', (req,res)=>{
     res.send('logout');
 });
 
