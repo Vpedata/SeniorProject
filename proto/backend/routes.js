@@ -2,9 +2,6 @@ const router = require('express').Router();
 var db = require ("./db.js");
 bodyParser = require('body-parser');
 router.use(bodyParser.json()); 
-router.use(bodyParser.urlencoded({
-  extended: true
-}));
 
 router.get("/", (req, res, next) => {
   res.sendFile("index.html", { root: publicRoot })
@@ -70,16 +67,9 @@ router.put("/user", (req, res, next) => {
   })
 });
 
-//Get id by an email
-router.put("/usersby",(req, res, next) => {
-  console.log(req.query);
-  //var sql = "SELECT user_ID FROM User WHERE email = ?";
-  //db.query(sql, [req.query.email], (err, rows, fields) => {
-    //if (err)
-     // console.log(err);
-    //else
-      //res.senjsond(rows);
- //})
+//Get id of the current user 
+router.put("/user/getmyid",(req, res, next) => {
+    res.send('id: ' + req.query.id);
 });
 
 module.exports = router;
