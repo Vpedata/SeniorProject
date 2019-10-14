@@ -18,9 +18,10 @@ passport.use(
     callbackURL:'/auth/redirect',
     clientID: keys.google.clientID,
     clientSecret: keys.google.clientSecret,
-  }, () => {
+  }, (accessToken,refreshToken,profile,done) => {
       //google callback
-  }
+      console.log('passport callback function ready')
+  } 
   ));
 
 const publicRoot = '/home/ubuntu/SeniorProject/proto/dist'
