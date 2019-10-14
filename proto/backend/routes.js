@@ -71,14 +71,15 @@ router.put("/user", (req, res, next) => {
 });
 
 //Get id by an email
-router.put("/user?getmyid=email",(req, res, next) => {
-  var sql = "SELECT user_ID FROM User WHERE email = ?";
-  db.query(sql, [req.query.email], (err, rows, fields) => {
-    if (err)
-      console.log(err);
-    else
-      res.senjsond(rows);
- })
+router.put("/usersby",(req, res, next) => {
+  console.log(req.query);
+  //var sql = "SELECT user_ID FROM User WHERE email = ?";
+  //db.query(sql, [req.query.email], (err, rows, fields) => {
+    //if (err)
+     // console.log(err);
+    //else
+      //res.senjsond(rows);
+ //})
 });
 
 module.exports = router;
