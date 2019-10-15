@@ -1,10 +1,18 @@
+/**
+  * Builds the users module that stores the users registered
+  */
+
+//imports 'userService' constant exported from the 'user.service.js' file in the '../_services' folder, exported by the 'index.js' file in the same folder
 import { userService } from '../_services';
 
+//constant 'state' that contains 'all' users and defaults to empty
 const state = {
     all: {}
 };
 
+// constant 'actions' that contains the actons of the users storage data structure
 const actions = {
+    //getAll() action function that makes a request to get all users and calls the userService.getAll() function to do so, resulting in either 'users' being passed 'users' upon success or 'error' being passed 'error' upon failure
     getAll({ commit }) {
         commit('getAllRequest');
 
@@ -15,6 +23,7 @@ const actions = {
             );
     },
 
+    //delete() action function that deletes the user with 'id' and calls the userService.delete() function to do so, resulting in either 'user' being passed 'id' upon success or 'error' being passed 'id' and 'error: error.toString()' upon failure
     delete({ commit }, id) {
         commit('deleteRequest', id);
 
