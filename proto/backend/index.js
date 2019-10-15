@@ -15,7 +15,7 @@ const GoogleStrategy = require('passport-google-oauth20');
 
 passport.use(
   new GoogleStrategy({
-    callbackURL:'/auth/redirect',
+	  callbackURL:'http://onlineadvisor.tk:3000/auth/redirect',
     clientID: keys.google.clientID,
     clientSecret: keys.google.clientSecret,
   }, (accessToken,refreshToken,profile,done) => {
