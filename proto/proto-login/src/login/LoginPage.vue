@@ -1,3 +1,4 @@
+<!-- Login page prototype vue code template -->
 <template>
     <div>
         <h2>Login</h2>
