@@ -52,7 +52,7 @@ export default {
         handleSubmit (e) {
             this.submitted = true;
             const { email, password } = this;
-            //if email && password are true, save email and password for user state handling
+            //if email && password exist and are correct, login to this user for user state handling
             if (email && password) {
                 this.login({ email, password })
             }
