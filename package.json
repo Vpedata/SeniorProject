@@ -1,0 +1,51 @@
+{
+  "name": "seniorproject",
+  "version": "1.0.0",
+  "description": "----------------------- ## Project Description -----------------------     In our experience as students, it has been tedious, and sometimes difficult, to identify what classes we need to take. It is also difficult to figure out when to take them, and what order we should take them in. Advisors are not always around either, so it becomes a guessing game if there is any uncertainty. Our project aims to provide an online advisement system between students and advisors. This will be achieved by providing students with an automated schedule of courses for the upcoming semesters. From there, students can modify the schedule of courses and ask the advisor for input by using the webpage’s messaging system. The advisor can then provide feedback. Finally, the online conversation between students and advisors are logged and can be retrieved at any point by either member.",
+  "main": "./backend/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vpedata/SeniorProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "vee-validate": "^2.2.8",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.6",
+    "vuetify": "^2.1.3",
+    "vuex": "^3.1.1"
+    "body-parser": "^1.19.0",
+    "cookie-session": "^1.3.3",
+    "express": "^4.17.1",
+    "mysql": "^2.17.1",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^2.0.0"
+  },
+"devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-vue": "^2.0.2",
+    "css-loader": "^2.1.1",
+    "deepmerge": "^4.1.1",
+    "fibers": "^4.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "path": "^0.12.7",
+    "sass": "^1.23.0",
+    "sass-loader": "^8.0.0",
+    "vue-loader": "^14.2.3",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.32.1",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.4.1"
+  },
+  "bugs": {
+    "url": "https://github.com/Vpedata/SeniorProject/issues"
+  },
+  "homepage": "https://github.com/Vpedata/SeniorProject#readme"
+}
