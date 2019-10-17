@@ -24,7 +24,7 @@ passport.use(
   } 
   ));
 
-const publicRoot = '/home/ubuntu/SeniorProject/proto/dist'
+const publicRoot = '/home/ubuntu/SeniorProject/frontend/dist'
 
 const authMiddleware = (req, res, next) => {
     if (!req.isAuthenticated()) {
