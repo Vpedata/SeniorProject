@@ -16,7 +16,13 @@
         <p>
             <router-link to="/login">Logout</router-link>
         </p>
+        <v-app id="inspire">
+            <div class="text-center">
+                <v-btn class="ma-2" outlined color="indigo" @click="$router.push('/studentview')" dark>Continue</v-btn>
+            </div>
+        </v-app>
     </div>
+    
 </template>
 
 <script>

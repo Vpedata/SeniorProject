@@ -4,8 +4,11 @@ import Router from 'vue-router';
 import HomePage from '../home/HomePage'
 import LoginPage from '../login/LoginPage'
 import RegisterPage from '../register/RegisterPage'
+import StudentView from '../student_view/StudentView'
+import vuetify from '../plugins/vuetify';
 
 Vue.use(Router);
+Vue.use(vuetify);
 
 export const router = new Router({
   mode: 'history',
@@ -13,6 +16,7 @@ export const router = new Router({
     { path: '/', component: HomePage },
     { path: '/login', component: LoginPage },
     { path: '/register', component: RegisterPage },
+    { path: '/studentview', component: StudentView },
 
     // otherwise redirect to home
     { path: '*', redirect: '/' }
