@@ -18,13 +18,7 @@ require('./config/passport.js');
 
 const publicRoot = '/home/ubuntu/SeniorProject/frontend/dist'
 
-const authMiddleware = (req, res, next) => {
-    if (!req.isAuthenticated()) {
-      res.status(401).send('You are not authenticated')
-    } else {
-      return next()
-    }
-  };
+
 
 app.use(express.static(publicRoot))
 app.use(routes);

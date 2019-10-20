@@ -23,14 +23,8 @@ passport.use(new GoogleStrategy({
   (accessToken,refreshToken,profile,done) => {
     process.nextTick(function(){
         //google callback
-        const User = {
-            "email": profile.email[0],
-            "firstName": profile.displayName,
-            "lastName" : profile.familyName,
-            "isStudent" : "",
-            "googleId" : profile.id
-        };
-        return done(null, User)
+        
+        return done(null, profile)
       /**       var sql = "SELECT * FROM User where google_id= ?";
 	  db.query(sql,[profile.id],(err, rows, fields)=>{
         if (err) return done(err);
