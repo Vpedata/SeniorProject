@@ -18,8 +18,6 @@ require('./config/passport.js');
 
 const publicRoot = '/home/ubuntu/SeniorProject/frontend/dist'
 
-
-
 app.use(express.static(publicRoot))
 app.use(routes);
 app.use(bodyParser.urlencoded({ extended: false }));
