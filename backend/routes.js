@@ -3,7 +3,7 @@ const router = require('express').Router();
 bodyParser = require('body-parser');
 router.use(bodyParser.json()); 
 
-const authRoutes = require('./routes/login')
+const authRoutes = require('./routes/auth')
 const userRoutes = require('./routes/user')
 
 // display the index.html
