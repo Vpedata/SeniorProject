@@ -4,25 +4,15 @@ const express = require('express');
 const app = express()
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
-const passport = require('passport');
-const keys = require('./keys');
+
+//Routes to Restful API
 const routes = require('./routes.js');
+
 //database connection
-var connection = require ("./db.js");
+var connection = require ("./config/db.js");
 
-// getting the local authentication type
-const GoogleStrategy = require('passport-google-oauth20');
-
-passport.use(
-  new GoogleStrategy({
-    callbackURL:'/auth/redirect',
-    clientID: keys.google.clientID,
-    clientSecret: keys.google.clientSecret,
-  }, (accessToken,refreshToken,profile,done) => {
-      //google callback
-      console.log('passport callback function ready')
-  } 
-  ));
+//google OAuth2.0 using passport
+const passport = require('./config/passport.js');
 
 const publicRoot = '/home/ubuntu/SeniorProject/frontend/dist'
 
