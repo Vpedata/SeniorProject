@@ -13,7 +13,8 @@ passport.use(new GoogleStrategy({
   }, 
   (accessToken,refreshToken,profile,done) => {
       //google callback
-      var sql = "SELECT * FROM User where google_id= ?";
+      done (null, profile)
+      /**       var sql = "SELECT * FROM User where google_id= ?";
 	  db.query(sql,[profile.id],(err, rows, fields)=>{
         if (err) return done(err);
         if(rows.length)
@@ -28,5 +29,5 @@ passport.use(new GoogleStrategy({
             }
             done (null,User);
         }
-    });
+    });**/
 }));
