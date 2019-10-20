@@ -8,10 +8,9 @@ router.get('/',passport.authenticate('google',{
 }));
 
 //callback route for google to redirect to
-router.get('/redirect',passport.authenticate('google'),(req,res)=>{
+router.get('/redirect',passport.authenticate('google'),{
     successRedirect: '/auth/login',
     failureRedirect: '/auth'
-    
 })
 
 // auth login 
