@@ -4,8 +4,8 @@ const express = require('express');
 const app = express()
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
+const passport = require('passport')
 
-const keys = require('./keys');
 
 //Routes to Restful API
 const routes = require('./routes.js');
@@ -14,7 +14,7 @@ const routes = require('./routes.js');
 var connection = require ("./config/db.js");
 
 //google OAuth2.0 using passport
-const passport = require('./config/passport.js');
+require('./config/passport.js');
 
 const publicRoot = '/home/ubuntu/SeniorProject/frontend/dist'
 
