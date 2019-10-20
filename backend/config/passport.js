@@ -1,4 +1,5 @@
 const passport = require('passport');
+const keys = require('./keys');
 
 // getting the local authentication type
 const GoogleStrategy = require('passport-google-oauth20');

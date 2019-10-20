@@ -5,6 +5,8 @@ const app = express()
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 
+const keys = require('./keys');
+
 //Routes to Restful API
 const routes = require('./routes.js');
 
