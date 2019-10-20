@@ -1,3 +1,14 @@
+const Sequelize = require('sequelize');
+const keys = require('./keys.js');
+var sequelize = new Sequelize('SeniorProject', keys.db.uname, keys.db.pword, {
+    host:"3.84.68.239", 
+    dialect='mysql',
+    operatorsAliases=false
+}))
+
+module.export = sequelize; 
+
+/** 
 var mysql = require('mysql');
 const keys = require('./keys.js');
 var connection = mysql.createConnection({
@@ -15,3 +26,4 @@ connection.connect(function (err){
 
 module.exports = connection;
 
+**/

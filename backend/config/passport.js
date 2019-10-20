@@ -9,8 +9,10 @@ passport.use(
     callbackURL:'/auth/redirect',
     clientID: keys.google.clientID,
     clientSecret: keys.google.clientSecret,
+    passReqToCallback   : true
   }, (accessToken,refreshToken,profile,done) => {
       //google callback
-      console.log('passport callback function ready')
-  } 
-  ));
+      //User.findOrCreate({ googleId: profile.id }, function (err, user) {
+       // return done(err, user);
+      //});
+  }));

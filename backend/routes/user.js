@@ -1,6 +1,14 @@
 const router = require('express').Router();
 var db = require ("../config/db.js");
 
+//User Homepage
+router.get("/", (req, res, next)=>{
+    res.send('Logged in');
+});
+
+
+
+
 //Get all users
 router.get("/all", (req, res, next)=>{
     var sql = "SELECT * FROM User";

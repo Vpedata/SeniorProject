@@ -2,10 +2,10 @@ const express = require('express');
  
 // creating an express instance
 const app = express()
+
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
-const passport = require('passport')
-
+const passport = require('passport');
 
 //Routes to Restful API
 const routes = require('./routes.js');
@@ -25,10 +25,10 @@ const authMiddleware = (req, res, next) => {
       return next()
     }
   };
-  
 
 app.use(express.static(publicRoot))
 app.use(routes);
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use (bodyParser.json());
 
 app.use(cookieSession({
@@ -39,8 +39,6 @@ app.use(cookieSession({
 
 app.use (passport.initialize());
 app.use (passport.session());
-
-
 
 app.listen(3000, () => {
     console.log("proto  app listening on port 3000")

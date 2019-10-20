@@ -4,22 +4,25 @@ const passport = require('passport');
 
 // auth page
 router.get('/',passport.authenticate('google',{
-    scope:['profile']
+    scope:[ 'email', 'profile' ]
 }));
 
 //callback route for google to redirect to
 router.get('/redirect',passport.authenticate('google'),(req,res)=>{
-    res.send("You reached the callback URI")
+    successRedirect: '/auth/login',
+    failureRedirect: '/auth'
+    
 })
 
 // auth login 
 router.get('/login', (req,res)=>{
-    res.send('login');
+    res.redirect('/user');
 });
 
 // auth logout
 router.get('/logout', (req,res)=>{
-    res.send('logout');
+    req.logout();
+    res.redirect('/');
 });
 
 
