@@ -4,15 +4,16 @@ const passport = require('passport');
 
 
 // auth login page
-router.get('/login',passport.authenticate('google',{
-    scope:[ 'email', 'profile' ]
+router.get('/login',passport.authenticate('google',{scope: 
+    ['https://www.googleapis.com/auth/userinfo.profile',
+'https://www.googleapis.com/auth/userinfo.email']
 }));
 
 //callback route for google to redirect to
 router.get('/redirect',passport.authenticate('google',
     {failureRedirect: '/auth/login' }),
     (req, res)=>{
-    res.redirect('/user');
+    res.send(req.user);
   });
     
 
