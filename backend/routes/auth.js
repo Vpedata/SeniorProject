@@ -1,12 +1,9 @@
 const router = require('express').Router();
 const passport = require('passport');
 
-
-
 // auth login page
-router.get('/login',passport.authenticate('google',{scope: 
-    ['https://www.googleapis.com/auth/userinfo.profile',
-'https://www.googleapis.com/auth/userinfo.email']
+router.get('/login',passport.authenticate('google',{
+    scope: ['profile','email']
 }));
 
 //callback route for google to redirect to

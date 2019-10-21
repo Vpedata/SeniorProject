@@ -24,6 +24,7 @@ passport.use(new GoogleStrategy({
 
     process.nextTick(function(){
         //google callback
+        
         return done(null, profile);
     });
   }
