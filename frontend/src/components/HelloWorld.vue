@@ -2,7 +2,17 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
+    
     <ul>
+      <li> 
+        <a 
+          href="/auth/login"
+          target="_blank"
+        >
+            Sign In with Google
+        </a>
+      </li>
+      <br>
       <li>
         <a
           href="https://vuejs.org"

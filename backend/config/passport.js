@@ -36,6 +36,13 @@ passport.use(new GoogleStrategy({
           done(null,rows[0]);
         else 
         {
+          let user = {
+            "isStudent" : 1,
+            "firstName" : profile.name.givenName,
+            "lastName"  : profile.name.familyName,
+            "email"     : profile.email[0],
+            "googleId"  : profile.id
+          };
           var insert = "INSERT INTO User SET ?; SELECT SCOPE_IDENTITY();";
           db.query(insert, { user: user }, (err, rows, fields) => {
             if(err) throw  err;
