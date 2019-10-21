@@ -7,12 +7,17 @@ const GoogleStrategy = require('passport-google-oauth20');
 
 // Serialized and deserialized methods when got from session
 passport.serializeUser(function(user, done) {
-    done(null, user);
+    done(null, user.id);
+});
+passport.deserializeUser(function(id, done) {
+  var sql = "SELECT * FROM User WHERE user_ID = ?";
+  db.query(sql, [id], (err, rows, fields) => {
+    if (err)throw err;
+    done(null,rows[0]);
+
+  })
 });
 
-passport.deserializeUser(function(user, done) {
-    done(null, user);
-});
 
 passport.use(new GoogleStrategy({
     callbackURL:'/auth/redirect',
@@ -23,9 +28,20 @@ passport.use(new GoogleStrategy({
   (accessToken,refreshToken,profile,done) => {
 
     process.nextTick(function(){
-        //google callback
-        
-        return done(null, profile);
+      //google callback
+      var sql = "SELECT * FROM User WHERE googleId = ?";
+      db.query(sql, [profile.id], (err, rows, fields) => {
+        if (err) throw err;
+        if(rows.length)
+          done(null,rows[0]);
+        else 
+        {
+          var insert = "INSERT INTO User SET ?; SELECT SCOPE_IDENTITY();";
+          db.query(insert, { user: user }, (err, rows, fields) => {
+            if(err) throw  err;
+            done(null,rows[0]) 
+          });
+        }
+      });
     });
-  }
-));
+  }));
