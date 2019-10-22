@@ -25,12 +25,12 @@ passport.use(new GoogleStrategy({
     clientSecret: keys.google.clientSecret,
     passReqToCallback   : true
   }, 
-  (accessToken,refreshToken,profile,done) => {
-    console.log(done);
+  (accessToken,refreshToken,done,profile) => {
+    console.log(profile);
     process.nextTick(function(){
       //google callback
       var sql = "SELECT * FROM User WHERE googleId = ?";
-      db.query(sql, [done.id], (err, rows, fields) => {
+      db.query(sql, [profile.id], (err, rows, fields) => {
         if (err) throw err;
         if(rows.length)
           done(null,rows[0]);
@@ -38,13 +38,13 @@ passport.use(new GoogleStrategy({
         {
           let user = {
             isStudent : 1,
-            firstName : done.name.givenName,
-            lastName  : done.name.familyName,
-            email     : done.emails[0].value,
-            googleId  : done.id
+            firstName : profile.name.givenName,
+            lastName  : profile.name.familyName,
+            email     : profile.emails[0].value,
+            googleId  : profile.id
           };
-          var insert = "INSERT INTO User SET ?; SELECT * from User where user_ID=(SELECT LAST_INSERT_ID())";
-          db.query(insert, user, (err, rows, fields) => {
+          var insert = "INSERT INTO User SET ?;SELECT * FROM User WHERE googleId = ?"
+          db.query(insert, [user,profile.id], (err, rows, fields) => {
             if(err) throw  err;
             done(null,rows[0]) 
           });

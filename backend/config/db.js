@@ -6,7 +6,8 @@ var connection = mysql.createConnection({
     user: keys.db.uname,
     password:keys.db.pword,
     database: "SeniorProject",
-    insecureAuth: true
+    insecureAuth: true,
+    multipleStatements:true
 })
 connection.connect(function (err){
     if (err) throw err;
