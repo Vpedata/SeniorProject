@@ -36,8 +36,9 @@ passport.use(new GoogleStrategy({
           done(null,rows[0]);
         else 
         {
-          let user = [1,done.name.givenName,done.name.familyName, done.emails[0].value, done.id]
-          var insert = "INSERT INTO students (isStudent,firstName,lastName,email,googleId) VALUES ?; SELECT SCOPE_IDENTITY();"
+          let user = (1,done.name.givenName,done.name.familyName, done.emails[0].value, done.id);
+          var insert = "INSERT INTO User (isStudent,firstName,lastName,email,googleId) VALUES ?; \
+          SELECT * from User where user_ID=(SELECT LAST_INSERT_ID());"
           db.query(insert, [user], (err, rows, fields) => {
             if(err) throw  err;
             done(null,rows[0]) 
