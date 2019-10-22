@@ -37,15 +37,14 @@ passport.use(new GoogleStrategy({
         else 
         {
           let user = {
-            "isStudent" : 1,
-            "firstName" : done.name.givenName,
-            "lastName"  : done.name.familyName,
-            "email"     : done.emails[0].value,
-            "googleId"  : done.id
+            isStudent : 1,
+            firstName : done.name.givenName,
+            lastName  : done.name.familyName,
+            email     : done.emails[0].value,
+            googleId  : done.id
           };
-          var insert = "INSERT INTO User (isStudent,firstName,lastName,email,googleId) VALUES ?; \
-          SELECT * from User where user_ID=(SELECT LAST_INSERT_ID());"
-          db.query(insert, [user], (err, rows, fields) => {
+          var insert = "INSERT INTO User SET ?; SELECT * from User where user_ID=(SELECT LAST_INSERT_ID())";
+          db.query(insert, user, (err, rows, fields) => {
             if(err) throw  err;
             done(null,rows[0]) 
           });
