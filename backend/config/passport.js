@@ -25,7 +25,7 @@ passport.use(new GoogleStrategy({
     clientSecret: keys.google.clientSecret,
     passReqToCallback   : true
   }, 
-  (accessToken,refreshToken,profile,done) => {
+  (req,accessToken,refreshToken,profile,done) => {
     console.log(profile);
     process.nextTick(function(){
       //google callback
