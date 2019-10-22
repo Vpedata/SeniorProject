@@ -3,7 +3,7 @@ const keys = require('./keys');
 var db = require ("./db.js");
 
 // getting the local authentication type
-const GoogleStrategy = require('passport-google-oauth20');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 // Serialized and deserialized methods when got from session
 passport.serializeUser(function(user, done) {
@@ -23,10 +23,10 @@ passport.use(new GoogleStrategy({
     callbackURL:'/auth/redirect',
     clientID: keys.google.clientID,
     clientSecret: keys.google.clientSecret,
-    passReqToCallback   : true
+    //passReqToCallback   : true
   }, 
-  (accessToken,refreshToken,done,profile) => {
-    console.log(profile);
+  (accessToken,refreshToken,profile,done) => {
+    console.log(profile.emails);
     process.nextTick(function(){
       //google callback
       var sql = "SELECT * FROM User WHERE googleId = ?";
