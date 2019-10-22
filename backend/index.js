@@ -1,4 +1,7 @@
 const express = require('express');
+ 
+// creating an express instance
+const app = express()
 
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
@@ -7,8 +10,6 @@ const passport = require('passport');
 //google OAuth2.0 using passport
 require('./config/passport.js');
 
-// creating an express instance
-const app = express()
 
 app.use(cookieSession({
     name: 'session',
@@ -19,11 +20,11 @@ app.use(cookieSession({
 app.use (passport.initialize());
 app.use (passport.session());
 
-//database connection
-var connection = require ("./config/db.js");
-
 //Routes to Restful API
 const routes = require('./routes.js');
+
+//database connection
+var connection = require ("./config/db.js");
 
 const publicRoot = '/home/ubuntu/SeniorProject/frontend/dist'
 

@@ -7,14 +7,15 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 // Serialized and deserialized methods when got from session
 passport.serializeUser(function(user, done) {
+    console.log(user);
     done(null, user.id);
 });
 passport.deserializeUser(function(id, done) {
   var sql = "SELECT * FROM User WHERE user_ID = ?";
   db.query(sql, [id], (err, rows, fields) => {
     if (err)throw err;
+    console.log(rows[0]);
     done(null,rows[0]);
-
   })
 });
 
