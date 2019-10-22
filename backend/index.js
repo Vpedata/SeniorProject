@@ -6,6 +6,7 @@ const app = express()
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const session = require('express-session');
 
 //google OAuth2.0 using passport
 require('./config/passport.js');
@@ -16,6 +17,8 @@ app.use(cookieSession({
     keys: ['proto'],
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }))
+
+app.use(session({secret: 'proto' }));
 
 app.use (passport.initialize());
 app.use (passport.session());
