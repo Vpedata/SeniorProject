@@ -23,17 +23,17 @@ passport.use(new GoogleStrategy({
     callbackURL:'/auth/redirect',
     clientID: keys.google.clientID,
     clientSecret: keys.google.clientSecret,
-    //passReqToCallback   : true
+    passReqToCallback   : true
   }, 
   (accessToken,refreshToken,profile,done) => {
-    console.log(profile.emails);
+    console.log(profile);
     process.nextTick(function(){
       //google callback
       var sql = "SELECT * FROM User WHERE googleId = ?";
       db.query(sql, [profile.id], (err, rows, fields) => {
         if (err) throw err;
         if(rows.length)
-          done(null,rows[0]);
+          return done(null,rows[0]);
         else 
         {
           let user = {
@@ -46,7 +46,7 @@ passport.use(new GoogleStrategy({
           var insert = "INSERT INTO User SET ?;SELECT * FROM User WHERE googleId = ?"
           db.query(insert, [user,profile.id], (err, rows, fields) => {
             if(err) throw  err;
-            done(null,rows[0]) 
+            return done(null,rows[0]) 
           });
         }
       });
