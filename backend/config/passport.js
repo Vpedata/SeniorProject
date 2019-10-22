@@ -26,14 +26,11 @@ passport.use(new GoogleStrategy({
     passReqToCallback   : true
   }, 
   (accessToken,refreshToken,profile,done) => {
-    console.log(accessToken);
-    console.log(refreshToken);
-    console.log(profile);
     console.log(done);
     process.nextTick(function(){
       //google callback
       var sql = "SELECT * FROM User WHERE googleId = ?";
-      db.query(sql, [profile.id], (err, rows, fields) => {
+      db.query(sql, [done.id], (err, rows, fields) => {
         if (err) throw err;
         if(rows.length)
           done(null,rows[0]);
@@ -41,10 +38,10 @@ passport.use(new GoogleStrategy({
         {
           let user = {
             "isStudent" : 1,
-            "firstName" : profile.name.givenName,
-            "lastName"  : profile.name.familyName,
-            "email"     : profile.email[0],
-            "googleId"  : profile.id
+            "firstName" : done.name.givenName,
+            "lastName"  : done.name.familyName,
+            "email"     : done.emails[0].value,
+            "googleId"  : done.id
           };
           var insert = "INSERT INTO User SET ?; SELECT SCOPE_IDENTITY();";
           db.query(insert, { user: user }, (err, rows, fields) => {
