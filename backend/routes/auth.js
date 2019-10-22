@@ -3,6 +3,8 @@ const passport = require('passport');
 
 // auth login page
 router.get('/login',passport.authenticate('google',{
+    accessType: 'offline',
+    prompt: 'consent',
     scope: ['profile','email']
 }));
 

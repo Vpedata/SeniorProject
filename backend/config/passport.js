@@ -26,7 +26,10 @@ passport.use(new GoogleStrategy({
     passReqToCallback   : true
   }, 
   (accessToken,refreshToken,profile,done) => {
-
+    console.log(accessToken);
+    console.log(refreshToken);
+    console.log(profile);
+    console.log(done);
     process.nextTick(function(){
       //google callback
       var sql = "SELECT * FROM User WHERE googleId = ?";
