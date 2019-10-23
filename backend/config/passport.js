@@ -44,10 +44,14 @@ passport.use(new GoogleStrategy({
             email     : profile.emails[0].value,
             googleId  : profile.id
           };
-          var insert = "INSERT INTO User SET ?;SELECT * FROM User WHERE googleId = ?"
+          var insert = "INSERT INTO User SET ?"
           db.query(insert, [user,profile.id], (err, rows, fields) => {
             if(err) throw  err;
-            return done(null,rows[0]) 
+          });
+          db.query(sql, [profile.id], (err, rows, fields) => {
+            if (err) throw err;
+            if(rows.length)
+              return done(null,rows[0]);
           });
         }
       });
