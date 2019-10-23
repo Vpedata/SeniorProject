@@ -17,7 +17,7 @@ router.get("/",authMiddleware, (req, res, next)=>{
 
 
 //Get all users
-router.get("/all", (req, res, next)=>{
+router.get("/all",authMiddleware, (req, res, next)=>{
     var sql = "SELECT * FROM User";
 	  db.query(sql,(err, rows, fields)=>{
     if (err) throw err;
@@ -28,7 +28,7 @@ router.get("/all", (req, res, next)=>{
 
 
 //Get an user
-router.get("/:id", (req, res, next) => {
+router.get("/:id",authMiddleware, (req, res, next) => {
   var sql = "SELECT * FROM User WHERE user_ID = ?";
   db.query(sql, [req.params.id], (err, rows, fields) => {
     if (err)
