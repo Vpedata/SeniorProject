@@ -12,7 +12,7 @@ const authMiddleware = (req, res, next) => {
 
 //User Homepage
 router.get("/",authMiddleware, (req, res, next)=>{
-    res.send('Logged in');
+    res.send(req.user);
 });
 
 

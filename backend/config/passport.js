@@ -8,7 +8,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 // Serialized and deserialized methods when got from session
 passport.serializeUser(function(user, done) {
     console.log(user);
-    done(null, user.id);
+    done(null, user.user_ID);
 });
 passport.deserializeUser(function(id, done) {
   var sql = "SELECT * FROM User WHERE user_ID = ?";
