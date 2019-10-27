@@ -17,7 +17,8 @@ router.get('/redirect',passport.authenticate('google',{
 
 // auth logout
 router.get('/logout', (req,res)=>{
-    req.session = null; 
+    req.session = null;
+    console.log(req.session);
     req.logout();
     res.redirect('/');
 });
