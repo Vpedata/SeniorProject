@@ -5,7 +5,7 @@ const authMiddleware = require("./authentication.js");
 const isStudent= (req, res, next) => {
     if (req.user.IsStudent)
         return next();
-    res.redirect('auth/login');
+    res.redirect('/auth/login');
 };
 
 //Student Homepage
