@@ -3,8 +3,8 @@ var db = require ("../config/db.js");
 
 //check for authorized users only; 
 const authMiddleware = (req, res, next) => {
-  if (!req.isAuthenticated()) {
-    res.status(401).send('You are not authenticated')
+  if (!req.user) {
+    res.redirect(/auth/login);
   } else {
     return next()
   }
