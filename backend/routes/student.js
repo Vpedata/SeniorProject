@@ -1,9 +1,15 @@
 const router = require('express').Router();
 const authMiddleware = require("./authentication.js");
 
+//check if user is student only; 
+const isStudent= (req, res, next) => {
+    if (req.user.IsStudent)
+        return next()
+    req.redirect('auth/login')
+};
+
 //Student Homepage
-router.get("/",authMiddleware, (req, res, next)=>{
-    console.log("in student homepage");
+router.get("/",isStudent, (req, res, next)=>{
     res.send(req.user);
 });
 
