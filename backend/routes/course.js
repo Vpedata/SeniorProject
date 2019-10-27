@@ -13,7 +13,7 @@ router.get("/all",authMiddleware, (req, res, next)=>{
 
 //Get an course by id 
 router.get("/:id",authMiddleware, (req, res, next) => {
-  var sql = "SELECT * FROM User WHERE course_ID = ?";
+  var sql = "SELECT * FROM Course WHERE course_ID = ?";
   db.query(sql, [req.params.id], (err, rows, fields) => {
     if (err) throw err;
     res.json(rows[0]);
@@ -22,7 +22,7 @@ router.get("/:id",authMiddleware, (req, res, next) => {
 
 //Get an course by crn 
 router.get("/:crn",authMiddleware, (req, res, next) => {
-  var sql = "SELECT * FROM User WHERE course_crn = ?";
+  var sql = "SELECT * FROM Course WHERE course_crn = ?";
   db.query(sql, [req.query.crn], (err, rows, fields) => {
     if (err) throw err;
     res.json(rows[0]);

@@ -19,7 +19,7 @@ router.use('/auth',authRoutes);
 router.use('/user',userRoutes);
 
 // routes to course
-router.use('/user',userRoutes);
+router.use('/course',courseRoutes);
 
 module.exports = router;
 
