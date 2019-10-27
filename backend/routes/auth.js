@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
-const authMiddleware = require("./authentication.js")
+const authMiddleware = require("./authentication.js");
 
 // auth login page
 router.get('/login',passport.authenticate('google',{

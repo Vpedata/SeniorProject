@@ -6,7 +6,7 @@ const authMiddleware = require("./authentication.js");
 router.get("/",authMiddleware, (req, res, next)=>{
     req.session.user_ID = req.user.user_ID;
     console.log(req.session);
-    if(req.user.isStudent){
+    if(req.user.IsStudent){
       res.redirect('/user/student');
     }
     else{

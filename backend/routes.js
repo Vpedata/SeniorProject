@@ -6,8 +6,8 @@ router.use(bodyParser.json());
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const courseRoutes = require('./routes/course');
-//const studentRoutes = require('./routes/student');
-//const advisorRoutes = require('./routes/advisor');
+const studentRoutes = require('./routes/student');
+const advisorRoutes = require('./routes/advisor');
 
 // display the index.html
 router.get("/", (req, res, next) => {
@@ -24,10 +24,10 @@ router.use('/user',userRoutes);
 router.use('/course',courseRoutes);
 
 // routes to student
-//router.use('/user/student',studentRoutes);
+router.use('/user/student',studentRoutes);
 
 // routes to advisor 
-//router.user('/user/advisor',advisorRoutes);
+router.use('/user/advisor',advisorRoutes);
 
 module.exports = router;
 

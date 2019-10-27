@@ -3,7 +3,7 @@ const authMiddleware = require("./authentication.js");
 
 //Student Homepage
 router.get("/",authMiddleware, (req, res, next)=>{
-    console.log(req.user);
+    console.log("in student homepage");
     res.send(req.user);
 });
 
