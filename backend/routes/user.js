@@ -2,25 +2,17 @@ const router = require('express').Router();
 var db = require ("../config/db.js");
 const authMiddleware = require("./authentication.js");
 
-//Deterime is user is student or advisor
-const validateUser = (req, res, next) => {
-  if (!req.user) {
-    res.redirect('/auth/login');
-  } else {
-    if(req.user.IsStudent){
-      res.redirect('/user/student');
-    }
-    else{
-      res.redirect('/user/advisor');
-    }
-  }
-};
+// routes to student 
+router.use('/student',require('./routes/student'));
+// routes to advisor
+router.use('/advisor',require('./routes/advisor'));
 
-
-router.get("/",validateUser, (req, res, next)=>{
+router.get("/",authMiddleware, (req, res, next)=>{
     req.session.user_ID = req.user.user_ID;
     console.log(req.session);
-    req.send(req.user);
+    if(!req.user.IsStudent)
+      res.redirect(/user/advisor);
+    res.redirect(/user/student);
 });
 
 //Get id of the current user
