@@ -3,9 +3,9 @@ const authMiddleware = require("./authentication.js");
 
 //check if user is advisor only; 
 const isAdvisor= (req, res, next) => {
-    if (req.user.IsStudent)
-        return next()
-    req.redirect('auth/login')
+    if (!req.user.IsStudent)
+        return next();
+    res.redirect('auth/login');
 };
 
 //Advisor Homepage

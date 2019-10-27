@@ -4,8 +4,8 @@ const authMiddleware = require("./authentication.js");
 //check if user is student only; 
 const isStudent= (req, res, next) => {
     if (req.user.IsStudent)
-        return next()
-    req.redirect('auth/login')
+        return next();
+    res.redirect('auth/login');
 };
 
 //Student Homepage
