@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
 //const cookieSession = require('cookie-session');
 const session = require('express-session');
+const keys = require('./config/keys');
 
 //google OAuth2.0 using passport
 require('./config/passport.js');
@@ -25,11 +26,11 @@ app.use( bodyParser.urlencoded({extended: true}));
 //}))
 
 app.use(session({
-    secret: 'keyboard cat',
+    secret: keys.session.secret,
     resave: false,
     saveUninitialized: true,
     cookie: { 
-        secure: true,
+        secure: false,
         maxAge: 24 * 60 * 60 * 1000 // 24 hours
      } 
 }));

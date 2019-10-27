@@ -12,7 +12,7 @@ const authMiddleware = (req, res, next) => {
 
 //User Homepage
 router.get("/",authMiddleware, (req, res, next)=>{
-    res.session.user = req.user; 
+    res.session.userId = req.user.user_ID; 
     res.send(req.user);
 });
 
@@ -78,7 +78,7 @@ router.put("/", (req, res, next) => {
 
 //Get id of the current user 
 router.put("/getmyid",(req, res, next) => {
-    res.send('id: ' + req.query.id);
+    res.send('id: ' + req.session.userId);
 });
 
 module.exports = router; 
