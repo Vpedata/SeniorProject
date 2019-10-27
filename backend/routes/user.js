@@ -3,8 +3,8 @@ var db = require ("../config/db.js");
 
 //check for authorized users only; 
 const authMiddleware = (req, res, next) => {
-  if (!req.user) {
-    res.redirect(/auth/login);
+  if (!req.isAuthenticated()) {
+    res.redirect('/auth/login');
   } else {
     return next()
   }
@@ -12,6 +12,7 @@ const authMiddleware = (req, res, next) => {
 
 //User Homepage
 router.get("/",authMiddleware, (req, res, next)=>{
+    res.session.user = req.user; 
     res.send(req.user);
 });
 
