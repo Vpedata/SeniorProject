@@ -6,21 +6,20 @@ const authMiddleware = (req, res, next) => {
   if (!req.user) {
     res.redirect('/auth/login');
   } else {
-    return next()
+    return next();
   }
 };
 
 //User Homepage
 router.get("/",authMiddleware, (req, res, next)=>{
-    res.session.user_ID = req.user.user_ID;
+    req.session.user_ID = req.user.user_ID;
     console.log(req.session);
     res.send(req.user);
 });
 
-//Get id of the current user 
+//Get id of the current user
 router.get("/getmyid",authMiddleware,(req, res, next) => {
-  console.log(req.session.user_ID);
-  res.send('id: ' + req.session.user_ID);
+  res.send('id: ' + req.session.user_ID);                                          
 });
 
 //Get all users
@@ -32,8 +31,6 @@ router.get("/all",authMiddleware, (req, res, next)=>{
   })
 });
 
-
-
 //Get an user
 router.get("/:id",authMiddleware, (req, res, next) => {
   var sql = "SELECT * FROM User WHERE user_ID = ?";
@@ -44,7 +41,6 @@ router.get("/:id",authMiddleware, (req, res, next) => {
       res.json(rows[0]);
   })
 });
-
 
 //Delete an user
 router.delete("/:id", (req, res, next) => {
