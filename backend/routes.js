@@ -24,10 +24,10 @@ router.use('/user',userRoutes);
 router.use('/course',courseRoutes);
 
 // routes to student
-router.use('/user/student',studentRoutes);
+router.use('/student',studentRoutes);
 
 // routes to advisor 
-router.use('/user/advisor',advisorRoutes);
+router.use('/advisor',advisorRoutes);
 
 module.exports = router;
 
