@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
+const authMiddleware = require("./authentication.js")
 
 // auth login page
 router.get('/login',passport.authenticate('google',{
@@ -14,14 +15,12 @@ router.get('/redirect',passport.authenticate('google',{
     failureRedirect: '/auth/login'
 }));
     
-
 // auth logout
-router.get('/logout', (req,res)=>{
+router.get('/logout',authMiddleware, (req,res)=>{
     req.session.destroy();
     req.logout();
     res.redirect('/');
 });
-
 
 
 module.exports = router; 
