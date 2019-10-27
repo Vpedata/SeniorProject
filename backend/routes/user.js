@@ -3,10 +3,11 @@ var db = require ("../config/db.js");
 const authMiddleware = require("./authentication.js");
 
 // routes to student 
-router.use('/student',require('./routes/student'));
+router.use('/student',require('./student'));
 // routes to advisor
-router.use('/advisor',require('./routes/advisor'));
+router.use('/advisor',require('./advisor'));
 
+// redirect to Student or Advisor homepage
 router.get("/",authMiddleware, (req, res, next)=>{
     req.session.user_ID = req.user.user_ID;
     console.log(req.session);
