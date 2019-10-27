@@ -6,9 +6,12 @@ const authMiddleware = require("./authentication.js");
 router.get("/",authMiddleware, (req, res, next)=>{
     req.session.user_ID = req.user.user_ID;
     console.log(req.session);
-    if(req.user.isStudent)
+    if(req.user.isStudent){
       res.redirect('/user/student');
-    res.redirect('/user/advisor');
+    }
+    else{
+      res.redirect('/user/advisor');
+    }
 });
 
 //Get id of the current user
