@@ -3,9 +3,9 @@
     <div id="login" class = "full-container">
         <h2>Login</h2>
         <div class = "centered-div">
-        <form class = "centered-form">
-            <div class="form-group centered-div">
-                <router-link to="/auth/login" tag = "button" class="loginBtn loginBtn--google">Login With Google</router-link>
+        <form class = "centered-form" action="/auth/login" method="get">
+            <div class="form-group centered-div"a>
+                <button class="loginBtn loginBtn--google">Login With Google</button>
             </div>
         </form>
         </div>
