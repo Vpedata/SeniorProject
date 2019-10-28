@@ -1,6 +1,5 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
+  <div id="app" class = "full-screen">
     <router-view/>
   </div>
 </template>
@@ -18,6 +17,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+.full-screen{
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
 }
 </style>

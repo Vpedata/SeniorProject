@@ -1,31 +1,14 @@
 <!-- Login page prototype vue code template (builds the login page) -->
 <template>
-    <div id="login">
+    <div id="login" class = "full-container">
         <h2>Login</h2>
-        <form @submit.prevent="handleSubmit">
-            <!-- Email Form Group (Label & Textbox w/ Error Handling) -->
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" v-model="email" name="email" class="form-control" :class="{ 'is-invalid': submitted && !email }" />
-                <div v-show="submitted && !email" class="invalid-feedback">Email is required</div>
-            </div>
-            <!-- Password Form Group (Label & Textbox w/ Error Handling) -->
-            <div class="form-group">
-                <label htmlFor="password">Password</label>
-                <input type="password" v-model="password" name="password" class="form-control" :class="{ 'is-invalid': submitted && !password }" />
-                <div v-show="submitted && !password" class="invalid-feedback">Password is required</div>
-            </div>
-            <!-- Login Button Form Group ("Login" Button w/ Logging In Gif, & Create Account w/ Link To Register Page) -->
-            <div class="form-group">
-                <button class="btn btn-primary" :disabled="status.loggingIn">Login</button>
-                <img v-show="status.loggingIn" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                <router-link to="/register" class="btn btn-link">Create Account</router-link>
-            </div>
-            <div class="Alternate Page">
-                <router-link to="/user" class="btn btn-link"></router-link>
-                <router-link to="/user" class="btn btn-link">To /user</router-link>
+        <div class = "centered-div">
+        <form class = "centered-form">
+            <div class="form-group centered-div">
+                <router-link to="/auth/login" tag = "button" class="loginBtn loginBtn--google">Login With Google</router-link>
             </div>
         </form>
+        </div>
     </div>
 </template>
 
@@ -38,12 +21,15 @@ export default {
     //empty default data
     name: 'Login',
     data () {
-        return {
+    return {
+      msg: 'Welcome to THe login Page'
+    }
+        /*return {
             email: '',
             password: '',
             submitted: false
-        }
-    },
+        }*/
+    }/*,
     computed: {
         ...mapState('account', ['status'])
     },
@@ -62,7 +48,72 @@ export default {
                 this.login({ email, password })
             }
         }
-    }
+    }*/
 };
 </script>
+
+<style scoped>
+
+.centered-div{
+    justify-content: center;
+}
+
+.centered-div{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.full-container{
+    height:100%;
+    width: 100%;
+}
+
+.loginBtn {
+  box-sizing: border-box;
+  position: relative;
+  justify-content: center;
+  /* width: 13em;  - apply for fixed size */
+  margin: 0.2em;
+  padding: 0 15px 0 15px;
+  border: none;
+  text-align: center;
+  line-height: 50px;
+  white-space: nowrap;
+  border-radius: 0.2em;
+  font-size: 16px;
+  color: #FFF;
+}
+
+.loginBtn--google {
+  /*font-family: "Roboto", Roboto, arial, sans-serif;*/
+  background: #DD4B39;
+}
+
+.loginBtn:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 100%;
+}
+.loginBtn:focus {
+  outline: none;
+}
+.loginBtn:active {
+  box-shadow: inset 0 0 0 32px rgba(0,0,0,0.1);
+}
+/* Google */
+.loginBtn--google {
+  /*font-family: "Roboto", Roboto, arial, sans-serif;*/
+  background: #DD4B39;
+}
+.loginBtn--google:hover,
+.loginBtn--google:focus {
+  background: #E74B37;
+}
+
+</style>
 
