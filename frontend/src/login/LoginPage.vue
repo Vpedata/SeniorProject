@@ -36,6 +36,7 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
     //empty default data
+    name: 'Login',
     data () {
         return {
             email: '',
