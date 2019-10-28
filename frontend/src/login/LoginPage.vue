@@ -1,6 +1,6 @@
 <!-- Login page prototype vue code template (builds the login page) -->
 <template>
-    <div>
+    <div id="login">
         <h2>Login</h2>
         <form @submit.prevent="handleSubmit">
             <!-- Email Form Group (Label & Textbox w/ Error Handling) -->

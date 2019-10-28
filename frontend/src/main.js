@@ -12,5 +12,5 @@ new Vue({
   el: '#app',
   router,
   components: { Login },
-  template: '<App/>'
+  template: '<Login/>'
 })
