@@ -31,36 +31,36 @@
 
 <!-- Page Vue Script -->
 <script>
-//imports vuex state and action mapping functions
+// imports vuex state and action mapping functions
 import { mapState, mapActions } from 'vuex'
 
 export default {
-    //empty default data
-    data () {
-        return {
-            email: '',
-            password: '',
-            submitted: false
-        }
-    },
-    computed: {
-        ...mapState('account', ['status'])
-    },
-    created () {
-        // reset login status
-        this.logout();
-    },
-    //account login submission handling
-    methods: {
-        ...mapActions('account', ['login', 'logout']),
-        handleSubmit (e) {
-            this.submitted = true;
-            const { email, password } = this;
-            //if email && password exist and are correct, login to this user for user state handling
-            if (email && password) {
-                this.login({ email, password })
-            }
-        }
+  // empty default data
+  data () {
+    return {
+      email: '',
+      password: '',
+      submitted: false
     }
-};
+  },
+  computed: {
+    ...mapState('account', ['status'])
+  },
+  created () {
+    // reset login status
+    this.logout()
+  },
+  // account login submission handling
+  methods: {
+    ...mapActions('account', ['login', 'logout']),
+    handleSubmit (e) {
+      this.submitted = true
+      const { email, password } = this
+      // if email && password exist and are correct, login to this user for user state handling
+      if (email && password) {
+        this.login({ email, password })
+      }
+    }
+  }
+}
 </script>
