@@ -47,7 +47,7 @@ module.exports = {
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: 'www.onlineadvisor.tk:3000'
+            apiUrl: 'http://onlineadvisor.tk:3000'
         })
     }
 }
