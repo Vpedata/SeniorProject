@@ -11,7 +11,7 @@ const isStudent= (req, res, next) => {
 
 //Student Homepage
 router.get("/",isStudent, (req, res, next)=>{
-    res.sendFile("index.html", { root: publicRoot })
+    res.redirect("http://onlineadvisor.tk:3000/#/fe/student");
     //res.send(req.user);
 });
 
