@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const authMiddleware = require("./authentication.js");
+const publicRoot = '/home/ubuntu/SeniorProject/frontend/dist'
 
 //check if user is student only; 
 const isStudent= (req, res, next) => {
