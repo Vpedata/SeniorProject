@@ -1,7 +1,7 @@
 
 //check for authorized users only; 
 const authMiddleware = (req, res, next) => {
-  if (!req.user) 
+  if (!req.isAuthenticated()) 
     res.redirect('/auth/login')
   return next();
 };
