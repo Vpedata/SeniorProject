@@ -16,5 +16,6 @@ export default {
     return {
       msg: 'Welcome to THe student Page'
     }
+    }
 }
 </script>
