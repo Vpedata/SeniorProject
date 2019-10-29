@@ -11,6 +11,10 @@
 
 <script>
 export default {
-    
+    name: 'Student',
+    data () {
+    return {
+      msg: 'Welcome to THe student Page'
+    }
 }
 </script>

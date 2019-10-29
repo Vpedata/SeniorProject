@@ -10,7 +10,8 @@ const isStudent= (req, res, next) => {
 
 //Student Homepage
 router.get("/",isStudent, (req, res, next)=>{
-    res.send(req.user);
+    res.redirect("/fe/student")
+    //res.send(req.user);
 });
 
 module.exports = router; 
