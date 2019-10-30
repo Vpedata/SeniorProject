@@ -12,16 +12,16 @@
 <script>
 export default {
     name: 'Student',
+        methods: {
+            logout: function(){
+                $http.get("http://onlineadvisor.tk:3000/auth/logout");      
+                $router.push('http://onlineadvisor.tk:3000/#/');
+            }
+        },
     data () {
     return {
       msg: 'Welcome to THe student Page'
     }
-    },
-    methods: {
-    logout: function(){
-        $http.get("http://onlineadvisor.tk:3000/user");      
-        $router.push('/');
     }
-}
 }
 </script>
