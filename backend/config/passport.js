@@ -19,7 +19,7 @@ passport.deserializeUser(function(id, done) {
 
 
 passport.use(new GoogleStrategy({
-    callbackURL:'/auth/redirect',
+	callbackURL:'http://onlineadvisor.tk:3000/auth/redirect',
     clientID: keys.google.clientID,
     clientSecret: keys.google.clientSecret,
     passReqToCallback   : true

@@ -2,7 +2,7 @@ var mysql = require('mysql');
 const keys = require('./keys.js');
 
 var connection = mysql.createConnection({
-    host:"3.84.68.239",
+    host:"3.82.107.180",
     user: keys.db.uname,
     password:keys.db.pword,
     database: "SeniorProject",
