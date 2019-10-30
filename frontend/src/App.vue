@@ -6,7 +6,13 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  methods: {
+    logout: function(){
+        $http.get("http://onlineadvisor.tk:3000/auth/logout");      
+        $router.push('http://onlineadvisor.tk:3000/#/');
+    }
+},
 }
 </script>
 
