@@ -4,7 +4,7 @@
         <h2>Login</h2>
         <div class = "centered-div">
         <form class = "centered-form" action="/auth/login" method="get">
-            <div class="form-group centered-div"a>
+            <div class="form-group centered-div">
                 <button class="loginBtn loginBtn--google">Login With Google</button>
             </div>
         </form>

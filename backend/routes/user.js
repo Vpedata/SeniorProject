@@ -1,6 +1,7 @@
 const router = require('express').Router();
 var db = require ("../config/db.js");
 const authMiddleware = require("./authentication.js");
+const authFEMiddleware = require ("./frontendauthentication.js");
 
 // routes to student 
 router.use('/student',require('./student'));
@@ -31,6 +32,12 @@ router.get("/all",authMiddleware, (req, res, next)=>{
     if (err) throw err;
     res.json(rows);
   })
+});
+
+router.get("/check", authFEMiddleware, (req, res, next) => {
+
+    res.send(req.json(redir));
+
 });
 
 //Get an user

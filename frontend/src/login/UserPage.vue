@@ -4,7 +4,7 @@
             <v-btn class="ma-2" outlined color="indigo" @click="$router.push('/user')" dark>Refresh</v-btn>
         </div>
         <div class="text-center">
-            <v-btn class="ma-2" outlined color="indigo" @click="$router.push('/login')" dark>To Login Page</v-btn>
+            <v-btn class="ma-2" outlined color="indigo" @click="logout" dark>To Login Page</v-btn>
         </div>
     </v-app>
 </template>
@@ -16,6 +16,12 @@ export default {
     return {
       msg: 'Welcome to THe student Page'
     }
+    },
+    methods: {
+    logout: function(){
+        $http.get("http://onlineadvisor.tk:3000/user");      
+        $router.push('/');
     }
+}
 }
 </script>
