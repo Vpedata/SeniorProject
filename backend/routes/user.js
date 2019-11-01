@@ -4,9 +4,9 @@ const authMiddleware = require("./authentication.js");
 const authFEMiddleware = require ("./frontendauthentication.js");
 
 // routes to student 
-router.use('/student',require('./student'));
+router.use('/student',require('./student/student'));
 // routes to advisor
-router.use('/advisor',require('./advisor'));
+router.use('/advisor',require('./advisor/advisor'));
 
 // redirect to Student or Advisor homepage
 router.get("/",authMiddleware, (req, res, next)=>{

@@ -9,10 +9,12 @@ router.get("/",isStudent, (req, res, next)=>{
     //res.send(req.user);
 });
 
-//Returns Student Advisor
+//Returns Student's Advisor
 router.get("/getmyadvisor",isStudent,(req, res, next)=>{
-    
+   res.send("Advisor in progress!!!") ;
 });
+
+
 
 
 module.exports = router; 
