@@ -14,7 +14,10 @@ router.get("/getmyadvisor",isStudent,(req, res, next)=>{
    res.send("Advisor in progress!!!") ;
 });
 
+// routes to student courses
+router.use('/courses',require('./courses'));
 
-
+// routes to student messages
+router.use('/messages',require('./messages'));
 
 module.exports = router; 
