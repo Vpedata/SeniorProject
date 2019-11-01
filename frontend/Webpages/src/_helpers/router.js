@@ -1,12 +1,14 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import HomePage from '../home/HomePage'
-import LoginPage from '../login/LoginPage'
-import RegisterPage from '../register/RegisterPage'
-import StudentView from '../student_view/StudentView'
+import HomePage from '../home/HomePage';
+import LoginPage from '../login/LoginPage';
+import RegisterPage from '../register/RegisterPage';
+import StudentView from '../student/StudentView';
+import StudentAddClassPage from '../student/StudentAddClassPage';
 import vuetify from '../plugins/vuetify';
-import UserPage from '../login/UserPage'
+import UserPage from '../login/UserPage';
+import MessagePage from '../conversation/MessagePage';
 
 Vue.use(Router);
 Vue.use(vuetify);
@@ -19,6 +21,8 @@ export const router = new Router({
     { path: '/register', component: RegisterPage },
     { path: '/studentview', component: StudentView },
     { path: '/user', component: UserPage },
+    { path: '/messages', component: MessagePage},
+    { path: '/studentaddclass', component: StudentAddClassPage },
 
     // otherwise redirect to home
     { path: '*', redirect: '/' }
