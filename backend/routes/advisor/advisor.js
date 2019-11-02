@@ -7,13 +7,13 @@ router.get("/",isAdvisor, (req, res, next)=>{
 });
 
 // routes to student for current advisor
-router.get('/student',require('./student'));
+router.use('/student',require('./student'));
 
 // routes to advisor chatrooms
 router.use('/chatroom',require('./chatroom'));
 
 // routes to advisor course (course in Course Table)
-router.user('/course',require('./course'));
+router.use('/course',require('./course'));
 
 
 module.exports = router; 
