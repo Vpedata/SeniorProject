@@ -6,12 +6,14 @@ router.get("/",isAdvisor, (req, res, next)=>{
     res.send(req.user);
 });
 
-//get all students under current advisor
-router.get('/students',isAdvisor,(req,res,next)=> {
-    res.send("Under Construnction!!!") ;
-});
+// routes to student for current advisor
+router.get('/student',require('./student'));
 
 // routes to advisor chatrooms
 router.use('/chatroom',require('./chatroom'));
+
+// routes to advisor course (course in Course Table)
+router.user('/course',require('./course'));
+
 
 module.exports = router; 

@@ -2,8 +2,8 @@ const router = require('express').Router();
 const isAdvisor = require("./advisorAuth.js");
 const db = require("../../config/db.js");
 
-//Return all the messages of the given student by student_ID for current advisor; 
-router.get("/all",isAdvisor, (req, res, next)=>{
+//Return all the messages of the given student by student email for current advisor; 
+router.get("/:email",isAdvisor, (req, res, next)=>{
     res.send("Under construction");
 });
 
