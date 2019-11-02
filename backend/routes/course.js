@@ -20,10 +20,10 @@ router.get("/:id",authMiddleware, (req, res, next) => {
   })
 });
 
-//Get an course by crn 
-router.get("/crn/:crn",authMiddleware, (req, res, next) => {
+//Get an course by courseCode 
+router.get("/number/:cn",authMiddleware, (req, res, next) => {
   var sql = "SELECT * FROM Course WHERE course_crn = ?";
-  db.query(sql, [req.query.crn], (err, rows, fields) => {
+  db.query(sql, [req.query.cn], (err, rows, fields) => {
     if (err) throw err;
     res.json(rows[0]);
   })
