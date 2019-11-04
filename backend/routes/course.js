@@ -4,7 +4,7 @@ const authMiddleware = require("./authentication.js");
 
 //Get all courses
 router.get("/all",authMiddleware, (req, res, next)=>{
-    var sql = "SELECT * FROM Course";
+    var sql = "CALL getAllCourses();";
 	  db.query(sql,(err, rows, fields)=>{
     if (err) throw err;
     res.json(rows);
@@ -13,7 +13,7 @@ router.get("/all",authMiddleware, (req, res, next)=>{
 
 //Get an course by id 
 router.get("/:id",authMiddleware, (req, res, next) => {
-  var sql = "SELECT * FROM Course WHERE course_ID = ?";
+  var sql = "CALL getCourseById(?);";
   db.query(sql, [req.params.id], (err, rows, fields) => {
     if (err) throw err;
     res.json(rows[0]);
@@ -22,7 +22,7 @@ router.get("/:id",authMiddleware, (req, res, next) => {
 
 //Get an course by courseCode 
 router.get("/number/:cn",authMiddleware, (req, res, next) => {
-  var sql = "SELECT * FROM Course WHERE course_crn = ?";
+  var sql = "CALL getCourseByNumber(?);";
   db.query(sql, [req.query.cn], (err, rows, fields) => {
     if (err) throw err;
     res.json(rows[0]);
