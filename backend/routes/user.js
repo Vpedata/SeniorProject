@@ -27,7 +27,7 @@ router.get("/getmyid",authMiddleware,(req, res, next) => {
 
 //Get all users
 router.get("/all",authMiddleware, (req, res, next)=>{
-    var sql = "SELECT * FROM User";
+    var sql = "CALL getAllUser();";
 	  db.query(sql,(err, rows, fields)=>{
     if (err) throw err;
     res.json(rows);
@@ -42,7 +42,7 @@ router.get("/check", authFEMiddleware, (req, res, next) => {
 
 //Get an user
 router.get("/:id",authMiddleware, (req, res, next) => {
-  var sql = "SELECT * FROM User WHERE user_ID = ?";
+  var sql = "CALL getUserById(?);";
   db.query(sql, [req.params.id], (err, rows, fields) => {
     if (err) throw(err);
     res.json(rows[0]);
