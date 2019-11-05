@@ -10,21 +10,18 @@
                 </v-toolbar>
             </v-row>
             <v-row>
-
-            </v-row>
-            <v-row>
                 <v-col cols="3"></v-col>
                 <v-col cols="9" lg="6">
-                <v-card class="mt-n16 mx-auto" elevation="12" height="700px">
+                <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
                     <v-toolbar flat>
-                        <v-toolbar-title class="grey--text">Selected Classes</v-toolbar-title>
+                        <v-toolbar-title class="grey--text">Add Classes</v-toolbar-title>
                     </v-toolbar>
-                    <v-list style="max-height: 700px" class="overflow-y-auto">
+                    <v-list style="max-height: 600px" class="overflow-y-auto">
                         <v-list-item>
                             <v-list-item-content>
                                 <v-dialog v-model="dialog" width="500">
                                     <template v-slot:activator="{ on }">
-                                    <v-btn color="red lighten-2" dark v-on="on">
+                                    <v-btn color="indigo lighten-2" dark v-on="on">
                                         GetClassName
                                     </v-btn>
                                     </template>
@@ -67,7 +64,7 @@
             </v-row>
             <v-row>
                 <v-col cols="8">
-                    <v-btn class="mt-12 ma-12" outlined color="indigo" @click="$router.push('/studentview')" dark>Back</v-btn>
+                    <v-btn class="mt-12 ma-12" outlined color="blue" @click="$router.push('/studentview')" dark>Back</v-btn>
                 </v-col>
             </v-row>
         </div>
