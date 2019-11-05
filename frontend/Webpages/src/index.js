@@ -24,6 +24,11 @@ configureFakeBackend();
 new Vue({
     el: '#app',
     vuetify: new Vuetify(),
+    data() {
+      return {
+        dialog: false,
+      }
+    },
     router,
     store,
     render: h => h(App)

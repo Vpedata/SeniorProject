@@ -10,7 +10,8 @@
                 </v-toolbar>
             </v-row>
             <v-row>
-                <v-btn class="ma-2" outlined color="red" @click="$router.push('/login')" dark>Edit Completed Courses</v-btn>
+                <v-btn class="ma-4" outlined color="red" @click="$router.push('/login')" dark>Edit Completed Courses</v-btn>
+                <v-btn class="ma-4" outlined color="red" @click="$router.push('/login')" dark>View Class List</v-btn>
             </v-row>
             <v-row>
                 <v-col cols="3">
@@ -27,52 +28,43 @@
                         <v-toolbar-title class="grey--text">Selected Classes</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 300px" class="overflow-y-auto">
-                        <v-list-item @click="$router.push('/login')">
+                        <v-list-item>
                             <v-list-item-content>
-                            <v-list-item-title>Class1</v-list-item-title>
-                            
+                                <v-dialog v-model="dialog" width="500">
+                                    <template v-slot:activator="{ on }">
+                                    <v-btn color="red lighten-2" dark v-on="on">
+                                        GetClassName
+                                    </v-btn>
+                                    </template>
+                                    <v-card>
+                                        <v-card-title
+                                            class="headline grey lighten-2"
+                                            primary-title
+                                        >
+                                            GetClassName
+                                        </v-card-title>
+                                        <v-divider></v-divider>
+                                        <v-card-text>
+                                            GetClassSummary
+                                        </v-card-text>
+                                        <v-divider></v-divider>
+                                        <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <v-btn color="blue" text @click="dialog = false">
+                                                Ok
+                                            </v-btn>
+                                            <v-btn color="red" text @click="dialog = false">
+                                                Remove
+                                            </v-btn>
+                                        </v-card-actions>
+                                    </v-card>
+                                </v-dialog>
                             </v-list-item-content>
                         </v-list-item>
             
-                        <v-list-item @click="$router.push('/login')">
+                        <v-list-item @click="$router.push('/classlist')">
                             <v-list-item-content>
-                            <v-list-item-title>Class2</v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-            
-                        <v-list-item @click="$router.push('/login')">
-                            <v-list-item-content>
-                            <v-list-item-title>Class3</v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-
-                        <v-list-item @click="$router.push('/login')">
-                            <v-list-item-content>
-                            <v-list-item-title>Class4</v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-
-                        <v-list-item @click="$router.push('/login')">
-                            <v-list-item-content>
-                            <v-list-item-title>Class5</v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-
-                        <v-list-item @click="$router.push('/login')">
-                            <v-list-item-content>
-                            <v-list-item-title>Class6</v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-
-                        <v-list-item @click="$router.push('/login')">
-                            <v-list-item-content>
-                            <v-list-item-title>Class7</v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-
-                        <v-list-item @click="$router.push('/login')">
-                            <v-list-item-content>
-                            <v-list-item-title>Class8</v-list-item-title>
+                            <v-list-item-title>Repeat...</v-list-item-title>
                             </v-list-item-content>
                         </v-list-item>
                     </v-list>
@@ -103,6 +95,9 @@ export default {
         ...mapState({
             account: state => state.account,
         })
-    }
+    }, 
+    data: () => ({
+        dialog: false
+  }),
 };
 </script>

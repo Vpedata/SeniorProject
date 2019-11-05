@@ -9,6 +9,7 @@ import StudentAddClassPage from '../student/StudentAddClassPage';
 import vuetify from '../plugins/vuetify';
 import UserPage from '../login/UserPage';
 import MessagePage from '../conversation/MessagePage';
+import ClassList from '../classes/ClassList'
 
 Vue.use(Router);
 Vue.use(vuetify);
@@ -23,6 +24,7 @@ export const router = new Router({
     { path: '/user', component: UserPage },
     { path: '/messages', component: MessagePage},
     { path: '/studentaddclass', component: StudentAddClassPage },
+    { path: '/classlist', component: ClassList},
 
     // otherwise redirect to home
     { path: '*', redirect: '/' }
