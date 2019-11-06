@@ -13,6 +13,7 @@ passport.deserializeUser(function(id, done) {
   var sql = "Call getUserById(?)";
   db.query(sql, [id], (err, rows, fields) => {
     if (err)throw err;
+    console.log(rows[0]);
     done(null,rows[0]);
   })
 });
