@@ -3,7 +3,7 @@ const isAdvisor = require("./advisorAuth.js");
 
 //Advisor Homepage
 router.get("/",isAdvisor, (req, res, next)=>{
-    res.send(req.user);
+    res.send(req.user[0]);
 });
 
 // routes to student for current advisor
