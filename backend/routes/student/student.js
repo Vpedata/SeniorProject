@@ -6,7 +6,8 @@ const publicRoot = '/home/ubuntu/SeniorProject/frontend/dist'
 
 //Student Homepage
 router.get("/",isStudent, (req, res, next)=>{
-    var sql = "CALL getStudentByEmail('?',@student); select @student;";
+
+    var sql = "CALL getStudentByEmail(?,@student); select @student;";
     db.query(sql, [req.user[0].email], (err, rows, fields) => {
       if (err) throw(err);
       req.session.student_ID = rows[0];
