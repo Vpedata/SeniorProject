@@ -4,11 +4,10 @@ const db = require("../../config/db.js");
 
 //Advisor Homepage
 router.get("/",isAdvisor, (req, res, next)=>{
-    var sql = "CALL getAdvisorByEmail(?,@advisor); select @advisor;";
+    var sql = "CALL getAdvisorByEmail(?,@advisor); select @advisor as advisor_ID;";
     db.query(sql, [req.user[0].email], (err, rows, fields) => {
       if (err) throw(err);
-      req.session.student_ID = rows[0];
-      console.log(req.session);
+      req.session.student_ID = rows[1][0].advisor_ID;
     })
     res.send(req.user[0]);
 });
