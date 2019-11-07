@@ -1,7 +1,7 @@
 <template>
     <div class="chat-app">
         <Conversation :contact="selectedContact" :messages="messages" @new="saveNewMessage"/>
-        <ContactsList :contacts="contacts" @selected="startConversationWith"/>
+        <ContactsList :contacts="contacts" :user="user" @selected="startConversationWith"/>
     </div>
 </template>
 
@@ -30,6 +30,7 @@
                 });
             axios.get('/contacts')
                 .then((response) => {
+                    //console.log(response.data);
                     this.contacts = response.data;
             });
         },
@@ -52,6 +53,7 @@
                     return;
                 }
 
+                this.$root.$emit('updateMessages');
                 this.updateUnreadCount(message.from_contact, false);
             },
             updateUnreadCount(contact, reset) {

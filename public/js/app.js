@@ -1870,6 +1870,7 @@ __webpack_require__.r(__webpack_exports__);
       _this.handleIncoming(e.message);
     });
     axios.get('/contacts').then(function (response) {
+      //console.log(response.data);
       _this.contacts = response.data;
     });
   },
@@ -1892,6 +1893,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
+      this.$root.$emit('updateMessages');
       this.updateUnreadCount(message.from_contact, false);
     },
     updateUnreadCount: function updateUnreadCount(contact, reset) {
@@ -1949,30 +1951,74 @@ __webpack_require__.r(__webpack_exports__);
     contacts: {
       type: Array,
       "default": []
+    },
+    user: {
+      type: Object,
+      required: true
     }
   },
   data: function data() {
     return {
-      selected: this.contacts.length ? this.contacts[0] : null
+      selected: this.contacts.length ? this.contacts[0] : null,
+      messages: []
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$root.$on('updateMessages', function () {
+      _this.updateMessages();
+    });
+    axios.get('/messages').then(function (response) {
+      //console.log(response.data);
+      _this.messages = response.data;
+    });
   },
   methods: {
     selectContact: function selectContact(contact) {
       this.selected = contact;
       this.$emit('selected', contact);
+    },
+    updateMessages: function updateMessages() {
+      var _this2 = this;
+
+      axios.get('/messages').then(function (response) {
+        //console.log(response.data);
+        _this2.messages = response.data;
+      });
     }
   },
   computed: {
     sortedContacts: function sortedContacts() {
-      var _this = this;
+      var _this3 = this;
 
+      // return _.sortBy(this.contacts, [(contact) => {
+      //     // if(contact == this.selected) {
+      //     //     return Infinity;
+      //     // }
+      //
+      //     return contact.unread;
+      // }]).reverse();
+      console.log('-------- NEW --------');
       return _.sortBy(this.contacts, [function (contact) {
-        if (contact == _this.selected) {
-          return Infinity;
-        }
+        //console.log(contact.name + ': ' + contact.id);
+        var recent = -1;
 
-        return contact.unread;
-      }]).reverse();
+        for (var i in _this3.messages) {
+          var message = _this3.messages[i];
+
+          if (message.to == contact.id && message.from == _this3.user.id || message.to == _this3.user.id && message.from == contact.id) {
+            if (message.id > recent) {
+              recent = message.id;
+            }
+          }
+        } //console.log('Message ID: ' + recent);
+
+
+        return recent;
+      }]).reverse(); // return this.contacts.sort(function (a, b) {
+      //     return new Date(b.updated_at) - new Date(a.updated_at);
+      // });
     }
   }
 });
@@ -2025,6 +2071,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         _this.$emit('new', response.data);
       });
+      this.$root.$emit('updateMessages');
     }
   },
   components: {
@@ -48117,7 +48164,7 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("ContactsList", {
-        attrs: { contacts: _vm.contacts },
+        attrs: { contacts: _vm.contacts, user: _vm.user },
         on: { selected: _vm.startConversationWith }
       })
     ],

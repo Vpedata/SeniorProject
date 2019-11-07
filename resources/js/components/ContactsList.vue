@@ -21,28 +21,70 @@
             contacts: {
                 type: Array,
                 default: []
+            },
+            user: {
+                type: Object,
+                required: true
             }
         },
         data() {
             return {
-                selected: this.contacts.length ? this.contacts[0] : null
+                selected: this.contacts.length ? this.contacts[0] : null,
+                messages: []
             };
+        },
+        mounted() {
+            this.$root.$on('updateMessages', () => {
+                this.updateMessages();
+                });
+            axios.get('/messages')
+                .then((response) => {
+                    //console.log(response.data);
+                    this.messages = response.data;
+                });
         },
         methods: {
             selectContact(contact) {
                 this.selected = contact;
                 this.$emit('selected', contact);
+            },
+            updateMessages() {
+                    axios.get('/messages')
+                        .then((response) => {
+                            //console.log(response.data);
+                            this.messages = response.data;
+                        });
             }
         },
         computed: {
             sortedContacts() {
-                return _.sortBy(this.contacts, [(contact) => {
-                    if(contact == this.selected) {
-                        return Infinity;
-                    }
+                // return _.sortBy(this.contacts, [(contact) => {
+                //     // if(contact == this.selected) {
+                //     //     return Infinity;
+                //     // }
+                //
+                //     return contact.unread;
+                // }]).reverse();
 
-                    return contact.unread;
+                console.log('-------- NEW --------');
+                return _.sortBy(this.contacts, [(contact) => {
+                    //console.log(contact.name + ': ' + contact.id);
+                    var recent = -1;
+                    for(let i in this.messages) {
+                        var message = this.messages[i];
+                        if((message.to == contact.id && message.from == this.user.id) || (message.to == this.user.id && message.from == contact.id)) {
+                            if(message.id > recent) {
+                                recent = message.id;
+                            }
+                        }
+                    }
+                    //console.log('Message ID: ' + recent);
+                    return recent;
                 }]).reverse();
+
+                // return this.contacts.sort(function (a, b) {
+                //     return new Date(b.updated_at) - new Date(a.updated_at);
+                // });
             }
         }
     }

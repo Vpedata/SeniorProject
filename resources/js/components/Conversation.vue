@@ -32,7 +32,9 @@
                     text: text,
                 }).then((response) => {
                     this.$emit('new', response.data);
-                })
+                });
+
+                this.$root.$emit('updateMessages');
             }
         },
         components: {MessagesFeed, MessageComposer}
