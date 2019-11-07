@@ -1,11 +1,16 @@
 import Vue from 'vue'
+import Vuetify from 'vuetify'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
+import ClassList from '@/studentpages/ClassList'
+import StudentAddClassPage from '@/studentpages/StudentAddClassPage'
+import StudentView from '@/studentpages/StudentView'
 import Login from '@/login/LoginPage'
 import Student from '@/login/UserPage'
 import axios from 'axios'
 
 Vue.use(Router)
+Vue.use(Vuetify)
 
 let router = new Router({
   routes: [
@@ -21,7 +26,32 @@ let router = new Router({
       meta: {
         requiresAuth: true
       }
-    }
+    },
+    {
+      path: '/fe/classlist',
+      name: 'ClassList',
+      component: ClassList,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/fe/studentaddclasspage',
+      name: 'StudentAddClassPage',
+      component: StudentAddClassPage,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/fe/studentview',
+      name: 'StudentView',
+      component: StudentView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+
   ]
 })
 

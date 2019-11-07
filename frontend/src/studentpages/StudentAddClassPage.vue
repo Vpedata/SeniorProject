@@ -74,14 +74,8 @@
 
 
 <script>
-import { mapState, mapActions } from 'vuex'
 
 export default {
-    computed: {
-        ...mapState({
-            account: state => state.account,
-        })
-    }, 
     data: () => ({
         dialog: false
   }),
