@@ -89,6 +89,7 @@
 
 <script>
 export default {
+    name: 'StudentView',
     data: () => ({
         dialog: false
   }),

@@ -76,6 +76,7 @@
 <script>
 
 export default {
+    name: 'ClassList',
     data: () => ({
         dialog: false
   }),
