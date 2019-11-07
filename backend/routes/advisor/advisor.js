@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const isAdvisor = require("./advisorAuth.js");
+const db = require("../../config/db.js");
 
 //Advisor Homepage
 router.get("/",isAdvisor, (req, res, next)=>{
