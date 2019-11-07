@@ -13,22 +13,9 @@ router.get("/",authMiddleware, (req, res, next)=>{
     req.session.user_ID = req.user[0].user_ID;
     console.log(req.session);
     if(!req.user[0].IsStudent){
-      var sql = "CALL getStudentByEmail(?,@student); select @student as student_ID;";
-     db.query(sql, [req.user[0].email], (err, rows, fields) => {
-      if (err) throw(err);
-      req.user[0].student_ID = rows[1][0].student_ID;
-      console.log(req.session);
-    })
       res.redirect('/user/advisor');
     }
     else { 
-      var sql = "CALL getAdvisorByEmail(?,@advisor); select @advisor as advisor_ID;";
-    db.query(sql, [req.user[0].email], (err, rows, fields) => {
-      if (err) throw(err);
-      req.user[0].advisor_ID = rows[1][0].advisor_ID;
-      req.session.student_ID = rows[1][0].advisor_ID;
-      console.log(req.session);
-    })
       res.redirect('/user/student');
     }
 });
