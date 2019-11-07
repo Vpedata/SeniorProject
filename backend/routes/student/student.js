@@ -6,19 +6,13 @@ const publicRoot = '/home/ubuntu/SeniorProject/frontend/dist'
 
 //Student Homepage
 router.get("/",isStudent, (req, res, next)=>{
-
-    var sql = "CALL getStudentByEmail(?,@student); select @student as student_ID;";
-    db.query(sql, [req.user[0].email], (err, rows, fields) => {
-      if (err) throw(err);
-      req.session.student_ID = rows[1][0].student_ID;
-      console.log(req.session);
-    });
     res.redirect("http://onlineadvisor.tk:3000/#/fe/student");
     //res.send(req.user[0]);
 });
 
 //Returns Student's Advisor
 router.get("/getmyadvisor",isStudent,(req, res, next)=>{
+    
     var sql = "CALL getmyadvisor(?);";
     db.query(sql, [req.session.student_ID], (err, rows, fields) => {
       if (err) throw(err);
