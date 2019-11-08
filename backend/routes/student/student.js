@@ -20,7 +20,7 @@ router.get("/getmyadvisor",isStudent,(req, res, next)=>{
     var sql = "CALL getmyadvisor(?);";
     db.query(sql, [req.user[0].student_ID], (err, rows, fields) => {
       if (err) throw(err);
-      res.json(rows[0]);
+      res.json(rows[0][0]);
     })
 });
 

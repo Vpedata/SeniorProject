@@ -10,7 +10,6 @@ router.use('/advisor',require('./advisor/advisor'));
 
 // redirect to Student or Advisor homepage
 router.get("/",authMiddleware, (req, res, next)=>{
-    console.log(req.session);
     if(!req.user[0].IsStudent){
       res.redirect('/user/advisor');
     }
