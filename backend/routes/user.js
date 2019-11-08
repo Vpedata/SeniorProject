@@ -13,11 +13,11 @@ router.get("/",authMiddleware, (req, res, next)=>{
     req.session.user_ID = req.user[0].user_ID;
     console.log(req.session);
     if(!req.user[0].IsStudent){
-      req.session.student_ID = req.user[0].student_ID; 
+      req.session.advisor_ID = req.user[0].advisor_ID; 
       res.redirect('/user/advisor');
     }
     else { 
-      req.session.advisor_ID = req.user[0].advisor_ID;
+      req.session.student_ID = req.user[0].student_ID;
       res.redirect('/user/student');
 
     }
@@ -38,14 +38,8 @@ router.get("/all",authMiddleware, (req, res, next)=>{
 });
 
 router.get("/check", authFEMiddleware, (req, res, next) => {
-
     res.send(req.json(redir));
-
 });
-
-router.get("/getName"), authMiddleware, (req, res, next) => {
-  res.json({firstName: req.session.firstName, lastName: req.session.lastName})
-}
 
 //Get an user
 router.get("/:id",authMiddleware, (req, res, next) => {

@@ -4,6 +4,8 @@ const db = require("../../config/db.js");
 
 //Advisor Homepage
 router.get("/",isAdvisor, (req, res, next)=>{
+    req.session.user = req.user[0];
+    console.log(req.session.user);
     res.send(req.user[0]);
 });
 
