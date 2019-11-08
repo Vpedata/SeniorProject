@@ -10,6 +10,11 @@ router.get("/",isStudent, (req, res, next)=>{
     //res.send(req.user[0]);
 });
 
+//Get student's id 
+router.get("/getmyids",isStudent, (req, res, next)=>{
+  res.send({"user_Id": req.session.user_ID, "student_ID": req.session.student_ID });  
+});
+
 //Returns Student's Advisor
 router.get("/getmyadvisor",isStudent,(req, res, next)=>{
     

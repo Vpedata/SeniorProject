@@ -13,10 +13,13 @@ router.get("/",authMiddleware, (req, res, next)=>{
     req.session.user_ID = req.user[0].user_ID;
     console.log(req.session);
     if(!req.user[0].IsStudent){
+      req.session.student_ID = req.user[0].student_ID; 
       res.redirect('/user/advisor');
     }
     else { 
+      req.session.advisor_ID = req.user[0].advisor_ID;
       res.redirect('/user/student');
+
     }
 });
 
