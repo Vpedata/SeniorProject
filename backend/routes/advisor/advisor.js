@@ -7,6 +7,12 @@ router.get("/",isAdvisor, (req, res, next)=>{
     res.send(req.user[0]);
 });
 
+//Adivsor Homepage info
+router.get("/info",isAdvisor, (req, res, next)=>{
+    res.send(req.user[0]);
+});
+  
+
 // routes to student for current advisor
 router.use('/student',require('./student'));
 
