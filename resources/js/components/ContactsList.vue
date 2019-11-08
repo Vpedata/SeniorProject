@@ -34,7 +34,8 @@
             return {
                 selected: this.contacts.length ? this.contacts[0] : null,
                 messages: [],
-                onlineContacts: []
+                onlineContacts: [],
+                notContacted: [],
             };
         },
         mounted() {
@@ -79,9 +80,11 @@
                 //     return contact.unread;
                 // }]).reverse();
 
-                console.log('-------- NEW --------');
-                return _.sortBy(this.contacts, [(contact) => {
-                    //console.log(contact.name + ': ' + contact.id);
+
+                var notContacts = [];
+                //console.log('-------- NEW --------');
+                var temp = _.sortBy(this.contacts, [(contact) => {
+                    // console.log(contact.name + ': ' + contact.id);
                     var recent = -1;
                     for(let i in this.messages) {
                         var message = this.messages[i];
@@ -91,10 +94,35 @@
                             }
                         }
                     }
-                    //console.log('Message ID: ' + recent);
+
+                    if(recent === -1) {
+                        // console.log(contact.name + ' - ' + contact.id)
+                        notContacts.push(contact);
+                        // console.log(notContacts);
+                    }
+                    // console.log('Message ID: ' + recent);
                     return recent;
                 }]).reverse();
 
+                console.log('----a----');
+                console.log(temp);
+
+                for(let i in notContacts) {
+                    var con = notContacts[i];
+                    var index = temp.indexOf(con);
+                    temp.splice(index);
+                }
+
+                console.log('----n----');
+                console.log(notContacts);
+                console.log('----t----');
+                console.log(temp);
+                console.log('--------');
+
+                // this.notContacted = notContacts;
+                // console.log(this.notContacted);
+
+                return temp;
                 // return this.contacts.sort(function (a, b) {
                 //     return new Date(b.updated_at) - new Date(a.updated_at);
                 // });
@@ -146,22 +174,22 @@
                 span.online {
                     height: 10px;
                     width: 10px;
-                    background-color: #01da00;
+                    background-color: #01ff00;
                     border-radius: 50%;
                     display: inline-block;
                     position: absolute;
-                    right: 6px;
+                    right: 10px;
                     top: 10px;
                 }
 
                 span.offline {
                     height: 10px;
                     width: 10px;
-                    background-color: #c90003;
+                    background-color: #777777;
                     border-radius: 50%;
                     display: inline-block;
                     position: absolute;
-                    right: 6px;
+                    right: 10px;
                     top: 10px;
                 }
 

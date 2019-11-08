@@ -1969,7 +1969,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       selected: this.contacts.length ? this.contacts[0] : null,
       messages: [],
-      onlineContacts: []
+      onlineContacts: [],
+      notContacted: []
     };
   },
   mounted: function mounted() {
@@ -2020,9 +2021,10 @@ __webpack_require__.r(__webpack_exports__);
       //
       //     return contact.unread;
       // }]).reverse();
-      console.log('-------- NEW --------');
-      return _.sortBy(this.contacts, [function (contact) {
-        //console.log(contact.name + ': ' + contact.id);
+      var notContacts = []; //console.log('-------- NEW --------');
+
+      var temp = _.sortBy(this.contacts, [function (contact) {
+        // console.log(contact.name + ': ' + contact.id);
         var recent = -1;
 
         for (var i in _this4.messages) {
@@ -2033,11 +2035,34 @@ __webpack_require__.r(__webpack_exports__);
               recent = message.id;
             }
           }
-        } //console.log('Message ID: ' + recent);
+        }
+
+        if (recent === -1) {
+          // console.log(contact.name + ' - ' + contact.id)
+          notContacts.push(contact); // console.log(notContacts);
+        } // console.log('Message ID: ' + recent);
 
 
         return recent;
-      }]).reverse(); // return this.contacts.sort(function (a, b) {
+      }]).reverse();
+
+      console.log('----a----');
+      console.log(temp);
+
+      for (var i in notContacts) {
+        var con = notContacts[i];
+        var index = temp.indexOf(con);
+        temp.splice(index);
+      }
+
+      console.log('----n----');
+      console.log(notContacts);
+      console.log('----t----');
+      console.log(temp);
+      console.log('--------'); // this.notContacted = notContacts;
+      // console.log(this.notContacted);
+
+      return temp; // return this.contacts.sort(function (a, b) {
       //     return new Date(b.updated_at) - new Date(a.updated_at);
       // });
     }
@@ -8634,7 +8659,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".contacts-list[data-v-484f3208] {\n  -webkit-box-flex: 2;\n          flex: 2;\n  max-height: 600px;\n  overflow: auto;\n  border-left: 1px solid #a6a6a6;\n}\n.contacts-list ul[data-v-484f3208] {\n  list-style-type: none;\n  padding-left: 0;\n}\n.contacts-list ul li[data-v-484f3208] {\n  display: -webkit-box;\n  display: flex;\n  padding: 2px;\n  border-bottom: 1px solid #aaaaaa;\n  height: 80px;\n  position: relative;\n  cursor: pointer;\n}\n.contacts-list ul li.selected[data-v-484f3208] {\n  background: #dfdfdf;\n}\n.contacts-list ul li span.unread[data-v-484f3208] {\n  background: #82e0a8;\n  color: #ffffff;\n  position: absolute;\n  right: 11px;\n  top: 20px;\n  display: -webkit-box;\n  display: flex;\n  font-weight: 700;\n  min-width: 20px;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n  line-height: 20px;\n  font-size: 12px;\n  padding: 0 4px;\n  border-radius: 3px;\n}\n.contacts-list ul li span.online[data-v-484f3208] {\n  height: 10px;\n  width: 10px;\n  background-color: #01da00;\n  border-radius: 50%;\n  display: inline-block;\n  position: absolute;\n  right: 6px;\n  top: 10px;\n}\n.contacts-list ul li span.offline[data-v-484f3208] {\n  height: 10px;\n  width: 10px;\n  background-color: #c90003;\n  border-radius: 50%;\n  display: inline-block;\n  position: absolute;\n  right: 6px;\n  top: 10px;\n}\n.contacts-list ul li .avatar[data-v-484f3208] {\n  -webkit-box-flex: 1;\n          flex: 1;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n}\n.contacts-list ul li .avatar img[data-v-484f3208] {\n  width: 35px;\n  border-radius: 50%;\n  margin: 0 auto;\n}\n.contacts-list ul li .contact[data-v-484f3208] {\n  -webkit-box-flex: 3;\n          flex: 3;\n  font-size: 10px;\n  overflow: hidden;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  -webkit-box-pack: center;\n          justify-content: center;\n}\n.contacts-list ul li .contact p[data-v-484f3208] {\n  margin: 0;\n}\n.contacts-list ul li .contact p.name[data-v-484f3208] {\n  font-weight: bold;\n}", ""]);
+exports.push([module.i, ".contacts-list[data-v-484f3208] {\n  -webkit-box-flex: 2;\n          flex: 2;\n  max-height: 600px;\n  overflow: auto;\n  border-left: 1px solid #a6a6a6;\n}\n.contacts-list ul[data-v-484f3208] {\n  list-style-type: none;\n  padding-left: 0;\n}\n.contacts-list ul li[data-v-484f3208] {\n  display: -webkit-box;\n  display: flex;\n  padding: 2px;\n  border-bottom: 1px solid #aaaaaa;\n  height: 80px;\n  position: relative;\n  cursor: pointer;\n}\n.contacts-list ul li.selected[data-v-484f3208] {\n  background: #dfdfdf;\n}\n.contacts-list ul li span.unread[data-v-484f3208] {\n  background: #82e0a8;\n  color: #ffffff;\n  position: absolute;\n  right: 11px;\n  top: 20px;\n  display: -webkit-box;\n  display: flex;\n  font-weight: 700;\n  min-width: 20px;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n  line-height: 20px;\n  font-size: 12px;\n  padding: 0 4px;\n  border-radius: 3px;\n}\n.contacts-list ul li span.online[data-v-484f3208] {\n  height: 10px;\n  width: 10px;\n  background-color: #01ff00;\n  border-radius: 50%;\n  display: inline-block;\n  position: absolute;\n  right: 10px;\n  top: 10px;\n}\n.contacts-list ul li span.offline[data-v-484f3208] {\n  height: 10px;\n  width: 10px;\n  background-color: #777777;\n  border-radius: 50%;\n  display: inline-block;\n  position: absolute;\n  right: 10px;\n  top: 10px;\n}\n.contacts-list ul li .avatar[data-v-484f3208] {\n  -webkit-box-flex: 1;\n          flex: 1;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n}\n.contacts-list ul li .avatar img[data-v-484f3208] {\n  width: 35px;\n  border-radius: 50%;\n  margin: 0 auto;\n}\n.contacts-list ul li .contact[data-v-484f3208] {\n  -webkit-box-flex: 3;\n          flex: 3;\n  font-size: 10px;\n  overflow: hidden;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  -webkit-box-pack: center;\n          justify-content: center;\n}\n.contacts-list ul li .contact p[data-v-484f3208] {\n  margin: 0;\n}\n.contacts-list ul li .contact p.name[data-v-484f3208] {\n  font-weight: bold;\n}", ""]);
 
 // exports
 
