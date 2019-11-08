@@ -9,7 +9,7 @@ router.get("/",isAdvisor, (req, res, next)=>{
 
 //Get student's id 
 router.get("/getmyids",isAdvisor, (req, res, next)=>{
-    res.send({"user_Id": req.session.user_ID, "student_ID": req.session.student_ID });  
+    res.send({"user_Id": req.session.user_ID, "advisor_ID": req.session.advisor_ID });  
   });
 
 // routes to student for current advisor
