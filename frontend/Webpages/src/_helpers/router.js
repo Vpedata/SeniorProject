@@ -1,12 +1,13 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import vuetify from '../plugins/vuetify';
 
 import HomePage from '../home/HomePage';
 import LoginPage from '../login/LoginPage';
 import RegisterPage from '../register/RegisterPage';
 import StudentView from '../student/StudentView';
 import StudentAddClassPage from '../student/StudentAddClassPage';
-import vuetify from '../plugins/vuetify';
+import StudentEditCompleted from '../student/StudentEditCompleted';
 import UserPage from '../login/UserPage';
 import MessagePage from '../conversation/MessagePage';
 import ClassList from '../classes/ClassList'
@@ -25,6 +26,7 @@ export const router = new Router({
     { path: '/messages', component: MessagePage},
     { path: '/studentaddclass', component: StudentAddClassPage },
     { path: '/classlist', component: ClassList},
+    { path: '/editcompleted', component: StudentEditCompleted},
 
     // otherwise redirect to home
     { path: '*', redirect: '/' }

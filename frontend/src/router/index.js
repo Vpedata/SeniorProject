@@ -5,6 +5,7 @@ import HelloWorld from '@/components/HelloWorld'
 import ClassList from '@/studentpages/ClassList'
 import StudentAddClassPage from '@/studentpages/StudentAddClassPage'
 import StudentView from '@/studentpages/StudentView'
+import StudentEditCompleted from '@/studentpages/StudentEditCompleted'
 import Login from '@/login/LoginPage'
 import Student from '@/login/UserPage'
 import axios from 'axios'
@@ -47,6 +48,14 @@ let router = new Router({
       path: '/fe/studentview',
       name: 'StudentView',
       component: StudentView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/fe/editcompleted',
+      name: 'StudentEditCompleted',
+      component: StudentEditCompleted,
       meta: {
         requiresAuth: true
       }

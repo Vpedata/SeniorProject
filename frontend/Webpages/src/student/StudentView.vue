@@ -10,7 +10,7 @@
                 </v-toolbar>
             </v-row>
             <v-row>
-                <v-btn class="ma-4" outlined color="red" @click="$router.push('/login')" dark>Edit Completed Courses</v-btn>
+                <v-btn class="ma-4" outlined color="blue" @click="$router.push('/editcompleted')" dark>Edit Completed Courses</v-btn>
                 <v-btn class="ma-4" outlined color="blue" @click="$router.push('/classlist')" dark>View Class List</v-btn>
             </v-row>
             <v-row>
