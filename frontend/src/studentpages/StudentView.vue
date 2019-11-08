@@ -10,13 +10,13 @@
                 </v-toolbar>
             </v-row>
             <v-row>
-                <v-btn class="ma-4" outlined color="red" @click="$router.push('')" dark>Edit Completed Courses</v-btn>
+                <v-btn class="ma-4" outlined color="blue" @click="$router.push('/editcompleted')" dark>Edit Completed Courses</v-btn>
                 <v-btn class="ma-4" outlined color="blue" @click="$router.push('/classlist')" dark>View Class List</v-btn>
             </v-row>
             <v-row>
                 <v-col cols="3">
                     <v-row>
-                        <v-btn class="ms-12 mt-12" outlined color="red" @click="$router.push('')" dark>Generate</v-btn>
+                        <v-btn class="ms-12 mt-12" outlined color="red" @click="$router.push('/login')" dark>Generate</v-btn>
                     </v-row>
                     <v-row>
                         <v-btn class="ms-12 mt-4" outlined color="blue" @click="$router.push('/studentaddclass')" dark>Add Class</v-btn>
