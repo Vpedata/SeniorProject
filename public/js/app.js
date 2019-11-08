@@ -1910,7 +1910,12 @@ __webpack_require__.r(__webpack_exports__);
 
         return single;
       });
-    }
+    } // updateOnlineStatus() {
+    //     this.contacts = this.contacts.map((single) => {
+    //         if()
+    //     })
+    // }
+
   },
   components: {
     Conversation: _Conversation__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -1946,6 +1951,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     contacts: {
@@ -1960,7 +1968,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       selected: this.contacts.length ? this.contacts[0] : null,
-      messages: []
+      messages: [],
+      onlineContacts: []
     };
   },
   mounted: function mounted() {
@@ -1973,6 +1982,12 @@ __webpack_require__.r(__webpack_exports__);
       //console.log(response.data);
       _this.messages = response.data;
     });
+    this.interval = setInterval(function () {
+      return _this.updateOnline();
+    }, 1000);
+    this.$root.$on('stopOnline', function () {
+      _this.interval = clearInterval();
+    });
   },
   methods: {
     selectContact: function selectContact(contact) {
@@ -1983,14 +1998,20 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.get('/messages').then(function (response) {
-        //console.log(response.data);
         _this2.messages = response.data;
+      });
+    },
+    updateOnline: function updateOnline() {
+      var _this3 = this;
+
+      axios.get('/contacts/onlineContacts').then(function (response) {
+        _this3.onlineContacts = response.data;
       });
     }
   },
   computed: {
     sortedContacts: function sortedContacts() {
-      var _this3 = this;
+      var _this4 = this;
 
       // return _.sortBy(this.contacts, [(contact) => {
       //     // if(contact == this.selected) {
@@ -2004,10 +2025,10 @@ __webpack_require__.r(__webpack_exports__);
         //console.log(contact.name + ': ' + contact.id);
         var recent = -1;
 
-        for (var i in _this3.messages) {
-          var message = _this3.messages[i];
+        for (var i in _this4.messages) {
+          var message = _this4.messages[i];
 
-          if (message.to == contact.id && message.from == _this3.user.id || message.to == _this3.user.id && message.from == contact.id) {
+          if (message.to == contact.id && message.from == _this4.user.id || message.to == _this4.user.id && message.from == contact.id) {
             if (message.id > recent) {
               recent = message.id;
             }
@@ -8613,7 +8634,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".contacts-list[data-v-484f3208] {\n  -webkit-box-flex: 2;\n          flex: 2;\n  max-height: 600px;\n  overflow: auto;\n  border-left: 1px solid #a6a6a6;\n}\n.contacts-list ul[data-v-484f3208] {\n  list-style-type: none;\n  padding-left: 0;\n}\n.contacts-list ul li[data-v-484f3208] {\n  display: -webkit-box;\n  display: flex;\n  padding: 2px;\n  border-bottom: 1px solid #aaaaaa;\n  height: 80px;\n  position: relative;\n  cursor: pointer;\n}\n.contacts-list ul li.selected[data-v-484f3208] {\n  background: #dfdfdf;\n}\n.contacts-list ul li span.unread[data-v-484f3208] {\n  background: #82e0a8;\n  color: #ffffff;\n  position: absolute;\n  right: 11px;\n  top: 20px;\n  display: -webkit-box;\n  display: flex;\n  font-weight: 700;\n  min-width: 20px;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n  line-height: 20px;\n  font-size: 12px;\n  padding: 0 4px;\n  border-radius: 3px;\n}\n.contacts-list ul li .avatar[data-v-484f3208] {\n  -webkit-box-flex: 1;\n          flex: 1;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n}\n.contacts-list ul li .avatar img[data-v-484f3208] {\n  width: 35px;\n  border-radius: 50%;\n  margin: 0 auto;\n}\n.contacts-list ul li .contact[data-v-484f3208] {\n  -webkit-box-flex: 3;\n          flex: 3;\n  font-size: 10px;\n  overflow: hidden;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  -webkit-box-pack: center;\n          justify-content: center;\n}\n.contacts-list ul li .contact p[data-v-484f3208] {\n  margin: 0;\n}\n.contacts-list ul li .contact p.name[data-v-484f3208] {\n  font-weight: bold;\n}", ""]);
+exports.push([module.i, ".contacts-list[data-v-484f3208] {\n  -webkit-box-flex: 2;\n          flex: 2;\n  max-height: 600px;\n  overflow: auto;\n  border-left: 1px solid #a6a6a6;\n}\n.contacts-list ul[data-v-484f3208] {\n  list-style-type: none;\n  padding-left: 0;\n}\n.contacts-list ul li[data-v-484f3208] {\n  display: -webkit-box;\n  display: flex;\n  padding: 2px;\n  border-bottom: 1px solid #aaaaaa;\n  height: 80px;\n  position: relative;\n  cursor: pointer;\n}\n.contacts-list ul li.selected[data-v-484f3208] {\n  background: #dfdfdf;\n}\n.contacts-list ul li span.unread[data-v-484f3208] {\n  background: #82e0a8;\n  color: #ffffff;\n  position: absolute;\n  right: 11px;\n  top: 20px;\n  display: -webkit-box;\n  display: flex;\n  font-weight: 700;\n  min-width: 20px;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n  line-height: 20px;\n  font-size: 12px;\n  padding: 0 4px;\n  border-radius: 3px;\n}\n.contacts-list ul li span.online[data-v-484f3208] {\n  height: 10px;\n  width: 10px;\n  background-color: #01da00;\n  border-radius: 50%;\n  display: inline-block;\n  position: absolute;\n  right: 6px;\n  top: 10px;\n}\n.contacts-list ul li span.offline[data-v-484f3208] {\n  height: 10px;\n  width: 10px;\n  background-color: #c90003;\n  border-radius: 50%;\n  display: inline-block;\n  position: absolute;\n  right: 6px;\n  top: 10px;\n}\n.contacts-list ul li .avatar[data-v-484f3208] {\n  -webkit-box-flex: 1;\n          flex: 1;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n}\n.contacts-list ul li .avatar img[data-v-484f3208] {\n  width: 35px;\n  border-radius: 50%;\n  margin: 0 auto;\n}\n.contacts-list ul li .contact[data-v-484f3208] {\n  -webkit-box-flex: 3;\n          flex: 3;\n  font-size: 10px;\n  overflow: hidden;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  -webkit-box-pack: center;\n          justify-content: center;\n}\n.contacts-list ul li .contact p[data-v-484f3208] {\n  margin: 0;\n}\n.contacts-list ul li .contact p.name[data-v-484f3208] {\n  font-weight: bold;\n}", ""]);
 
 // exports
 
@@ -48223,10 +48244,23 @@ var render = function() {
             _vm._v(" "),
             contact.unread
               ? _c("span", { staticClass: "unread" }, [
-                  _vm._v(" " + _vm._s(contact.unread))
+                  _vm._v(_vm._s(contact.unread))
                 ])
-              : _vm._e()
-          ]
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._l(_vm.onlineContacts, function(onlineContact) {
+              return contact.id == onlineContact.id && onlineContact.online
+                ? _c("span", { staticClass: "online" })
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.onlineContacts, function(onlineContact) {
+              return contact.id == onlineContact.id && !onlineContact.online
+                ? _c("span", { staticClass: "offline" })
+                : _vm._e()
+            })
+          ],
+          2
         )
       }),
       0

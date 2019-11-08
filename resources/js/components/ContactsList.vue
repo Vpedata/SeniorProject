@@ -2,6 +2,7 @@
     <div class="contacts-list">
         <ul>
             <li v-for="contact in sortedContacts" :key="contact.id" @click="selectContact(contact)" :class="{ 'selected': contact == selected }">
+
                 <div class="avatar">
                     <img :src="contact.profile_image" :alt="contact.name">
                 </div>
@@ -9,7 +10,9 @@
                     <p class="name">{{ contact.name }}</p>
                     <p class="email">{{ contact.email }}</p>
                 </div>
-                <span class="unread" v-if="contact.unread"> {{ contact.unread }}</span>
+                <span class="unread" v-if="contact.unread">{{ contact.unread }}</span>
+                <span v-for="onlineContact in onlineContacts" class="online" v-if="contact.id == onlineContact.id && onlineContact.online"></span>
+                <span v-for="onlineContact in onlineContacts" class="offline" v-if="contact.id == onlineContact.id && !onlineContact.online"></span>
             </li>
         </ul>
     </div>
@@ -30,7 +33,8 @@
         data() {
             return {
                 selected: this.contacts.length ? this.contacts[0] : null,
-                messages: []
+                messages: [],
+                onlineContacts: []
             };
         },
         mounted() {
@@ -42,6 +46,10 @@
                     //console.log(response.data);
                     this.messages = response.data;
                 });
+            this.interval = setInterval(() => this.updateOnline(), 1000);
+            this.$root.$on('stopOnline', () => {
+               this.interval = clearInterval();
+            });
         },
         methods: {
             selectContact(contact) {
@@ -51,9 +59,14 @@
             updateMessages() {
                     axios.get('/messages')
                         .then((response) => {
-                            //console.log(response.data);
                             this.messages = response.data;
                         });
+            },
+            updateOnline() {
+                axios.get('/contacts/onlineContacts')
+                    .then((response) => {
+                        this.onlineContacts = response.data;
+                    });
             }
         },
         computed: {
@@ -128,6 +141,28 @@
                     font-size: 12px;
                     padding: 0 4px;
                     border-radius: 3px;
+                }
+
+                span.online {
+                    height: 10px;
+                    width: 10px;
+                    background-color: #01da00;
+                    border-radius: 50%;
+                    display: inline-block;
+                    position: absolute;
+                    right: 6px;
+                    top: 10px;
+                }
+
+                span.offline {
+                    height: 10px;
+                    width: 10px;
+                    background-color: #c90003;
+                    border-radius: 50%;
+                    display: inline-block;
+                    position: absolute;
+                    right: 6px;
+                    top: 10px;
                 }
 
                 .avatar {

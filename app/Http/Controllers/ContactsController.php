@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Message;
 use App\Events\NewMessage;
+use Cache;
 
 class ContactsController extends Controller
 {
@@ -53,5 +54,18 @@ class ContactsController extends Controller
         broadcast(new NewMessage($message));
 
         return response()->json($message);
+    }
+
+    public function onlineContacts() {
+        $onlineContacts = User::where('id', '!=', auth()->id())->get();
+
+        $onlineContacts = $onlineContacts->map(function($contact) {
+
+            $contact->online = Cache::has('active-user' . $contact->id) ? true : false;
+
+            return $contact;
+        });
+
+        return response()->json($onlineContacts);
     }
 }
