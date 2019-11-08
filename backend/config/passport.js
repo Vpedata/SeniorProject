@@ -27,19 +27,10 @@ passport.use(new GoogleStrategy({
   (req,accessToken,refreshToken,profile,done) => {
     process.nextTick(function(){
       //google callback
-      let user = {
-        isStudent : 1,
-        firstName : profile.name.givenName,
-        lastName  : profile.name.familyName,
-        email     : profile.emails[0].value,
-        googleId  : profile.id
-      };
-      var sql = "CALL insertAndReturnUser(?);"
-      db.query(sql, [user], (err, rows, fields) => {
+      var sql = "CALL insertAndReturnUser(?)"
+      db.query(sql, [1,profile.name.givenName,profile.name.familyName,profile.emails[0].value,profile.id], (err, rows, fields) => {
         if (err) throw err;
-        console.log(rows[0]);
         return done(null,rows[0]);
-        
       });
     });
   }));
