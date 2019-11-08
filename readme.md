@@ -14,7 +14,7 @@
     <li>Distinguishing the differences in features of the message app for Advisors and Students (Students can only message their advisors</li>
 </ul>
 
-<h4>Version History</h4>
+<h3>Version History</h3>
 <p><b>Version 1.3.0</b> -> The list of contacts in ContactsList.vue now only includes users that the current user has sent messages to or received messages from.</p>
 <p><b>Version 1.2.1</b> -> Minor changes to the fake database backend. The unused 'phone' column was removed. The necessary column 'isStudent' for distinguishing the difference between a Student User and an Advisor User in future versions was added to the fake database. The factory UserFactory was updated to reflect these changes.</p>
 <p><b>Version 1.2.0</b> -> The list of contacts in ContactsList.vue now renders whether a user is online or offline using an updateOnline() method and custom ActiveUser Middleware to temporarily link a user's online state to their Cache based on a 15 second expiration timer. It updates that a user is offline after 15 seconds of having logged out or closed their browser.</p>
