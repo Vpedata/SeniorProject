@@ -6,15 +6,8 @@ const publicRoot = '/home/ubuntu/SeniorProject/frontend/dist'
 
 //Student Homepage
 router.get("/",isStudent, (req, res, next)=>{
-    req.session.user = req.user[0];
-    console.log(req.session.user);
     res.redirect("http://onlineadvisor.tk:3000/#/fe/student");
     //res.send(req.user[0]);
-});
-
-//Get student's id 
-router.get("/getmyids",isStudent, (req, res, next)=>{
-  res.send("student_ID"+  req.session.student_ID );  
 });
 
 //Returns Student's Advisor
