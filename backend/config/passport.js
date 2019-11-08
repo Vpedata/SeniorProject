@@ -17,7 +17,6 @@ passport.deserializeUser(function(id, done) {
   })
 });
 
-
 passport.use(new GoogleStrategy({
 	callbackURL:'http://onlineadvisor.tk:3000/auth/redirect',
     clientID: keys.google.clientID,
@@ -30,7 +29,7 @@ passport.use(new GoogleStrategy({
       var sql = "CALL insertAndReturnUser(?)"
       db.query(sql, [1,profile.name.givenName,profile.name.familyName,profile.emails[0].value,profile.id], (err, rows, fields) => {
         if (err) throw err;
-        return done(null,rows[0]);
+        return done(null,rows[1][0]);
       });
     });
   }));
