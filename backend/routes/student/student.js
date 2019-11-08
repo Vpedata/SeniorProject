@@ -12,7 +12,6 @@ router.get("/",isStudent, (req, res, next)=>{
 
 //Returns Student's Advisor
 router.get("/getmyadvisor",isStudent,(req, res, next)=>{
-    
     var sql = "CALL getmyadvisor(?);";
     db.query(sql, [req.session.student_ID], (err, rows, fields) => {
       if (err) throw(err);
