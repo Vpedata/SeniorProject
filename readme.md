@@ -1,6 +1,6 @@
 <h1>Messaging Application Prototype</h1>
 
-<h6>Version 1.2.1</h6>
+<h6>Version 1.3.0</h6>
 
 <p>This branch contains the Laravel (PHP Framework) and Vue JS build of the Messaging Application Prototype. It is to be integrated with the Vue JS build of our Advising Application once everything else is working smoothly and integrated properly. Integrating this could either be as simple as connecting it to the DataBase in the .env file, and then grabbing the files we need and routing to the proper views, or it could be extremely complex. In the latter case, I will simply curl up into a ball and cry. Have your fingers crossed that the former will turn out to be true.</p>
 
