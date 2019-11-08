@@ -34,8 +34,7 @@
             return {
                 selected: this.contacts.length ? this.contacts[0] : null,
                 messages: [],
-                onlineContacts: [],
-                notContacted: [],
+                onlineContacts: []
             };
         },
         mounted() {
@@ -88,7 +87,7 @@
                     var recent = -1;
                     for(let i in this.messages) {
                         var message = this.messages[i];
-                        if((message.to == contact.id && message.from == this.user.id) || (message.to == this.user.id && message.from == contact.id)) {
+                        if((message.to === contact.id && message.from === this.user.id) || (message.to === this.user.id && message.from === contact.id)) {
                             if(message.id > recent) {
                                 recent = message.id;
                             }
@@ -104,25 +103,15 @@
                     return recent;
                 }]).reverse();
 
-                console.log('----a----');
-                console.log(temp);
-
                 for(let i in notContacts) {
                     var con = notContacts[i];
                     var index = temp.indexOf(con);
                     temp.splice(index);
                 }
 
-                console.log('----n----');
-                console.log(notContacts);
-                console.log('----t----');
-                console.log(temp);
-                console.log('--------');
-
-                // this.notContacted = notContacts;
-                // console.log(this.notContacted);
-
                 return temp;
+
+
                 // return this.contacts.sort(function (a, b) {
                 //     return new Date(b.updated_at) - new Date(a.updated_at);
                 // });

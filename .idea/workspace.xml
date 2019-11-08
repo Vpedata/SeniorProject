@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c53b0535-896a-45fc-958e-e63e4145013f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/ContactsList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ContactsList.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -230,7 +228,7 @@
       <workItem from="1572531584184" duration="4579000" />
       <workItem from="1572551098321" duration="4856000" />
       <workItem from="1572578967809" duration="9098000" />
-      <workItem from="1573159139282" duration="21718000" />
+      <workItem from="1573159139282" duration="21909000" />
     </task>
     <servers />
   </component>
