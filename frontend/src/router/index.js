@@ -58,7 +58,7 @@ let router = new Router({
 
 router.beforeEach((to, from, next) =>{
   if (to.matched.some(record => record.meta.requiresAuth)){
-      axios.get("http://onlineadvisor.tk:3000/user/check")
+      axios.get("/user/check")
       .then(function(result){
         if (result.data.redirect == "yes"){
           router.replace("/");

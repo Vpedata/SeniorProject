@@ -98,7 +98,7 @@ export default {
         name: " "
   }),
   beforeMount(){
-      axios.get("http://onlineadvisor.tk:3000/user/getName").then(function(result){
+      axios.get("/user/getName").then(function(result){
         this.name = result.data.firstName + " " + result.data.lastName;
       })
   }

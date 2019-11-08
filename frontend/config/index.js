@@ -11,7 +11,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-    	"/user": "http://onlineadvisor.tk:3000"
+      '/': 'http://onlineadvisor.tk:3000'
     },
 
     // Various Dev Server settings
@@ -53,7 +53,9 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-
+    proxyTable: {
+      '/': 'http://onlineadvisor.tk:3000'
+    },
     /**
      * Source Maps
      */
