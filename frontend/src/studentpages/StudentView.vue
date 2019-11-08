@@ -5,7 +5,7 @@
             <v-row>
                 <v-toolbar dark>
                 <v-toolbar-title>
-                    {{account.user.firstName}} {{account.user.lastName}}
+                    {{name}}
                 </v-toolbar-title>
                 </v-toolbar>
             </v-row>
@@ -88,10 +88,19 @@
 
 
 <script>
+import axios from 'axios'
+import router from '../router/index.js'
+
 export default {
     name: 'StudentView',
     data: () => ({
-        dialog: false
+        dialog: false,
+        name: " "
   }),
+  beforeMount(){
+      axios.get("http://onlineadvisor.tk:3000/user/getName").then(function(result){
+        this.name = result.data.firstName + " " + result.data.lastName;
+      })
+  }
 };
 </script>

@@ -3,18 +3,18 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import axios from 'axios';
-import Vuetify from 'vuetify';
+import axios from 'axios'
+import Vuetify from 'vuetify'
 
 Vue.config.productionTip = false
-Vue.prototype.$http = axios;
+Vue.prototype.$http = axios
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   vuetify: new Vuetify(),
-  data() {
+  data () {
     return {
-      dialog: false,
+      dialog: false
     }
   },
   router,

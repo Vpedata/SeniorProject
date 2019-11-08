@@ -10,11 +10,12 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: 'Student',
   methods: {
     logout(){
-        $http.get("http://onlineadvisor.tk:3000/auth/logout");
+        axios.get("http://onlineadvisor.tk:3000/auth/logout");
         $router.push('/');
     }
 },

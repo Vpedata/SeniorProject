@@ -21,8 +21,8 @@ let router = new Router({
     },
     {
       path: '/fe/student',
-      name: 'Student',
-      component: Student,
+      name: 'StudentView',
+      component: StudentView,
       meta: {
         requiresAuth: true
       }
@@ -42,22 +42,13 @@ let router = new Router({
       meta: {
         requiresAuth: true
       }
-    },
-    {
-      path: '/fe/studentview',
-      name: 'StudentView',
-      component: StudentView,
-      meta: {
-        requiresAuth: true
-      }
-    },
-
+    }
   ]
 })
 
 router.beforeEach((to, from, next) =>{
   if (to.matched.some(record => record.meta.requiresAuth)){
-      axios.get("/user/check")
+      axios.get("http://onlineadvisor.tk:3000/user/check")
       .then(function(result){
         if (result.data.redirect == "yes"){
           router.replace("/");

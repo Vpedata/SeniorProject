@@ -40,6 +40,10 @@ router.get("/check", authFEMiddleware, (req, res, next) => {
 
 });
 
+router.get("/getName"), authMiddleware, (req, res, next) => {
+  res.json({firstName: req.session.firstName, lastName: req.session.lastName})
+}
+
 //Get an user
 router.get("/:id",authMiddleware, (req, res, next) => {
   var sql = "CALL getUserById(?);";
