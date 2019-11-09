@@ -26,7 +26,7 @@ passport.use(new GoogleStrategy({
   (req,accessToken,refreshToken,profile,done) => {
     process.nextTick(function(){
       //google callback
-      var sql = "CALL insertAndReturnUser(?,?,?,?,?)"
+      var sql = "CALL insertAndReturnUser(?,?,?,?,?)";
       db.query(sql, [1,profile.name.givenName,profile.name.familyName,profile.emails[0].value,profile.id], (err, rows, fields) => {
         if (err) throw err;
         return done(null,rows[1][0]);
