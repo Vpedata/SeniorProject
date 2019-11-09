@@ -7,12 +7,12 @@ const publicRoot = '/home/ubuntu/SeniorProject/frontend/dist'
 //Student hompage
 router.get("/",isStudent, (req, res, next)=>{
     res.redirect("http://onlineadvisor.tk:3000/#/fe/student");
-    //res.send(req.user[0]);
+    //res.send(req.user);
 });
 
 //Student Homepage info
 router.get("/info",isStudent, (req, res, next)=>{
-  res.send(req.user[0]);
+  res.send(req.user);
 });
 
 //Returns Student's Advisor

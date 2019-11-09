@@ -1,6 +1,6 @@
 //check if user is student only; 
 const isStudent= (req, res, next) => {
-    if(req.user[0].IsStudent)
+    if(req.user.IsStudent)
     {
         return next();
     }

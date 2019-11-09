@@ -10,7 +10,7 @@ router.use('/advisor',require('./advisor/advisor'));
 
 // redirect to Student or Advisor homepage
 router.get("/",authMiddleware, (req, res, next)=>{
-    if(!req.user[0].IsStudent){
+    if(!req.user.IsStudent){
       res.redirect('/user/advisor');
     }
     else { 
@@ -21,8 +21,8 @@ router.get("/",authMiddleware, (req, res, next)=>{
 
 //Get Name of the user
 router.get('/getName', authMiddleware, (req,res,next)=>{
-    res.send({'firstName': req.user[0].firstName,
-              'lastName': req.user[0].lastName});
+    res.send({'firstName': req.user.firstName,
+              'lastName': req.user.lastName});
 });
 
 //Get id of the current user

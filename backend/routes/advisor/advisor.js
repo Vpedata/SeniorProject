@@ -4,12 +4,12 @@ const db = require("../../config/db.js");
 
 //Advisor Homepage
 router.get("/",isAdvisor, (req, res, next)=>{
-    res.send(req.user[0]);
+    res.send(req.user);
 });
 
 //Adivsor Homepage info
 router.get("/info",isAdvisor, (req, res, next)=>{
-    res.send(req.user[0]);
+    res.send(req.user);
 });
   
 
