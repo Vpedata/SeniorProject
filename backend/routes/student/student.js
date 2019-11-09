@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const isStudent = require("./studentAuth.js");
 const db = require("../../config/db.js");
-const publicRoot = '/home/ubuntu/SeniorProject/frontend/dist'
-
 
 //Student hompage
 router.get("/",isStudent, (req, res, next)=>{
@@ -18,9 +16,9 @@ router.get("/info",isStudent, (req, res, next)=>{
 //Returns Student's Advisor
 router.get("/getmyadvisor",isStudent,(req, res, next)=>{
     var sql = "CALL getmyadvisor(?);";
-    db.query(sql, [req.user[0].student_ID], (err, rows, fields) => {
+    db.query(sql, [req.user.student_ID], (err, rows, fields) => {
       if (err) throw(err);
-      res.json(rows[0][0]);
+      res.json(rows);
     })
 });
 
