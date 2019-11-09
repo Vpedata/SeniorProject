@@ -11,7 +11,7 @@ router.get("/all",isAdvisor, (req, res, next)=> {
     });
 });
 
-//get student by email 
+//get student_ID by email 
 router.get("/email/:email",isAdvisor, (req, res, next)=> {
 var sql = "CALL getStudentByEmail(?,@student); select @student as student_ID;";
     db.query(sql,req.params.email, (err, rows, fields) => {

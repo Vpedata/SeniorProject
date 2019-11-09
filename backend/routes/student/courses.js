@@ -22,9 +22,4 @@ router.post("/taken",isStudent,(req, res, next) => {
     res.send("Under construction");
 });
 
-//update the list of courses recommended for current student
-router.post("/recommended",isStudent,(req, res, next) => {
-    res.send("Under construction");
-});
-
 module.exports = router; 
