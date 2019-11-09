@@ -17,7 +17,7 @@ const publicRoot = '/home/ubuntu/SeniorProject/frontend/dist'
 app.use(express.static(publicRoot))
 app.use( cookieParser()); 
 app.use( bodyParser.json());
-app.use( bodyParser.urlencoded({extended: true}));
+app.use( bodyParser.urlencoded({extended: false}));
 
 //app.use(cookieSession({
 //    name: 'session',
