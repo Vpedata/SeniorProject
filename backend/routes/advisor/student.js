@@ -3,7 +3,7 @@ const isAdvisor = require("./advisorAuth.js");
 const db = require("../../config/db.js");
 
 //get all students for the current advisor 
-router.get("/all",isAdvisor, (req, res, next)=> {
+router.get("/all",isAdvigsor, (req, res, next)=> {
     var sql = "CALL getAllStudents(?);";
     db.query(sql,req.user.advisor_ID, (err, rows, fields) => {
         if (err) throw err;
@@ -14,7 +14,7 @@ router.get("/all",isAdvisor, (req, res, next)=> {
 //get student by email 
 router.get("/email/:email",isAdvisor, (req, res, next)=> {
 var sql = "CALL getStudentByEmail(?,@student); select @student as student_ID;";
-    db.query(sql,req.params.id, (err, rows, fields) => {
+    db.query(sql,req.params.email, (err, rows, fields) => {
         if (err) throw err;
         res.send(rows);
     });
@@ -23,7 +23,7 @@ var sql = "CALL getStudentByEmail(?,@student); select @student as student_ID;";
 //get student's list of courses taken by student email 
 router.get("/:email/taken",isAdvisor, (req, res, next)=> {
     var sql = "CALL getStudentsTakenCourses(?);";
-    db.query(sql,[req.params.email], (err, rows, fields) => {
+    db.query(sql,req.params.email, (err, rows, fields) => {
         if (err) throw err;
         res.send(rows);
     });
