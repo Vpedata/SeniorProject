@@ -3,12 +3,29 @@ const isAdvisor = require("./advisorAuth.js");
 
 //get all students for the current advisor 
 router.get("/all",isAdvisor, (req, res, next)=> {
-    res.send("Under Construction");
+    var sql = "CALL getAllStudents(?);";
+    db.query(sql,req.user.advisor_ID, (err, rows, fields) => {
+        if (err) throw err;
+        res.send(rows);
+    });
+});
+
+//get student by email 
+router.get("/email/:email",isAdvisor, (req, res, next)=> {
+var sql = "CALL getStudentByEmail(?,@student); select @student as student_ID;";
+    db.query(sql,req.params.id, (err, rows, fields) => {
+        if (err) throw err;
+        res.send(rows);
+    });
 });
 
 //get student's list of courses taken by student email 
 router.get("/:email/taken",isAdvisor, (req, res, next)=> {
-    res.send("Under Construction");
+    var sql = "CALL getStudentsTakenCourses(?);";
+    db.query(sql,[req.params.email], (err, rows, fields) => {
+        if (err) throw err;
+        res.send(rows);
+    });
 });
 
 //get student's list of recommended courses by student email
