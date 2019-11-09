@@ -11,6 +11,8 @@ import StudentEditCompleted from '../student/StudentEditCompleted';
 import UserPage from '../login/UserPage';
 import MessagePage from '../conversation/MessagePage';
 import ClassList from '../classes/ClassList'
+import AdvisorView from '../advisor/AdvisorView';
+import CreateCourse from '../advisor/CreateCourse';
 
 Vue.use(Router);
 Vue.use(vuetify);
@@ -27,6 +29,8 @@ export const router = new Router({
     { path: '/studentaddclass', component: StudentAddClassPage },
     { path: '/classlist', component: ClassList},
     { path: '/editcompleted', component: StudentEditCompleted},
+    { path: '/advisorview', component: AdvisorView},
+    { path: '/createcourse', component: CreateCourse},
 
     // otherwise redirect to home
     { path: '*', redirect: '/' }

@@ -8,6 +8,8 @@ import StudentView from '@/studentpages/StudentView'
 import StudentEditCompleted from '@/studentpages/StudentEditCompleted'
 import Login from '@/login/LoginPage'
 import Student from '@/login/UserPage'
+import AdvisorView from '@/advisor/AdvisorView'
+import CreateCourse from '@/advisor/AdvisorView'
 import axios from 'axios'
 
 Vue.use(Router)
@@ -48,6 +50,22 @@ let router = new Router({
       path: '/fe/editcompleted',
       name: 'StudentEditCompleted',
       component: StudentEditCompleted,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/fe/advisorview',
+      name: 'AdvisorView',
+      component: AdvisorView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/fe/editcompleted',
+      name: 'CreateCourse',
+      component: CreateCourse,
       meta: {
         requiresAuth: true
       }

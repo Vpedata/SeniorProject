@@ -18,7 +18,8 @@
         </p>
         <v-app id="inspire">
             <div class="text-center">
-                <v-btn class="ma-2" outlined color="indigo" @click="$router.push('/studentview')" dark>Continue</v-btn>
+                <v-btn class="ma-2" outlined color="indigo" @click="$router.push('/studentview')" dark>Student View</v-btn>
+                <v-btn class="ma-2" outlined color="indigo" @click="$router.push('/advisorview')" dark>Advisor View</v-btn>
             </div>
         </v-app>
     </div>
