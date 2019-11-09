@@ -4,12 +4,12 @@ const db = require("../../config/db.js");
 
 
 //Insert a course by courseCode  
-router.post("/",isAdvisor, (req, res, next) => {
+router.put("/", (req, res, next) => {
     var sql = "#CALL addCourse(?,?,?,?,?)";
     const course = [req.body.courseCode,
                     req.body.name,
-                    req.body.recSemester,
                     req.body.isRequired,
+                    req.body.recSemester,
                     req.body.creditHours]
     db.query(sql,course, (err, rows, fields) => {
       if (err) throw err;
@@ -17,12 +17,26 @@ router.post("/",isAdvisor, (req, res, next) => {
     });
 });
 //Update a course by courseCode 
-router.put("/:cn",isAdvisor, (req, res, next) => {
-    res.send("Under Construction");
+router.put("/:id", (req, res, next) => {
+    var sql = "CALL addCourse(?,?,?,?,?,?)";
+    const course = [req.params.id,
+                    req.body.courseCode,
+                    req.body.name,
+                    req.body.isRequired,
+                    req.body.recSemester,
+                    req.body.creditHours]
+    db.query(sql,course, (err, rows, fields) => {
+        if (err) throw err;
+        res.send(rows);
+    });
 });
 //Delete a course by courseCode 
-router.delete("/:cn",isAdvisor, (req, res, next) => {
-    res.send("Under Construction");
+router.delete("/:id", (req, res, next) => {
+    var sql = " CALL deleteCourse(?)";
+    db.query(sql,req.params.id, (err, rows, fields) => {
+        if (err) throw err;
+        res.send(rows);
+    });
 });
 
 module.exports = router; 
