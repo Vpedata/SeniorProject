@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const isAdvisor = require("./advisorAuth.js");
+const db = require("../../config/db.js");
 
 //get all students for the current advisor 
 router.get("/all",isAdvisor, (req, res, next)=> {
