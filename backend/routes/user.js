@@ -3,6 +3,11 @@ var db = require ("../config/db.js");
 const authMiddleware = require("./authentication.js");
 const authFEMiddleware = require ("./frontendauthentication.js");
 
+//Frontend authentication
+router.get("/check", authFEMiddleware, (req, res, next) => {
+  res.send(req.json(redir));
+});
+
 // routes to student 
 router.use('/student',require('./student/student'));
 // routes to advisor
@@ -39,19 +44,16 @@ router.get("/all",authMiddleware, (req, res, next)=>{
   })
 });
 
-router.get("/check", authFEMiddleware, (req, res, next) => {
-    res.send(req.json(redir));
-});
-
 //Get an user
 router.get("/:id",authMiddleware, (req, res, next) => {
   var sql = "CALL getUserById(?);";
   db.query(sql, [req.params.id], (err, rows, fields) => {
     if (err) throw(err);
-    res.json(rows[0]);
+    res.json(rows);
   })
 });
 
+/**  
 //Delete an user
 router.delete("/:id", (req, res, next) => {
   var sql = "DELETE FROM User WHERE user_ID = ?";
@@ -81,5 +83,5 @@ router.put("/", (req, res, next) => {
     res.json({'status': 'success'});
   })
 });
-
+*/
 module.exports = router; 
