@@ -1,5 +1,5 @@
 const router = require('express').Router();
-//const isAdvisor = require("./advisorAuth.js");
+const isAdvisor = require("./advisorAuth.js");
 const db = require("../../config/db.js");
 
 
