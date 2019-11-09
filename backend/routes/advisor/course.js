@@ -4,7 +4,7 @@ const db = require("../../config/db.js");
 
 
 //Insert a course by courseCode  
-router.put("/", (req, res, next) => {
+router.post("/",isAdvisor, (req, res, next) => {
     var sql = "#CALL addCourse(?,?,?,?,?)";
     const course = [req.body.courseCode,
                     req.body.name,
@@ -17,7 +17,7 @@ router.put("/", (req, res, next) => {
     });
 });
 //Update a course by courseCode 
-router.put("/:id", (req, res, next) => {
+router.put("/:id",isAdvisor, (req, res, next) => {
     var sql = "CALL addCourse(?,?,?,?,?,?)";
     const course = [req.params.id,
                     req.body.courseCode,
@@ -31,7 +31,7 @@ router.put("/:id", (req, res, next) => {
     });
 });
 //Delete a course by courseCode 
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id",isAdvisor, (req, res, next) => {
     var sql = " CALL deleteCourse(?)";
     db.query(sql,req.params.id, (err, rows, fields) => {
         if (err) throw err;
