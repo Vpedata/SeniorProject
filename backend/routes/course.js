@@ -16,16 +16,16 @@ router.get("/:id",authMiddleware, (req, res, next) => {
   var sql = "CALL getCourseById(?);";
   db.query(sql, [req.params.id], (err, rows, fields) => {
     if (err) throw err;
-    res.json(rows[0]);
+    res.json(rows);
   })
 });
 
 //Get an course by courseCode 
 router.get("/number/:cn",authMiddleware, (req, res, next) => {
   var sql = "CALL getCourseByNumber(?);";
-  db.query(sql, [req.query.cn], (err, rows, fields) => {
+  db.query(sql, [req.params.cn], (err, rows, fields) => {
     if (err) throw err;
-    res.json(rows[0]);
+    res.json(rows);
   })
 });
 
