@@ -106,8 +106,8 @@ export default {
       axios
       .get('/user/getName')
       .then(response => {
-        this.name = response.firstName + " " + response.lastName;
-      })
+        this.name = response.data.firstName + " " + response.data.lastName;
+      }).bind(this)
       .catch(error => {
         console.log(error)
       })
