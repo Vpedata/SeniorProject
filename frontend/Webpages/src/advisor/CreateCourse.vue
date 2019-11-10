@@ -3,8 +3,8 @@
     <v-app id="inspire">
         <div class="grey lighten-5 pa-4">
             <v-row>
-                <v-toolbar dark>
-                <v-toolbar-title>
+                <v-toolbar color="amber darken-1" dark>
+                <v-toolbar-title class="brown--text">
                     {{account.user.firstName}} {{account.user.lastName}}
                 </v-toolbar-title>
                 </v-toolbar>
