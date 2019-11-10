@@ -7,6 +7,12 @@
 <script>
 export default {
   name: 'App',
+  methods: {
+    logout(){
+        $http.get("http://onlineadvisor.tk:3000/auth/logout");      
+        $router.push('http://onlineadvisor.tk:3000/#/');
+    }
+},
 }
 </script>
 
