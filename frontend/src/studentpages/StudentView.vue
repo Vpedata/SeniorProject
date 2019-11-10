@@ -75,7 +75,7 @@
             </v-row>
             <v-row>
                 <v-col cols="8">
-                    <v-btn class="mt-12 ma-12" outlined color="brown" @click="$router.push('/login')" dark>Logout</v-btn>
+                    <v-btn class="mt-12 ma-12" outlined color="brown" @click="logout" dark>Logout</v-btn>
                 </v-col>
                 <v-col cols="4">
                     <v-btn class="mt-12" outlined color="brown" @click="$router.push('/messages')" dark>Messages</v-btn>
@@ -101,6 +101,12 @@ export default {
         dialog: false,
         name: " "
   }),
+  methods: {
+      logout: function () {
+        axios.get("/auth/logout");      
+        $router.push('/');
+    }
+  },
 
   beforeMount(){
       axios
