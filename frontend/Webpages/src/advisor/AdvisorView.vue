@@ -3,15 +3,15 @@
     <v-app id="inspire">
         <div class="grey lighten-5 pa-4">
             <v-row>
-                <v-toolbar dark>
-                <v-toolbar-title>
+                <v-toolbar color="amber darken-1" dark>
+                <v-toolbar-title class="brown--text">
                     {{account.user.firstName}} {{account.user.lastName}}
                 </v-toolbar-title>
                 </v-toolbar>
             </v-row>
             <v-row>
-                <v-btn class="ma-4" outlined color="blue" @click="$router.push('/createcourse')" dark>Create New Course</v-btn>
-                <v-btn class="ma-4" outlined color="blue" @click="$router.push('/classlist')" dark>View Class List</v-btn>
+                <v-btn class="ma-4" outlined color="brown" @click="$router.push('/createcourse')" dark>Create New Course</v-btn>
+                <v-btn class="ma-4" outlined color="brown" @click="$router.push('/classlist')" dark>View Class List</v-btn>
             </v-row>
             <v-row>
                 <v-col cols="3"></v-col>
@@ -25,7 +25,7 @@
                             <v-list-item-content>
                                 <v-dialog v-model="dialog" width="500">
                                     <template v-slot:activator="{ on }">
-                                    <v-btn color="indigo lighten-2" dark v-on="on">
+                                    <v-btn color="amber darken-1" dark v-on="on">
                                         (Get Student Name)
                                     </v-btn>
                                     </template>
