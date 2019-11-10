@@ -3,8 +3,8 @@
     <v-app id="inspire">
         <div class="grey lighten-5 pa-4">
             <v-row>
-                <v-toolbar dark>
-                <v-toolbar-title>
+                <v-toolbar color="amber darken-1" dark>
+                <v-toolbar-title class="brown--text">
                     {{account.user.firstName}} {{account.user.lastName}}
                 </v-toolbar-title>
                 </v-toolbar>
@@ -23,7 +23,7 @@
                     <v-btn class="mt-12 ma-12" outlined color="blue" @click="$router.push('/advisorview')" dark>Back</v-btn>
                 </v-col>
                 <v-col cols="4">
-                    <v-btn class="mt-12" outlined color="red" @click="$router.push('/advisorview')" dark>Create</v-btn>
+                    <v-btn class="mt-12" outlined color="blue" @click="$router.push('/advisorview')" dark>Create</v-btn>
                 </v-col>
             </v-row>
         </div>
@@ -35,6 +35,11 @@
 import { mapState, mapActions } from 'vuex'
 
 export default {
+    computed: {
+        ...mapState({
+            account: state => state.account,
+        })
+    }, 
     data: () => ({
         class_name: '',
         class_desc: ''
