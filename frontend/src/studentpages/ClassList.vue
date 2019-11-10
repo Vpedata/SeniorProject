@@ -3,8 +3,8 @@
     <v-app id="inspire">
         <div class="grey lighten-5 pa-4">
             <v-row>
-                <v-toolbar dark>
-                <v-toolbar-title>
+                <v-toolbar color="amber darken-1" dark>
+                <v-toolbar-title class="brown--text">
                     {{account.user.firstName}} {{account.user.lastName}}
                 </v-toolbar-title>
                 </v-toolbar>
@@ -24,7 +24,7 @@
                             <v-list-item-content>
                                 <v-dialog v-model="dialog" width="500">
                                     <template v-slot:activator="{ on }">
-                                    <v-btn color="indigo lighten-2" dark v-on="on">
+                                    <v-btn color="amber darken-1" dark v-on="on">
                                         GetClassName
                                     </v-btn>
                                     </template>
@@ -74,9 +74,14 @@
 
 
 <script>
+import { mapState, mapActions } from 'vuex'
 
 export default {
-    name: 'ClassList',
+    computed: {
+        ...mapState({
+            account: state => state.account,
+        })
+    }, 
     data: () => ({
         dialog: false
   }),
