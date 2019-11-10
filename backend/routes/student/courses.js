@@ -19,7 +19,11 @@ router.get("/recommended",isStudent, (req, res, next) => {
 
 //update the list of couses taken by the current student
 router.post("/taken",isStudent,(req, res, next) => {
-    res.send("Under construction");
+    var sql = "CALL addTakenClasses(?,?,?);";
+    db.query(sql,req.user.student_ID, (err, rows, fields) => {
+        if (err) throw err;
+        res.send(rows);
+      });
 });
 
 module.exports = router; 
