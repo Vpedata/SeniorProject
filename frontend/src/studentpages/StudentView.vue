@@ -3,23 +3,23 @@
     <v-app id="inspire">
         <div class="grey lighten-5 pa-4">
             <v-row>
-                <v-toolbar dark>
-                <v-toolbar-title>
-                    {{name}}
+                <v-toolbar color="amber darken-1" dark>
+                <v-toolbar-title class="brown--text">
+                    {{account.user.firstName}} {{account.user.lastName}}
                 </v-toolbar-title>
                 </v-toolbar>
             </v-row>
             <v-row>
-                <v-btn class="ma-4" outlined color="blue" @click="$router.push('/editcompleted')" dark>Edit Completed Courses</v-btn>
-                <v-btn class="ma-4" outlined color="blue" @click="$router.push('/classlist')" dark>View Class List</v-btn>
+                <v-btn class="ma-4" outlined color="brown" @click="$router.push('/editcompleted')" dark>Edit Completed Courses</v-btn>
+                <v-btn class="ma-4" outlined color="brown" @click="$router.push('/classlist')" dark>View Class List</v-btn>
             </v-row>
             <v-row>
                 <v-col cols="3">
                     <v-row>
-                        <v-btn class="ms-12 mt-12" outlined color="red" @click="$router.push('/login')" dark>Generate</v-btn>
+                        <v-btn class="ms-12 mt-12" outlined color="amber darken-1" @click="$router.push('/login')" dark>Generate</v-btn>
                     </v-row>
                     <v-row>
-                        <v-btn class="ms-12 mt-4" outlined color="blue" @click="$router.push('/studentaddclass')" dark>Add Class</v-btn>
+                        <v-btn class="ms-12 mt-4" outlined color="brown" @click="$router.push('/studentaddclass')" dark>Add Class</v-btn>
                     </v-row>
                 </v-col>
                 <v-col cols="9" lg="6">
@@ -32,7 +32,7 @@
                             <v-list-item-content>
                                 <v-dialog v-model="dialog" width="500">
                                     <template v-slot:activator="{ on }">
-                                    <v-btn color="indigo lighten-2" dark v-on="on">
+                                    <v-btn color="amber darken-1" dark v-on="on">
                                         GetClassName
                                     </v-btn>
                                     </template>
@@ -75,10 +75,10 @@
             </v-row>
             <v-row>
                 <v-col cols="8">
-                    <v-btn class="mt-12 ma-12" outlined color="blue" @click="$router.push('/login')" dark>Logout</v-btn>
+                    <v-btn class="mt-12 ma-12" outlined color="brown" @click="$router.push('/login')" dark>Logout</v-btn>
                 </v-col>
                 <v-col cols="4">
-                    <v-btn class="mt-12" outlined color="blue" @click="$router.push('/messages')" dark>Messages</v-btn>
+                    <v-btn class="mt-12" outlined color="brown" @click="$router.push('/messages')" dark>Messages</v-btn>
                 </v-col>
             </v-row>
         </div>
@@ -88,19 +88,16 @@
 
 
 <script>
-import axios from 'axios'
-import router from '../router/index.js'
+import { mapState, mapActions } from 'vuex'
 
 export default {
-    name: 'StudentView',
+    computed: {
+        ...mapState({
+            account: state => state.account,
+        })
+    }, 
     data: () => ({
-        dialog: false,
-        name: " "
+        dialog: false
   }),
-  beforeMount(){
-      axios.get("/user/getName").then(function(result){
-        name = result.data.firstName + " " + result.data.lastName;
-      })
-  }
 };
 </script>
