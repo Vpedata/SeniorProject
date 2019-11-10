@@ -3,8 +3,8 @@
     <v-app id="inspire">
         <div class="grey lighten-5 pa-4">
             <v-row>
-                <v-toolbar dark>
-                <v-toolbar-title>
+                <v-toolbar color="amber darken-1" dark>
+                <v-toolbar-title class="brown--text">
                     {{account.user.firstName}} {{account.user.lastName}}
                 </v-toolbar-title>
                 </v-toolbar>
@@ -12,21 +12,81 @@
             <v-row>
                 <v-col cols="2"></v-col>
                 <v-col cols="10" lg="8">
-                <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
+                <v-card class="mt-n16 mx-auto" elevation="12" height="800px">
                     <v-toolbar flat>
                         <v-toolbar-title class="grey--text">Select Completed Classes</v-toolbar-title>
                     </v-toolbar>
-                    <p>Debug List: {{ selected_courses }}</p>
+                    <p>List: {{ selected_courses }}</p>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
                         <v-list-item>
                             <v-list-item-content>
-                                <v-checkbox class="ml-4" v-model="selected_courses" label="Class1" value="Class1"></v-checkbox>
+                                <v-checkbox class="ml-4" v-model="selected_courses" label="Intro to Object-Oriented Programming" value="IOOP"></v-checkbox>
                             </v-list-item-content>
                         </v-list-item>
             
                         <v-list-item>
                             <v-list-item-content>
-                                <v-checkbox class="ml-4" v-model="selected_courses" label="Class2" value="Class2"></v-checkbox>
+                                <v-checkbox class="ml-4" v-model="selected_courses" label="Object-Oriented Programming and Data Abstraction" value="OOPDA"></v-checkbox>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-checkbox class="ml-4" v-model="selected_courses" label="Data Structures and Algorithms" value="DSA"></v-checkbox>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-checkbox class="ml-4" v-model="selected_courses" label="Design and Analysis of Algorithms" value="DAA"></v-checkbox>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-checkbox class="ml-4" v-model="selected_courses" label="Computer Lab Techniques" value="CLT"></v-checkbox>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-checkbox class="ml-4" v-model="selected_courses" label="Foundations of Computer Science" value="Foundations"></v-checkbox>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-checkbox class="ml-4" v-model="selected_courses" label="Computer Organization" value="Comp Org"></v-checkbox>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-checkbox class="ml-4" v-model="selected_courses" label="Cyber Security" value="Cyber Security"></v-checkbox>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-checkbox class="ml-4" v-model="selected_courses" label="Operating Systems" value="OS"></v-checkbox>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-checkbox class="ml-4" v-model="selected_courses" label="Programming Languages" value="PL"></v-checkbox>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-checkbox class="ml-4" v-model="selected_courses" label="Software Engineering" value="SWENG"></v-checkbox>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-checkbox class="ml-4" v-model="selected_courses" label="Computers and Society" value="Comp and Soc"></v-checkbox>
                             </v-list-item-content>
                         </v-list-item>
                     </v-list>
