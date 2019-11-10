@@ -11,7 +11,8 @@
     <li>A search bar that allows the user to search through the list of contacts for a specific contact needs to be added.</li>
     <li>An option to start a new conversation with a new user needs to be added.</li>
     <li>A button (temporarily routing nowhere) that will allow the user to go back to the previous page needs to be added.</li>
-    <li>Distinguishing the differences in features of the message app for Advisors and Students (Students can only message their advisors</li>
+    <li>Distinguishing the differences in features of the message app for Advisors and Students (Students can only message their advisors, advisors can start conversationgs with students).</li>
+    <li>Integrate this messenger application with the advising application.</li>
 </ul>
 
 <h3>Version History</h3>
