@@ -71,11 +71,6 @@
                     return single;
                 })
             }
-            // updateOnlineStatus() {
-            //     this.contacts = this.contacts.map((single) => {
-            //         if()
-            //     })
-            // }
         },
         components: {Conversation, ContactsList}
     }
