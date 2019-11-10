@@ -21,7 +21,7 @@ export default {
 },
     data () {
     return {
-      msg: 'Welcome to THe student Page'
+      msg: 'Welcome to The student Page'
     }
     }
 }

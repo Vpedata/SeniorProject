@@ -22,7 +22,7 @@ export default {
     name: 'Login',
     data () {
     return {
-      msg: 'Welcome to THe login Page'
+      msg: 'Welcome to The login Page'
     }
         /*return {
             email: '',

@@ -99,7 +99,7 @@ export default {
   }),
   beforeMount(){
       axios.get("/user/getName").then(function(result){
-        this.name = result.data.firstName + " " + result.data.lastName;
+        name = result.data.firstName + " " + result.data.lastName;
       })
   }
 };

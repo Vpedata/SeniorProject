@@ -8,6 +8,8 @@ import Vuetify from 'vuetify'
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
+Vue.use(Vuetify); 
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
