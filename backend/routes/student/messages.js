@@ -3,7 +3,7 @@ const isStudent = require("./studentAuth.js");
 const db = require("../../config/db.js");
 
 //Return all the messages of the current student; 
-router.get("/all/:id",isStudent, (req, res, next)=>{
+router.get("/all",isStudent, (req, res, next)=>{
     var sql = "CALL getAllChatsForStudent(?);";
     db.query(sql,req.user.student_ID, (err, rows, fields) => {
         if (err) throw err;
