@@ -74,6 +74,7 @@ let router = new Router({
   ]
 })
 
+
 router.beforeEach((to, from, next) =>{
   if (to.matched.some(record => record.meta.requiresAuth)){
       axios.get("/user/check")
