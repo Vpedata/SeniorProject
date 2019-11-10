@@ -23,7 +23,7 @@ router.post("/taken",isStudent,(req, res, next) => {
     db.query(sql,req.user.student_ID, (err, rows, fields) => {
         if (err) throw err;
         res.send(rows);
-      });
+    });
 });
 
 module.exports = router; 
