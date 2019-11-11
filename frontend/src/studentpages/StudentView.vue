@@ -90,7 +90,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios';
-
+import router from '../router/index.js'
 export default {
     computed: {
         ...mapState({
@@ -103,7 +103,9 @@ export default {
   }),
   methods: {
       logout: function () {
-        axios.get("/auth/logout").then($router.push('/')).catch(err => {
+        axios.get("/auth/logout").then(respone => {
+            this.$router.push('/');
+        }).catch(err => {
             console.log(err)
         });
         
