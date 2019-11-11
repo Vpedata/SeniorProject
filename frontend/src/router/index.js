@@ -1,13 +1,11 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import ClassList from '@/studentpages/ClassList'
 import StudentAddClassPage from '@/studentpages/StudentAddClassPage'
 import StudentView from '@/studentpages/StudentView'
 import StudentEditCompleted from '@/studentpages/StudentEditCompleted'
 import Login from '@/login/LoginPage'
-import Student from '@/login/UserPage'
 import AdvisorView from '@/advisor/AdvisorView'
 import CreateCourse from '@/advisor/AdvisorView'
 import axios from 'axios'
@@ -63,7 +61,7 @@ let router = new Router({
       }
     },
     {
-      path: '/fe/editcompleted',
+      path: '/fe/createcourse',
       name: 'CreateCourse',
       component: CreateCourse,
       meta: {
