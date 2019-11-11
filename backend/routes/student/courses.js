@@ -22,7 +22,7 @@ router.get("/yetToTake",isStudent, (req, res, next) => {
     var sql = "CALL classesYetToTake(?);";
     db.query(sql,req.user.student_ID, (err, rows, fields) => {
       if (err) throw err;
-      res.send(rows);
+      res.json(rows);
     });
 });
 

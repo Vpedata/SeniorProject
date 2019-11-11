@@ -19,7 +19,7 @@
                         <v-toolbar-title class="grey--text">Class List</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
-                        <classComponent v-for="course in courses" :course="course" :key="course"/> 
+                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID"/> 
                     </v-list>                  
                 </v-card>
                 </v-col>
@@ -48,7 +48,7 @@ export default {
     data: () => ({
         dialog: false,
         name: " ",
-        courses: []
+        courses: JSON
     }),
 
     components: {
