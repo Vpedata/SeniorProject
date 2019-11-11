@@ -12,7 +12,7 @@ router.get("/all",isAdvisor, (req, res, next)=> {
 });
 
 //get student_ID by email 
-router.get("/email/:email",isAdvisor, (req, res, next)=> {
+router.get("/id/:email",isAdvisor, (req, res, next)=> {
 var sql = "CALL getStudentByEmail(?,@student); select @student as student_ID;";
     db.query(sql,req.params.email, (err, rows, fields) => {
         if (err) throw err;
@@ -26,6 +26,15 @@ router.get("/:email/taken",isAdvisor, (req, res, next)=> {
     db.query(sql,req.params.email, (err, rows, fields) => {
         if (err) throw err;
         res.send(rows);
+    });
+});
+
+//Get courses that are left to take for current students; 
+router.get("/:email/yetToTake",isAdvisor, (req, res, next) => {
+    var sql = "CALL classesYetToTake(?);";
+    db.query(sql,req.params.email, (err, rows, fields) => {
+      if (err) throw err;
+      res.send(rows);
     });
 });
 

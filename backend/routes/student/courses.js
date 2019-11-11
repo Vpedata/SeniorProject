@@ -3,7 +3,7 @@ const isStudent = require("./studentAuth.js");
 const db = require("../../config/db.js");
 
 
-//Get recommended courses for current student; 
+//Get all the courses taken by the current student 
 router.get("/taken",isStudent, (req, res, next) => {
     var sql = "CALL getTakenCourses(?)";
     db.query(sql,req.user.student_ID, (err, rows, fields) => {
@@ -12,15 +12,25 @@ router.get("/taken",isStudent, (req, res, next) => {
     });
 });
 
-//Get all the courses taken by the current student
+//Get recommended courses for current student;
 router.get("/recommended",isStudent, (req, res, next) => {
     res.send("Under construction");
+});
+
+//Get courses that are left to take for current students; 
+router.get("/yetToTake",isStudent, (req, res, next) => {
+    var sql = "CALL classesYetToTake(?);";
+    db.query(sql,req.user.student_ID, (err, rows, fields) => {
+      if (err) throw err;
+      res.send(rows);
+    });
 });
 
 //update the list of couses taken by the current student
 router.post("/taken",isStudent,(req, res, next) => {
     var sql = "CALL addTakenClasses(?,?,?);";
-    db.query(sql,req.user.student_ID, (err, rows, fields) => {
+    const classInfo = [req.body.classes,req.user.student_ID,req.body.grades];
+    db.query(sql,classInfo, (err, rows, fields) => {
         if (err) throw err;
         res.send(rows);
     });
