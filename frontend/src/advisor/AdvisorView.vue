@@ -91,7 +91,6 @@ export default {
     methods: {
       logout: function () {
         axios.get("/auth/logout");      
-        $router.replace('/');
     }
   },
 
