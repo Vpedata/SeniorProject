@@ -10,8 +10,8 @@
                 </v-toolbar>
             </v-row>
             <v-row>
-                <v-btn class="ma-4" outlined color="brown" @click="$router.push('/editcompleted')" dark>Edit Completed Courses</v-btn>
-                <v-btn class="ma-4" outlined color="brown" @click="$router.push('/classlist')" dark>View Class List</v-btn>
+                <v-btn class="ma-4" outlined color="brown" @click="$router.push('/fe/editcompleted')" dark>Edit Completed Courses</v-btn>
+                <v-btn class="ma-4" outlined color="brown" @click="$router.push('/fe/classlist')" dark>View Class List</v-btn>
             </v-row>
             <v-row>
                 <v-col cols="3">
@@ -19,7 +19,7 @@
                         <v-btn class="ms-12 mt-12" outlined color="amber darken-1" @click="$router.push('/login')" dark>Generate</v-btn>
                     </v-row>
                     <v-row>
-                        <v-btn class="ms-12 mt-4" outlined color="brown" @click="$router.push('/studentaddclass')" dark>Add Class</v-btn>
+                        <v-btn class="ms-12 mt-4" outlined color="brown" @click="$router.push('/fe/studentaddclass')" dark>Add Class</v-btn>
                     </v-row>
                 </v-col>
                 <v-col cols="9" lg="6">
@@ -62,7 +62,7 @@
                             </v-list-item-content>
                         </v-list-item>
             
-                        <v-list-item @click="$router.push('/classlist')">
+                        <v-list-item @click="$router.push('/fe/classlist')">
                             <v-list-item-content>
                             <v-list-item-title>Repeat...</v-list-item-title>
                             </v-list-item-content>
