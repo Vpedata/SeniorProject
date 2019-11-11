@@ -19,7 +19,7 @@ router.get('/redirect',passport.authenticate('google',{
 router.get('/logout',authMiddleware, (req,res)=>{
     req.session.destroy();
     req.logout();
-    res.redirect('/');
+    res.redirect('http://onlineadvisor.tk:3000/#/');
 });
 
 
