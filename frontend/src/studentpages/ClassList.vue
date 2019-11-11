@@ -67,7 +67,8 @@ export default {
 
       axios.get('/user/student/courses/yetToTake')
       .then(response =>{
-         this.courses = response.data;
+         var obj = response.data[0]; 
+         this.courses = Object.keys(obj).map(key => obj[key]);
       })
       .catch(error =>{
           console.log(error)
