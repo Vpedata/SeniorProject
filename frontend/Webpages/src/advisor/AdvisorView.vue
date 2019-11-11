@@ -15,7 +15,14 @@
             </v-row>
             <v-row>
                 <v-col cols="3"></v-col>
-                <v-col cols="9" lg="6">
+                <v-col cols="6">
+                    <v-text-field class="mb-n12" v-model="search_txt" label="Student Search" outlined shaped></v-text-field>
+                </v-col>
+            </v-row>
+            <v-row>
+                
+                <v-col cols="3"></v-col>
+                <v-col cols="6" lg="6">
                 <v-card class="mt-n16 mx-auto" elevation="12" height="350px">
                     <v-toolbar flat>
                         <v-toolbar-title class="grey--text">View Courses for Students (List Students)</v-toolbar-title>
@@ -84,7 +91,8 @@ export default {
         })
     }, 
     data: () => ({
-        dialog: false
+        dialog: false,
+        search_txt: ""
   }),
 };
 </script>
