@@ -5,7 +5,7 @@
             <v-row>
                 <v-toolbar color="amber darken-1" dark>
                 <v-toolbar-title class="brown--text">
-                    {{account.user.firstName}} {{account.user.lastName}}
+                    {{name}}
                 </v-toolbar-title>
                 </v-toolbar>
             </v-row>
@@ -42,7 +42,18 @@ export default {
     }, 
     data: () => ({
         class_name: '',
-        class_desc: ''
+        class_desc: '',
+        name: " "
   }),
+    beforeMount(){
+      axios
+      .get('/user/getName')
+      .then(response => {
+        this.name = response.data.firstName + " " + response.data.lastName;
+      }).bind(this)
+      .catch(error => {
+        console.log(error)
+      })
+  }
 };
 </script>

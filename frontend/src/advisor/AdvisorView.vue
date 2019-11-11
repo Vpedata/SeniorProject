@@ -5,7 +5,7 @@
             <v-row>
                 <v-toolbar color="amber darken-1" dark>
                 <v-toolbar-title class="brown--text">
-                    {{account.user.firstName}} {{account.user.lastName}}
+                    {{name}}
                 </v-toolbar-title>
                 </v-toolbar>
             </v-row>
@@ -62,7 +62,7 @@
             </v-row>
             <v-row>
                 <v-col cols="8">
-                    <v-btn class="mt-12 ma-12" outlined color="blue" @click="$router.push('/login')" dark>Logout</v-btn>
+                    <v-btn class="mt-12 ma-12" outlined color="blue" @click="logout" dark>Logout</v-btn>
                 </v-col>
                 <v-col cols="4">
                     <v-btn class="mt-12" outlined color="blue" @click="$router.push('/messages')" dark>Messages</v-btn>
@@ -84,7 +84,25 @@ export default {
         })
     }, 
     data: () => ({
-        dialog: false
+        dialog: false,
+        name: " "
   }),
+    methods: {
+      logout: function () {
+        axios.get("/auth/logout");      
+        $router.push('/');
+    }
+  },
+
+    beforeMount(){
+      axios
+      .get('/user/getName')
+      .then(response => {
+        this.name = response.data.firstName + " " + response.data.lastName;
+      }).bind(this)
+      .catch(error => {
+        console.log(error)
+      })
+  }
 };
 </script>
