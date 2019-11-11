@@ -4,7 +4,7 @@ const db = require("../../config/db.js");
 
 //Advisor Homepage
 router.get("/",isAdvisor, (req, res, next)=>{
-    res.redirect("http://onlineadvisor.tk:3000/#/fe/advisor");
+    res.redirect("http://onlineadvisor.tk:3000/#/fe/adv/advisor");
     //res.send(req.user);
 });
 

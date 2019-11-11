@@ -53,7 +53,7 @@ let router = new Router({
       }
     },
     {
-      path: '/fe/advisor',
+      path: '/fe/adv/advisor',
       name: 'AdvisorView',
       component: AdvisorView,
       meta: {
@@ -61,7 +61,7 @@ let router = new Router({
       }
     },
     {
-      path: '/fe/createcourse',
+      path: '/fe/adv/createcourse',
       name: 'CreateCourse',
       component: CreateCourse,
       meta: {
@@ -80,7 +80,10 @@ router.beforeEach((to, from, next) =>{
         if (result.data.redirect == "yes"){
           router.replace("/");
         }
-        else{
+        else if (to.path.includes("/adv/") && result.data.isStudent == 0){
+          next();
+        }
+        else if (!(to.path.includes("/adv/")) && result.data.isStudent == 1){
           next();
         }
       })
