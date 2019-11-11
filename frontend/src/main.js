@@ -6,6 +6,7 @@ import router from './router'
 import axios from 'axios'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+import classComponent from './studentpages/classListComponent.vue'
 
 Vue.use(Vuetify); 
 Vue.config.productionTip = false
@@ -22,6 +23,6 @@ new Vue({
     }
   },
   router,
-  components: { App },
+  components: { App, classComponent },
   template: '<App/>'
 })
