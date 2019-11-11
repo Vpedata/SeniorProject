@@ -53,7 +53,7 @@ let router = new Router({
       }
     },
     {
-      path: '/fe/advisorview',
+      path: '/fe/advisor',
       name: 'AdvisorView',
       component: AdvisorView,
       meta: {
