@@ -4,7 +4,7 @@ const authFEMiddleware = (req, res, next) =>{
       return res.json(redir); 
     }
     else{
-      var redir = {redirect: "no"};
+      var redir = {redirect: "no", "isStudent": req.user.IsStudent};
       return res.json(redir);
     }
   }
