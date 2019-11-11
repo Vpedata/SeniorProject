@@ -103,7 +103,10 @@ export default {
   }),
   methods: {
       logout: function () {
-        axios.get("/auth/logout");      
+        axios.get("/auth/logout").then().catch(err => {
+            console.log(err)
+        });
+        $router.push('/');
     }
   },
 
