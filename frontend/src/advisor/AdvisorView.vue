@@ -90,7 +90,11 @@ export default {
   }),
     methods: {
       logout: function () {
-        axios.get("/auth/logout");      
+        axios.get("/auth/logout").then(response =>{
+            this.$router.push('/');
+        }).catch(err =>{
+            console.log(err);
+        });      
     }
   },
 

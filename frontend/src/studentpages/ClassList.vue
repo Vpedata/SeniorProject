@@ -26,7 +26,7 @@
             </v-row>
             <v-row>
                 <v-col cols="8">
-                    <v-btn class="mt-12 ma-12" outlined color="blue" @click="$router.push('/fe/studentview')" dark>Back</v-btn>
+                    <v-btn class="mt-12 ma-12" outlined color="blue" @click="$router.push('/fe/student')" dark>Back</v-btn>
                 </v-col>
             </v-row>
         </div>
