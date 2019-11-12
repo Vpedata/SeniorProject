@@ -1,7 +1,7 @@
 <template>
     <div id="app">
     <v-app id="inspire">
-        <div class="grey lighten-5 pa-4">
+        <div class="amber lighten-5 pa-4">
             <v-row>
                 <v-toolbar color="amber darken-1" dark>
                 <v-toolbar-title class="brown--text">
