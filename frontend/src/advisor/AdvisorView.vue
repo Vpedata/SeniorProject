@@ -83,7 +83,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios';
-
+import router from '../router/index.js'
 export default {
     computed: {
         ...mapState({
@@ -93,7 +93,7 @@ export default {
     data: () => ({
         dialog: false,
         name: " ",
-        search_txt: ""
+        students: JSON
   }),
     methods: {
       logout: function () {
@@ -113,6 +113,14 @@ export default {
       }).bind(this)
       .catch(error => {
         console.log(error)
+      })
+      axios.get('/user/advisor/student/all')
+      .then(response =>{
+         var obj = response.data[0]; 
+         this.students = Object.keys(obj).map(key => obj[key]);
+      })
+      .catch(error =>{
+          console.log(error)
       })
   }
 };
