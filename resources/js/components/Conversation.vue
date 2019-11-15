@@ -2,7 +2,7 @@
     <div class="conversation">
         <h1>{{ contact ? contact.name : 'Select a Contact'}}</h1>
         <MessagesFeed :contact="contact" :messages="messages" />
-        <MessageComposer @send="sendMessage" v-if="contact"/>
+        <MessageComposer @send="sendMessage" v-if="contact" />
     </div>
 </template>
 
@@ -19,7 +19,7 @@
             messages: {
                 type: Array,
                 default: []
-            }
+            },
         },
         methods: {
             sendMessage(text) {

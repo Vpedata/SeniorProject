@@ -131,7 +131,7 @@
 <style lang="scss" scoped>
     .contacts-list {
         flex: 2;
-        max-height: 600px;
+        height: 600px;
         border-left: 1px solid #a6a6a6;
 
         .conlist {

@@ -1,6 +1,6 @@
 <template>
     <div class="search-bar">
-        <div class="input" @click="toggleVisible" v-text="'Click to Search for User...'"></div>
+        <div class="input" @click="toggleVisible" v-text="'Click to search for a user...'"></div>
         <div class="popover" v-if="visible">
             <input type="text" ref="input" v-model="query" @keydown.up="up" @keydown.down="down" @keydown.enter="selectContact" placeholder="Search Users...">
             <div class="options" ref="optionsList">
@@ -112,7 +112,7 @@
         border-radius: 3px;
         border: 2px solid lightgray;
         box-shadow: 0 0 10px #eceaea;
-        font-size: 18px;
+        font-size: 15px;
         padding-left: 10px;
         padding-top: 7px;
         cursor: pointer;
