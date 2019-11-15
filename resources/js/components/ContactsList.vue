@@ -1,6 +1,6 @@
 <template>
     <div class="contacts-list">
-        <SearchBar :contacts="contacts" :user="user"></SearchBar>
+        <SearchBar :contacts="contacts" :user="user" v-if="!studentUser"></SearchBar>
         <div class="conlist">
             <ul>
                 <li v-for="contact in sortedContacts" :key="contact.id" @click="selectContact(contact)" :class="{ 'selected': contact == selected }">
@@ -38,7 +38,8 @@
             return {
                 selected: this.contacts.length ? this.contacts[0] : null,
                 messages: [],
-                onlineContacts: []
+                onlineContacts: [],
+                studentUser: true
             };
         },
         mounted() {
@@ -57,6 +58,7 @@
             this.$root.$on('selectedResult', (contact) => {
                     this.selectContact(contact);
                 });
+            this.checkStudent();
         },
         methods: {
             selectContact(contact) {
@@ -74,6 +76,13 @@
                     .then((response) => {
                         this.onlineContacts = response.data;
                     });
+            },
+            checkStudent() {
+                if(this.user.isStudent === 1) {
+                    this.studentUser = true;
+                } else {
+                    this.studentUser = false;
+                }
             }
         },
         computed: {

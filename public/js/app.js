@@ -1969,7 +1969,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       selected: this.contacts.length ? this.contacts[0] : null,
       messages: [],
-      onlineContacts: []
+      onlineContacts: [],
+      studentUser: true
     };
   },
   mounted: function mounted() {
@@ -1991,6 +1992,7 @@ __webpack_require__.r(__webpack_exports__);
     this.$root.$on('selectedResult', function (contact) {
       _this.selectContact(contact);
     });
+    this.checkStudent();
   },
   methods: {
     selectContact: function selectContact(contact) {
@@ -2010,6 +2012,13 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/contacts/onlineContacts').then(function (response) {
         _this3.onlineContacts = response.data;
       });
+    },
+    checkStudent: function checkStudent() {
+      if (this.user.isStudent === 1) {
+        this.studentUser = true;
+      } else {
+        this.studentUser = false;
+      }
     }
   },
   computed: {
@@ -48398,7 +48407,9 @@ var render = function() {
     "div",
     { staticClass: "contacts-list" },
     [
-      _c("SearchBar", { attrs: { contacts: _vm.contacts, user: _vm.user } }),
+      !_vm.studentUser
+        ? _c("SearchBar", { attrs: { contacts: _vm.contacts, user: _vm.user } })
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "conlist" }, [
         _c(
