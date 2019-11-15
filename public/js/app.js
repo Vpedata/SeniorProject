@@ -2262,8 +2262,12 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {},
   methods: {
     toggleVisible: function toggleVisible() {
+      var _this = this;
+
       this.visible = !this.visible;
-      console.log(this.contacts);
+      setTimeout(function () {
+        _this.$refs.input.focus();
+      }, 50);
     },
     userClicked: function userClicked(index) {
       this.selected = index;
@@ -8837,7 +8841,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".search-bar[data-v-6849e9f0] {\n  width: 100%;\n  position: relative;\n}\n.input[data-v-6849e9f0] {\n  height: 40px;\n  border-radius: 3px;\n  border: 2px solid lightgray;\n  box-shadow: 0 0 10px #eceaea;\n  font-size: 18px;\n  padding-left: 10px;\n  padding-top: 7px;\n  cursor: pointer;\n}\n.popover[data-v-6849e9f0] {\n  min-height: 50px;\n  border: 2px solid lightgray;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  right: 0px;\n  background: #ffffff;\n  border-radius: 3px;\n  text-align: center;\n}\n.popover input[data-v-6849e9f0] {\n  width: 95%;\n  margin-top: 5px;\n  height: 40px;\n  font-size: 16px;\n  border-radius: 3px;\n  border: 1px solid lightgray;\n  padding-left: 8px;\n}\n.options[data-v-6849e9f0] {\n  max-height: 150px;\n  overflow-y: scroll;\n  margin-top: 5px;\n  border: 1px solid black;\n}\n.options ul[data-v-6849e9f0] {\n  list-style-type: none;\n  text-align: left;\n  padding-left: 0;\n  border-right: 1px solid gray;\n}\n.options ul li[data-v-6849e9f0] {\n  border-bottom: 1px solid gray;\n  padding: 10px;\n  cursor: pointer;\n  background: #f1f1f1;\n}\n.options ul li p[data-v-6849e9f0] {\n  font-size: 14px;\n  margin: 0;\n}\n.options ul li.selected[data-v-6849e9f0] {\n  background: #1762ff;\n  color: #ffffff;\n  font-weight: bold;\n}", ""]);
+exports.push([module.i, ".search-bar[data-v-6849e9f0] {\n  width: 100%;\n  position: relative;\n}\n.input[data-v-6849e9f0] {\n  height: 40px;\n  border-radius: 3px;\n  border: 2px solid lightgray;\n  box-shadow: 0 0 10px #eceaea;\n  font-size: 18px;\n  padding-left: 10px;\n  padding-top: 7px;\n  cursor: pointer;\n}\n.popover[data-v-6849e9f0] {\n  min-height: 50px;\n  border: 2px solid lightgray;\n  position: absolute;\n  top: 38px;\n  left: 0px;\n  right: 0px;\n  background: #ffffff;\n  border-radius: 3px;\n  text-align: center;\n}\n.popover input[data-v-6849e9f0] {\n  width: 95%;\n  margin-top: 5px;\n  height: 40px;\n  font-size: 16px;\n  border-radius: 3px;\n  border: 1px solid lightgray;\n  padding-left: 8px;\n}\n.options[data-v-6849e9f0] {\n  max-height: 150px;\n  overflow-y: scroll;\n  margin-top: 5px;\n  border: 1px solid black;\n}\n.options ul[data-v-6849e9f0] {\n  list-style-type: none;\n  text-align: left;\n  padding-left: 0;\n  border-right: 1px solid gray;\n}\n.options ul li[data-v-6849e9f0] {\n  border-bottom: 1px solid gray;\n  padding: 10px;\n  cursor: pointer;\n  background: #f1f1f1;\n}\n.options ul li p[data-v-6849e9f0] {\n  font-size: 14px;\n  margin: 0;\n}\n.options ul li.selected[data-v-6849e9f0] {\n  background: #1762ff;\n  color: #ffffff;\n  font-weight: bold;\n}", ""]);
 
 // exports
 
@@ -48627,7 +48631,7 @@ var render = function() {
   return _c("div", { staticClass: "search-bar" }, [
     _c("div", {
       staticClass: "input",
-      domProps: { textContent: _vm._s("Search...") },
+      domProps: { textContent: _vm._s("Click to Search for User...") },
       on: { click: _vm.toggleVisible }
     }),
     _vm._v(" "),
@@ -48642,6 +48646,7 @@ var render = function() {
                 expression: "query"
               }
             ],
+            ref: "input",
             attrs: { type: "text", placeholder: "Search Users..." },
             domProps: { value: _vm.query },
             on: {

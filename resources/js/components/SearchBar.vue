@@ -1,8 +1,8 @@
 <template>
     <div class="search-bar">
-        <div class="input" @click="toggleVisible" v-text="'Search...'"></div>
+        <div class="input" @click="toggleVisible" v-text="'Click to Search for User...'"></div>
         <div class="popover" v-if="visible">
-            <input type="text" v-model="query" @keydown.up="up" @keydown.down="down" @keydown.enter="selectContact" placeholder="Search Users...">
+            <input type="text" ref="input" v-model="query" @keydown.up="up" @keydown.down="down" @keydown.enter="selectContact" placeholder="Search Users...">
             <div class="options" ref="optionsList">
                 <ul>
                     <li v-for="(match, index) in matches" :key="index" :class="{ 'selected': (selected == index) }" @click="userClicked(index)">
@@ -43,7 +43,10 @@
         methods: {
             toggleVisible() {
                 this.visible = !this.visible;
-                console.log(this.contacts);
+
+                setTimeout(() => {
+                    this.$refs.input.focus();
+                }, 50);
             },
             userClicked(index) {
                 this.selected = index;
@@ -119,7 +122,7 @@
         min-height: 50px;
         border: 2px solid lightgray;
         position:absolute;
-        top:0px;
+        top:38px;
         left:0px;
         right:0px;
         background: #ffffff;
