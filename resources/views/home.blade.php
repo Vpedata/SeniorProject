@@ -3,9 +3,6 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="search-component" id="search-bar">
-            <search-bar></search-bar>
-        </div>
         <div class="col-sm-12" style="padding-top: 10px;">
             <div class="card">
                 <div class="card-header">AdvisorChat Messaging</div>

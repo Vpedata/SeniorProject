@@ -1,24 +1,28 @@
 <template>
     <div class="contacts-list">
-        <ul>
-            <li v-for="contact in sortedContacts" :key="contact.id" @click="selectContact(contact)" :class="{ 'selected': contact == selected }">
+        <SearchBar :contacts="contacts" :user="user"></SearchBar>
+        <div class="conlist">
+            <ul>
+                <li v-for="contact in sortedContacts" :key="contact.id" @click="selectContact(contact)" :class="{ 'selected': contact == selected }">
 
-                <div class="avatar">
-                    <img :src="contact.profile_image" :alt="contact.name">
-                </div>
-                <div class ="contact">
-                    <p class="name">{{ contact.name }}</p>
-                    <p class="email">{{ contact.email }}</p>
-                </div>
-                <span class="unread" v-if="contact.unread">{{ contact.unread }}</span>
-                <span v-for="onlineContact in onlineContacts" class="online" v-if="contact.id == onlineContact.id && onlineContact.online"></span>
-                <span v-for="onlineContact in onlineContacts" class="offline" v-if="contact.id == onlineContact.id && !onlineContact.online"></span>
-            </li>
-        </ul>
+                    <div class="avatar">
+                        <img :src="contact.profile_image" :alt="contact.name">
+                    </div>
+                    <div class ="contact">
+                        <p class="name">{{ contact.name }}</p>
+                        <p class="email">{{ contact.email }}</p>
+                    </div>
+                    <span class="unread" v-if="contact.unread">{{ contact.unread }}</span>
+                    <span v-for="onlineContact in onlineContacts" class="online" v-if="contact.id == onlineContact.id && onlineContact.online"></span>
+                    <span v-for="onlineContact in onlineContacts" class="offline" v-if="contact.id == onlineContact.id && !onlineContact.online"></span>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
 <script>
+    import SearchBar from "./SearchBar";
     export default {
         props: {
             contacts: {
@@ -49,7 +53,10 @@
             this.interval = setInterval(() => this.updateOnline(), 1000);
             this.$root.$on('stopOnline', () => {
                this.interval = clearInterval();
-            });
+                });
+            this.$root.$on('selectedResult', (contact) => {
+                    this.selectContact(contact);
+                });
         },
         methods: {
             selectContact(contact) {
@@ -116,7 +123,8 @@
                 //     return new Date(b.updated_at) - new Date(a.updated_at);
                 // });
             }
-        }
+        },
+        components: {SearchBar}
     }
 </script>
 
@@ -124,95 +132,96 @@
     .contacts-list {
         flex: 2;
         max-height: 600px;
-        overflow: auto;
         border-left: 1px solid #a6a6a6;
 
-        ul {
-            list-style-type: none;
-            padding-left: 0;
+        .conlist {
+            max-height: 560px;
+            overflow: auto;
+            ul {
+                list-style-type: none;
+                padding-left: 0;
 
-            li {
-                display: flex;
-                padding: 2px;
-                border-bottom: 1px solid #aaaaaa;
-                height: 80px;
-                position: relative;
-                cursor: pointer;
-
-                &.selected {
-                    background: #dfdfdf;
-                }
-
-                span.unread {
-                    background: #82e0a8;
-                    color: #ffffff;
-                    position: absolute;
-                    right: 11px;
-                    top: 20px;
+                li {
                     display: flex;
-                    font-weight: 700;
-                    min-width: 20px;
-                    justify-content: center;
-                    align-items: center;
-                    line-height: 20px;
-                    font-size: 12px;
-                    padding: 0 4px;
-                    border-radius: 3px;
-                }
+                    padding: 2px;
+                    border-bottom: 1px solid #aaaaaa;
+                    height: 80px;
+                    position: relative;
+                    cursor: pointer;
 
-                span.online {
-                    height: 10px;
-                    width: 10px;
-                    background-color: #01ff00;
-                    border-radius: 50%;
-                    display: inline-block;
-                    position: absolute;
-                    right: 10px;
-                    top: 10px;
-                }
-
-                span.offline {
-                    height: 10px;
-                    width: 10px;
-                    background-color: #777777;
-                    border-radius: 50%;
-                    display: inline-block;
-                    position: absolute;
-                    right: 10px;
-                    top: 10px;
-                }
-
-                .avatar {
-                    flex: 1;
-                    display: flex;
-                    align-items: center;
-
-                    img {
-                        width: 35px;
-                        border-radius: 50%;
-                        margin: 0 auto;
+                    &.selected {
+                        background: #dfdfdf;
                     }
-                }
 
-                .contact {
-                    flex: 3;
-                    font-size: 10px;
-                    overflow: hidden;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
+                    span.unread {
+                        background: #82e0a8;
+                        color: #ffffff;
+                        position: absolute;
+                        right: 11px;
+                        top: 20px;
+                        display: flex;
+                        font-weight: 700;
+                        min-width: 20px;
+                        justify-content: center;
+                        align-items: center;
+                        line-height: 20px;
+                        font-size: 12px;
+                        padding: 0 4px;
+                        border-radius: 3px;
+                    }
 
-                    p {
-                        margin: 0;
+                    span.online {
+                        height: 10px;
+                        width: 10px;
+                        background-color: #01ff00;
+                        border-radius: 50%;
+                        display: inline-block;
+                        position: absolute;
+                        right: 10px;
+                        top: 10px;
+                    }
 
-                        &.name {
-                            font-weight: bold;
+                    span.offline {
+                        height: 10px;
+                        width: 10px;
+                        background-color: #777777;
+                        border-radius: 50%;
+                        display: inline-block;
+                        position: absolute;
+                        right: 10px;
+                        top: 10px;
+                    }
+
+                    .avatar {
+                        flex: 1;
+                        display: flex;
+                        align-items: center;
+
+                        img {
+                            width: 35px;
+                            border-radius: 50%;
+                            margin: 0 auto;
+                        }
+                    }
+
+                    .contact {
+                        flex: 3;
+                        font-size: 10px;
+                        overflow: hidden;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+
+                        p {
+                            margin: 0;
+
+                            &.name {
+                                font-weight: bold;
+                            }
                         }
                     }
                 }
             }
         }
-
-
     }
 </style>
