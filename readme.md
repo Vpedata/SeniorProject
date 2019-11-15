@@ -16,7 +16,7 @@
 </ul>
 
 <h3>Version History</h3>
-<p><b>Version 1.4.1</b> -> Minor styling changes.</p>
+<p><b>Version 1.4.2</b> -> Minor styling changes.</p>
 <p><b>Version 1.4.1</b> -> Minor change to search bar input box: when the search bar is opened, the input is automatically put into focus.</p>
 <p><b>Version 1.4.0</b> -> A search bar has been COMPLETELY developed and added to the ContactsList. It allows the user to search all existing users and for a specific name OR email. From that list they can select the user they wish to start or continue a coversation with (they can even use the up & down arrow keys and the enter key to parse the list and select a user). Once selected, if the user is a contact in the current user's list already, it selects that contact, highlights them in the contacts list, and opens their existing conversation. However, if the user is not already a contact in the current user's list, meaning they have not had a conversation (no messages have been passed between them), it simply opens a blank conversation with that user. If the user decides to send that user a message, that user is instantly added to the current user's contacts list AND the current user is instantly added to the receiving user's contacts list LIVE. In the case that current user does not send them a message and instead decides to leave the blank conversation, the user is not added to the contacts list, as no conversation has been started.</p>
 <p><b>Version 1.3.1</b> -> Began the implementation of the SeachBar. It currently is present on screen and posts a query in the URL, but it does not yet function.</p>
