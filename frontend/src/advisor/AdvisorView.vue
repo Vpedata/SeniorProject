@@ -16,7 +16,8 @@
             <v-row>
                 <v-col cols="3"></v-col>
                 <v-col cols="6">
-                    <autocomplete :search="search" placeholder="Search Student" aria-label="Search Student" ></autocomplete>
+                    <autocomplete :search="search" placeholder="Search Student" aria-label="Search Student" 
+                    :get-result-value="getResultValue" ></autocomplete>
                 </v-col>
             </v-row>
             <v-row>
@@ -114,6 +115,7 @@ export default {
         getResultValue(result) {
             return result.name
         }
+        
     },
 
     beforeMount(){
