@@ -15,8 +15,11 @@
             <v-row>
                 <v-textarea class = 'ma-3' v-model = 'class_desc' label = 'Class Description' outlined maxlength = '120'></v-textarea>
             </v-row>
-            <v-row>
-                
+             <v-row>
+                 <v-col cols="4"></v-col>
+                 <v-col cols="3">
+                <v-text-field class = 'ma-3' v-model = 'credit_value' label = 'Credits' single-line type="number" hide-details></v-text-field>
+                 </v-col>
             </v-row>
             <v-row>
                 <v-col cols="8">
@@ -42,7 +45,8 @@ export default {
     }, 
     data: () => ({
         class_name: '',
-        class_desc: ''
+        class_desc: '',
+        credit_value: null
   }),
 };
 </script>
