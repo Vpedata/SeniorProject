@@ -26,13 +26,15 @@
                     <v-toolbar flat>
                         <v-toolbar-title class="grey--text">View Courses for Students (List Students)</v-toolbar-title>
                     </v-toolbar>
+                    <v-list  class="overflow-y-auto">
+                    <classComponent v-for="student in students" :firstName="student.firstName" :lastName="student.lastName" :key="student.student_ID"/> 
+                    </v-list>
                     <v-list style="max-height: 300px" class="overflow-y-auto">
                         <v-list-item>
                             <v-list-item-content>
                                 <v-dialog v-model="dialog" width="500">
                                     <template v-slot:activator="{ on }">
                                     <v-btn color="amber darken-1" dark v-on="on">
-                                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID"/> 
                                         (Get Student Name)
                                     </v-btn>
                                     </template>
@@ -105,9 +107,10 @@ export default {
             });
         },
         search(input) {
+            
             if (input.length < 1) { return [] }
-            return students.filter(student => {
-            return student.toLowerCase()
+            return this.students.filter(student => {
+            return student.firstName.toLowerCase()
             .startsWith(input.toLowerCase())
             })
         }
@@ -122,10 +125,13 @@ export default {
       .catch(error => {
         console.log(error)
       })
+    },
+    mounted() {
     axios.get('/user/advisor/student/all')
       .then(response =>{
          var obj = response.data[0]; 
          this.students = Object.keys(obj).map(key => obj[key]);
+         console.log(students);
       })
       .catch(error =>{
           console.log(error)
