@@ -49,6 +49,19 @@ export default {
         class_credits: null,
         name: " "
   }),
+    //createCourse() {
+    //      axios.post(??, {
+    //          class_name: this.class_name,    
+    //          class_desc: this.class_desc,    
+    //          class_credits: this.class_credits
+    //      }).then(function (response) {
+    //          console.log(response);
+    //      })
+    //      .catch(function (error) {
+    //          console.log(error);
+    //      });
+    //      
+    //},
     beforeMount(){
       axios
       .get('/user/getName')
