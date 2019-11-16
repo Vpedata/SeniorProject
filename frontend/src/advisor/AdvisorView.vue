@@ -16,7 +16,7 @@
             <v-row>
                 <v-col cols="3"></v-col>
                 <v-col cols="6">
-                    <v-text-field class="mb-n12" v-model="search_txt" label="Student Search" outlined shaped></v-text-field>
+                    <autocomplete :search="search" placeholder="Search Student" aria-label="Search Student" ></autocomplete>
                 </v-col>
             </v-row>
             <v-row>
@@ -32,6 +32,7 @@
                                 <v-dialog v-model="dialog" width="500">
                                     <template v-slot:activator="{ on }">
                                     <v-btn color="amber darken-1" dark v-on="on">
+                                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID"/> 
                                         (Get Student Name)
                                     </v-btn>
                                     </template>
@@ -82,6 +83,8 @@
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios';
 import router from '../router/index.js'
+import Autocomplete from '@trevoreyre/autocomplete-vue'
+
 export default {
     computed: {
         ...mapState({
@@ -90,7 +93,8 @@ export default {
     }, 
     data: () => ({
         dialog: false,
-        name: " "
+        name: " ",
+        student:JSON
   }),
     methods: {
       logout: function () {
@@ -110,6 +114,14 @@ export default {
       }).bind(this)
       .catch(error => {
         console.log(error)
+      })
+        axios.get('/user/advisor/student/all')
+      .then(response =>{
+         var obj = response.data[0]; 
+         this.students = Object.keys(obj).map(key => obj[key]);
+      })
+      .catch(error =>{
+          console.log(error)
       })
   }
 };
