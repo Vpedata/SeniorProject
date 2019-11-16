@@ -11,7 +11,7 @@
             </v-row>
             <v-row>
                 <v-btn class="ma-4" outlined color="brown" @click="$router.push('/fe/adv/createcourse')" dark>Create New Course</v-btn>
-                <v-btn class="ma-4" outlined color="brown" @click="$router.push('/fe/classlist')" dark>View Class List</v-btn>
+                <v-btn class="ma-4" outlined color="brown" @click="$router.push('/fe/advisorclasslist')" dark>View Class List</v-btn>
             </v-row>
             <v-row>
                 <v-col cols="3"></v-col>
@@ -57,9 +57,6 @@
                                 </v-dialog>
                             </v-list-item-content>
                         </v-list-item>
-            
-                        <!--repeat--> 
-
                     </v-list>
                     
                 </v-card>

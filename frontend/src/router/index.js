@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 import Router from 'vue-router'
 import ClassList from '@/studentpages/ClassList'
+import AdvisorClassList from '@/advisor/AdvisorClassList'
 import StudentAddClassPage from '@/studentpages/StudentAddClassPage'
 import StudentView from '@/studentpages/StudentView'
 import StudentEditCompleted from '@/studentpages/StudentEditCompleted'
@@ -32,6 +33,14 @@ let router = new Router({
       path: '/fe/classlist',
       name: 'ClassList',
       component: ClassList,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/fe/advisorclasslist',
+      name: 'AdvisorClassList',
+      component: AdvisorClassList,
       meta: {
         requiresAuth: true
       }
