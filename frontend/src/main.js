@@ -7,10 +7,6 @@ import axios from 'axios'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import classComponent from './studentpages/classListComponent.vue'
-import Autocomplete from '@trevoreyre/autocomplete-vue'
-import '@trevoreyre/autocomplete-vue/dist/style.css'
-
-Vue.use(Autocomplete);
 
 Vue.use(Vuetify); 
 Vue.config.productionTip = false

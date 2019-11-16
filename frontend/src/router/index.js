@@ -80,7 +80,7 @@ router.beforeEach((to, from, next) =>{
         if (result.data.redirect == "yes"){
           router.replace("/");
         }
-        else if ((to.path.includes("/adv/") && result.data.isStudent == 0) || to.path.includes("/classlist")){
+        else if (to.path.includes("/adv/") && result.data.isStudent == 0){
           next();
         }
         else if (!(to.path.includes("/adv/")) && result.data.isStudent == 1){
