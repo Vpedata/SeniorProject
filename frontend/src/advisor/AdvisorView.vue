@@ -83,7 +83,7 @@
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios';
 import router from '../router/index.js'
-import Autocomplete from '@trevoreyre/autocomplete-vue'
+
 
 export default {
     computed: {
@@ -97,14 +97,21 @@ export default {
         student:JSON
   }),
     methods: {
-      logout: function () {
-        axios.get("/auth/logout").then(response =>{
-            this.$router.push('/');
-        }).catch(err =>{
-            console.log(err);
-        });      
-    }
-  },
+        logout: function () {
+            axios.get("/auth/logout").then(response =>{
+                this.$router.push('/');
+            }).catch(err =>{
+                console.log(err);
+            });
+        },
+        search(input) {
+            if (input.length < 1) { return [] }
+            return students.filter(student => {
+            return student.toLowerCase()
+            .startsWith(input.toLowerCase())
+            })
+        }
+    },
 
     beforeMount(){
       axios
@@ -115,7 +122,7 @@ export default {
       .catch(error => {
         console.log(error)
       })
-        axios.get('/user/advisor/student/all')
+    axios.get('/user/advisor/student/all')
       .then(response =>{
          var obj = response.data[0]; 
          this.students = Object.keys(obj).map(key => obj[key]);
