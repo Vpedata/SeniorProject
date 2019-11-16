@@ -106,10 +106,13 @@ export default {
         search(input) {
             
             if (input.length < 1) { return [] }
-            return this.students.name.filter(student => {
+            return this.students.filter(student => {
             return student.name.toLowerCase()
             .startsWith(input.toLowerCase())
             })
+        },
+        getResultValue(result) {
+            return result.name
         }
     },
 
@@ -128,7 +131,6 @@ export default {
       .then(response =>{
          var obj = response.data[0]; 
          this.students = Object.keys(obj).map(key => obj[key]);
-         console.log(this.students);
       })
       .catch(error =>{
           console.log(error)
