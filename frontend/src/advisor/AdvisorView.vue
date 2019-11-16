@@ -26,9 +26,6 @@
                     <v-toolbar flat>
                         <v-toolbar-title class="grey--text">View Courses for Students (List Students)</v-toolbar-title>
                     </v-toolbar>
-                    <v-list  class="overflow-y-auto">
-                    <classComponent v-for="student in students" :firstName="student.firstName" :lastName="student.lastName" :key="student.student_ID"/> 
-                    </v-list>
                     <v-list style="max-height: 300px" class="overflow-y-auto">
                         <v-list-item>
                             <v-list-item-content>
@@ -96,7 +93,7 @@ export default {
     data: () => ({
         dialog: false,
         name: " ",
-        student:JSON
+        students:JSON
   }),
     methods: {
         logout: function () {
@@ -109,8 +106,8 @@ export default {
         search(input) {
             
             if (input.length < 1) { return [] }
-            return this.students.filter(student => {
-            return student.firstName.toLowerCase()
+            return this.students.name.filter(student => {
+            return student.name.toLowerCase()
             .startsWith(input.toLowerCase())
             })
         }
@@ -131,7 +128,7 @@ export default {
       .then(response =>{
          var obj = response.data[0]; 
          this.students = Object.keys(obj).map(key => obj[key]);
-         console.log(students);
+         console.log(this.students);
       })
       .catch(error =>{
           console.log(error)
