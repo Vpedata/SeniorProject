@@ -6,13 +6,16 @@
                 <v-toolbar color="amber darken-1" dark>
                 <v-toolbar-title class="brown--text">
                     {{name}}
-                    <v-col cols="3"></v-col>
+                </v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-toolbar-items>
                     <v-btn class="ma-4" outlined color="brown" @click="$router.push('/fe/adv/createcourse')" dark>Create New Course</v-btn>
                     <v-btn class="ma-4" outlined color="brown" @click="$router.push('/fe/classlist')" dark>View Class List</v-btn>
                     <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
-                    <v-col cols="2"></v-col>
                     <v-btn  @click="logout" dark>Logout</v-btn>
-                </v-toolbar-title>
+                </v-toolbar-items>
+                
+                
                 </v-toolbar>
             </v-row>
             <v-row>
