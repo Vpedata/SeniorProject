@@ -55,28 +55,10 @@
               <v-toolbar flat>
                 <v-toolbar-title class="grey--text">Selected Classes</v-toolbar-title>
               </v-toolbar>
-              <v-list style="max-height: 300px" class="overflow-y-auto">
-                <studentGeneratedComponent
-                  v-for="course in classes"
-                  :course="course"
-                  :key="course.course_ID"
-                />
-              </v-list>
+                    <v-list style="max-height: 600px" class="overflow-y-auto">
+                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID"/> 
+                    </v-list> 
             </v-card>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="8">
-            <v-btn class="mt-12 ma-12" outlined color="brown" @click="logout" dark>Logout</v-btn>
-          </v-col>
-          <v-col cols="4">
-            <v-btn
-              class="mt-12"
-              outlined
-              color="brown"
-              @click="$router.push('/messages')"
-              dark
-            >Messages</v-btn>
           </v-col>
         </v-row>
       </div>
@@ -90,6 +72,7 @@ import { mapState, mapActions } from "vuex";
 import axios from "axios";
 import router from "../router/index.js";
 import studentGeneratedComponent from "./studentGeneratedListComponent.vue";
+import classComponent from './classListComponent.vue'
 export default {
   computed: {
     ...mapState({
@@ -102,7 +85,7 @@ export default {
   data: () => ({
     dialog: false,
     name: " ",
-    classes: JSON
+    courses: JSON
   }),
   methods: {
     logout: function() {
@@ -132,7 +115,7 @@ export default {
             i++;
           }
 
-          this.classes = selectedCourses;
+          this.courses = selectedCourses;
           console.info(this.classes)
         })
         .catch(err => {
