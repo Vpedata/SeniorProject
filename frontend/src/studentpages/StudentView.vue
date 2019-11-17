@@ -123,7 +123,9 @@ export default {
           var i = 0;
           while (creditCount < 17) {
             creditCount = creditCount + allCourses[i].creditHours;
+            console.log("allCourses " + allCourses[i]);
             selectedCourses.push(allCourses[i]);
+            console.log("selectedCourses " + selectedCourses);
             i++;
           }
 
