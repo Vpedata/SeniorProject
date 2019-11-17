@@ -57,7 +57,7 @@
               </v-toolbar>
               <v-list style="max-height: 300px" class="overflow-y-auto">
                 <studentGeneratedComponent
-                  v-for="course in generatedclasses"
+                  v-for="course in classes"
                   :course="course"
                   :key="course.course_ID"
                 />
@@ -102,7 +102,7 @@ export default {
   data: () => ({
     dialog: false,
     name: " ",
-    classes: []
+    classes: JSON
   }),
   methods: {
     logout: function() {
@@ -126,13 +126,14 @@ export default {
           var i = 0;
           while (creditCount < 17) {
             creditCount = creditCount + allCourses[i].creditHours;
-            console.log("allCourses " + allCourses[i].toString());
+            console.info(allCourses[i]);
             selectedCourses.push(allCourses[i]);
-            console.log("selectedCourses " + selectedCourses.toString());
+            console.info(selectedCourses);
             i++;
           }
 
           this.classes = selectedCourses;
+          console.info(this.classes)
         })
         .catch(err => {
           console.log(err);
