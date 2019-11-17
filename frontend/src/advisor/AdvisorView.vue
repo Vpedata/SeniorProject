@@ -61,7 +61,10 @@ export default {
     data: () => ({
         dialog: false,
         name: " ",
-        students:JSON
+        students:JSON,
+        student_ID:-1,
+        coursesTake:JSON,
+        coursesRecommended:JSON
   }),
     methods: {
         logout: function () {
@@ -83,7 +86,9 @@ export default {
             return result.name + " ("  + result.email  + ")"; 
         },
         handleSubmit(result) {
-            alert(`You selected ${result}`)
+            student_ID = result.student_ID;
+
+            alert(`You selected ${result.student_ID}.  The student_ID is ${student_ID}`)
         }
         
     },
