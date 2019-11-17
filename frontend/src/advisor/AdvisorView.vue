@@ -67,7 +67,7 @@ export default {
             })
         },
         getResultValue(result) {
-            return result.name
+            return result.name + "("  + result.email  + ")"; 
         }
         
     },
