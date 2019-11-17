@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 import Router from 'vue-router'
 import ClassList from '@/studentpages/ClassList'
-import AdvisorClassList from '@/advisor/AdvisorClassList'
+import ClassListAdvisor from '@/advisor/ClassListAdvisor'
 import StudentAddClassPage from '@/studentpages/StudentAddClassPage'
 import StudentView from '@/studentpages/StudentView'
 import StudentEditCompleted from '@/studentpages/StudentEditCompleted'
@@ -38,9 +38,9 @@ let router = new Router({
       }
     },
     {
-      path: '/fe/advisorclasslist',
-      name: 'AdvisorClassList',
-      component: AdvisorClassList,
+      path: '/fe/classlistadvisor',
+      name: 'ClassListAdvisor',
+      component: ClassListAdvisor,
       meta: {
         requiresAuth: true
       }
@@ -81,7 +81,7 @@ let router = new Router({
   ]
 })
 
-
+/*
 router.beforeEach((to, from, next) =>{
   if (to.matched.some(record => record.meta.requiresAuth)){
       axios.get("/user/check")
@@ -101,5 +101,5 @@ router.beforeEach((to, from, next) =>{
     next();
   }
 })
-
+*/
 export default router;
