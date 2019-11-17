@@ -1,126 +1,144 @@
 <template>
-    <div id="app">
+  <div id="app">
     <v-app id="inspire">
-        <div class="amber lighten-5 pa-4">
+      <div class="amber lighten-5 pa-4">
+        <v-row>
+          <v-toolbar color="amber darken-1" dark>
+            <v-toolbar-title class="brown--text">{{name}}</v-toolbar-title>
+          </v-toolbar>
+        </v-row>
+        <v-row>
+          <v-btn
+            class="ma-4"
+            outlined
+            color="brown"
+            @click="$router.push('/fe/editcompleted')"
+            dark
+          >Edit Completed Courses</v-btn>
+          <v-btn
+            class="ma-4"
+            outlined
+            color="brown"
+            @click="$router.push('/fe/classlist')"
+            dark
+          >View Class List</v-btn>
+        </v-row>
+        <v-row>
+          <v-col cols="3">
             <v-row>
-                <v-toolbar color="amber darken-1" dark>
-                <v-toolbar-title class="brown--text">
-                    {{name}}
-                </v-toolbar-title>
-                </v-toolbar>
+              <v-btn
+                class="ms-12 mt-12"
+                outlined
+                color="amber darken-1"
+                @click="generateDefaults"
+                dark
+              >Generate</v-btn>
             </v-row>
             <v-row>
-                <v-btn class="ma-4" outlined color="brown" @click="$router.push('/fe/editcompleted')" dark>Edit Completed Courses</v-btn>
-                <v-btn class="ma-4" outlined color="brown" @click="$router.push('/fe/classlist')" dark>View Class List</v-btn>
+              <v-btn
+                class="ms-12 mt-4"
+                outlined
+                color="brown"
+                @click="$router.push('/fe/studentaddclass')"
+                dark
+              >Add Class</v-btn>
             </v-row>
-            <v-row>
-                <v-col cols="3">
-                    <v-row>
-                        <v-btn class="ms-12 mt-12" outlined color="amber darken-1" @click="$router.push('/login')" dark>Generate</v-btn>
-                    </v-row>
-                    <v-row>
-                        <v-btn class="ms-12 mt-4" outlined color="brown" @click="$router.push('/fe/studentaddclass')" dark>Add Class</v-btn>
-                    </v-row>
-                </v-col>
-                <v-col cols="9" lg="6">
-                <v-card class="mt-n16 mx-auto" elevation="12" height="350px">
-                    <v-toolbar flat>
-                        <v-toolbar-title class="grey--text">Selected Classes</v-toolbar-title>
-                    </v-toolbar>
-                    <v-list style="max-height: 300px" class="overflow-y-auto">
-                        <v-list-item>
-                            <v-list-item-content>
-                                <v-dialog v-model="dialog" width="500">
-                                    <template v-slot:activator="{ on }">
-                                    <v-btn color="amber darken-1" dark v-on="on">
-                                        GetClassName
-                                    </v-btn>
-                                    </template>
-                                    <v-card>
-                                        <v-card-title
-                                            class="headline grey lighten-2"
-                                            primary-title
-                                        >
-                                            GetClassName
-                                        </v-card-title>
-                                        <v-divider></v-divider>
-                                        <v-card-text>
-                                            GetClassSummary
-                                        </v-card-text>
-                                        <v-divider></v-divider>
-                                        <v-card-actions>
-                                            <v-spacer></v-spacer>
-                                            <v-btn color="blue" text @click="dialog = false">
-                                                Ok
-                                            </v-btn>
-                                            <v-btn color="red" text @click="dialog = false">
-                                                Remove
-                                            </v-btn>
-                                        </v-card-actions>
-                                    </v-card>
-                                </v-dialog>
-                            </v-list-item-content>
-                        </v-list-item>
-            
-                        <v-list-item @click="$router.push('/fe/classlist')">
-                            <v-list-item-content>
-                            <v-list-item-title>Repeat...</v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list>
-                    
-                </v-card>
-                </v-col>
-  
-            </v-row>
-            <v-row>
-                <v-col cols="8">
-                    <v-btn class="mt-12 ma-12" outlined color="brown" @click="logout" dark>Logout</v-btn>
-                </v-col>
-                <v-col cols="4">
-                    <v-btn class="mt-12" outlined color="brown" @click="$router.push('/messages')" dark>Messages</v-btn>
-                </v-col>
-            </v-row>
-        </div>
+          </v-col>
+          <v-col cols="9" lg="6">
+            <v-card class="mt-n16 mx-auto" elevation="12" height="350px">
+              <v-toolbar flat>
+                <v-toolbar-title class="grey--text">Selected Classes</v-toolbar-title>
+              </v-toolbar>
+              <v-list style="max-height: 300px" class="overflow-y-auto">
+                <studentGeneratedComponent
+                  v-for="course in generatedclasses"
+                  :course="course"
+                  :key="course.course_ID"
+                />
+                <v-list-item @click="$router.push('/fe/classlist')"></v-list-item>
+              </v-list>
+            </v-card>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="8">
+            <v-btn class="mt-12 ma-12" outlined color="brown" @click="logout" dark>Logout</v-btn>
+          </v-col>
+          <v-col cols="4">
+            <v-btn
+              class="mt-12"
+              outlined
+              color="brown"
+              @click="$router.push('/messages')"
+              dark
+            >Messages</v-btn>
+          </v-col>
+        </v-row>
+      </div>
     </v-app>
-    </div>
+  </div>
 </template>
 
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import axios from 'axios';
-import router from '../router/index.js'
+import { mapState, mapActions } from "vuex";
+import axios from "axios";
+import router from "../router/index.js";
+import studentGeneratedComponent from "./studentGeneratedListComponent.vue";
 export default {
-    computed: {
-        ...mapState({
-            account: state => state.account,
-        })
-    }, 
-    data: () => ({
-        dialog: false,
-        name: " "
+  computed: {
+    ...mapState({
+      account: state => state.account
+    })
+  },
+  data: () => ({
+    dialog: false,
+    name: " ",
+    generatedclasses: JSON
   }),
   methods: {
-      logout: function () {
-        axios.get("/auth/logout").then(respone => {
-            this.$router.push('/');
-        }).catch(err => {
-            console.log(err)
+    logout: function() {
+      axios
+        .get("/auth/logout")
+        .then(respone => {
+          this.$router.push("/");
+        })
+        .catch(err => {
+          console.log(err);
         });
-        
+    },
+    generateDefaults: function() {
+      axios
+        .get("/user/student/courses/recommended")
+        .then(response => {
+          var creditCount = 0;
+          var obj = response.data[0];
+          var allCourses = Object.keys(obj).map(key => obj[key]);
+          var selectedCourses = [];
+
+          while (creditCount < 17) {
+            creditCount = creditCount + allCourses[i].creditHours;
+            selectedCourses[i] = allCourses[i];
+          }
+
+          this.generatedclasses = selectedCourses;
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
 
-  beforeMount(){
-      axios
-      .get('/user/getName')
+  beforeMount() {
+    axios
+      .get("/user/getName")
       .then(response => {
         this.name = response.data.firstName + " " + response.data.lastName;
-      }).bind(this)
-      .catch(error => {
-        console.log(error)
       })
+      .bind(this)
+      .catch(error => {
+        console.log(error);
+      });
   }
 };
 </script>
