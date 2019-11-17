@@ -109,8 +109,13 @@ export default {
             creditCount = creditCount + allCourses[i].creditHours;
             console.info(allCourses[i]);
             selectedCourses.push(allCourses[i]);
-            classCode = classCode + allCourses[i].courseCode + ",";
-            grades = grades + "-1,";
+            if (creditCount < 17){
+                classCode = classCode + allCourses[i].courseCode + ",";
+                grades = grades + "-1,";
+            }else{
+                classCode = classCode + allCourses[i].courseCode;
+                grades = grades + "-1";
+            }git 
             console.info(selectedCourses);
             i++;
           }
