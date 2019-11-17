@@ -21,13 +21,6 @@
             @click="$router.push('/fe/editcompleted')"
             dark
           >Edit Completed Courses</v-btn>
-          <v-btn
-            class="ma-4"
-            outlined
-            color="brown"
-            @click="$router.push('/fe/classlist')"
-            dark
-          >View Class List</v-btn>
         </v-row>
         <v-row>
           <v-col cols="3">
@@ -56,7 +49,7 @@
                 <v-toolbar-title class="grey--text">Selected Classes</v-toolbar-title>
               </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
-                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID"/> 
+                        <classComponent v-for="course in generatedClasses" :course="course" :key="course.course_ID"/> 
                     </v-list> 
             </v-card>
           </v-col>
@@ -79,7 +72,7 @@ export default {
       account: state => state.account
     }),
     generatedClasses: function(){
-        return this.classes;
+        return this.courses;
     }
   },
   data: () => ({
@@ -136,8 +129,6 @@ export default {
       .catch(error => {
         console.log(error);
       });
-
-      this.generateDefaults();
   }
 };
 </script>
