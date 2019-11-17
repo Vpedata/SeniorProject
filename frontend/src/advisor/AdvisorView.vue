@@ -50,6 +50,7 @@
                         </v-list>                  
                     </v-card>
                 </v-col>
+
             </v-row>
         </div>
     </v-app>
@@ -74,7 +75,7 @@ export default {
         name: " ",
         students:JSON,
         student_ID:-1,
-        coursesTake:JSON,
+        coursesTaken:JSON,
         coursesRecommended:JSON
   }),
     methods: {
@@ -97,8 +98,23 @@ export default {
             return result.name + " ("  + result.email  + ")"; 
         },
         handleSubmit(result) {
-            this.student_ID = result.student_ID;
-            alert(`You selected ${result.student_ID}.  The student_ID is ${this.student_ID}`)
+            axios.get(`/user/advisor/student/${result.student_ID}/taken`)
+            .then(response =>{
+            var obj = response.data[0]; 
+            this. coursesTaken= Object.keys(obj).map(key => obj[key]);
+            })
+            .catch(error =>{
+                console.log(error)
+            }),
+            
+            axios.get(`/user/advisor/student/${result.student_ID}/recommended`)
+            .then(response =>{
+            var obj = response.data[0]; 
+            this. coursesRecommended= Object.keys(obj).map(key => obj[key]);
+            })
+            .catch(error =>{
+                console.log(error)
+            })
         }
         
     },
