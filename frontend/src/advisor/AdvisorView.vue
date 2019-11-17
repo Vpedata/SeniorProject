@@ -30,7 +30,12 @@
                             <v-toolbar-title class="grey--text">Courses Taken</v-toolbar-title>
                         </v-toolbar>
                         <v-list style="max-height: 600px" class="overflow-y-auto">
-                        
+                            <v-toolbar dark>
+                                <v-toolbar-title class="white--text">Class1</v-toolbar-title>
+                                <v-spacer></v-spacer>
+                                <v-btn class="ma-1">Edit</v-btn>
+                                <v-btn class="ma-1">Remove</v-btn>
+                            </v-toolbar>
                         </v-list>                  
                     </v-card>
                 </v-col>
