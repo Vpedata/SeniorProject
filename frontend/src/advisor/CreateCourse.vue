@@ -93,19 +93,21 @@ export default {
         courseCode: null,
         name: " "
   }),
-    //createCourse() {
-    //      axios.post(??, {
-    //          class_name: this.class_name,    
-    //          class_desc: this.class_desc,    
-    //          class_credits: this.class_credits
-    //      }).then(function (response) {
-    //          console.log(response);
-    //      })
-    //      .catch(function (error) {
-    //          console.log(error);
-    //      });
-    //      
-    //},
+    createCourse() {
+          axios.post("/user/advisor/course/", {
+              name: this.class_name,    
+              description: this.class_desc,    
+              isCore: this.isCore,
+              creditHours: this.class_credits
+              //prereqs: this.prereq_list
+          }).then(function (response) {
+              console.log(response);
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+          
+    },
     beforeMount(){
       axios
       .get('/user/getName')
