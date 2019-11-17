@@ -13,12 +13,25 @@
                 <v-text-field class = 'ma-12' v-model = 'class_name' label = 'Class Name' outlined></v-text-field>
             </v-row>
             <v-row>
-                <v-textarea class = 'ma-3' v-model = 'class_desc' label = 'Class Description' outlined maxlength = '120'></v-textarea>
+                <v-textarea class = 'ma-3 mt-n8' v-model = 'class_desc' label = 'Class Description' outlined maxlength = '120'></v-textarea>
             </v-row>
-             <v-row>
+            <v-row>
+                <v-checkbox
+                    v-model="isCore"
+                    class = 'ma-3 mt-n8'
+                    :label="`Core Course`"
+                ></v-checkbox>
+            </v-row>
+            <v-row>
                  <v-col cols="4"></v-col>
                  <v-col cols="3">
-                <v-text-field class = 'ma-3' v-model = 'credit_value' label = 'Credits' single-line type="number" hide-details></v-text-field>
+                <v-text-field class = 'ma-3 mt-n8' v-model = 'courseCode' label = 'Course Code' single-line type="number" hide-details></v-text-field>
+                 </v-col>
+            </v-row>
+            <v-row>
+                 <v-col cols="4"></v-col>
+                 <v-col cols="3">
+                <v-text-field class = 'ma-3 mt-n8' v-model = 'credit_value' label = 'Credits' single-line type="number" hide-details></v-text-field>
                  </v-col>
             </v-row>
             
@@ -66,7 +79,9 @@ export default {
         class_desc: '',
         prereq_list: [],
         prereq_current: '',
-        credit_value: null
+        credit_value: null,
+        isCore: false,
+        courseCode: null
   }),
 };
 </script>

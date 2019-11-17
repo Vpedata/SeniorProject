@@ -17,27 +17,43 @@
                 </v-toolbar>
             </v-row>
             <v-row>
-                <v-text-field class = 'ma-12' v-model = 'class_name' label = 'Class Name' outlined></v-text-field>
-            </v-row>
-            <v-row>
-                <v-textarea class = 'ma-3' v-model = 'class_desc' label = 'Class Description' outlined maxlength = '120'></v-textarea>
-            </v-row>
-             <v-row>
-                 <v-col cols="4"></v-col>
-                 <v-col cols="3">
-                    <v-text-field class = 'ma-3' v-model = 'credit_value' label = 'Credits' single-line type="number" hide-details></v-text-field>
-                 </v-col>
-            </v-row>
-            <v-row>
-                <v-col cols="4">
-                    <v-btn class="mt-12" outlined color="blue" @click="$router.push('/fe/advisorview')" dark>Create</v-btn>
+                <v-col cols=4></v-col>
+                <v-col cols=3>
+                    <v-text-field class = 'ma-12' v-model = 'class_name' label = 'Class Name' outlined></v-text-field>
                 </v-col>
             </v-row>
             <v-row>
-                
-                <v-text-field v-model="prereq_current">
-                    
-                </v-text-field>
+                <v-col cols=3></v-col>
+                <v-col cols=5>
+                    <v-textarea class = 'ma-3 mt-n8' v-model = 'class_desc' label = 'Class Description' outlined maxlength = '120'></v-textarea>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col cols=5></v-col>
+                <v-checkbox
+                    v-model="isCore"
+                    class = 'ma-3 mt-n8'
+                    :label="`Core Course`"
+                ></v-checkbox>
+            </v-row>
+            <v-row>
+                 <v-col cols="4"></v-col>
+                 <v-col cols="3">
+                <v-text-field class = 'ma-3 mt-n8' v-model = 'courseCode' label = 'Course Code' single-line type="number" hide-details></v-text-field>
+                 </v-col>
+            </v-row>
+            <v-row>
+                 <v-col cols="4"></v-col>
+                 <v-col cols="3">
+                <v-text-field class = 'ma-3 mt-n8' v-model = 'class_credits' label = 'Credits' single-line type="number" hide-details></v-text-field>
+                 </v-col>
+            </v-row>
+            
+            <v-row>
+                <v-col cols="3"></v-col>
+                <v-col cols="3">
+                <v-text-field v-model="prereq_current"></v-text-field>
+                </v-col>
                 <v-btn @click="prereq_list.push(prereq_current)" >Add PreReq Course Code</v-btn>
                 <v-btn @click="prereq_list.pop()" >Undo</v-btn>
             </v-row>
@@ -49,9 +65,6 @@
                 {{prereq}}
                 </v-chip>
             <v-row>
-                <v-col cols="8">
-                    <v-btn class="mt-12 ma-12" outlined color="blue" @click="$router.push('/advisorview')" dark>Back</v-btn>
-                </v-col>
                 <v-col cols="4">
                     <v-btn class="mt-12" outlined color="blue" @click="$router.push('/advisorview')" dark>Create</v-btn>
                 </v-col>
@@ -76,6 +89,8 @@ export default {
         class_desc: '',
         class_credits: null,
         prereq_list: [],
+        isCore: false,
+        courseCode: null,
         name: " "
   }),
     //createCourse() {
