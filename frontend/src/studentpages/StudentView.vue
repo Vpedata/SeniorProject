@@ -95,6 +95,8 @@ export default {
         });
     },
     generateDefaults: function() {
+        var classCode = [];
+        var grades = [];
       axios
         .get("/user/student/courses/recommended")
         .then(response => {
@@ -103,8 +105,6 @@ export default {
           var allCourses = Object.keys(obj).map(key => obj[key]);
           var selectedCourses = [];
           var i = 0;
-          var classCode = [];
-          var grades = [];
           while (creditCount < 17) {
             creditCount = creditCount + allCourses[i].creditHours;
             console.info(allCourses[i]);
