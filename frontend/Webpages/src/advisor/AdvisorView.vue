@@ -9,7 +9,7 @@
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
-                    <v-btn  @click="$router.push('/fe/adv/createcourse')" dark>Create New Course</v-btn>
+                    <v-btn  @click="$router.push('/createcourse')" dark>Create New Course</v-btn>
                     <v-btn  @click="$router.push('/fe/classlist')" dark>View Class List</v-btn>
                     <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
