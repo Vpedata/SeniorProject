@@ -9,7 +9,7 @@
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
-                    <v-btn  @click="$router.push('/fe/classlist')" dark>View Class List</v-btn>
+                    <v-btn  @click="$router.push('/fe/classlistadvisor')" dark>View Class List</v-btn>
                     <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
                 </v-toolbar-items>
@@ -19,7 +19,7 @@
                 <v-col cols="3"></v-col>
                 <v-col cols="6">
                     <autocomplete :search="search" placeholder="Search Student" aria-label="Search Student" 
-                    :get-result-value="getResultValue" ></autocomplete>
+                    :get-result-value="getResultValue" @submit="handleSubmit" ></autocomplete>
                 </v-col>
             </v-row>
             <v-row>
