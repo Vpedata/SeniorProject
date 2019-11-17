@@ -95,23 +95,24 @@ export default {
             return result.name + " ("  + result.email  + ")"; 
         },
         handleSubmit(result) {
-            axios.get('/user/advisor/student/${result.student_ID}/taken')
+            let coursesTakenUrl = '/user/advisor/student/'+ result.student_ID +'/taken';
+            axios.get(coursesTakenUrl)
             .then(response =>{
             var obj = response.data[0]; 
             this. coursesTaken= Object.keys(obj).map(key => obj[key]);
             })
             .catch(error =>{
                 console.log(error)
-            }),
-
-            axios.get('/user/advisor/student/${result.student_ID}/recommended')
+            });
+            let coursesRecommendedUrl = '/user/advisor/student/'+ result.student_ID +'/recommended';
+            axios.get(coursesRecommendedUrl)
             .then(response =>{
             var obj = response.data[0]; 
             this. coursesRecommended= Object.keys(obj).map(key => obj[key]);
             })
             .catch(error =>{
                 console.log(error)
-            })
+            });
         }
         
     },
