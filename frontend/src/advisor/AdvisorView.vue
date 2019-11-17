@@ -58,7 +58,7 @@
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios';
 import router from '../router/index.js'
-import classComponent from './classListComponentAdvisor.vue'
+import classComponent from '../studentpages/classListComponent.vue'
 
 
 export default {

@@ -9,9 +9,8 @@
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
-                    <v-btn  @click="$router.push('/fe/adv/createcourse')" dark>Create New Course</v-btn>
-                    <v-btn  @click="$router.push('/fe/adv/advisor')" dark>Home</v-btn>
                     <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
+                    <v-btn  @click="$router.push('/fe/adv/advisor')" dark>Home</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
                 </v-toolbar-items>
                 </v-toolbar>
@@ -29,6 +28,11 @@
                         <classComponent v-for="course in courses" :course="course" :key="course.course_ID"/> 
                     </v-list>                  
                 </v-card>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col cols="8">
+                    <v-btn class="mt-12 ma-12" outlined color="blue" @click="$router.push('/fe/student')" dark>Back</v-btn>
                 </v-col>
             </v-row>
         </div>
@@ -67,10 +71,11 @@ export default {
         console.log(error)
       });
 
-      axios.get('/user/student/courses/yetToTake')
+      axios.get('/course/all')
       .then(response =>{
          var obj = response.data[0]; 
          this.courses = Object.keys(obj).map(key => obj[key]);
+         console.info(this.courses);
       })
       .catch(error =>{
           console.log(error)
@@ -78,3 +83,4 @@ export default {
   }
 };
 </script>
+
