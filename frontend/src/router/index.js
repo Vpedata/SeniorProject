@@ -75,7 +75,7 @@ let router = new Router({
       name: 'AdvisorView',
       component: AdvisorView,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
