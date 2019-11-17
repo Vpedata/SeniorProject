@@ -22,7 +22,7 @@ var sql = "CALL getStudentByEmail(?,@student); select @student as student_ID;";
 
 //get student's list of courses taken by student email 
 router.get("/:id/taken",isAdvisor, (req, res, next)=> {
-    var sql = "CALL getStudentsTakenCourses(?);";
+    var sql = "CALL getTakenCourses(?)";
     db.query(sql,req.params.id, (err, rows, fields) => {
         if (err) throw err;
         res.send(rows);
