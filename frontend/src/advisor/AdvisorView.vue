@@ -30,12 +30,7 @@
                             <v-toolbar-title class="grey--text">Courses Taken</v-toolbar-title>
                         </v-toolbar>
                         <v-list style="max-height: 600px" class="overflow-y-auto">
-                            <v-toolbar dark>
-                                <v-toolbar-title class="white--text">Class1</v-toolbar-title>
-                                <v-spacer></v-spacer>
-                                <v-btn class="ma-1">Edit</v-btn>
-                                <v-btn class="ma-1">Remove</v-btn>
-                            </v-toolbar>
+                            <classComponent v-for="course in coursesTaken" :course="course" :key="course.course_ID"/>
                         </v-list>                  
                     </v-card>
                 </v-col>
@@ -43,11 +38,12 @@
                 <v-col cols="4">
                     <v-card class="mx-auto" elevation="12" height="600px">
                         <v-toolbar flat>
-                            <v-toolbar-title class="grey--text">Recommended Courses</v-toolbar-title>
+                            <v-toolbar-title class="grey--text">Recommended Courses</v-toolbar-title>    
                         </v-toolbar>
                         <v-list style="max-height: 600px" class="overflow-y-auto">
-                        
-                        </v-list>                  
+                            <classComponent v-for="course in coursesRecommended" :course="course" :key="course.course_ID"/>
+                        </v-list>       
+              
                     </v-card>
                 </v-col>
 
@@ -62,6 +58,7 @@
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios';
 import router from '../router/index.js'
+import classComponent from './classListComponentAdvisor.vue'
 
 
 export default {
@@ -136,7 +133,7 @@ export default {
          this.students = Object.keys(obj).map(key => obj[key]);
       })
       .catch(error =>{
-          console.log(error)
+          console.log(error)   
       })
   }
 };

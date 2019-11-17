@@ -31,13 +31,16 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-
+import classComponent from './classListComponentAdvisor.vue'
 export default {
     computed: {
         ...mapState({
             account: state => state.account,
         })
     }, 
+    components: {
+        classComponent
+    },
     data: () => ({
         dialog: false,
         search_txt: ""
