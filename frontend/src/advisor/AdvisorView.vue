@@ -99,7 +99,8 @@ export default {
             axios.get(coursesTakenUrl)
             .then(response =>{
             var obj = response.data[0]; 
-            this. coursesTaken= Object.keys(obj).map(key => obj[key]);
+            this.coursesTaken= Object.keys(obj).map(key => obj[key]);
+            console.info(this.coursesTaken);
             })
             .catch(error =>{
                 console.log(error)
@@ -108,7 +109,8 @@ export default {
             axios.get(coursesRecommendedUrl)
             .then(response =>{
             var obj = response.data[0]; 
-            this. coursesRecommended= Object.keys(obj).map(key => obj[key]);
+            this.coursesRecommended= Object.keys(obj).map(key => obj[key]);
+            console.info(this.coursesRecommended)
             })
             .catch(error =>{
                 console.log(error)
