@@ -109,7 +109,7 @@ export default {
             creditCount = creditCount + allCourses[i].creditHours;
             console.info(allCourses[i]);
             selectedCourses.push(allCourses[i]);
-            classCode = classCode + allCourses[i].classCode + ",";
+            classCode = classCode + allCourses[i].courseCode + ",";
             grades = grades + "-1,";
             console.info(selectedCourses);
             i++;
