@@ -94,10 +94,10 @@ export default {
           console.log(err);
         });
     },
-    generateDefaults: function() {
+    generateDefaults: async function() {
         var classCode = "";
         var grades = "";
-      axios
+      await axios
         .get("/user/student/courses/recommended")
         .then(response => {
           var creditCount = 0;
