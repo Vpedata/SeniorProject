@@ -75,6 +75,9 @@ export default {
         coursesTaken:JSON,
         coursesRecommended:JSON
   }),
+  components: {
+        classComponent
+    },
     methods: {
         logout: function () {
             axios.get("/auth/logout").then(response =>{
