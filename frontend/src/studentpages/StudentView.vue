@@ -87,6 +87,9 @@ export default {
     name: " ",
     courses: JSON
   }),
+    components: {
+        classComponent
+    },
   methods: {
     logout: function() {
       axios
@@ -116,7 +119,7 @@ export default {
           }
 
           this.courses = selectedCourses;
-          console.info(this.classes)
+          console.info(this.courses)
         })
         .catch(err => {
           console.log(err);
