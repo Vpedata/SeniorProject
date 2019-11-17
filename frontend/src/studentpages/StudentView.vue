@@ -117,11 +117,11 @@ export default {
           var i = 0;
           while (creditCount < 17) {
             creditCount = creditCount + allCourses[i].creditHours;
-            selectedCourses[i] = allCourses[i];
+            selectedCourses.push(allCourses[i]);
             i++;
           }
 
-          this.generatedclasses = selectedCourses;
+          this.generatedclasses = allCourses;
         })
         .catch(err => {
           console.log(err);
