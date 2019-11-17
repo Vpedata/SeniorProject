@@ -9,8 +9,8 @@
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
-                    <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
                     <v-btn  @click="$router.push('/fe/adv/advisor')" dark>Home</v-btn>
+                    <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
                 </v-toolbar-items>
                 </v-toolbar>

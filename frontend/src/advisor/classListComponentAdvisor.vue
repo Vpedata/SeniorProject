@@ -4,16 +4,17 @@
             <v-list-item-content>
                 <v-dialog v-model="dialog" width="500">
                     <template v-slot:activator="{ on }">
-                    <v-btn color="amber darken-1" dark v-on="on">
-                        {{course.name}}
-                    </v-btn>
-                    <v-spacer></v-spacer>
-                    <v-btn color="amber darken-1" dark v-on="on">
+                    <v-toolbar :color="bar.class" :dark="bar.dark">
+                        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+                        <v-btn v-on="on"> {{course.name}} </v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn>
                         Edit
-                    </v-btn>
-                    <v-btn color="amber darken-1" dark v-on="on">
-                        Remove
-                    </v-btn>
+                        </v-btn>
+                        <v-btn>
+                         Remove   
+                        </v-btn>
+                    </v-toolbar>
                     </template>
                     <v-card>
                         <v-card-title
