@@ -55,7 +55,6 @@
                   :course="course"
                   :key="course.course_ID"
                 />
-                <v-list-item @click="$router.push('/fe/classlist')"></v-list-item>
               </v-list>
             </v-card>
           </v-col>
@@ -115,10 +114,11 @@ export default {
           var obj = response.data[0];
           var allCourses = Object.keys(obj).map(key => obj[key]);
           var selectedCourses = [];
-
+          var i = 0;
           while (creditCount < 17) {
             creditCount = creditCount + allCourses[i].creditHours;
             selectedCourses[i] = allCourses[i];
+            i++;
           }
 
           this.generatedclasses = selectedCourses;
