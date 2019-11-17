@@ -10,6 +10,7 @@ import Login from '@/login/LoginPage'
 import AdvisorView from '@/advisor/AdvisorView'
 import CreateCourse from '@/advisor/CreateCourse'
 import axios from 'axios'
+//import Messages from '@/messaging/components/ChatApp'
 
 Vue.use(Router)
 Vue.use(Vuetify)
@@ -53,6 +54,14 @@ let router = new Router({
         requiresAuth: true
       }
     },
+   /* {
+      path: '/fe/messages',
+      name: 'messenger',
+      component: Messages,
+      meta: {
+        requiresAuth: true
+      }
+    },*/
     {
       path: '/fe/editcompleted',
       name: 'StudentEditCompleted',
