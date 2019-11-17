@@ -86,9 +86,8 @@ export default {
             return result.name + " ("  + result.email  + ")"; 
         },
         handleSubmit(result) {
-            student_ID = result.student_ID;
-
-            alert(`You selected ${result.student_ID}.  The student_ID is ${student_ID}`)
+            this.student_ID = result.student_ID;
+            alert(`You selected ${result.student_ID}.  The student_ID is ${this.student_ID}`)
         }
         
     },
