@@ -90,7 +90,7 @@ export default {
         class_credits: null,
         prereq_list: [],
         isCore: false,
-        courseCode: 0,
+        courseCode: null,
         name: " "
   }),
     //createCourse() {
