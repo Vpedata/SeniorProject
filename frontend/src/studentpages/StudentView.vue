@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-app id="inspire">
-      <div class="amber lighten-5 pa-4">
+      <div class="amber lighten-5 pa-4 full-screen">
         <v-row>
           <v-toolbar color="amber darken-1" dark>
             <v-toolbar-title class="brown--text">{{name}}</v-toolbar-title>
@@ -31,7 +31,7 @@
                 color="amber darken-1"
                 @click="generateDefaults"
                 dark
-              >Generate</v-btn>
+              >Generate Default Classes</v-btn>
             </v-row>
             <v-row>
               <v-btn
@@ -103,10 +103,14 @@ export default {
           var allCourses = Object.keys(obj).map(key => obj[key]);
           var selectedCourses = [];
           var i = 0;
+          var classCode = [];
+          var grades = [];
           while (creditCount < 17) {
             creditCount = creditCount + allCourses[i].creditHours;
             console.info(allCourses[i]);
             selectedCourses.push(allCourses[i]);
+            classCode.push(allCourses[i].classCode);
+            grades.push(-1);
             console.info(selectedCourses);
             i++;
           }
@@ -117,6 +121,16 @@ export default {
         .catch(err => {
           console.log(err);
         });
+
+        //array of coursecodes, grades
+        axios.post("/user/student/courses/taken",{
+            classes: classCode,
+            grades: grades
+        }).then(response =>{
+            console.log(response);
+        }).catch(err =>{
+            console.log(err);
+        })
     }
   },
 
