@@ -23,28 +23,22 @@
                 </v-col>
             </v-row>
             <v-row>
-                <v-col cols="1"></v-col>
-                <v-col cols="4">
-                    <v-card class="mx-auto" elevation="12" height="600px">
-                        <v-toolbar flat>
-                            <v-toolbar-title class="grey--text">Courses Taken</v-toolbar-title>
-                        </v-toolbar>
-                        <v-list style="max-height: 600px" class="overflow-y-auto">
-                        
-                        </v-list>                  
-                    </v-card>
-                </v-col>
-                <v-col cols="1"></v-col>
-                <v-col cols="4">
-                    <v-card class="mx-auto" elevation="12" height="600px">
-                        <v-toolbar flat>
-                            <v-toolbar-title class="grey--text">Recommended Courses</v-toolbar-title>
-                        </v-toolbar>
-                        <v-list style="max-height: 600px" class="overflow-y-auto">
-                        
-                        </v-list>                  
-                    </v-card>
-                </v-col>
+                <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
+                    <v-toolbar flat>
+                        <v-toolbar-title class="grey--text">Courses Taken</v-toolbar-title>
+                    </v-toolbar>
+                    <v-list style="max-height: 600px" class="overflow-y-auto">
+                    
+                    </v-list>                  
+                </v-card>
+                <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
+                    <v-toolbar flat>
+                        <v-toolbar-title class="grey--text">Recommended Courses</v-toolbar-title>
+                    </v-toolbar>
+                    <v-list style="max-height: 600px" class="overflow-y-auto">
+                    
+                    </v-list>                  
+                </v-card>
             </v-row>
         </div>
     </v-app>
@@ -69,7 +63,7 @@ export default {
         name: " ",
         students:JSON,
         student_ID:-1,
-        coursesTake:JSON,
+        coursesTaken:JSON,
         coursesRecommended:JSON
   }),
     methods: {
@@ -92,8 +86,23 @@ export default {
             return result.name + " ("  + result.email  + ")"; 
         },
         handleSubmit(result) {
-            this.student_ID = result.student_ID;
-            alert(`You selected ${result.student_ID}.  The student_ID is ${this.student_ID}`)
+            axios.get(`/user/advisor/student/${result.student_ID}/taken`)
+            .then(response =>{
+            var obj = response.data[0]; 
+            this. coursesTaken= Object.keys(obj).map(key => obj[key]);
+            })
+            .catch(error =>{
+                console.log(error)
+            }),
+            
+            axios.get(`/user/advisor/student/${result.student_ID}/recommended`)
+            .then(response =>{
+            var obj = response.data[0]; 
+            this. coursesRecommended= Object.keys(obj).map(key => obj[key]);
+            })
+            .catch(error =>{
+                console.log(error)
+            })
         }
         
     },
