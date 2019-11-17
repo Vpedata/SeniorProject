@@ -94,12 +94,15 @@ export default {
   computed: {
     ...mapState({
       account: state => state.account
-    })
+    }),
+    generatedClasses: function(){
+        return this.classes;
+    }
   },
   data: () => ({
     dialog: false,
     name: " ",
-    generatedclasses: JSON
+    classes: []
   }),
   methods: {
     logout: function() {
@@ -123,13 +126,13 @@ export default {
           var i = 0;
           while (creditCount < 17) {
             creditCount = creditCount + allCourses[i].creditHours;
-            console.log("allCourses " + allCourses[i]);
+            console.log("allCourses " + allCourses[i].toString());
             selectedCourses.push(allCourses[i]);
-            console.log("selectedCourses " + selectedCourses);
+            console.log("selectedCourses " + selectedCourses.toString());
             i++;
           }
 
-          this.generatedclasses = allCourses;
+          this.classes = selectedCourses;
         })
         .catch(err => {
           console.log(err);
@@ -143,7 +146,6 @@ export default {
       .then(response => {
         this.name = response.data.firstName + " " + response.data.lastName;
       })
-      .bind(this)
       .catch(error => {
         console.log(error);
       });
