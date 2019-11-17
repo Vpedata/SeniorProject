@@ -7,68 +7,20 @@
                 <v-toolbar-title class="brown--text">
                     {{name}}
                 </v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-toolbar-items>
+                    <v-btn  @click="$router.push('/fe/adv/createcourse')" dark>Create New Course</v-btn>
+                    <v-btn  @click="$router.push('/fe/classlist')" dark>View Class List</v-btn>
+                    <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
+                    <v-btn  @click="logout" dark>Logout</v-btn>
+                </v-toolbar-items>
                 </v-toolbar>
-            </v-row>
-            <v-row>
-                <v-btn class="ma-4" outlined color="brown" @click="$router.push('/fe/adv/createcourse')" dark>Create New Course</v-btn>
-                <v-btn class="ma-4" outlined color="brown" @click="$router.push('/fe/advisorclasslist')" dark>View Class List</v-btn>
             </v-row>
             <v-row>
                 <v-col cols="3"></v-col>
                 <v-col cols="6">
-                    <v-text-field class="mb-n12" v-model="search_txt" label="Student Search" outlined shaped></v-text-field>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col cols="3"></v-col>
-                <v-col cols="9" lg="6">
-                <v-card class="mt-n16 mx-auto" elevation="12" height="350px">
-                    <v-toolbar flat>
-                        <v-toolbar-title class="grey--text">View Courses for Students (List Students)</v-toolbar-title>
-                    </v-toolbar>
-                    <v-list style="max-height: 300px" class="overflow-y-auto">
-                        <v-list-item>
-                            <v-list-item-content>
-                                <v-dialog v-model="dialog" width="500">
-                                    <template v-slot:activator="{ on }">
-                                    <v-btn color="amber darken-1" dark v-on="on">
-                                        (Get Student Name)
-                                    </v-btn>
-                                    </template>
-                                    <v-card>
-                                        <v-card-title
-                                            class="headline grey lighten-2"
-                                            primary-title
-                                        >
-                                            (Get Student Name)
-                                        </v-card-title>
-                                        <v-divider></v-divider>
-                                        <v-card-text>
-                                            (Get Student's Planned Classes)
-                                        </v-card-text>
-                                        <v-divider></v-divider>
-                                        <v-card-actions>
-                                            <v-spacer></v-spacer>
-                                            <v-btn color="blue" text @click="dialog = false">
-                                                Ok
-                                            </v-btn>
-                                        </v-card-actions>
-                                    </v-card>
-                                </v-dialog>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list>
-                    
-                </v-card>
-                </v-col>
-  
-            </v-row>
-            <v-row>
-                <v-col cols="8">
-                    <v-btn class="mt-12 ma-12" outlined color="blue" @click="logout" dark>Logout</v-btn>
-                </v-col>
-                <v-col cols="4">
-                    <v-btn class="mt-12" outlined color="blue" @click="$router.push('/messages')" dark>Messages</v-btn>
+                    <autocomplete :search="search" placeholder="Search Student" aria-label="Search Student" 
+                    :get-result-value="getResultValue" ></autocomplete>
                 </v-col>
             </v-row>
         </div>
@@ -80,6 +32,8 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios';
+import router from '../router/index.js'
+
 
 export default {
     computed: {
@@ -90,17 +44,29 @@ export default {
     data: () => ({
         dialog: false,
         name: " ",
-        search_txt: ""
+        students:JSON
   }),
     methods: {
-      logout: function () {
-        axios.get("/auth/logout").then(response =>{
-            this.$router.push('/');
-        }).catch(err =>{
-            console.log(err);
-        });      
-    }
-  },
+        logout: function () {
+            axios.get("/auth/logout").then(response =>{
+                this.$router.push('/');
+            }).catch(err =>{
+                console.log(err);
+            });
+        },
+        search(input) {
+            
+            if (input.length < 1) { return [] }
+            return this.students.filter(student => {
+            return student.name.toLowerCase()
+            .startsWith(input.toLowerCase())
+            })
+        },
+        getResultValue(result) {
+            return result.name + "("  + result.email  + ")"; 
+        }
+        
+    },
 
     beforeMount(){
       axios
@@ -110,6 +76,16 @@ export default {
       }).bind(this)
       .catch(error => {
         console.log(error)
+      })
+    },
+    mounted() {
+    axios.get('/user/advisor/student/all')
+      .then(response =>{
+         var obj = response.data[0]; 
+         this.students = Object.keys(obj).map(key => obj[key]);
+      })
+      .catch(error =>{
+          console.log(error)
       })
   }
 };

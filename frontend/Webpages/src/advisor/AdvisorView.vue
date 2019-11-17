@@ -59,8 +59,6 @@
                             </v-list-item-content>
                         </v-list-item>
             
-                        <!--repeat--> 
-
                     </v-list>
                     
                 </v-card>
