@@ -5,7 +5,13 @@
         <v-row>
           <v-toolbar color="amber darken-1" dark>
             <v-toolbar-title class="brown--text">{{name}}</v-toolbar-title>
-          </v-toolbar>
+          <v-spacer></v-spacer>
+                <v-toolbar-items>
+                    <v-btn  @click="$router.push('/fe/classlist')" dark>Class List</v-btn>
+                    <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
+                    <v-btn  @click="logout" dark>Logout</v-btn>
+                </v-toolbar-items>
+                </v-toolbar>
         </v-row>
         <v-row>
           <v-btn

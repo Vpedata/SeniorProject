@@ -7,6 +7,13 @@
                 <v-toolbar-title class="brown--text">
                     {{name}}
                 </v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-toolbar-items>
+                    <v-btn  @click="$router.push('/fe/classlistadvisor')" dark>Back</v-btn>
+                    <v-btn  @click="$router.push('/fe/adv/advisor')" dark>Home</v-btn>
+                    <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
+                    <v-btn  @click="logout" dark>Logout</v-btn>
+                </v-toolbar-items>
                 </v-toolbar>
             </v-row>
             <v-row>
@@ -22,9 +29,6 @@
                  </v-col>
             </v-row>
             <v-row>
-                <v-col cols="8">
-                    <v-btn class="mt-12 ma-12" outlined color="blue" @click="$router.push('/fe/advisorview')" dark>Back</v-btn>
-                </v-col>
                 <v-col cols="4">
                     <v-btn class="mt-12" outlined color="blue" @click="$router.push('/fe/advisorview')" dark>Create</v-btn>
                 </v-col>
