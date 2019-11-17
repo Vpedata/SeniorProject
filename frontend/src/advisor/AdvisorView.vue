@@ -95,7 +95,7 @@ export default {
             return result.name + " ("  + result.email  + ")"; 
         },
         handleSubmit(result) {
-            axios.get("/user/advisor/student/${result.student_ID}/taken")
+            axios.get('/user/advisor/student/${result.student_ID}/taken')
             .then(response =>{
             var obj = response.data[0]; 
             this. coursesTaken= Object.keys(obj).map(key => obj[key]);
@@ -104,7 +104,7 @@ export default {
                 console.log(error)
             }),
 
-            axios.get("/user/advisor/student/${result.student_ID}/recommended")
+            axios.get('/user/advisor/student/${result.student_ID}/recommended')
             .then(response =>{
             var obj = response.data[0]; 
             this. coursesRecommended= Object.keys(obj).map(key => obj[key]);
