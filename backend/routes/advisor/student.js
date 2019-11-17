@@ -21,9 +21,9 @@ var sql = "CALL getStudentByEmail(?,@student); select @student as student_ID;";
 });
 
 //get student's list of courses taken by student email 
-router.get("/:email/taken",isAdvisor, (req, res, next)=> {
-    var sql = "CALL getStudentsTakenCourses(?);";
-    db.query(sql,req.params.email, (err, rows, fields) => {
+router.get("/:id/taken",isAdvisor, (req, res, next)=> {
+    var sql = "CALL getTakenCourses(?);";
+    db.query(sql,req.params.id, (err, rows, fields) => {
         if (err) throw err;
         res.send(rows);
     });
@@ -39,8 +39,12 @@ router.get("/:email/yetToTake",isAdvisor, (req, res, next) => {
 });
 
 //get student's list of recommended courses by student email
-router.get("/:email/recommended",isAdvisor,(req,res,next)=> {
-    res.send("Under Construction");
+router.get("/:id/recommended",isAdvisor,(req,res,next)=> {
+    var sql = "CALL getReccomendedSemester(?);";
+    db.query(sql,req.params.id, (err, rows, fields) => {
+        if (err) throw err;
+        res.send(rows);
+    });
 });
 
 
