@@ -8,7 +8,7 @@ import StudentView from '@/studentpages/StudentView'
 import StudentEditCompleted from '@/studentpages/StudentEditCompleted'
 import Login from '@/login/LoginPage'
 import AdvisorView from '@/advisor/AdvisorView'
-import CreateCourse from '@/advisor/AdvisorView'
+import CreateCourse from '@/advisor/CreateCourse'
 import axios from 'axios'
 
 Vue.use(Router)
