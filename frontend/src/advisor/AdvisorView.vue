@@ -81,6 +81,9 @@ export default {
         },
         getResultValue(result) {
             return result.name + " ("  + result.email  + ")"; 
+        },
+        handleSubmit(result) {
+            alert(`You selected ${result}`)
         }
         
     },
