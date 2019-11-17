@@ -8,10 +8,10 @@
                         {{course.name}}
                     </v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn color="amber darken-1">
+                    <v-btn small color="amber darken-1">
                         Edit
                     </v-btn>
-                    <v-btn color="amber darken-1">
+                    <v-btn small color="amber darken-1">
                         Remove
                     </v-btn>
                     </template>
