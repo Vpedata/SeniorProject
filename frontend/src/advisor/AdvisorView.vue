@@ -23,22 +23,28 @@
                 </v-col>
             </v-row>
             <v-row>
-                <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
-                    <v-toolbar flat>
-                        <v-toolbar-title class="grey--text">Courses Taken</v-toolbar-title>
-                    </v-toolbar>
-                    <v-list style="max-height: 600px" class="overflow-y-auto">
-                    
-                    </v-list>                  
-                </v-card>
-                <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
-                    <v-toolbar flat>
-                        <v-toolbar-title class="grey--text">Recommended Courses</v-toolbar-title>
-                    </v-toolbar>
-                    <v-list style="max-height: 600px" class="overflow-y-auto">
-                    
-                    </v-list>                  
-                </v-card>
+                <v-col cols="1"></v-col>
+                <v-col cols="4">
+                    <v-card class="mx-auto" elevation="12" height="600px">
+                        <v-toolbar flat>
+                            <v-toolbar-title class="grey--text">Courses Taken</v-toolbar-title>
+                        </v-toolbar>
+                        <v-list style="max-height: 600px" class="overflow-y-auto">
+                        
+                        </v-list>                  
+                    </v-card>
+                </v-col>
+                <v-col cols="1"></v-col>
+                <v-col cols="4">
+                    <v-card class="mx-auto" elevation="12" height="600px">
+                        <v-toolbar flat>
+                            <v-toolbar-title class="grey--text">Recommended Courses</v-toolbar-title>
+                        </v-toolbar>
+                        <v-list style="max-height: 600px" class="overflow-y-auto">
+                        
+                        </v-list>                  
+                    </v-card>
+                </v-col>
             </v-row>
         </div>
     </v-app>
