@@ -61,7 +61,15 @@ export default {
     components: {
         classComponent
     },
-
+    methods: {
+        logout: function () {
+            axios.get("/auth/logout").then(response =>{
+                this.$router.push('/');
+            }).catch(err =>{
+                console.log(err);
+            });
+        }
+    },
     beforeMount(){
       axios
       .get('/user/getName')
