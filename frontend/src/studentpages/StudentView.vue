@@ -109,13 +109,9 @@ export default {
             creditCount = creditCount + allCourses[i].creditHours;
             console.info(allCourses[i]);
             selectedCourses.push(allCourses[i]);
-            if (creditCount < 17){
-                classCode = classCode + allCourses[i].courseCode + ",";
-                grades = grades + "-1,";
-            }else{
-                classCode = classCode + allCourses[i].courseCode;
-                grades = grades + "-1";
-            }git 
+            classCode = classCode + allCourses[i].courseCode + ",";
+            grades = grades + "-1,";
+            
             console.info(selectedCourses);
             i++;
           }
@@ -126,7 +122,8 @@ export default {
         .catch(err => {
           console.log(err);
         });
-
+        classCode = classCode.substring(0, classCode.length - 1);
+        grades = grades.substring(0, grades.length - 1);
         //array of coursecodes, grades
         axios.post("/user/student/courses/taken",{
             classes: classCode,
