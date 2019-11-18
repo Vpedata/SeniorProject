@@ -19,6 +19,7 @@
             </v-row>
             <v-row>
                 <v-col cols="3"></v-col>
+                <v-btn  @click="$router.push('/fe/adv/createcourse')" dark>Create Course</v-btn>
                 <v-col cols="9" lg="6">
                 <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
                     <v-toolbar flat>
@@ -60,7 +61,15 @@ export default {
     components: {
         classComponent
     },
-
+    methods: {
+        logout: function () {
+            axios.get("/auth/logout").then(response =>{
+                this.$router.push('/');
+            }).catch(err =>{
+                console.log(err);
+            });
+        }
+    },
     beforeMount(){
       axios
       .get('/user/getName')
