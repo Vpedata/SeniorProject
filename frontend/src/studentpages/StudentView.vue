@@ -94,6 +94,9 @@ export default {
           console.log(err);
         });
     },
+    getLastRecommended: function(){
+        
+    },
     generateDefaults: async function() {
         var classCode = "";
         var grades = "";
