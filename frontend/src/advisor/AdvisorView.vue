@@ -72,7 +72,6 @@ export default {
         name: " ",
         students:JSON,
         student_ID:-1,
-        currSem: -1,
         coursesTaken:JSON,
         coursesRecommended:JSON
   }),
@@ -109,28 +108,16 @@ export default {
             .catch(error =>{
                 console.log(error)
             });
-
             let coursesRecommendedUrl = '/user/advisor/student/'+ result.student_ID +'/recommended';
             axios.get(coursesRecommendedUrl)
             .then(response =>{
             var obj = response.data[0]; 
             this.coursesRecommended= Object.keys(obj).map(key => obj[key]);
+            console.info(this.coursesRecommended)
             })
             .catch(error =>{
                 console.log(error)
             });
-
-            let currSemUrl = 'user/advisor/student/curSem/'+result.student_ID;
-             axios.get(currSemUrl)
-            .then(response =>{
-            var obj = response.data[0]; 
-            this.currSem= Object.keys(obj).map(key => obj[key]);
-            console.info(this.currSem);
-            })
-            .catch(error =>{
-                console.log(error)
-            });
-            
         }
         
     },
