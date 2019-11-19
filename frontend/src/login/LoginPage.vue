@@ -11,7 +11,16 @@
             </form>
         </v-card>
         </div>
+        <v-img
+        src='~@/assets/login_background.png'
+        lazy-src='~@/assets/login_background.png'
+        aspect-ratio="1"
+        class="grey lighten-2"
+        width="100hw"
+        height= "100vh"
+      ></v-img>
     </div>
+    
 </template>
 
 <!-- Page Vue Script -->
@@ -55,6 +64,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 .centered-div{
   position: fixed;
   top: 50%;
