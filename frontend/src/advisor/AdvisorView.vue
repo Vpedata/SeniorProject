@@ -47,7 +47,10 @@
                     <v-card class="mx-auto" elevation="12" height="600px">
                         <v-toolbar dark flat>
                             <v-toolbar-title class="white--text">Courses Taken</v-toolbar-title>
-                            Credits:{{this.creditsTaken}}
+                            <v-spacer></v-spacer>
+                            <div v-if="student_ID > -1">
+                                <v-subheader>Credits Taken: {{this.creditsTaken}}</v-subheader>
+                            </div>
                         </v-toolbar>
                         <v-list style="max-height: 600px" class="overflow-y-auto">
                             <classComponent v-for="course in coursesTaken" :course="course" :key="course.course_ID"/>
