@@ -73,6 +73,7 @@ export default {
         students:JSON,
         student_ID:-1,
         currSem: -1,
+        creditsTakem: -1,
         coursesTaken:JSON,
         coursesRecommended:JSON
   }),
@@ -125,12 +126,21 @@ export default {
             .then(response =>{
             var obj = response.data[0]; 
             this.currSem= Object.keys(obj).map(key => obj[key]);
-            console.info(this.currSem);
             })
             .catch(error =>{
                 console.log(error)
             });
             
+             let creditsTakenUrl = 'user/advisor/student/takenCredits/'+result.student_ID;
+             axios.get(creditsTakenUrl)
+            .then(response =>{
+            var obj = response.data[0]; 
+            this.creditsTaken= Object.keys(obj).map(key => obj[key]);
+            console.info(this.creditsTaken);
+            })
+            .catch(error =>{
+                console.log(error)
+            });
         }
         
     },

@@ -30,6 +30,16 @@ router.get("/:id/taken",isAdvisor, (req, res, next)=> {
     });
 });
 
+//get student credits taken by student id 
+router.get("/takenCredits/:id",isAdvisor, (req, res, next)=> {
+    var sql = "CALL getTakenCoursesCredits(?);";
+    db.query(sql,req.params.id, (err, rows, fields) => {
+        if (err) throw err;
+        res.send(rows);
+    });
+});
+
+
 //Get courses that are left to take for current students; 
 router.get("/:email/yetToTake",isAdvisor, (req, res, next) => {
     var sql = "CALL getStudentClassesYetToTake(?); ";
