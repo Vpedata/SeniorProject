@@ -33,7 +33,6 @@ router.get("/yetToTake",isStudent, (req, res, next) => {
 //update the list of couses taken by the current student
 router.post("/taken",isStudent,(req, res, next) => {
     var sql = "CALL addTakenClasses(?,?,?);";
-    console.log(req.body.classes);
     const classInfo = [req.body.classes,req.user.student_ID,req.body.grades];
     db.query(sql,classInfo, (err, rows, fields) => {
         if (err) throw err;

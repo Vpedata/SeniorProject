@@ -11,16 +11,17 @@ router.get("/all",isAdvisor, (req, res, next)=> {
     });
 });
 
-//get student_ID by email 
-router.get("/id/:email",isAdvisor, (req, res, next)=> {
-var sql = "CALL getStudentByEmail(?,@student); select @student as student_ID;";
-    db.query(sql,req.params.email, (err, rows, fields) => {
+
+//get current semester for a student by student_ID 
+router.get("/curSem/:id/",isAdvisor, (req, res, next)=> {
+var sql = "CALL getStudentCurrentSem(?)";
+    db.query(sql,req.params.id, (err, rows, fields) => {
         if (err) throw err;
         res.send(rows);
     });
 });
 
-//get student's list of courses taken by student email 
+//get student's list of courses taken by student id 
 router.get("/:id/taken",isAdvisor, (req, res, next)=> {
     var sql = "CALL getTakenCourses(?);";
     db.query(sql,req.params.id, (err, rows, fields) => {
@@ -38,7 +39,7 @@ router.get("/:email/yetToTake",isAdvisor, (req, res, next) => {
     });
 });
 
-//get student's list of recommended courses by student email
+//get student's list of recommended courses by student id
 router.get("/:id/recommended",isAdvisor,(req,res,next)=> {
     var sql = "CALL getReccomendedSemester(?);";
     db.query(sql,req.params.id, (err, rows, fields) => {
