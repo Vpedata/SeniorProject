@@ -55,8 +55,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 .centered-div{
   position: fixed;
   top: 50%;
