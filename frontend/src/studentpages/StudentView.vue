@@ -33,7 +33,7 @@
           <v-btn
             class="ma-4"
             outlined
-            color="amber darken-1"
+            color="#FF0000"
             @click="generateDefaults"
             dark
             >Generate Default Classes</v-btn>
