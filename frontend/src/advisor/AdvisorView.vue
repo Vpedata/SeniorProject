@@ -23,11 +23,15 @@
                 </v-col>
             </v-row>
             <v-row>
+                Current Semester: {{this.currSem}}
+            </v-row>
+            <v-row>
                 <v-col cols="1"></v-col>
                 <v-col cols="4">
                     <v-card class="mx-auto" elevation="12" height="600px">
                         <v-toolbar flat>
                             <v-toolbar-title class="grey--text">Courses Taken</v-toolbar-title>
+                            Credits:{{this.creditsTaken}}
                         </v-toolbar>
                         <v-list style="max-height: 600px" class="overflow-y-auto">
                             <classComponent v-for="course in coursesTaken" :course="course" :key="course.course_ID"/>
