@@ -53,7 +53,7 @@
                             </div>
                         </v-toolbar>
                         <v-list style="max-height: 600px" class="overflow-y-auto">
-                            <classComponent v-for="course in coursesTaken" :course="course" :key="course.course_ID"/>
+                            <classComponent class="mt-n1" v-for="course in coursesTaken" :course="course" :key="course.course_ID"/>
                         </v-list>                  
                     </v-card>
                 </v-col>
@@ -64,7 +64,7 @@
                             <v-toolbar-title class="white--text">Recommended Courses</v-toolbar-title>    
                         </v-toolbar>
                         <v-list style="max-height: 600px" class="overflow-y-auto">
-                            <classComponent v-for="course in coursesRecommended" :course="course" :key="course.course_ID"/>
+                            <classComponent class="mt-n1" v-for="course in coursesRecommended" :course="course" :key="course.course_ID"/>
                         </v-list>       
               
                     </v-card>
