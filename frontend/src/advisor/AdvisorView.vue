@@ -23,11 +23,30 @@
                 </v-col>
             </v-row>
             <v-row>
+                <v-col cols="4"></v-col>
+                <v-col cols="3">
+                    <v-card  elevation="12" height = "156" width = "512">
+                        <v-toolbar dark flat>
+                            <v-toolbar-title dense class="white--text">Student Information</v-toolbar-title>    
+                        </v-toolbar>
+                        <div v-if="student_ID > -1">
+                            <v-list dense>
+                                <v-subheader class>Student ID: {{student_ID}}</v-subheader>
+                                <v-subheader>Student ?: {{student_ID}}</v-subheader>
+                            </v-list>
+                        </div>
+                        <div v-else> 
+                            <v-subheader class="mt-4">Search for a student above</v-subheader>
+                        </div>
+                    </v-card>
+                </v-col>
+            </v-row>
+            <v-row>
                 <v-col cols="1"></v-col>
                 <v-col cols="4">
                     <v-card class="mx-auto" elevation="12" height="600px">
-                        <v-toolbar flat>
-                            <v-toolbar-title class="grey--text">Courses Taken</v-toolbar-title>
+                        <v-toolbar dark flat>
+                            <v-toolbar-title class="white--text">Courses Taken</v-toolbar-title>
                         </v-toolbar>
                         <v-list style="max-height: 600px" class="overflow-y-auto">
                             <classComponent v-for="course in coursesTaken" :course="course" :key="course.course_ID"/>
@@ -37,8 +56,8 @@
                 <v-col cols="1"></v-col>
                 <v-col cols="4">
                     <v-card class="mx-auto" elevation="12" height="600px">
-                        <v-toolbar flat>
-                            <v-toolbar-title class="grey--text">Recommended Courses</v-toolbar-title>    
+                        <v-toolbar dark flat>
+                            <v-toolbar-title class="white--text">Recommended Courses</v-toolbar-title>    
                         </v-toolbar>
                         <v-list style="max-height: 600px" class="overflow-y-auto">
                             <classComponent v-for="course in coursesRecommended" :course="course" :key="course.course_ID"/>
@@ -117,6 +136,7 @@ export default {
             this.coursesRecommended= Object.keys(obj).map(key => obj[key]);
             console.info(this.coursesRecommended)
             })
+            
             .catch(error =>{
                 console.log(error)
             });
