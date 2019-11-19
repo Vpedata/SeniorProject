@@ -16,8 +16,6 @@
                 </v-toolbar>
             </v-row>
             <v-row>
-            </v-row>
-            <v-row>
                 <v-col cols="3"></v-col>
                 <v-btn  @click="$router.push('/fe/adv/createcourse')" dark>Create Course</v-btn>
                 <v-col cols="9" lg="6">
