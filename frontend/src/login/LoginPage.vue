@@ -2,7 +2,7 @@
 <template>
     <div id="login" class = "full-container">
         <div class = "centered-div">
-          <v-card class="mt-n16 mx-auto vCard" elevation="12" height="100%" width="100%">
+          <v-card class="vCard" elevation="12" height="100%" width="100%">
             <v-card-title class="v-card-title">Online Advisor</v-card-title>
             <form class = "centered-form" action="/auth/login" method="get">
                 <div class="form-group">
@@ -75,7 +75,7 @@ export default {
 }
 
 .vCard{
-    background-color: rgba(81, 80, 80, 0.90);
+    background-color: rgba(81, 80, 80, 0.90) !important;
 }
 
 .centered-form{
