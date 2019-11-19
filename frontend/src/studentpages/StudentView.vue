@@ -47,6 +47,8 @@
             <v-card class="mt-n16 mx-auto" elevation="12" height="350px">
               <v-toolbar flat>
                 <v-toolbar-title class="grey--text">Selected Classes</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-toolbar-title>Total Credits: {{totalCredits}}</v-toolbar-title>
               </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
                         <classComponent v-for="course in generatedClasses" :course="course" :key="course.course_ID"/> 
@@ -78,7 +80,8 @@ export default {
   data: () => ({
     dialog: false,
     name: " ",
-    courses: JSON
+    courses: JSON,
+    totalCredits: 0
   }),
     components: {
         classComponent
@@ -138,6 +141,7 @@ export default {
           }
 
           this.courses = selectedCourses;
+          this.totalCredits = creditCount;
           console.info(this.courses)
         })
         .catch(err => {
