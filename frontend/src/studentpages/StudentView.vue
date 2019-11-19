@@ -167,7 +167,7 @@ export default {
         console.log(error);
       });
 
-      getLastRecommended();
+      this.getLastRecommended();
   }
 };
 </script>
