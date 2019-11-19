@@ -48,7 +48,7 @@
               <v-toolbar flat>
                 <v-toolbar-title class="grey--text">Selected Classes</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-toolbar-title :key="totalCredits">Total Credits: {{credits}}</v-toolbar-title>
+                <v-toolbar-title class="grey--text" :key="totalCredits">Total Credits: {{credits}}</v-toolbar-title>
               </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
                         <classComponent v-for="course in generatedClasses" :course="course" :key="course.course_ID"/> 
