@@ -21,26 +21,29 @@
             @click="$router.push('/fe/editcompleted')"
             dark
           >Edit Completed Courses</v-btn>
-        </v-row>
-        <v-row>
-          <v-col cols="3">
-            <v-row>
+          <v-spacer></v-spacer>
               <v-btn
-                class="ms-12 mt-12"
-                outlined
-                color="amber darken-1"
-                @click="generateDefaults"
-                dark
-              >Generate Default Classes</v-btn>
-            </v-row>
-            <v-row>
-              <v-btn
-                class="ms-12 mt-4"
+                class="ma-4"
                 outlined
                 color="brown"
                 @click="$router.push('/fe/studentaddclass')"
                 dark
               >Add Class</v-btn>
+           <v-spacer></v-spacer>
+          <v-btn
+            class="ma-4"
+            outlined
+            color="amber darken-1"
+            @click="generateDefaults"
+            dark
+            >Generate Default Classes</v-btn>
+
+        </v-row>
+        <v-row>
+          <v-col cols="3">
+            <v-row>
+            </v-row>
+            <v-row>
             </v-row>
           </v-col>
           <v-col cols="9" lg="6">
