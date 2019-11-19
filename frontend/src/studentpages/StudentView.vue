@@ -95,11 +95,29 @@ export default {
         });
     },
     getLastRecommended: function(){
-        
+        axios.get("/user/student/courses/getUserRecommend")
+        .then(response =>{
+            var obj = response.data[0];
+            var allCourses = Object.keys(obj).map(key => obj[key]);
+
+            this.courses = allCourses;
+        })
+        .catch(err =>{
+            console.log(err);
+        });
     },
     generateDefaults: async function() {
         var classCode = "";
         var grades = "";
+
+        await axios
+        .get("/user/student/courses/deleteNegOnes")
+        .then(response =>{
+            console.log(response);
+        })
+        .catch(err =>{
+            console.log(err);
+        });
       await axios
         .get("/user/student/courses/recommended")
         .then(response => {
@@ -148,6 +166,8 @@ export default {
       .catch(error => {
         console.log(error);
       });
+
+      getLastRecommended();
   }
 };
 </script>
