@@ -105,7 +105,12 @@ export default {
         .then(response =>{
             var obj = response.data[0];
             var allCourses = Object.keys(obj).map(key => obj[key]);
+            let credits = 0;
 
+            for (i = 0; i < allCourses.length; i++){
+                credits = credits + allCourses[i].creditHours;
+            }
+            this.totalCredits = credits;
             this.courses = allCourses;
         })
         .catch(err =>{
