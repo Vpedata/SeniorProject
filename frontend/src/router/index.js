@@ -8,6 +8,7 @@ import StudentView from '@/studentpages/StudentView'
 import StudentEditCompleted from '@/studentpages/StudentEditCompleted'
 import Login from '@/login/LoginPage'
 import AdvisorView from '@/advisor/AdvisorView'
+import CreateCourse from '@/advisor/CreateCourse'
 import axios from 'axios'
 //import Messages from '@/messaging/components/ChatApp'
 
@@ -38,7 +39,7 @@ let router = new Router({
       }
     },
     {
-      path: '/fe/adv/classlistadvisor',
+      path: '/fe/classlistadvisor',
       name: 'ClassListAdvisor',
       component: ClassListAdvisor,
       meta: {
@@ -77,7 +78,14 @@ let router = new Router({
         requiresAuth: true
       }
     },
-    
+    {
+      path: '/fe/adv/createcourse',
+      name: 'CreateCourse',
+      component: CreateCourse,
+      meta: {
+        requiresAuth: true
+      }
+    },
 
   ]
 })
