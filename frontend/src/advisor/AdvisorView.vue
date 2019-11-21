@@ -7,14 +7,14 @@
                 <v-toolbar-title class="brown--text">
                     {{name}}
                 </v-toolbar-title>
+                <v-toolbar-items>
+                    <v-btn  @click="$router.push('/fe/classlistadvisor')" dark><icon>home</icon></v-btn>
+                </v-toolbar-items>
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
                     <v-btn  @click="$router.push('/fe/classlistadvisor')" dark>View Class List</v-btn>
                     <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
-                    <v-btn  @click="logout" dark>
-                        <span>Logout</span>
-                        <v-icon>exit_to_app</v-icon>
-                    </v-btn>
+                    <v-btn  @click="logout" dark>Logout</v-btn>
                 </v-toolbar-items>
                 </v-toolbar>
             </v-row>
