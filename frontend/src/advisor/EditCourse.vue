@@ -1,7 +1,7 @@
 <template>
     <v-dialog max-width="1000px">
         <template v-slot:activator="{ on }">
-        <v-btn flat class="success">Edit Course</v-btn>
+        <v-btn flat class="success" v-on="on">Edit Course</v-btn>
         </template>
         <v-card>
             <v-card-title>
