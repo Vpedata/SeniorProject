@@ -1,6 +1,14 @@
 <!-- Login page prototype vue code template (builds the login page) -->
 <template>
     <div id="login" class = "full-container">
+      <v-img
+        src='~@/assets/login_background.png'
+        lazy-src='~@/assets/login_background.png'
+        aspect-ratio="1"
+        class="grey lighten-2"
+        width="100hw"
+        height= "100vh"
+      ></v-img>
         <div class = "centered-div">
           <v-card class="vCard" elevation="12" height="100%" width="100%">
             <v-card-title class="v-card-title">Online Advisor</v-card-title>
@@ -11,14 +19,7 @@
             </form>
         </v-card>
         </div>
-        <v-img
-        src='~@/assets/login_background.png'
-        lazy-src='~@/assets/login_background.png'
-        aspect-ratio="1"
-        class="grey lighten-2"
-        width="100hw"
-        height= "100vh"
-      ></v-img>
+        
     </div>
     
 </template>
