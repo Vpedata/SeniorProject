@@ -7,9 +7,6 @@
                 <v-toolbar-title class="brown--text">
                     {{name}}
                 </v-toolbar-title>
-                <v-toolbar-items>
-                    <v-btn  @click="$router.push('/fe/classlistadvisor')" dark><icon>home</icon></v-btn>
-                </v-toolbar-items>
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
                     <v-btn  @click="$router.push('/fe/classlistadvisor')" dark>View Class List</v-btn>
