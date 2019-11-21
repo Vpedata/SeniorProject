@@ -27,17 +27,8 @@
                 <v-col cols="3">
                     <v-card  elevation="12" height = "156" width = "512">
                         <v-toolbar dark flat>
-                            <v-toolbar-title dense class="white--text">Student Information</v-toolbar-title>    
+                            <v-toolbar-title dense class="white--text">Current Semester: {{this.currSem.currSemester}}</v-toolbar-title>    
                         </v-toolbar>
-                        <div v-if="student_ID > -1">
-                            <v-list dense>
-                                <v-subheader class>Student ID: {{student_ID}}</v-subheader>
-                                <v-subheader>Student ?: {{student_ID}}</v-subheader>
-                            </v-list>
-                        </div>
-                        <div v-else> 
-                            <v-subheader class="mt-4">Search for a student above</v-subheader>
-                        </div>
                     </v-card>
                 </v-col>
             </v-row>
