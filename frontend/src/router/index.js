@@ -39,7 +39,7 @@ let router = new Router({
       }
     },
     {
-      path: '/fe/classlistadvisor',
+      path: '/fe/adv/classlistadvisor',
       name: 'ClassListAdvisor',
       component: ClassListAdvisor,
       meta: {
@@ -78,14 +78,8 @@ let router = new Router({
         requiresAuth: true
       }
     },
-    {
-      path: '/fe/adv/createcourse',
-      name: 'CreateCourse',
-      component: CreateCourse,
-      meta: {
-        requiresAuth: true
-      }
-    },
+    
+    
 
   ]
 })
