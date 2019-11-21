@@ -48,9 +48,7 @@
                         <v-toolbar dark flat>
                             <v-toolbar-title class="white--text">Courses Taken</v-toolbar-title>
                             <v-spacer></v-spacer>
-                            <div v-if="student_ID > -1">
-                                <v-subheader>Credits Taken: {{this.creditsTaken}}</v-subheader>
-                            </div>
+                            <v-toolbar-title class="white--text">Credits: {{this.creditsTaken.Credits}}</v-toolbar-title>
                         </v-toolbar>
                         <v-list style="max-height: 600px" class="overflow-y-auto">
                             <classComponent class="mt-n1" v-for="course in coursesTaken" :course="course" :key="course.course_ID"/>
@@ -94,9 +92,9 @@ export default {
         dialog: false,
         name: " ",
         students:JSON,
-        student_ID:-1,
-        currSem: -1,
-        creditsTaken: -1,
+        student_ID:"",
+        currSem: "",
+        creditsTaken: "",
         coursesTaken:JSON,
         coursesRecommended:JSON
   }),
@@ -148,8 +146,7 @@ export default {
             let currSemUrl = 'user/advisor/student/curSem/'+result.student_ID;
              axios.get(currSemUrl)
             .then(response =>{
-            var obj = response.data[0]; 
-            this.currSem= Object.keys(obj).map(key => obj[key]);
+            this.currSem= response.data[0][0];
             })
             .catch(error =>{
                 console.log(error)
@@ -158,8 +155,7 @@ export default {
              let creditsTakenUrl = 'user/advisor/student/takenCredits/'+result.student_ID;
              axios.get(creditsTakenUrl)
             .then(response =>{
-            var obj = response.data[0]; 
-            this.creditsTaken= Object.keys(obj).map(key => obj[key]);
+            this.creditsTaken= response.data[0][0];
             console.info(this.creditsTaken);
             })
             .catch(error =>{
