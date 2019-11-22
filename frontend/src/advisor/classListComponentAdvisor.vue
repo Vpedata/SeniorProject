@@ -3,14 +3,16 @@
         <v-list-item>
             <v-list-item-content>
                 <v-dialog v-model="dialog" width="500">
+                    <v-toolbar color="amber darken-1" dark >
                     <template v-slot:activator="{ on }">
-                    <v-row>
-                    <btn color="amber darken-1" dark v-on="on">{{course.name}}</btn>
-                    <v-spacer></v-spacer>
-                    <v-icon>{{ icons.mdiPencil }}</v-icon>
-                    <div class="mx-2"></div>
-                    <v-icon>{{ icons.mdiDelete}}</v-icon>
-                    </v-row>
+                        <v-toolbar-title class="brown--text" v-on="on">{{course.name}}</v-toolbar-title>
+                    </template>
+                        <v-toolbar-items>
+                        <v-icon>{{ icons.mdiPencil }}</v-icon>
+                        <div class="mx-2"></div>
+                        <v-icon>{{ icons.mdiDelete}}</v-icon>
+                    </v-toolbar-items>
+                    </v-toolbar>
                     </template>
                     <v-card>
                         <v-card-title
