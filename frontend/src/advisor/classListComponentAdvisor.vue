@@ -7,10 +7,12 @@
                     <v-toolbar color="amber darken-1" dark v-on="on">
                         <v-toolbar-title class="brown--text">{{course.name}}</v-toolbar-title>
                         <v-spacer></v-spacer>
+                        <v-toolbar-items>
                         <v-icon>{{ icons.mdiPencil }}</v-icon>
                         <div class="mx-2"></div>
                         <v-icon>{{ icons.mdiDelete}}</v-icon>
-                    <v-toolbar>
+                        </v-toolbar-items>
+                    </v-toolbar>
                     </template>
                     <v-card>
                         <v-card-title
