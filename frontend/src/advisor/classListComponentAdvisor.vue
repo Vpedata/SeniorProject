@@ -2,7 +2,7 @@
 <template>
         <v-list-item>
             <v-list-item-content>
-                <v-dialog v-model="dialog" width="500">
+                
                     <v-toolbar color="amber darken-1" dark >
                     <template v-slot:activator="{ on }">
                         <v-toolbar-title class="brown--text" v-on="on">{{course.name}}</v-toolbar-title>
@@ -13,7 +13,7 @@
                         <v-icon>{{ icons.mdiDelete}}</v-icon>
                     </v-toolbar-items>
                     </v-toolbar>
-                    
+                    <v-dialog v-model="dialog" width="500">
                     <v-card>
                         <v-card-title
                             class="headline grey lighten-2"
