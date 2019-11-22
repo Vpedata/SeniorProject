@@ -23,8 +23,7 @@
                         <v-toolbar-title class="grey--text">Add Classes (Only Available Classes List)</v-toolbar-title>
                     </v-toolbar>                                    <!---->
                     <p>List: {{ initial_courses }}</p>              <!--What i want to send when finished-->
-                    <v-list style="max-height: 600px" class="overflow-y-auto">
-                        
+
                     <v-list style="max-height: 600px" class="overflow-y-auto">
                         <classComponent v-for="course in currentReccSemester" :course="course" :key="course.course_ID"/> 
                     </v-list> 
