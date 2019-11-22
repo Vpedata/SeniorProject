@@ -4,6 +4,7 @@
             <v-list-item-content>
                 <v-dialog v-model="dialog" width="500">
                     <template v-slot:activator="{ on }">
+                    <v-row>
                     <v-toolbar color="amber darken-1" dark v-on="on">
                         <v-toolbar-title class="brown--text">{{course.name}}</v-toolbar-title>
                         <v-spacer></v-spacer>
@@ -13,6 +14,7 @@
                         <v-icon>{{ icons.mdiDelete}}</v-icon>
                         </v-toolbar-items>
                     </v-toolbar>
+                    </v-row>
                     </template>
                     <v-card>
                         <v-card-title
