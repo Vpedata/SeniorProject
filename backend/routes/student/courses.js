@@ -49,4 +49,20 @@ router.post("/taken",isStudent,(req, res, next) => {
     });
 });
 
+router.get("/deleteNegOnes", isStudent, (req, res, next)=>{
+    var sql = "CALL removeNegOnes(?);";
+    db.query(sql, req.user.student_ID, (err, rows, fields) => {
+      if (err) throw err;
+      res.send(rows);
+    });
+});
+
+router.get("/getUserRecommend", isStudent, (req, res, next)=>{
+  var sql = "CALL callAllNegOnesForStudent(?);";
+  db.query(sql,req.user.student_ID, (err, rows, fields) => {
+    if (err) throw err;
+    res.json(rows);
+  });
+});
+
 module.exports = router; 

@@ -23,22 +23,42 @@
                 </v-col>
             </v-row>
             <v-row>
-                <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
-                    <v-toolbar flat>
-                        <v-toolbar-title class="grey--text">Courses Taken</v-toolbar-title>
-                    </v-toolbar>
-                    <v-list style="max-height: 600px" class="overflow-y-auto">
-                    
-                    </v-list>                  
-                </v-card>
-                <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
-                    <v-toolbar flat>
-                        <v-toolbar-title class="grey--text">Recommended Courses</v-toolbar-title>
-                    </v-toolbar>
-                    <v-list style="max-height: 600px" class="overflow-y-auto">
-                    
-                    </v-list>                  
-                </v-card>
+                <v-col cols="4"></v-col>
+                <v-col cols="3">
+                    <v-card  elevation="12" height = "156" width = "512">
+                        <v-toolbar dark flat>
+                            <v-toolbar-title dense class="white--text">Current Semester: {{this.currSem.currSemester}}</v-toolbar-title>    
+                        </v-toolbar>
+                    </v-card>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col cols="1"></v-col>
+                <v-col cols="4">
+                    <v-card class="mx-auto" elevation="12" height="600px">
+                        <v-toolbar dark flat>
+                            <v-toolbar-title class="white--text">Courses Taken</v-toolbar-title>
+                            <v-spacer></v-spacer>
+                            <v-toolbar-title class="white--text">Credits: {{this.creditsTaken.Credits}}</v-toolbar-title>
+                        </v-toolbar>
+                        <v-list style="max-height: 600px" class="overflow-y-auto">
+                            <classComponent class="mt-n1" v-for="course in coursesTaken" :course="course" :key="course.course_ID"/>
+                        </v-list>                  
+                    </v-card>
+                </v-col>
+                <v-col cols="1"></v-col>
+                <v-col cols="4">
+                    <v-card class="mx-auto" elevation="12" height="600px">
+                        <v-toolbar dark flat>
+                            <v-toolbar-title class="white--text">Recommended Courses</v-toolbar-title>    
+                        </v-toolbar>
+                        <v-list style="max-height: 600px" class="overflow-y-auto">
+                            <classComponent class="mt-n1" v-for="course in coursesRecommended" :course="course" :key="course.course_ID"/>
+                        </v-list>       
+              
+                    </v-card>
+                </v-col>
+
             </v-row>
         </div>
     </v-app>
@@ -50,6 +70,7 @@
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios';
 import router from '../router/index.js'
+import classComponent from '../studentpages/classListComponent.vue'
 
 
 export default {
@@ -62,10 +83,15 @@ export default {
         dialog: false,
         name: " ",
         students:JSON,
-        student_ID:-1,
-        coursesTake:JSON,
+        student_ID:"",
+        currSem: "",
+        creditsTaken: "",
+        coursesTaken:JSON,
         coursesRecommended:JSON
   }),
+  components: {
+        classComponent
+    },
     methods: {
         logout: function () {
             axios.get("/auth/logout").then(response =>{
@@ -86,8 +112,46 @@ export default {
             return result.name + " ("  + result.email  + ")"; 
         },
         handleSubmit(result) {
-            this.student_ID = result.student_ID;
-            alert(`You selected ${result.student_ID}.  The student_ID is ${this.student_ID}`)
+            let coursesTakenUrl = '/user/advisor/student/'+ result.student_ID +'/taken';
+            axios.get(coursesTakenUrl)
+            .then(response =>{
+            var obj = response.data[0]; 
+            this.coursesTaken= Object.keys(obj).map(key => obj[key]);
+            console.info(this.coursesTaken);
+            })
+            .catch(error =>{
+                console.log(error)
+            });
+            let coursesRecommendedUrl = '/user/advisor/student/'+ result.student_ID +'/recommended';
+            axios.get(coursesRecommendedUrl)
+            .then(response =>{
+            var obj = response.data[0]; 
+            this.coursesRecommended= Object.keys(obj).map(key => obj[key]);
+            console.info(this.coursesRecommended)
+            })
+            
+            .catch(error =>{
+                console.log(error)
+            });
+
+            let currSemUrl = 'user/advisor/student/curSem/'+result.student_ID;
+             axios.get(currSemUrl)
+            .then(response =>{
+            this.currSem= response.data[0][0];
+            })
+            .catch(error =>{
+                console.log(error)
+            });
+            
+             let creditsTakenUrl = 'user/advisor/student/takenCredits/'+result.student_ID;
+             axios.get(creditsTakenUrl)
+            .then(response =>{
+            this.creditsTaken= response.data[0][0];
+            console.info(this.creditsTaken);
+            })
+            .catch(error =>{
+                console.log(error)
+            });
         }
         
     },
@@ -109,7 +173,7 @@ export default {
          this.students = Object.keys(obj).map(key => obj[key]);
       })
       .catch(error =>{
-          console.log(error)
+          console.log(error)   
       })
   }
 };

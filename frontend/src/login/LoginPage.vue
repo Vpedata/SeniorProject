@@ -1,22 +1,34 @@
 <!-- Login page prototype vue code template (builds the login page) -->
 <template>
     <div id="login" class = "full-container">
-        <h2>Login</h2>
+      <v-img
+        src='~@/assets/login_background.png'
+        lazy-src='~@/assets/login_background.png'
+        aspect-ratio="1"
+        class="grey lighten-2"
+        width="100hw"
+        height= "100vh"
+      ></v-img>
         <div class = "centered-div">
-        <form class = "centered-form" action="/auth/login" method="get">
-            <div class="form-group centered-div">
-                <button class="loginBtn loginBtn--google">Login With Google</button>
-            </div>
-        </form>
+          <v-card class="vCard" elevation="12" height="100%" width="100%">
+            <v-card-title class="v-card-title">Online Advisor</v-card-title>
+            <form class = "centered-form" action="/auth/login" method="get">
+                <div class="form-group">
+                    <button class="loginBtn loginBtn--google">Login With Google</button>
+                </div>
+            </form>
+        </v-card>
         </div>
+        
     </div>
+    
 </template>
 
 <!-- Page Vue Script -->
 <script>
 //imports vuex state and action mapping functions
 import { mapState, mapActions } from 'vuex'
-
+const backgroundImg = require("../assets/login_background.png");
 export default {
     //empty default data
     name: 'Login',
@@ -54,19 +66,39 @@ export default {
 
 <style scoped>
 
-.centered-div{
-    justify-content: center;
-}
 
 .centered-div{
-  position: relative;
+  position: fixed;
   top: 50%;
-  transform: translateY(-50%);
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -200px;
+  height: 220px;
+  width: 400px;
+
+}
+
+.v-card-title{
+    justify-content: center;
+    font-size: 36px;
+    color: #FFCC00;
+}
+
+.vCard{
+    background-color: rgba(81, 80, 80, 0.90) !important;
+}
+
+.centered-form{
+    position: center;
+  top: 50%;
+  transform: translateY(100%);
 }
 
 .full-container{
     height:100%;
     width: 100%;
+    background-image: url('~@/assets/login_background.png');
+    background-size: cover;
 }
 
 .loginBtn {
@@ -74,20 +106,20 @@ export default {
   position: relative;
   justify-content: center;
   /* width: 13em;  - apply for fixed size */
-  margin: 0.2em;
-  padding: 0 15px 0 15px;
   border: none;
+  width: 250px;
+  height: 50px;
   text-align: center;
   line-height: 50px;
   white-space: nowrap;
-  border-radius: 0.2em;
-  font-size: 16px;
-  color: #FFF;
+  border-radius: 20px;
+  font-size: 24px;
+  color: #FFCC00;
 }
 
 .loginBtn--google {
   /*font-family: "Roboto", Roboto, arial, sans-serif;*/
-  background: #DD4B39;
+  background: #57150B;
 }
 
 .loginBtn:before {
@@ -108,11 +140,11 @@ export default {
 /* Google */
 .loginBtn--google {
   /*font-family: "Roboto", Roboto, arial, sans-serif;*/
-  background: #DD4B39;
+  background: #57150B;
 }
 .loginBtn--google:hover,
 .loginBtn--google:focus {
-  background: #E74B37;
+  background: #57150B;
 }
 
 </style>

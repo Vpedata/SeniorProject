@@ -7,6 +7,13 @@
                     <v-btn color="amber darken-1" dark v-on="on">
                         {{course.name}}
                     </v-btn>
+                    <v-spacer></v-spacer>
+                    <v-btn dark small color="amber darken-1">
+                        Edit
+                    </v-btn>
+                    <v-btn dark small color="amber darken-1">
+                        Remove
+                    </v-btn>
                     </template>
                     <v-card>
                         <v-card-title
@@ -24,12 +31,6 @@
                             <v-spacer></v-spacer>
                             <v-btn color="blue" text @click="dialog = false">
                                 Ok
-                            </v-btn>
-                            <v-btn color="green" text @click="dialog = false">
-                                Edit
-                            </v-btn>
-                            <v-btn color="red" text @click="dialog = false">
-                                Remove
                             </v-btn>
                         </v-card-actions>
                     </v-card>

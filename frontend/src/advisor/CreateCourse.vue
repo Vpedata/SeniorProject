@@ -77,6 +77,8 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import axios from 'axios';
+import router from '../router/index.js'
 
 export default {
     computed: {
@@ -93,19 +95,31 @@ export default {
         courseCode: null,
         name: " "
   }),
-    //createCourse() {
-    //      axios.post(??, {
-    //          class_name: this.class_name,    
-    //          class_desc: this.class_desc,    
-    //          class_credits: this.class_credits
-    //      }).then(function (response) {
-    //          console.log(response);
-    //      })
-    //      .catch(function (error) {
-    //          console.log(error);
-    //      });
-    //      
-    //},
+
+   methods: {
+        logout: function () {
+            axios.get("/auth/logout").then(response =>{
+                this.$router.push('/');
+            }).catch(err =>{
+                console.log(err);
+            });
+        },
+    createCourse: function() {
+          axios.post("/user/advisor/course/", {
+              name: this.class_name,    
+              description: this.class_desc,    
+              isCore: this.isCore,
+              creditHours: this.class_credits
+              //prereqs: this.prereq_list
+          }).then(function (response) {
+              console.log(response);
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+          
+        } 
+   },
     beforeMount(){
       axios
       .get('/user/getName')

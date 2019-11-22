@@ -9,14 +9,13 @@
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
-                    <v-btn  @click="$router.push('/fe/adv/createcourse')" dark>Create New Course</v-btn>
+                    <v-btn  @click="$router.push('/fe/adv/createcourse')" dark>Create Course</v-btn>
+                    <editCourse/>
                     <v-btn  @click="$router.push('/fe/adv/advisor')" dark>Home</v-btn>
                     <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
                 </v-toolbar-items>
                 </v-toolbar>
-            </v-row>
-            <v-row>
             </v-row>
             <v-row>
                 <v-col cols="3"></v-col>
@@ -31,6 +30,11 @@
                 </v-card>
                 </v-col>
             </v-row>
+            <v-row>
+                <v-col cols="8">
+                    <v-btn class="mt-12 ma-12" outlined color="blue" @click="$router.push('/fe/student')" dark>Back</v-btn>
+                </v-col>
+            </v-row>
         </div>
     </v-app>
     </div>
@@ -40,6 +44,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import classComponent from './classListComponentAdvisor.vue'
+import editCourse from'./EditCourse.vue'
 import axios from 'axios'
 export default {
     computed: {
@@ -54,9 +59,18 @@ export default {
     }),
 
     components: {
-        classComponent
+        editCourse,
+        classComponent,
     },
-
+    methods: {
+        logout: function () {
+            axios.get("/auth/logout").then(response =>{
+                this.$router.push('/');
+            }).catch(err =>{
+                console.log(err);
+            });
+        }
+    },
     beforeMount(){
       axios
       .get('/user/getName')
@@ -67,10 +81,11 @@ export default {
         console.log(error)
       });
 
-      axios.get('/user/student/courses/yetToTake')
+      axios.get('/course/all')
       .then(response =>{
          var obj = response.data[0]; 
          this.courses = Object.keys(obj).map(key => obj[key]);
+         console.info(this.courses);
       })
       .catch(error =>{
           console.log(error)
@@ -78,3 +93,4 @@ export default {
   }
 };
 </script>
+
