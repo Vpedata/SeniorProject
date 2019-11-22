@@ -2,12 +2,10 @@
 <template>
         <v-list-item>
             <v-list-item-content>
-                <v-dialog v-model="dialog" width="500">
-                    <template v-slot:activator="{ on }">
-                    <v-btn color="amber darken-1" dark v-on="on">
+                    <v-btn color="amber darken-1" dark @click.stop="dialog = true">
                         {{course.name}}
                     </v-btn>
-                    </template>
+                <v-dialog v-model="dialog" width="500">
                     <v-card>
                         <v-card-title
                             class="headline grey lighten-2"

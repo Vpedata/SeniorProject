@@ -13,7 +13,7 @@
                         <v-icon>{{ icons.mdiDelete}}</v-icon>
                     </v-toolbar-items>
                     </v-toolbar>
-                    </template>
+                    
                     <v-card>
                         <v-card-title
                             class="headline grey lighten-2"
