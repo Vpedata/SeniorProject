@@ -45,7 +45,7 @@
                 class="ms-12 mt-4"
                 outlined
                 color="brown"
-                @click="$router.push('/fe/studentaddclass')"
+                @click="$router.push('/fe/studentaddclasspage')"
                 dark
               >Add Class</v-btn>
             </v-row>

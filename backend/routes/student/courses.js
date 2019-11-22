@@ -21,6 +21,15 @@ router.get("/recommended",isStudent, (req, res, next) => {
     });
 });
 
+//Get recommended courses for current student (negative one values);
+router.get("/recommendedCourses",isStudent, (req, res, next) => {
+  var sql = "CALL callAllNegOnesForStudent(?);";
+  db.query(sql,req.user.student_ID, (err, rows, fields) => {
+    if (err) throw err;
+    res.json(rows);
+  });
+});
+
 //Get courses that are left to take for current students; 
 router.get("/yetToTake",isStudent, (req, res, next) => {
     var sql = "CALL classesYetToTake(?);";

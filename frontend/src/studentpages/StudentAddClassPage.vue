@@ -19,83 +19,15 @@
                 <v-col cols="3"></v-col>
                 <v-col cols="9" lg="6">
                 <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
-                    <v-toolbar flat>
+                    <v-toolbar flat>                                <!--header of list box-->
                         <v-toolbar-title class="grey--text">Add Classes (Only Available Classes List)</v-toolbar-title>
-                    </v-toolbar>
-                    <p>List: {{ listed_courses }}</p>
+                    </v-toolbar>                                    <!---->
+                    <p>List: {{ initial_courses }}</p>              <!--What i want to send when finished-->
                     <v-list style="max-height: 600px" class="overflow-y-auto">
-                        <v-list-item>
-                            <v-list-item-content>
-                                <v-checkbox class="ml-4" v-model="listed_courses" label="Intro to Object-Oriented Programming" value="IOOP"></v-checkbox>
-                            </v-list-item-content>
-                        </v-list-item>
-
-                        <v-list-item>
-                            <v-list-item-content>
-                                <v-checkbox class="ml-4" v-model="listed_courses" label="Object-Oriented Programming and Data Abstraction" value="OOPDA"></v-checkbox>
-                            </v-list-item-content>
-                        </v-list-item>
-
-                        <v-list-item>
-                            <v-list-item-content>
-                                <v-checkbox class="ml-4" v-model="listed_courses" label="Data Structures and Algorithms" value="DSA"></v-checkbox>
-                            </v-list-item-content>
-                        </v-list-item>
-
-                        <v-list-item>
-                            <v-list-item-content>
-                                <v-checkbox class="ml-4" v-model="listed_courses" label="Design and Analysis of Algorithms" value="DAA"></v-checkbox>
-                            </v-list-item-content>
-                        </v-list-item>
-
-                        <v-list-item>
-                            <v-list-item-content>
-                                <v-checkbox class="ml-4" v-model="listed_courses" label="Computer Lab Techniques" value="CLT"></v-checkbox>
-                            </v-list-item-content>
-                        </v-list-item>
-
-                        <v-list-item>
-                            <v-list-item-content>
-                                <v-checkbox class="ml-4" v-model="listed_courses" label="Foundations of Computer Science" value="Foundations"></v-checkbox>
-                            </v-list-item-content>
-                        </v-list-item>
-
-                        <v-list-item>
-                            <v-list-item-content>
-                                <v-checkbox class="ml-4" v-model="listed_courses" label="Computer Organization" value="Comp Org"></v-checkbox>
-                            </v-list-item-content>
-                        </v-list-item>
-
-                        <v-list-item>
-                            <v-list-item-content>
-                                <v-checkbox class="ml-4" v-model="listed_courses" label="Cyber Security" value="Cyber Security"></v-checkbox>
-                            </v-list-item-content>
-                        </v-list-item>
-
-                        <v-list-item>
-                            <v-list-item-content>
-                                <v-checkbox class="ml-4" v-model="listed_courses" label="Operating Systems" value="OS"></v-checkbox>
-                            </v-list-item-content>
-                        </v-list-item>
-
-                        <v-list-item>
-                            <v-list-item-content>
-                                <v-checkbox class="ml-4" v-model="listed_courses" label="Programming Languages" value="PL"></v-checkbox>
-                            </v-list-item-content>
-                        </v-list-item>
-
-                        <v-list-item>
-                            <v-list-item-content>
-                                <v-checkbox class="ml-4" v-model="listed_courses" label="Software Engineering" value="SWENG"></v-checkbox>
-                            </v-list-item-content>
-                        </v-list-item>
-
-                        <v-list-item>
-                            <v-list-item-content>
-                                <v-checkbox class="ml-4" v-model="listed_courses" label="Computers and Society" value="Comp and Soc"></v-checkbox>
-                            </v-list-item-content>
-                        </v-list-item>
-
+                        
+                    <v-list style="max-height: 600px" class="overflow-y-auto">
+                        <classComponent v-for="course in currentReccSemester" :course="course" :key="course.course_ID"/> 
+                    </v-list> 
 
                         <v-list-item>
                             <v-list-item-content>
@@ -130,6 +62,8 @@
                                 </v-dialog>
                             </v-list-item-content>
                         </v-list-item>
+
+                        
             
                         <v-list-item @click="$router.push('/classlist')">
                             <v-list-item-content>
@@ -164,9 +98,48 @@ export default {
     }, 
     data: () => ({
         dialog: false,
-        listed_courses: [],
+        initial_courses: [],
+        final_courses: [],
+        currentReccSemester: JSON,
         name: " "
   }),
+  
+    methods: {
+    logout: function() {
+      axios
+        .get("/auth/logout")
+        .then(respone => {
+          this.$router.push("/");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    generateDefaults: function() {
+      axios
+        .get("/user/student/courses/recommendedCourses")
+        .then(response => {
+          var obj = response.data[0];                               
+          var allCourses = Object.keys(obj).map(key => obj[key]);   //literally all courses
+          var selectedCourses = [];
+          var numOfReccCourses = allCourses.length;                               
+          var i = 0;
+          while (i < numOfReccCourses) {
+            console.info(allCourses[i]);
+            selectedCourses.push(allCourses[i]);                    
+            console.info(selectedCourses);
+            i++;
+          }
+
+          this.courses = selectedCourses;
+          console.info(this.courses)
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  },
+
     beforeMount(){
       axios
       .get('/user/getName')
