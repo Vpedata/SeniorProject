@@ -4,16 +4,13 @@
             <v-list-item-content>
                 <v-dialog v-model="dialog" width="500">
                     <template v-slot:activator="{ on }">
-                    <v-btn color="amber darken-1" dark v-on="on">
-                        {{course.name}}
-                    </v-btn>
-                    <v-spacer></v-spacer>
-                    <v-btn dark small color="amber darken-1">
-                        Edit
-                    </v-btn>
-                    <v-btn dark small color="amber darken-1">
-                        Remove
-                    </v-btn>
+                    <v-toolbar color="amber darken-1" dark v-on="on">
+                        <v-toolbar-title class="brown--text">{{course.name}}</v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-icon>{{ icons.mdiPencil }}</v-icon>
+                        <div class="mx-2"></div>
+                        <v-icon>{{ icons.mdiDelete}}</v-icon>
+                    <v-toolbar>
                     </template>
                     <v-card>
                         <v-card-title
