@@ -127,11 +127,12 @@ export default {
         },
     createCourse: function() {
           axios.post("/user/advisor/course/", {
-              name: this.class_name,    
-              description: this.class_desc,    
-              isCore: this.isCore,
-              creditHours: this.class_credits
-              //prereqs: this.prereq_list
+                courseCode: this.selected_code + this.courseCode,
+                name: this.class_name,      
+                isRequired: this.isCore,
+                creditHours: this.class_credits,
+                description: this.class_desc,  
+                preReq: this.prereq_list
           }).then(function (response) {
               console.log(response);
           })
