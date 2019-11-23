@@ -9,6 +9,7 @@ import 'vuetify/dist/vuetify.min.css'
 import classComponent from './studentpages/classListComponent.vue'
 import Autocomplete from '@trevoreyre/autocomplete-vue'
 import '@trevoreyre/autocomplete-vue/dist/style.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.use(Autocomplete);
 

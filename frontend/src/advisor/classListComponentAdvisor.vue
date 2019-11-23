@@ -2,6 +2,7 @@
     <v-list-item @click.stop="dialog = true">
             <v-list-item-content>
                 <v-list-item-title>{{course.name}}</v-list-item-title>
+                <v-dialog v-model="dialog" width="500">
                 <v-card>
                     <v-card-title class="headline grey lighten-2" primary-title>
                          {{course.name}}
@@ -16,12 +17,13 @@
                         <v-btn color="blue" text @click="dialog = false">Ok</v-btn>
                     </v-card-actions>
                 </v-card>
+                </v-dialog>
             </v-list-item-content>
              <v-list-item-action>
                 <v-btn color="primary" depressed>
                     <v-icon left>{{ icons.mdiDelete }}</v-icon>
                 </v-btn>
-                 <v-btn color="primary" depressed>
+                 <v-btn color="primary" depressed >
                     <v-icon left>{{ icons.mdiDelete }}</v-icon>
                 </v-btn>
         </v-list-item-action>
