@@ -9,8 +9,7 @@
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
-                    <v-btn  @click="$router.push('/fe/adv/createcourse')" dark>Create Course</v-btn>
-                    <v-btn  @click="$router.push('/fe/adv/advisor')" dark>Home</v-btn>
+                    <v-btn  @click="$router.push('/fe/student')" dark>Home</v-btn>
                     <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
                 </v-toolbar-items>
@@ -21,7 +20,7 @@
                 <v-col cols="9" lg="6">
                 <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
                     <v-toolbar flat>
-                        <v-toolbar-title class="grey--text">Class List</v-toolbar-title>
+                        <v-toolbar-title class="grey--text">Add Course</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
                         <classComponent v-for="course in courses" :course="course" :key="course.course_ID"/> 
