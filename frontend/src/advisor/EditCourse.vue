@@ -1,7 +1,7 @@
 <template>
     <v-dialog max-width="1000px">
         <template v-slot:activator="{ on }">
-             <v-btn class="mx-2" fab dark large color="cyan" v-on="on">
+             <v-btn class="mx-2" fab dark small color="cyan" v-on="on">
                 <v-icon dark>mdi-pencil</v-icon>
             </v-btn>
         </template>

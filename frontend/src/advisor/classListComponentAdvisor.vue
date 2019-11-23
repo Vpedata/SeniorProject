@@ -9,7 +9,7 @@
                     </v-card-title>
                     <v-divider></v-divider>
                     <v-card-text>
-                        Course Code: {{course.courseCode}}, Credit Hours: {{course.creditHours}}
+                        Course Code: {{course.courseCode}}, Course Description: {{coures.description}},Credit Hours: {{course.creditHours}}
                     </v-card-text>
                     <v-divider></v-divider>
                     <v-card-actions>
@@ -20,8 +20,8 @@
                 </v-dialog>
             </v-list-item-content>
              <v-list-item-action>
-                <editCourse/>
-                <v-btn class="mx-2" fab dark large color="purple" >
+                <editCourse :course="course"/>
+                <v-btn class="mx-2" fab dark small color="purple" >
                     <v-icon dark>mdi-delete</v-icon>
                 </v-btn>
         </v-list-item-action>
