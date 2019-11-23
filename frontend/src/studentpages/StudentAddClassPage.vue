@@ -19,8 +19,8 @@
                 <v-col cols="3"></v-col>
                 <v-col cols="9" lg="6">
                 <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
-                    <v-toolbar flat>
-                        <v-toolbar-title class="grey--text">Add Course</v-toolbar-title>
+                    <v-toolbar flat dark>
+                        <v-toolbar-title>Add Course</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
                         <classComponent v-for="course in courses" :course="course" :key="course.course_ID"/> 

@@ -7,6 +7,8 @@
             <v-toolbar-title class="brown--text">{{name}}</v-toolbar-title>
           <v-spacer></v-spacer>
                 <v-toolbar-items>
+                    <v-btn  @click="$router.push('/fe/editcompleted')" dark>Edit Completed</v-btn>
+                    <v-btn  @click="$router.push('/fe/studentaddclasspage')" dark>Add Class</v-btn>
                     <v-btn  @click="$router.push('/fe/classlist')" dark>Class List</v-btn>
                     <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
@@ -15,23 +17,7 @@
         </v-row>
         <v-row>
           <v-btn
-            class="ma-4"
-            outlined
-            color="brown"
-            @click="$router.push('/fe/editcompleted')"
-            dark
-          >Edit Completed Courses</v-btn>
-          <v-spacer></v-spacer>
-              <v-btn
-                class="ma-4"
-                outlined
-                color="brown"
-                @click="$router.push('/fe/studentaddclasspage')"
-                dark
-              >Add Class</v-btn>
-           <v-spacer></v-spacer>
-          <v-btn
-            class="ma-4"
+            class="mb-4 mt-12 mx-auto"
             outlined
             color="#FF0000"
             @click="generateDefaults"
@@ -48,10 +34,10 @@
           </v-col>
           <v-col cols="9" lg="6">
             <v-card class="mt-n16 mx-auto" elevation="12" height="350px">
-              <v-toolbar flat>
-                <v-toolbar-title class="grey--text">Selected Classes</v-toolbar-title>
+              <v-toolbar dark flat >
+                <v-toolbar-title>Selected Classes</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-toolbar-title class="grey--text" :key="totalCredits">Total Credits: {{credits}}</v-toolbar-title>
+                <v-toolbar-title :key="totalCredits">Total Credits: {{credits}}</v-toolbar-title>
               </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
                         <classComponent v-for="course in generatedClasses" :course="course" :key="course.course_ID"/> 
