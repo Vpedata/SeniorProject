@@ -16,43 +16,55 @@
                 </v-toolbar-items>
                 </v-toolbar>
             </v-row>
+            <v-card class = "mx-auto mt-8" width="1200px">
+                    <v-toolbar dark flat>
+                        <v-toolbar-title class="white--text">Course Creation</v-toolbar-title>
+                    </v-toolbar>
             <v-row>
-                <v-col cols=4></v-col>
-                <v-col cols=3>
+                <v-col cols=3></v-col>
+                <v-col cols=5>
                     <v-text-field class = 'ma-12' v-model = 'class_name' label = 'Class Name' outlined></v-text-field>
                 </v-col>
             </v-row>
             <v-row>
-                <v-col cols=3></v-col>
-                <v-col cols=5>
-                    <v-textarea class = 'ma-3 mt-n8' v-model = 'class_desc' label = 'Class Description' outlined maxlength = '120'></v-textarea>
+                <v-col>
+                    <v-textarea class = 'mx-12 mt-n12' v-model = 'class_desc' full-width counter single-line label = 'Class Description' outlined maxlength = '128'></v-textarea>
                 </v-col>
             </v-row>
             <v-row>
-                <v-col cols=5></v-col>
+                <v-card class="mx-auto" width = "800px">
+                <v-subheader>Course Code</v-subheader>
+                     <v-select
+                        class="ma-12"
+                        :items="available_codes"
+                        v-model="selected_code"
+                        label="Code"
+                        dense
+                    ></v-select>
+                <v-text-field class='ma-12 mt-n8' width="200px" v-model = 'courseCode' label = 'xxx' single-line type="number" hide-details></v-text-field>
+                </v-card>
+            </v-row>
+            <v-row>
                 <v-checkbox
                     v-model="isCore"
-                    class = 'ma-3 mt-n8'
+                    class = 'mx-auto mt-12'
                     :label="`Core Course`"
                 ></v-checkbox>
             </v-row>
             <v-row>
-                 <v-col cols="4"></v-col>
-                 <v-col cols="3">
-                <v-text-field class = 'ma-3 mt-n8' v-model = 'courseCode' label = 'Course Code' single-line type="number" hide-details></v-text-field>
-                 </v-col>
+                <v-subheader class="mx-auto mt-4">Credit Hours</v-subheader>
             </v-row>
             <v-row>
-                 <v-col cols="4"></v-col>
-                 <v-col cols="3">
-                <v-text-field class = 'ma-3 mt-n8' v-model = 'class_credits' label = 'Credits' single-line type="number" hide-details></v-text-field>
+                 <v-col cols="5"></v-col>
+                 <v-col cols="2">
+                <v-text-field class = 'mx-4 mt-n4' v-model = 'class_credits' single-line type="number" append-outer-icon="add" @click:append-outer="increment_credits" prepend-icon="remove" @click:prepend="decrement_credits"></v-text-field>
                  </v-col>
             </v-row>
             
             <v-row>
                 <v-col cols="3"></v-col>
                 <v-col cols="3">
-                <v-text-field v-model="prereq_current"></v-text-field>
+                <v-text-field label="Ex. CS04.113" v-model="prereq_current"></v-text-field>
                 </v-col>
                 <v-btn @click="prereq_list.push(prereq_current)" >Add PreReq Course Code</v-btn>
                 <v-btn @click="prereq_list.pop()" >Undo</v-btn>
@@ -66,10 +78,11 @@
                 </v-chip>
             <v-row>
                 <v-col cols="4">
-                    <v-btn class="mt-12" outlined color="blue" @click="$router.push('/advisorview')" dark>Create</v-btn>
+                    <v-btn class="mt-12" outlined color="blue" @click="$router.push('/fe/classlistadvisor')" dark>Create</v-btn>
                 </v-col>
 
             </v-row>
+            </v-card>
         </div>
     </v-app>
     </div>
@@ -89,14 +102,22 @@ export default {
     data: () => ({
         class_name: '',
         class_desc: '',
-        class_credits: null,
+        class_credits: 0,
         prereq_list: [],
         isCore: false,
         courseCode: null,
-        name: " "
+        name: " ",
+        available_codes: ["CS","MATH"],
+        selected_code: "CS"
   }),
 
    methods: {
+       increment_credits () {
+           this.class_credits = parseInt(this.class_credits,10)+1
+       },
+       decrement_credits () {
+           this.class_credits = parseInt(this.class_credits,10)-1
+       },
         logout: function () {
             axios.get("/auth/logout").then(response =>{
                 this.$router.push('/');
