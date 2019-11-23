@@ -1,6 +1,6 @@
 <template>
-    <v-list-item @click.stop="dialog = true">
-            <v-list-item-content>
+    <v-list-item>
+            <v-list-item-content @click.stop="dialog = true">
                 <v-list-item-title>{{course.name}}</v-list-item-title>
                 <v-dialog v-model="dialog" width="500">
                 <v-card>
@@ -20,10 +20,12 @@
                 </v-dialog>
             </v-list-item-content>
              <v-list-item-action>
+                 <v-row>
                 <editCourse :course="course"/>
                 <v-btn class="mx-2" fab dark small color="purple" >
                     <v-icon dark>mdi-delete</v-icon>
                 </v-btn>
+                 </v-row>
         </v-list-item-action>
         </v-list-item> 
 </template>

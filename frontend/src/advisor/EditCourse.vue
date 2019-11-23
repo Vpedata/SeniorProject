@@ -29,12 +29,12 @@ export default {
         course: Object,
     },
     data: () => ({
-        course_name: '',
-        course_desc: '',
-        cousre_credit: null,
+        course_name: course.name,
+        course_desc: course.description,
+        cousre_credit: course.creditHours,
         prereq_list: [],
-        isCore: false,
-        courseCode: null,
+        isCore: course.isCore,
+        courseCode: course.courseCode,
   }),
     
 }
