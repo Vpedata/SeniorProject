@@ -25,6 +25,9 @@
 <script>
 
 export default {
+    props: {
+        course: Object,
+    },
     data: () => ({
         course_name: '',
         course_desc: '',

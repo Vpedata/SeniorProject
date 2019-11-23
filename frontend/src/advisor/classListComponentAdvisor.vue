@@ -9,7 +9,7 @@
                     </v-card-title>
                     <v-divider></v-divider>
                     <v-card-text>
-                        Course Code: {{course.courseCode}}, Course Description: {{coures.description}},Credit Hours: {{course.creditHours}}
+                        Course Code: {{course.courseCode}}, Course Description: {{course.description}},Credit Hours: {{course.creditHours}}
                     </v-card-text>
                     <v-divider></v-divider>
                     <v-card-actions>
