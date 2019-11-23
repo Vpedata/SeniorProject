@@ -20,12 +20,14 @@
                 </v-dialog>
             </v-list-item-content>
              <v-list-item-action>
-                <v-btn color="primary" depressed>
-                    <v-icon left>{{ icons.mdiDelete }}</v-icon>
-                </v-btn>
-                 <v-btn color="primary" depressed >
-                    <v-icon left>{{ icons.mdiDelete }}</v-icon>
-                </v-btn>
+                 <v-btn class="mx-2" fab dark large color="cyan">
+      <v-icon dark>mdi-pencil</v-icon>
+    </v-btn>
+
+    <v-btn class="mx-2" fab dark large color="purple">
+      <v-icon dark>mdi-delete</v-icon>
+    </v-btn>
+            
         </v-list-item-action>
         </v-list-item> 
 </template>

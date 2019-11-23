@@ -10,10 +10,13 @@ import classComponent from './studentpages/classListComponent.vue'
 import Autocomplete from '@trevoreyre/autocomplete-vue'
 import '@trevoreyre/autocomplete-vue/dist/style.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import '@mdi/font/css/materialdesignicons.css'
 
 Vue.use(Autocomplete);
+Vue.use(Vuetify, {
+  iconfont: 'mdi'
+})
 
-Vue.use(Vuetify); 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
 
