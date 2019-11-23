@@ -10,7 +10,6 @@
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
                     <v-btn  @click="$router.push('/fe/adv/createcourse')" dark>Create Course</v-btn>
-                    <editCourse/>
                     <v-btn  @click="$router.push('/fe/adv/advisor')" dark>Home</v-btn>
                     <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
@@ -44,7 +43,6 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import classComponent from './classListComponentAdvisor.vue'
-import editCourse from'./EditCourse.vue'
 import axios from 'axios'
 export default {
     computed: {
@@ -59,7 +57,6 @@ export default {
     }),
 
     components: {
-        editCourse,
         classComponent,
     },
     methods: {

@@ -20,25 +20,24 @@
                 </v-dialog>
             </v-list-item-content>
              <v-list-item-action>
-                 <v-btn class="mx-2" fab dark large color="cyan">
-      <v-icon dark>mdi-pencil</v-icon>
-    </v-btn>
-
-    <v-btn class="mx-2" fab dark large color="purple">
-      <v-icon dark>mdi-delete</v-icon>
-    </v-btn>
-            
+                <editCourse/>
+                <v-btn class="mx-2" fab dark large color="purple" >
+                    <v-icon dark>mdi-delete</v-icon>
+                </v-btn>
         </v-list-item-action>
         </v-list-item> 
 </template>
 
 <script>
 import axios from 'axios';
-
+import editCourse from'./EditCourse.vue'
 export default {
     name: "classComponent",
     props: {
         course: Object,
+    },
+    components: {
+        editCourse
     },
     data: () => ({
         dialog: false
