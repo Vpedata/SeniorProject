@@ -29,9 +29,6 @@ export default {
     props: {
         course: Object,
     },
-    components: {
-        editCourse
-    },
     data: () => ({
         dialog: false
     }),

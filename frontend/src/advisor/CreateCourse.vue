@@ -125,8 +125,8 @@ export default {
                 console.log(err);
             });
         },
-    createCourse: function() {
-          axios.post("/user/advisor/course/", {
+    addCourse: function() {
+          axios.post("/user/advisor/course/addCourse", {
                 courseCode: this.selected_code + this.courseCode,
                 name: this.class_name,      
                 isRequired: this.isCore,
