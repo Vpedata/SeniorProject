@@ -28,6 +28,7 @@
                         <classComponent v-for="course in currentReccSemester" :course="course" :key="course.course_ID"/> 
                     </v-list> 
 
+                    <v-list>
                         <v-list-item>
                             <v-list-item-content>
                                 <v-dialog v-model="dialog" width="500">
@@ -95,6 +96,7 @@ export default {
             account: state => state.account,
         })
     }, 
+    
     data: () => ({
         dialog: false,
         initial_courses: [],
@@ -119,7 +121,7 @@ export default {
         .get("/user/student/courses/recommendedCourses")
         .then(response => {
           var obj = response.data[0];                               
-          var allCourses = Object.keys(obj).map(key => obj[key]);   //literally all courses
+          this.currentReccSemester = Object.keys(obj).map(key => obj[key]);   //literally all courses
           var selectedCourses = [];
           var numOfReccCourses = allCourses.length;                               
           var i = 0;
