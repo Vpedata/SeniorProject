@@ -17,7 +17,7 @@
                     <v-checkbox v-model="isCore" class = 'mx-auto mt-12' :label="`Core Course`"></v-checkbox>
                     <v-subheader class="mx-auto mt-4">Credit Hours</v-subheader>
                     <v-text-field  v-model = 'course_credits' label = 'Credits' single-line type="number" hide-details></v-text-field>
-                    <v-text-field label="Ex. CS04.113" v-model="prereq_current"></v-text-field>
+                    <v-text-field label="Ex. CS04113" v-model="prereq_current"></v-text-field>
                     <v-btn @click="prereq_list.push(prereq_current)" >Add PreReq Course Code</v-btn>
                     <v-btn @click="prereq_list.pop()" >Undo</v-btn>
                     <v-chip v-for="prereq in prereq_list" :key="prereq.id" v-model="prereq.isOpen">{{prereq}}</v-chip>

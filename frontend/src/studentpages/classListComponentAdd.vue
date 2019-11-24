@@ -5,11 +5,14 @@
                 <v-dialog v-model="dialog" width="500">
                 <v-card>
                     <v-card-title class="headline grey lighten-2" primary-title>
-                         {{course.name}}
+                        {{course.courseCode}}
+                        <v-spacer></v-spacer>
+                        Credits: {{course.creditHours}}
                     </v-card-title>
                     <v-divider></v-divider>
                     <v-card-text>
-                        Course Code: {{course.courseCode}}, Course Description: {{course.description}},Credit Hours: {{course.creditHours}}
+                        <div class="my-4 subtitle-1 black--text">{{course.name}}</div>
+                        <div class="grey-text">{{course.description}}</div>
                     </v-card-text>
                     <v-divider></v-divider>
                     <v-card-actions>
@@ -22,7 +25,7 @@
             <v-list-item-action>
                     <v-row>
                     <v-btn class="mx-2" fab dark small color="green" >
-                        <v-icon dark>mdi-add</v-icon>
+                        <v-icon dark>mdi-plus-circle-outline</v-icon>
                     </v-btn>
                     </v-row>
             </v-list-item-action>
