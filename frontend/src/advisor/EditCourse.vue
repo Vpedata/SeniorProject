@@ -1,5 +1,10 @@
 <template>
     <v-dialog v-model="dialog" width="800px" persistent>
+        <template v-slot:activator="{ on }">
+             <v-btn class="mx-2" fab dark small color="cyan" v-on="on">
+                <v-icon dark>mdi-pencil</v-icon>
+            </v-btn>
+        </template>
                 <v-card width="800px" class="mx-auto">
                 <v-card-title>
                 <h2>Edit Course</h2>
@@ -15,7 +20,7 @@
                     <v-col cols="1"></v-col>
                     <v-col cols="3"></v-col>
                     <v-col cols="3">
-                    <v-text-field class="mt-n4" v-model = 'courseCode' label = 'Course Code' single-line hide-details></v-text-field>
+                    <v-text-field class="mt-n4" v-model = 'courseCode' label = 'Code (Ex. CS04113)' single-line hide-details></v-text-field>
                     </v-col>
                     <v-col>
                         <v-checkbox v-model="isCore" class = 'mx-auto mt-n4 ml-12' :label="`Core Course`"></v-checkbox>
@@ -75,6 +80,7 @@ export default {
         course: Object,
     },
     data: () => ({
+        dialog: true,
         course_name: course.name,
         course_desc: course.description,
         course_credits: course.creditHours,

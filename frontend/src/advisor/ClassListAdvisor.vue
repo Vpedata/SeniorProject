@@ -20,7 +20,7 @@
             <v-dialog v-model="dialog" width="800px" persistent>
                 <v-card width="800px" class="mx-auto">
                 <v-card-title>
-                <h2>Edit Course</h2>
+                <h2>Create Course</h2>
             </v-card-title>
             <v-card-text>
                 <v-form class="px=3">
@@ -33,7 +33,7 @@
                     <v-col cols="1"></v-col>
                     <v-col cols="3"></v-col>
                     <v-col cols="3">
-                    <v-text-field class="mt-n4" v-model = 'courseCode' label = 'Course Code' single-line hide-details></v-text-field>
+                    <v-text-field class="mt-n4" v-model = 'courseCode' label = 'Code (Ex. CS04113)' single-line hide-details></v-text-field>
                     </v-col>
                     <v-col>
                         <v-checkbox v-model="isCore" class = 'mx-auto mt-n4 ml-12' :label="`Core Course`"></v-checkbox>
@@ -67,7 +67,7 @@
                     </v-col>
                     </v-row>
                     
-                    <v-btn flat class="success mx-0 mt-3">Update Course </v-btn>
+                    <v-btn flat class="success mx-0 mt-3">Create Course </v-btn>
                     <v-btn flat color="red" dark class="mx-0 mt-3" @click="dialog=false">Cancel </v-btn>
                 </v-form>
             </v-card-text>
