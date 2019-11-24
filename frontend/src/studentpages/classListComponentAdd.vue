@@ -8,7 +8,7 @@
                         {{course.courseCode}}
                         <v-spacer></v-spacer>
                         Credits: {{course.creditHours}}
-                        <v-row><v-card-subtitle>{{course.name}}</v-card-subtitle><v-row>
+                        <v-row><v-card-subtitle>{{course.name}}</v-card-subtitle></v-row>
                     </v-card-title>
                     <v-divider></v-divider>
                     <v-card-text>
@@ -24,8 +24,8 @@
             </v-list-item-content>
             <v-list-item-action>
                     <v-row>
-                    <v-btn class="mx-2" fab dark small color="cyan" >
-                        <v-icon dark>mdi-add</v-icon>
+                    <v-btn class="mx-2" fab dark small color="green" >
+                        <v-icon dark>mdi-plus-circle-outline</v-icon>
                     </v-btn>
                     </v-row>
             </v-list-item-action>
