@@ -25,7 +25,7 @@
              <v-list-item-action>
                  <v-row>
                 <editCourse :course="course"/>
-                <v-btn class="mx-2" fab dark small color="purple" >
+                <v-btn class="mx-2" fab dark small color="purple" @click="handleDeleteCourse">
                     <v-icon dark>mdi-delete</v-icon>
                 </v-btn>
                  </v-row>
@@ -37,14 +37,27 @@
 import axios from 'axios';
 import editCourse from'./EditCourse.vue'
 export default {
+    
     name: "classComponent",
+    
     props: {
         course: Object,
     },
     components: {
         editCourse
     },
+    methods: {
+        handleDeleteCourse: function() {
+            let deleteCourseUrl = 'user/advisor/cousre/'+course.course_ID;
+             axios.delete(deleteCourseUrl)
+            .then(response =>{})
+            .catch(error =>{
+                console.log(error)
+            });
+        }
+    },
     data: () => ({
+
         dialog: false
     }),
 }
