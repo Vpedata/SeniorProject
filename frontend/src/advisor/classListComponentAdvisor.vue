@@ -8,11 +8,11 @@
                         {{course.courseCode}}
                         <v-spacer></v-spacer>
                         Credits: {{course.creditHours}}
-                        <row>{{course.name}}</row>
+                        <v-card-subtitle>{{course.name}}</v-card-subtitle>
                     </v-card-title>
                     <v-divider></v-divider>
                     <v-card-text>
-                        Course Description: {{course.description}},
+                        {{course.description}},
                     </v-card-text>
                     <v-divider></v-divider>
                     <v-card-actions>
