@@ -5,11 +5,14 @@
                 <v-dialog v-model="dialog" width="500">
                 <v-card>
                     <v-card-title class="headline grey lighten-2" primary-title>
-                         {{course.name}}
+                        {{course.courseCode}}
+                        <v-spacer></v-spacer>
+                        Credits: {{course.creditHours}}
+                        <v-row><v-card-subtitle>{{course.name}}</v-card-subtitle><v-row>
                     </v-card-title>
                     <v-divider></v-divider>
                     <v-card-text>
-                        Course Code: {{course.courseCode}}, Course Description: {{course.description}},Credit Hours: {{course.creditHours}}
+                        {{course.description}},
                     </v-card-text>
                     <v-divider></v-divider>
                     <v-card-actions>
