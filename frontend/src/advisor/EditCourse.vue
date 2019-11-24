@@ -15,7 +15,7 @@
                     <v-col cols="1"></v-col>
                     <v-col cols="3"></v-col>
                     <v-col cols="3">
-                    <v-text-field class="mt-n4" v-model = 'courseCode' label = 'Course Code' single-line hide-details></v-text-field>
+                    <v-text-field class="mt-n4" v-model = 'courseCode' label = 'Code (Ex. CS04113)' single-line hide-details></v-text-field>
                     </v-col>
                     <v-col>
                         <v-checkbox v-model="isCore" class = 'mx-auto mt-n4 ml-12' :label="`Core Course`"></v-checkbox>
