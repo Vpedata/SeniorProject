@@ -1,10 +1,9 @@
 <template>
+    <div>
+        <v-btn class="mx-2" fab dark small color="cyan" @click="dialog=true">
+            <v-icon dark>mdi-pencil</v-icon>
+        </v-btn>
     <v-dialog v-model="dialog" width="800px" persistent>
-        <template v-slot:activator="{ on }">
-             <v-btn class="mx-2" fab dark small color="cyan" v-on="on">
-                <v-icon dark>mdi-pencil</v-icon>
-            </v-btn>
-        </template>
                 <v-card width="800px" class="mx-auto">
                 <v-card-title>
                 <h2>Edit Course</h2>
@@ -60,6 +59,7 @@
             </v-card-text>
                 </v-card>
             </v-dialog>
+    </div>
 </template>
 <script>
 
@@ -80,7 +80,7 @@ export default {
         course: Object,
     },
     data: () => ({
-        dialog: true,
+        dialog: false,
         course_name: course.name,
         course_desc: course.description,
         course_credits: course.creditHours,
