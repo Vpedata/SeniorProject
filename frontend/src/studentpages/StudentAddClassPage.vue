@@ -72,7 +72,7 @@ export default {
         console.log(error)
       });
 
-      axios.get('student/courses/recommended')
+      axios.get('/user/student/courses/recommended')
       .then(response =>{
          var obj = response.data[0]; 
          this.courses = Object.keys(obj).map(key => obj[key]);
