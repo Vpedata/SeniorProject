@@ -11,7 +11,7 @@
                     </v-card-title>
                     <v-divider></v-divider>
                     <v-card-text>
-                        <div class="subheading">{{course.name}}</div>
+                        <div class="my-4 subtitle-1 black--text">{{course.name}}</div>
                         <div class="grey-text">{{course.description}}</div>
                     </v-card-text>
                     <v-divider></v-divider>
