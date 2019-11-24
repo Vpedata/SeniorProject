@@ -43,7 +43,7 @@
                         <v-col cols="4"></v-col>
                         <v-col cols="4">
                         <v-subheader> Credits </v-subheader>
-                        <v-text-field class = 'mx-4 mt-n4' v-model = 'class_credits' single-line append-outer-icon="add" @click:append-outer="increment_credits" append-icon="remove" @click:append="decrement_credits"></v-text-field>
+                        <v-text-field class = 'mx-4 mt-n4' readonly v-model = 'class_credits' single-line append-icon="add" @click:append="increment_credits" append-outer-icon="remove" @click:append-outer="decrement_credits"></v-text-field>
                         </v-col>
                     </v-row>
                     <v-row>
@@ -121,10 +121,14 @@ export default {
     },
     methods: {
         increment_credits () {
-           this.class_credits = parseInt(this.class_credits,10)+1
+            if (this.class_credits <= 30) {
+                this.class_credits = parseInt(this.class_credits,10)+1
+            }
         },
         decrement_credits () {
-           this.class_credits = parseInt(this.class_credits,10)-1
+            if (this.class_credits > 0) {
+                this.class_credits = parseInt(this.class_credits,10)-1
+            }
         },
         logout: function () {
             axios.get("/auth/logout").then(response =>{
