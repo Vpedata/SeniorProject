@@ -80,6 +80,7 @@ export default {
         course: Object,
     },
     data: () => ({
+        dialog: true,
         course_name: course.name,
         course_desc: course.description,
         course_credits: course.creditHours,
