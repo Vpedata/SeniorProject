@@ -9,10 +9,10 @@
                         <v-spacer></v-spacer>
                         Credits: {{course.creditHours}}
                     </v-card-title>
-                    <v-card-subtitle>{{course.name}}</v-card-subtitle>
                     <v-divider></v-divider>
                     <v-card-text>
-                        {{course.description}},
+                        <div class="subheading">{{course.name}}</div>
+                        <div class="grey-text">{{course.description}}</div>
                     </v-card-text>
                     <v-divider></v-divider>
                     <v-card-actions>
