@@ -48,7 +48,7 @@ export default {
     },
     methods: {
         handleDeleteCourse: function() {
-            let deleteCourseUrl = 'user/advisor/cousre/'+course.course_ID;
+            let deleteCourseUrl = 'user/advisor/course/'+course.course_ID;
              axios.delete(deleteCourseUrl)
             .then(response =>{})
             .catch(error =>{
