@@ -20,14 +20,8 @@
                     <v-text-field label="Ex. CS04.113" v-model="prereq_current"></v-text-field>
                     <v-btn @click="prereq_list.push(prereq_current)" >Add PreReq Course Code</v-btn>
                     <v-btn @click="prereq_list.pop()" >Undo</v-btn>
-                     <v-chip 
-                v-for="prereq in prereq_list" 
-                :key="prereq.id" 
-                v-model="prereq.isOpen"
-                >
-                {{prereq}}
-                </v-chip>
-                <v-btn flat class="success mx-0 mt-3">Update Course </v-btn>
+                    <v-chip v-for="prereq in prereq_list" :key="prereq.id" v-model="prereq.isOpen">{{prereq}}</v-chip>
+                    <v-btn flat class="success mx-0 mt-3">Update Course </v-btn>
                 </v-form>
             </v-card-text>
         </v-card>
@@ -38,10 +32,10 @@
 export default {
      methods: {
        increment_credits () {
-           this.class_credits = parseInt(this.class_credits,10)+1
+           this.course_credits = parseInt(this.course_credits,10)+1
        },
        decrement_credits () {
-           this.class_credits = parseInt(this.class_credits,10)-1
+           this.course_credits = parseInt(this.course_credits,10)-1
        },
      },
     props: {
