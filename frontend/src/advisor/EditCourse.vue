@@ -1,5 +1,4 @@
 <template>
-    <div>
     <v-dialog v-model="dialog" width="800px" persistent>
         <v-dialog v-model="dialog" persistent max-width="290">
       <template v-slot:activator="{ on }">
@@ -62,7 +61,6 @@
             </v-card-text>
                 </v-card>
             </v-dialog>
-    </div>
 </template>
 <script>
 
