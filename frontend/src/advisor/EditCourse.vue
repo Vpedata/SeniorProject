@@ -1,9 +1,12 @@
 <template>
     <div>
-        <v-btn class="mx-2" fab dark small color="cyan" @click="dialog=true">
+    <v-dialog v-model="dialog" width="800px" persistent>
+        <v-dialog v-model="dialog" persistent max-width="290">
+      <template v-slot:activator="{ on }">
+       <v-btn class="mx-2" fab dark small color="cyan" v-on="on">
             <v-icon dark>mdi-pencil</v-icon>
         </v-btn>
-    <v-dialog v-model="dialog" width="800px" persistent>
+      </template>
                 <v-card width="800px" class="mx-auto">
                 <v-card-title>
                 <h2>Edit Course</h2>
