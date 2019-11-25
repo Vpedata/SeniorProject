@@ -80,13 +80,13 @@ export default {
         course: Object,
     },
     data: () => ({
-        dialog=false,
-        course_name: '',
-        course_desc: '',
-        course_credits: 0 ,
+        dialog:false,
+        course_name: this.course.name,
+        course_desc: this.course.description,
+        course_credits: this.course.creditHours ,
         prereq_list: [],
-        isCore: false,
-        courseCode: null,
+        isCore: this.course.isCore,
+        courseCode: this.course.courseCode,
   }),
     
 }
