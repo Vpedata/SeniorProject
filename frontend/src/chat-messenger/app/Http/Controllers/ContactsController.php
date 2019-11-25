@@ -15,7 +15,7 @@ class ContactsController extends Controller
         $contacts = User::where('user_ID', '!=', auth()->id())->get();
 
         $unreadIds = Message::select(\DB::raw('`sender` as sender_id, count(`sender`) as messages_count'))
-            ->where('receiver', auth()->id())
+            ->where('reciever', auth()->id())
             ->where('read', false)
             ->groupBy('sender')
             ->get();
@@ -33,13 +33,13 @@ class ContactsController extends Controller
 
     public function getMessagesFor($id) {
         // mark all messages with the selected contact as read
-        Message::where('sender', $id)->where('receiver', auth()->id())->update(['read' => true]);
+        Message::where('sender', $id)->where('reciever', auth()->id())->update(['read' => true]);
         $messages = Message::where(function($q) use ($id) {
             $q->where('sender', auth()->id());
-            $q->where('receiver', $id);
+            $q->where('reciever', $id);
         })->orWhere(function($q) use ($id) {
             $q->where('sender', $id);
-            $q->where('receiver', auth()->id());
+            $q->where('reciever', auth()->id());
         })->get(); // (a = 1 AND b = 2) OR (c = 1 OR d = 2)
 
         return response()->json($messages);
@@ -48,9 +48,11 @@ class ContactsController extends Controller
     public function send(Request $request) {
         $message = Message::create([
             'sender' => auth()->id(),
-            'receiver' => $request->contact_id,
+            'reciever' => $request->contact_id,
             'content' => $request->text,
-            'isFromUser' => $request->isFromUser
+            'isFromUser' => $request->isFromUser,
+            'timeSent' => date("Y-m-d h:i:s"),
+            'read' => 0
         ]);
 
         broadcast(new NewMessage($message));

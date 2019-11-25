@@ -46,7 +46,7 @@
             this.$root.$on('updateMessages', () => {
                 this.updateMessages();
                 });
-            axios.get('/messages')
+            axios.get('/messenger/messages')
                 .then((response) => {
                     // console.log(response.data);
                     this.messages = response.data;
@@ -66,19 +66,19 @@
                 this.$emit('selected', contact);
             },
             updateMessages() {
-                    axios.get('/messages')
+                    axios.get('/messenger/messages')
                         .then((response) => {
                             this.messages = response.data;
                         });
             },
             updateOnline() {
-                axios.get('/contacts/onlineContacts')
+                axios.get('/messenger/contacts/onlineContacts')
                     .then((response) => {
                         this.onlineContacts = response.data;
                     });
             },
             checkStudent() {
-                if(this.user.isStudent === 1) {
+                if(this.user.IsStudent === 1) {
                     this.studentUser = true;
                 } else {
                     this.studentUser = false;
@@ -104,9 +104,9 @@
                     var recent = -1;
                     for(let i in this.messages) {
                         var message = this.messages[i];
-                        // console.log(message.message_ID + ': sender -> ' + message.sender + ' | receiver -> ' + message.receiver);
+                        // console.log(message.message_ID + ': sender -> ' + message.sender + ' | reciever -> ' + message.reciever);
                         // if(i == 1) {console.log(message);}
-                        if((message.receiver === contact.user_ID && message.sender === this.user.user_ID) || (message.receiver === this.user.user_ID && message.sender === contact.user_ID)) {
+                        if((message.reciever === contact.user_ID && message.sender === this.user.user_ID) || (message.reciever === this.user.user_ID && message.sender === contact.user_ID)) {
                             if(message.message_ID > recent) {
                                 recent = message.message_ID;
                             }

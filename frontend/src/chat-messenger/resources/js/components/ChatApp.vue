@@ -29,7 +29,7 @@
                     console.log(e.message);
                     this.handleIncoming(e.message);
                 });
-            axios.get('/contacts')
+            axios.get('/messenger/contacts')
                 .then((response) => {
                     // console.log(response.data);
                     this.contacts = response.data;
@@ -40,7 +40,7 @@
             startConversationWith(contact) {
                 this.updateUnreadCount(contact, true);
 
-                axios.get(`/conversation/${contact.user_ID}`)
+                axios.get(`/messenger/conversation/${contact.user_ID}`)
                     .then((response) => {
                         this.messages = response.data;
                         this.selectedContact = contact;
