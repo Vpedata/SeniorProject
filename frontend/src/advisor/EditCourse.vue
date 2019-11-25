@@ -1,6 +1,5 @@
 <template>
     <v-dialog v-model="dialog" width="800px" persistent>
-        <v-dialog v-model="dialog" persistent max-width="290">
       <template v-slot:activator="{ on }">
        <v-btn class="mx-2" fab dark small color="cyan" v-on="on">
             <v-icon dark>mdi-pencil</v-icon>
@@ -81,13 +80,13 @@ export default {
         course: Object,
     },
     data: () => ({
-        dialog: false,
-        course_name: course.name,
-        course_desc: course.description,
-        course_credits: course.creditHours,
+        dialog=false,
+        course_name: '',
+        course_desc: '',
+        course_credits: 0 ,
         prereq_list: [],
-        isCore: course.isCore,
-        courseCode: course.courseCode,
+        isCore: false,
+        courseCode: null,
   }),
     
 }
