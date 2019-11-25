@@ -37,9 +37,7 @@
 import axios from 'axios';
 import editCourse from'./EditCourse.vue'
 export default {
-    
     name: "classComponent",
-    
     props: {
         course: Object,
     },
@@ -48,17 +46,17 @@ export default {
     },
     methods: {
         handleDeleteCourse: function() {
-            let deleteCourseUrl = 'user/advisor/course/'+course.course_ID;
+            let deleteCourseUrl = 'user/advisor/cousre/'+course.course_ID;
              axios.delete(deleteCourseUrl)
-            .then(response =>{})
+            .then(response =>{
+            })
             .catch(error =>{
                 console.log(error)
             });
         }
     },
     data: () => ({
-
-        dialog: false
+        dialog: false,
     }),
 }
 </script>

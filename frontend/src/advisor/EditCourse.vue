@@ -14,7 +14,7 @@
                     <v-row>
                     <v-col cols="1"></v-col>
                     <v-col cols="10">
-                    <v-text-field class = 'ma-12' dense label="Course Name" v-model="course_name" outlined></v-text-field>
+                    <v-text-field class = 'ma-12' dense label='Course Name' v-model='course_name' outlined></v-text-field>
                     <v-textarea class = 'mx-12 mt-n12' dense label="Course Description" v-model='course_desc' full-width counter single-line outlined maxlength = '128'></v-textarea>
                     </v-col>
                     <v-col cols="1"></v-col>
@@ -30,7 +30,7 @@
                         <v-col cols="4"></v-col>
                         <v-col cols="4">
                         <v-subheader> Credits </v-subheader>
-                        <v-text-field class = 'mx-4 mt-n4' readonly v-model = 'class_credits' single-line append-outer-icon="add" @click:append-outer="increment_credits" append-icon="remove" @click:append="decrement_credits"></v-text-field>
+                        <v-text-field class = 'mx-4 mt-n4' readonly v-model = 'course_credits' single-line append-outer-icon="add" @click:append-outer="increment_credits" append-icon="remove" @click:append="decrement_credits"></v-text-field>
                         </v-col>
                     </v-row>
                     <v-row>
@@ -79,16 +79,17 @@ export default {
     props: {
         course: Object,
     },
-    data: () => ({
-        dialog:false,
-        course_name: this.course.name,
-        course_desc: this.course.description,
-        course_credits: this.course.creditHours ,
-        prereq_list: [],
-        isCore: this.course.isCore,
-        courseCode: this.course.courseCode,
-  }),
-    
+    data: function() {
+        return {
+            dialog:false,
+            course_name: this.course.name,
+            course_desc: this.course.description,
+            course_credits: this.course.creditHours ,
+            prereq_list: [],
+            isCore: this.course.isCore,
+            courseCode: this.course.courseCode,
+        } 
+    }
 }
 </script>
    
