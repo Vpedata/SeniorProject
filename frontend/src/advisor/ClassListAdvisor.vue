@@ -110,10 +110,8 @@ export default {
         class_name: '',
         class_desc: '',
         class_credits: 0,
-        prereq_list: [],
         isCore: false,
-        courseCode: null,
-        name: " "
+        courseCode: null
     }),
 
     components: {

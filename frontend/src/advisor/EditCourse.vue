@@ -54,7 +54,7 @@
                     </v-col>
                     </v-row>
                     
-                    <v-btn flat class="success mx-0 mt-3">Update Course </v-btn>
+                    <v-btn flat class="success mx-0 mt-3" >Update Course </v-btn>
                     <v-btn flat color="red" dark class="mx-0 mt-3" @click="dialog=false">Cancel </v-btn>
                 </v-form>
             </v-card-text>
@@ -74,7 +74,8 @@ export default {
             if (this.class_credits > 0) {
                 this.class_credits = parseInt(this.class_credits,10)-1
             }
-        }
+        },
+
      },
     props: {
         course: Object,
@@ -85,7 +86,7 @@ export default {
             course_name: this.course.name,
             course_desc: this.course.description,
             course_credits: this.course.creditHours ,
-            prereq_list: [],
+            prereq_list: [this.course.PREREQCODES],
             isCore: this.course.isCore,
             courseCode: this.course.courseCode,
         } 
