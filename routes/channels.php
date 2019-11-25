@@ -12,5 +12,5 @@
 */
 
 Broadcast::channel('messages.{id}', function ($user, $id) {
-    return $user->id === (int) $id;
+    return (int) $user->user_ID === (int) $id;
 });

@@ -7,7 +7,7 @@
                 <ul>
                     <li v-for="(match, index) in matches" :key="index" :class="{ 'selected': (selected == index) }" @click="userClicked(index)">
                         <div class ="contact">
-                            <p class="name">{{ match.name }}</p>
+                            <p class="name">{{ match.firstName }} {{ match.lastName }}</p>
                             <p class="email">{{ match.email }}</p>
                         </div>
                     </li>
@@ -88,7 +88,8 @@
                 var results = [];
 
                 for(let i = 0; i < this.contacts.length; i++) {
-                    if(this.contacts[i].name.toLowerCase().includes(this.query.toLowerCase()) || this.contacts[i].email.toLowerCase().includes(this.query.toLowerCase())) {
+                    var name = this.contacts[i].firstName + ' ' + this.contacts[i].lastName;
+                    if(name.toLowerCase().includes(this.query.toLowerCase()) || this.contacts[i].email.toLowerCase().includes(this.query.toLowerCase())) {
                         results.push(this.contacts[i]);
                     }
                 }

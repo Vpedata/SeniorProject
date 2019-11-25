@@ -12,33 +12,34 @@ class ContactsController extends Controller
 {
     public function get() {
         // get all users except the authenticated one
-        $contacts = User::where('id', '!=', auth()->id())->get();
+        $contacts = User::where('user_ID', '!=', auth()->id())->get();
 
-        $unreadIds = Message::select(\DB::raw('`from` as sender_id, count(`from`) as messages_count'))
-            ->where('to', auth()->id())
+        $unreadIds = Message::select(\DB::raw('`sender` as sender_id, count(`sender`) as messages_count'))
+            ->where('reciever', auth()->id())
             ->where('read', false)
-            ->groupBy('from')
+            ->groupBy('sender')
             ->get();
 
         $contacts = $contacts->map(function($contact) use ($unreadIds) {
-            $contactUnread = $unreadIds->where('sender_id', $contact->id)->first();
+            $contactUnread = $unreadIds->where('sender_id', $contact->user_ID)->first();
 
             $contact->unread = $contactUnread ? $contactUnread->messages_count : 0;
 
             return $contact;
         });
+
         return response()->json($contacts);
     }
 
     public function getMessagesFor($id) {
         // mark all messages with the selected contact as read
-        Message::where('from', $id)->where('to', auth()->id())->update(['read' => true]);
+        Message::where('sender', $id)->where('reciever', auth()->id())->update(['read' => true]);
         $messages = Message::where(function($q) use ($id) {
-            $q->where('from', auth()->id());
-            $q->where('to', $id);
+            $q->where('sender', auth()->id());
+            $q->where('reciever', $id);
         })->orWhere(function($q) use ($id) {
-            $q->where('from', $id);
-            $q->where('to', auth()->id());
+            $q->where('sender', $id);
+            $q->where('reciever', auth()->id());
         })->get(); // (a = 1 AND b = 2) OR (c = 1 OR d = 2)
 
         return response()->json($messages);
@@ -46,9 +47,12 @@ class ContactsController extends Controller
 
     public function send(Request $request) {
         $message = Message::create([
-            'from' => auth()->id(),
-            'to' => $request->contact_id,
-            'text' => $request->text
+            'sender' => auth()->id(),
+            'reciever' => $request->contact_id,
+            'content' => $request->text,
+            'isFromUser' => $request->isFromUser,
+            'timeSent' => date("Y-m-d h:i:s"),
+            'read' => 0
         ]);
 
         broadcast(new NewMessage($message));
@@ -57,11 +61,11 @@ class ContactsController extends Controller
     }
 
     public function onlineContacts() {
-        $onlineContacts = User::where('id', '!=', auth()->id())->get();
+        $onlineContacts = User::where('user_ID', '!=', auth()->id())->get();
 
         $onlineContacts = $onlineContacts->map(function($contact) {
 
-            $contact->online = Cache::has('active-user' . $contact->id) ? true : false;
+            $contact->online = Cache::has('active-user' . $contact->user_ID) ? true : false;
 
             return $contact;
         });

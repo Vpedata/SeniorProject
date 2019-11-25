@@ -1,9 +1,9 @@
 <template>
     <div class="feed" ref="feed">
         <ul v-if="contact">
-            <li v-for="message in messages" :class="`message${message.to == contact.id ? ' sent' : ' received'}`" :key="message.id">
+            <li v-for="message in messages" :class="`message${message.isFromUser ? (message.reciever == contact.user_ID ? ' sent' : ' received') : ' system'}`" :key="message.message_ID">
                 <div class="text">
-                    {{ message.text }}
+                    {{ message.content }}
                 </div>
             </li>
         </ul>
@@ -76,6 +76,19 @@
 
                         .text {
                             background: #ffee00;
+                        }
+                    }
+
+                    &.system {
+                        text-align: center;
+                        border-top-style: solid;
+                        border-bottom-style: solid;
+                        border-color: #000000;
+                        border-width: 2px;
+
+                        .text {
+                            background: transparent;
+                            color: #555555;
                         }
                     }
                 }

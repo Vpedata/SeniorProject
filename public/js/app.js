@@ -1866,12 +1866,14 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    Echo["private"]("messages.".concat(this.user.id)).listen('NewMessage', function (e) {
+    Echo["private"]("messages.".concat(this.user.user_ID)).listen('NewMessage', function (e) {
+      console.log(e.message);
+
       _this.handleIncoming(e.message);
     });
-    axios.get('/contacts').then(function (response) {
-      //console.log(response.data);
-      _this.contacts = response.data;
+    axios.get('/messenger/contacts').then(function (response) {
+      // console.log(response.data);
+      _this.contacts = response.data; // console.log(this.contacts);
     });
   },
   methods: {
@@ -1879,7 +1881,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.updateUnreadCount(contact, true);
-      axios.get("/conversation/".concat(contact.id)).then(function (response) {
+      axios.get("/messenger/conversation/".concat(contact.user_ID)).then(function (response) {
         _this2.messages = response.data;
         _this2.selectedContact = contact;
       });
@@ -1888,7 +1890,7 @@ __webpack_require__.r(__webpack_exports__);
       this.messages.push(message);
     },
     handleIncoming: function handleIncoming(message) {
-      if (this.selectedContact && message.from == this.selectedContact.id) {
+      if (this.selectedContact && message.sender == this.selectedContact.user_ID) {
         this.saveNewMessage(message);
         return;
       }
@@ -1898,7 +1900,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateUnreadCount: function updateUnreadCount(contact, reset) {
       this.contacts = this.contacts.map(function (single) {
-        if (single.id !== contact.id) {
+        if (single.user_ID !== contact.user_ID) {
           return single;
         }
 
@@ -1979,8 +1981,8 @@ __webpack_require__.r(__webpack_exports__);
     this.$root.$on('updateMessages', function () {
       _this.updateMessages();
     });
-    axios.get('/messages').then(function (response) {
-      //console.log(response.data);
+    axios.get('/messenger/messages').then(function (response) {
+      // console.log(response.data);
       _this.messages = response.data;
     });
     this.interval = setInterval(function () {
@@ -2002,19 +2004,19 @@ __webpack_require__.r(__webpack_exports__);
     updateMessages: function updateMessages() {
       var _this2 = this;
 
-      axios.get('/messages').then(function (response) {
+      axios.get('/messenger/messages').then(function (response) {
         _this2.messages = response.data;
       });
     },
     updateOnline: function updateOnline() {
       var _this3 = this;
 
-      axios.get('/contacts/onlineContacts').then(function (response) {
+      axios.get('/messenger/contacts/onlineContacts').then(function (response) {
         _this3.onlineContacts = response.data;
       });
     },
     checkStudent: function checkStudent() {
-      if (this.user.isStudent === 1) {
+      if (this.user.IsStudent === 1) {
         this.studentUser = true;
       } else {
         this.studentUser = false;
@@ -2035,21 +2037,23 @@ __webpack_require__.r(__webpack_exports__);
       var notContacts = []; //console.log('-------- NEW --------');
 
       var temp = _.sortBy(this.contacts, [function (contact) {
-        // console.log(contact.name + ': ' + contact.id);
+        // console.log(contact.firstName + ': ' + contact.user_ID);
+        // console.log('contact: ' + contact.user_ID);
         var recent = -1;
 
         for (var i in _this4.messages) {
-          var message = _this4.messages[i];
+          var message = _this4.messages[i]; // console.log(message.message_ID + ': sender -> ' + message.sender + ' | reciever -> ' + message.reciever);
+          // if(i == 1) {console.log(message);}
 
-          if (message.to === contact.id && message.from === _this4.user.id || message.to === _this4.user.id && message.from === contact.id) {
-            if (message.id > recent) {
-              recent = message.id;
+          if (message.reciever === contact.user_ID && message.sender === _this4.user.user_ID || message.reciever === _this4.user.user_ID && message.sender === contact.user_ID) {
+            if (message.message_ID > recent) {
+              recent = message.message_ID;
             }
           }
         }
 
         if (recent === -1) {
-          // console.log(contact.name + ' - ' + contact.id)
+          // console.log(contact.firstName + ' - ' + contact.user_ID);
           notContacts.push(contact); // console.log(notContacts);
         } // console.log('Message ID: ' + recent);
 
@@ -2061,7 +2065,8 @@ __webpack_require__.r(__webpack_exports__);
         var con = notContacts[i];
         var index = temp.indexOf(con);
         temp.splice(index);
-      }
+      } // console.log(temp);
+
 
       return temp; // return this.contacts.sort(function (a, b) {
       //     return new Date(b.updated_at) - new Date(a.updated_at);
@@ -2115,9 +2120,10 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.post('/conversation/send', {
-        contact_id: this.contact.id,
-        text: text
+      axios.post('/messenger/conversation/send', {
+        contact_id: this.contact.user_ID,
+        text: text,
+        isFromUser: 1
       }).then(function (response) {
         _this.$emit('new', response.data);
       });
@@ -2318,7 +2324,9 @@ __webpack_require__.r(__webpack_exports__);
       var results = [];
 
       for (var i = 0; i < this.contacts.length; i++) {
-        if (this.contacts[i].name.toLowerCase().includes(this.query.toLowerCase()) || this.contacts[i].email.toLowerCase().includes(this.query.toLowerCase())) {
+        var name = this.contacts[i].firstName + ' ' + this.contacts[i].lastName;
+
+        if (name.toLowerCase().includes(this.query.toLowerCase()) || this.contacts[i].email.toLowerCase().includes(this.query.toLowerCase())) {
           results.push(this.contacts[i]);
         }
       } //console.log(this.contacts.filter((contact) => contact[name].toLowerCase()).includes(this.query.toLowerCase()));
@@ -8755,7 +8763,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".chat-app[data-v-1da0bc8e] {\n  display: -webkit-box;\n  display: flex;\n}", ""]);
+exports.push([module.i, ".chat-app[data-v-1da0bc8e] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}", ""]);
 
 // exports
 
@@ -8774,7 +8782,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".contacts-list[data-v-484f3208] {\n  -webkit-box-flex: 2;\n          flex: 2;\n  height: 600px;\n  border-left: 1px solid #a6a6a6;\n}\n.contacts-list .conlist[data-v-484f3208] {\n  max-height: 560px;\n  overflow: auto;\n}\n.contacts-list .conlist ul[data-v-484f3208] {\n  list-style-type: none;\n  padding-left: 0;\n}\n.contacts-list .conlist ul li[data-v-484f3208] {\n  display: -webkit-box;\n  display: flex;\n  padding: 2px;\n  border-bottom: 1px solid #aaaaaa;\n  height: 80px;\n  position: relative;\n  cursor: pointer;\n}\n.contacts-list .conlist ul li.selected[data-v-484f3208] {\n  background: #dfdfdf;\n}\n.contacts-list .conlist ul li span.unread[data-v-484f3208] {\n  background: #82e0a8;\n  color: #ffffff;\n  position: absolute;\n  right: 11px;\n  top: 20px;\n  display: -webkit-box;\n  display: flex;\n  font-weight: 700;\n  min-width: 20px;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n  line-height: 20px;\n  font-size: 12px;\n  padding: 0 4px;\n  border-radius: 3px;\n}\n.contacts-list .conlist ul li span.online[data-v-484f3208] {\n  height: 10px;\n  width: 10px;\n  background-color: #01ff00;\n  border-radius: 50%;\n  display: inline-block;\n  position: absolute;\n  right: 10px;\n  top: 10px;\n}\n.contacts-list .conlist ul li span.offline[data-v-484f3208] {\n  height: 10px;\n  width: 10px;\n  background-color: #777777;\n  border-radius: 50%;\n  display: inline-block;\n  position: absolute;\n  right: 10px;\n  top: 10px;\n}\n.contacts-list .conlist ul li .avatar[data-v-484f3208] {\n  -webkit-box-flex: 1;\n          flex: 1;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-align: center;\n          align-items: center;\n}\n.contacts-list .conlist ul li .avatar img[data-v-484f3208] {\n  width: 35px;\n  border-radius: 50%;\n  margin: 0 auto;\n}\n.contacts-list .conlist ul li .contact[data-v-484f3208] {\n  -webkit-box-flex: 3;\n          flex: 3;\n  font-size: 10px;\n  overflow: hidden;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  -webkit-box-pack: center;\n          justify-content: center;\n}\n.contacts-list .conlist ul li .contact p[data-v-484f3208] {\n  margin: 0;\n}\n.contacts-list .conlist ul li .contact p.name[data-v-484f3208] {\n  font-weight: bold;\n}", ""]);
+exports.push([module.i, ".contacts-list[data-v-484f3208] {\n  -webkit-box-flex: 2;\n      -ms-flex: 2;\n          flex: 2;\n  height: 600px;\n  border-left: 1px solid #a6a6a6;\n}\n.contacts-list .conlist[data-v-484f3208] {\n  max-height: 560px;\n  overflow: auto;\n}\n.contacts-list .conlist ul[data-v-484f3208] {\n  list-style-type: none;\n  padding-left: 0;\n}\n.contacts-list .conlist ul li[data-v-484f3208] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding: 2px;\n  border-bottom: 1px solid #aaaaaa;\n  height: 80px;\n  position: relative;\n  cursor: pointer;\n  /*.avatar {*/\n  /*    flex: 1;*/\n  /*    display: flex;*/\n  /*    align-items: center;*/\n  /*    img {*/\n  /*        width: 35px;*/\n  /*        border-radius: 50%;*/\n  /*        margin: 0 auto;*/\n  /*    }*/\n  /*}*/\n}\n.contacts-list .conlist ul li.selected[data-v-484f3208] {\n  background: #dfdfdf;\n}\n.contacts-list .conlist ul li span.unread[data-v-484f3208] {\n  background: #82e0a8;\n  color: #ffffff;\n  position: absolute;\n  right: 11px;\n  top: 20px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  font-weight: 700;\n  min-width: 20px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  line-height: 20px;\n  font-size: 12px;\n  padding: 0 4px;\n  border-radius: 3px;\n}\n.contacts-list .conlist ul li span.online[data-v-484f3208] {\n  height: 10px;\n  width: 10px;\n  background-color: #01ff00;\n  border-radius: 50%;\n  display: inline-block;\n  position: absolute;\n  right: 10px;\n  top: 10px;\n}\n.contacts-list .conlist ul li span.offline[data-v-484f3208] {\n  height: 10px;\n  width: 10px;\n  background-color: #777777;\n  border-radius: 50%;\n  display: inline-block;\n  position: absolute;\n  right: 10px;\n  top: 10px;\n}\n.contacts-list .conlist ul li .contact[data-v-484f3208] {\n  -webkit-box-flex: 3;\n      -ms-flex: 3;\n          flex: 3;\n  font-size: 12px;\n  overflow: hidden;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.contacts-list .conlist ul li .contact p[data-v-484f3208] {\n  margin: 0;\n  margin-left: 5px;\n}\n.contacts-list .conlist ul li .contact p.name[data-v-484f3208] {\n  font-weight: bold;\n}", ""]);
 
 // exports
 
@@ -8793,7 +8801,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".conversation[data-v-63f956ee] {\n  -webkit-box-flex: 5;\n          flex: 5;\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  -webkit-box-pack: justify;\n          justify-content: space-between;\n}\n.conversation h1[data-v-63f956ee] {\n  font-size: 20px;\n  padding: 10px;\n  margin: 0;\n  border-bottom: 1px dashed #dddddd;\n}", ""]);
+exports.push([module.i, ".conversation[data-v-63f956ee] {\n  -webkit-box-flex: 5;\n      -ms-flex: 5;\n          flex: 5;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.conversation h1[data-v-63f956ee] {\n  font-size: 20px;\n  padding: 10px;\n  margin: 0;\n  border-bottom: 1px dashed #dddddd;\n}", ""]);
 
 // exports
 
@@ -8831,7 +8839,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".feed[data-v-4b6ab3f5] {\n  background: #f0f0f0;\n  height: 100%;\n  max-height: 470px;\n  overflow: auto;\n}\n.feed ul[data-v-4b6ab3f5] {\n  list-style-type: none;\n  padding: 5px;\n}\n.feed ul li.message[data-v-4b6ab3f5] {\n  margin: 10px 0;\n  width: 100%;\n}\n.feed ul li.message .text[data-v-4b6ab3f5] {\n  max-width: 300px;\n  border-radius: 5px;\n  padding: 12px;\n  display: inline-block;\n}\n.feed ul li.message.received[data-v-4b6ab3f5] {\n  text-align: left;\n}\n.feed ul li.message.received .text[data-v-4b6ab3f5] {\n  background: #602e00;\n  color: #ffffff;\n}\n.feed ul li.message.sent[data-v-4b6ab3f5] {\n  text-align: right;\n}\n.feed ul li.message.sent .text[data-v-4b6ab3f5] {\n  background: #ffee00;\n}", ""]);
+exports.push([module.i, ".feed[data-v-4b6ab3f5] {\n  background: #f0f0f0;\n  height: 100%;\n  max-height: 470px;\n  overflow: auto;\n}\n.feed ul[data-v-4b6ab3f5] {\n  list-style-type: none;\n  padding: 5px;\n}\n.feed ul li.message[data-v-4b6ab3f5] {\n  margin: 10px 0;\n  width: 100%;\n}\n.feed ul li.message .text[data-v-4b6ab3f5] {\n  max-width: 300px;\n  border-radius: 5px;\n  padding: 12px;\n  display: inline-block;\n}\n.feed ul li.message.received[data-v-4b6ab3f5] {\n  text-align: left;\n}\n.feed ul li.message.received .text[data-v-4b6ab3f5] {\n  background: #602e00;\n  color: #ffffff;\n}\n.feed ul li.message.sent[data-v-4b6ab3f5] {\n  text-align: right;\n}\n.feed ul li.message.sent .text[data-v-4b6ab3f5] {\n  background: #ffee00;\n}\n.feed ul li.message.system[data-v-4b6ab3f5] {\n  text-align: center;\n  border-top-style: solid;\n  border-bottom-style: solid;\n  border-color: #000000;\n  border-width: 2px;\n}\n.feed ul li.message.system .text[data-v-4b6ab3f5] {\n  background: transparent;\n  color: #555555;\n}", ""]);
 
 // exports
 
@@ -8850,7 +8858,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".search-bar[data-v-6849e9f0] {\n  width: 100%;\n  position: relative;\n}\n.input[data-v-6849e9f0] {\n  height: 40px;\n  border-radius: 3px;\n  border: 2px solid lightgray;\n  box-shadow: 0 0 10px #eceaea;\n  font-size: 15px;\n  padding-left: 10px;\n  padding-top: 7px;\n  cursor: pointer;\n}\n.popover[data-v-6849e9f0] {\n  min-height: 50px;\n  border: 2px solid lightgray;\n  position: absolute;\n  top: 38px;\n  left: 0px;\n  right: 0px;\n  background: #ffffff;\n  border-radius: 3px;\n  text-align: center;\n}\n.popover input[data-v-6849e9f0] {\n  width: 95%;\n  margin-top: 5px;\n  height: 40px;\n  font-size: 16px;\n  border-radius: 3px;\n  border: 1px solid lightgray;\n  padding-left: 8px;\n}\n.options[data-v-6849e9f0] {\n  max-height: 150px;\n  overflow-y: scroll;\n  margin-top: 5px;\n  border: 1px solid black;\n}\n.options ul[data-v-6849e9f0] {\n  list-style-type: none;\n  text-align: left;\n  padding-left: 0;\n  border-right: 1px solid gray;\n}\n.options ul li[data-v-6849e9f0] {\n  border-bottom: 1px solid gray;\n  padding: 10px;\n  cursor: pointer;\n  background: #f1f1f1;\n}\n.options ul li p[data-v-6849e9f0] {\n  font-size: 14px;\n  margin: 0;\n}\n.options ul li.selected[data-v-6849e9f0] {\n  background: #1762ff;\n  color: #ffffff;\n  font-weight: bold;\n}", ""]);
+exports.push([module.i, ".search-bar[data-v-6849e9f0] {\n  width: 100%;\n  position: relative;\n}\n.input[data-v-6849e9f0] {\n  height: 40px;\n  border-radius: 3px;\n  border: 2px solid lightgray;\n  -webkit-box-shadow: 0 0 10px #eceaea;\n          box-shadow: 0 0 10px #eceaea;\n  font-size: 15px;\n  padding-left: 10px;\n  padding-top: 7px;\n  cursor: pointer;\n}\n.popover[data-v-6849e9f0] {\n  min-height: 50px;\n  border: 2px solid lightgray;\n  position: absolute;\n  top: 38px;\n  left: 0px;\n  right: 0px;\n  background: #ffffff;\n  border-radius: 3px;\n  text-align: center;\n}\n.popover input[data-v-6849e9f0] {\n  width: 95%;\n  margin-top: 5px;\n  height: 40px;\n  font-size: 16px;\n  border-radius: 3px;\n  border: 1px solid lightgray;\n  padding-left: 8px;\n}\n.options[data-v-6849e9f0] {\n  max-height: 150px;\n  overflow-y: scroll;\n  margin-top: 5px;\n  border: 1px solid black;\n}\n.options ul[data-v-6849e9f0] {\n  list-style-type: none;\n  text-align: left;\n  padding-left: 0;\n  border-right: 1px solid gray;\n}\n.options ul li[data-v-6849e9f0] {\n  border-bottom: 1px solid gray;\n  padding: 10px;\n  cursor: pointer;\n  background: #f1f1f1;\n}\n.options ul li p[data-v-6849e9f0] {\n  font-size: 14px;\n  margin: 0;\n}\n.options ul li.selected[data-v-6849e9f0] {\n  background: #1762ff;\n  color: #ffffff;\n  font-weight: bold;\n}", ""]);
 
 // exports
 
@@ -48418,7 +48426,7 @@ var render = function() {
             return _c(
               "li",
               {
-                key: contact.id,
+                key: contact.user_ID,
                 class: { selected: contact == _vm.selected },
                 on: {
                   click: function($event) {
@@ -48427,15 +48435,11 @@ var render = function() {
                 }
               },
               [
-                _c("div", { staticClass: "avatar" }, [
-                  _c("img", {
-                    attrs: { src: contact.profile_image, alt: contact.name }
-                  })
-                ]),
-                _vm._v(" "),
                 _c("div", { staticClass: "contact" }, [
                   _c("p", { staticClass: "name" }, [
-                    _vm._v(_vm._s(contact.name))
+                    _vm._v(
+                      _vm._s(contact.firstName) + " " + _vm._s(contact.lastName)
+                    )
                   ]),
                   _vm._v(" "),
                   _c("p", { staticClass: "email" }, [
@@ -48450,13 +48454,15 @@ var render = function() {
                   : _vm._e(),
                 _vm._v(" "),
                 _vm._l(_vm.onlineContacts, function(onlineContact) {
-                  return contact.id == onlineContact.id && onlineContact.online
+                  return contact.user_ID == onlineContact.user_ID &&
+                    onlineContact.online
                     ? _c("span", { staticClass: "online" })
                     : _vm._e()
                 }),
                 _vm._v(" "),
                 _vm._l(_vm.onlineContacts, function(onlineContact) {
-                  return contact.id == onlineContact.id && !onlineContact.online
+                  return contact.user_ID == onlineContact.user_ID &&
+                    !onlineContact.online
                     ? _c("span", { staticClass: "offline" })
                     : _vm._e()
                 })
@@ -48498,7 +48504,13 @@ var render = function() {
     { staticClass: "conversation" },
     [
       _c("h1", [
-        _vm._v(_vm._s(_vm.contact ? _vm.contact.name : "Select a Contact"))
+        _vm._v(
+          _vm._s(
+            _vm.contact
+              ? _vm.contact.firstName + " " + _vm.contact.lastName
+              : "Select a Contact"
+          )
+        )
       ]),
       _vm._v(" "),
       _c("MessagesFeed", {
@@ -48596,16 +48608,20 @@ var render = function() {
             return _c(
               "li",
               {
-                key: message.id,
+                key: message.message_ID,
                 class:
                   "message" +
-                  (message.to == _vm.contact.id ? " sent" : " received")
+                  (message.isFromUser
+                    ? message.reciever == _vm.contact.user_ID
+                      ? " sent"
+                      : " received"
+                    : " system")
               },
               [
                 _c("div", { staticClass: "text" }, [
                   _vm._v(
                     "\n                " +
-                      _vm._s(message.text) +
+                      _vm._s(message.content) +
                       "\n            "
                   )
                 ])
@@ -48723,7 +48739,9 @@ var render = function() {
                   [
                     _c("div", { staticClass: "contact" }, [
                       _c("p", { staticClass: "name" }, [
-                        _vm._v(_vm._s(match.name))
+                        _vm._v(
+                          _vm._s(match.firstName) + " " + _vm._s(match.lastName)
+                        )
                       ]),
                       _vm._v(" "),
                       _c("p", { staticClass: "email" }, [
@@ -61510,8 +61528,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/josiahbelle/Documents/learning_laravel/chat/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/josiahbelle/Documents/learning_laravel/chat/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/josiahbelle/Documents/learning_laravel/SeniorProject/frontend/src/chat-messenger/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/josiahbelle/Documents/learning_laravel/SeniorProject/frontend/src/chat-messenger/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

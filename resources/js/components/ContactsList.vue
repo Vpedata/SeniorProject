@@ -3,18 +3,18 @@
         <SearchBar :contacts="contacts" :user="user" v-if="!studentUser"></SearchBar>
         <div class="conlist">
             <ul>
-                <li v-for="contact in sortedContacts" :key="contact.id" @click="selectContact(contact)" :class="{ 'selected': contact == selected }">
+                <li v-for="contact in sortedContacts" :key="contact.user_ID" @click="selectContact(contact)" :class="{ 'selected': contact == selected }">
 
-                    <div class="avatar">
-                        <img :src="contact.profile_image" :alt="contact.name">
-                    </div>
+<!--                    <div class="avatar">-->
+<!--                        <img :src="contact.profile_image" :alt="contact.name">-->
+<!--                    </div>-->
                     <div class ="contact">
-                        <p class="name">{{ contact.name }}</p>
+                        <p class="name">{{ contact.firstName }} {{ contact.lastName }}</p>
                         <p class="email">{{ contact.email }}</p>
                     </div>
                     <span class="unread" v-if="contact.unread">{{ contact.unread }}</span>
-                    <span v-for="onlineContact in onlineContacts" class="online" v-if="contact.id == onlineContact.id && onlineContact.online"></span>
-                    <span v-for="onlineContact in onlineContacts" class="offline" v-if="contact.id == onlineContact.id && !onlineContact.online"></span>
+                    <span v-for="onlineContact in onlineContacts" class="online" v-if="contact.user_ID == onlineContact.user_ID && onlineContact.online"></span>
+                    <span v-for="onlineContact in onlineContacts" class="offline" v-if="contact.user_ID == onlineContact.user_ID && !onlineContact.online"></span>
                 </li>
             </ul>
         </div>
@@ -46,9 +46,9 @@
             this.$root.$on('updateMessages', () => {
                 this.updateMessages();
                 });
-            axios.get('/messages')
+            axios.get('/messenger/messages')
                 .then((response) => {
-                    //console.log(response.data);
+                    // console.log(response.data);
                     this.messages = response.data;
                 });
             this.interval = setInterval(() => this.updateOnline(), 1000);
@@ -66,19 +66,19 @@
                 this.$emit('selected', contact);
             },
             updateMessages() {
-                    axios.get('/messages')
+                    axios.get('/messenger/messages')
                         .then((response) => {
                             this.messages = response.data;
                         });
             },
             updateOnline() {
-                axios.get('/contacts/onlineContacts')
+                axios.get('/messenger/contacts/onlineContacts')
                     .then((response) => {
                         this.onlineContacts = response.data;
                     });
             },
             checkStudent() {
-                if(this.user.isStudent === 1) {
+                if(this.user.IsStudent === 1) {
                     this.studentUser = true;
                 } else {
                     this.studentUser = false;
@@ -99,19 +99,22 @@
                 var notContacts = [];
                 //console.log('-------- NEW --------');
                 var temp = _.sortBy(this.contacts, [(contact) => {
-                    // console.log(contact.name + ': ' + contact.id);
+                    // console.log(contact.firstName + ': ' + contact.user_ID);
+                    // console.log('contact: ' + contact.user_ID);
                     var recent = -1;
                     for(let i in this.messages) {
                         var message = this.messages[i];
-                        if((message.to === contact.id && message.from === this.user.id) || (message.to === this.user.id && message.from === contact.id)) {
-                            if(message.id > recent) {
-                                recent = message.id;
+                        // console.log(message.message_ID + ': sender -> ' + message.sender + ' | reciever -> ' + message.reciever);
+                        // if(i == 1) {console.log(message);}
+                        if((message.reciever === contact.user_ID && message.sender === this.user.user_ID) || (message.reciever === this.user.user_ID && message.sender === contact.user_ID)) {
+                            if(message.message_ID > recent) {
+                                recent = message.message_ID;
                             }
                         }
                     }
 
                     if(recent === -1) {
-                        // console.log(contact.name + ' - ' + contact.id)
+                        // console.log(contact.firstName + ' - ' + contact.user_ID);
                         notContacts.push(contact);
                         // console.log(notContacts);
                     }
@@ -125,6 +128,7 @@
                     temp.splice(index);
                 }
 
+                // console.log(temp);
                 return temp;
 
 
@@ -201,21 +205,21 @@
                         top: 10px;
                     }
 
-                    .avatar {
-                        flex: 1;
-                        display: flex;
-                        align-items: center;
+                    /*.avatar {*/
+                    /*    flex: 1;*/
+                    /*    display: flex;*/
+                    /*    align-items: center;*/
 
-                        img {
-                            width: 35px;
-                            border-radius: 50%;
-                            margin: 0 auto;
-                        }
-                    }
+                    /*    img {*/
+                    /*        width: 35px;*/
+                    /*        border-radius: 50%;*/
+                    /*        margin: 0 auto;*/
+                    /*    }*/
+                    /*}*/
 
                     .contact {
                         flex: 3;
-                        font-size: 10px;
+                        font-size: 12px;
                         overflow: hidden;
                         display: flex;
                         flex-direction: column;
@@ -223,6 +227,7 @@
 
                         p {
                             margin: 0;
+                            margin-left: 5px;
 
                             &.name {
                                 font-weight: bold;

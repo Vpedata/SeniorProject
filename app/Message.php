@@ -8,7 +8,11 @@ class Message extends Model
 {
     protected $guarded = [];
 
+    protected $table = 'Message';
+
+    protected $primaryKey = 'message_ID';
+
     public function fromContact() {
-        return $this->hasOne(User::class, 'id', 'from');
+        return $this->hasOne(User::class, 'user_ID', 'sender');
     }
 }

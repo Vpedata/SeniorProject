@@ -1,6 +1,6 @@
 <template>
     <div class="conversation">
-        <h1>{{ contact ? contact.name : 'Select a Contact'}}</h1>
+        <h1>{{ contact ? contact.firstName + ' ' + contact.lastName : 'Select a Contact'}}</h1>
         <MessagesFeed :contact="contact" :messages="messages" />
         <MessageComposer @send="sendMessage" v-if="contact" />
     </div>
@@ -27,9 +27,10 @@
                     return;
                 }
 
-                axios.post('/conversation/send', {
-                    contact_id: this.contact.id,
+                axios.post('/messenger/conversation/send', {
+                    contact_id: this.contact.user_ID,
                     text: text,
+                    isFromUser: 1,
                 }).then((response) => {
                     this.$emit('new', response.data);
                 });

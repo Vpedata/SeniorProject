@@ -20,25 +20,27 @@
             return {
                 selectedContact: null,
                 messages: [],
-                contacts: []
+                contacts: [],
             };
         },
         mounted() {
-            Echo.private(`messages.${this.user.id}`)
+            Echo.private(`messages.${this.user.user_ID}`)
                 .listen('NewMessage', (e) => {
+                    console.log(e.message);
                     this.handleIncoming(e.message);
                 });
-            axios.get('/contacts')
+            axios.get('/messenger/contacts')
                 .then((response) => {
-                    //console.log(response.data);
+                    // console.log(response.data);
                     this.contacts = response.data;
+                    // console.log(this.contacts);
             });
         },
         methods: {
             startConversationWith(contact) {
                 this.updateUnreadCount(contact, true);
 
-                axios.get(`/conversation/${contact.id}`)
+                axios.get(`/messenger/conversation/${contact.user_ID}`)
                     .then((response) => {
                         this.messages = response.data;
                         this.selectedContact = contact;
@@ -48,7 +50,7 @@
                 this.messages.push(message);
             },
             handleIncoming(message) {
-                if (this.selectedContact && message.from == this.selectedContact.id) {
+                if (this.selectedContact && message.sender == this.selectedContact.user_ID) {
                     this.saveNewMessage(message);
                     return;
                 }
@@ -58,7 +60,7 @@
             },
             updateUnreadCount(contact, reset) {
                 this.contacts = this.contacts.map((single) => {
-                    if(single.id !== contact.id) {
+                    if(single.user_ID !== contact.user_ID) {
                         return single;
                     }
 
