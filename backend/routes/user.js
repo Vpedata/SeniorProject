@@ -53,10 +53,6 @@ router.get("/:id",authMiddleware, (req, res, next) => {
   })
 });
 
-router.get("/chatapp", (req, res, next) => {
-    res.sendFile("../../../frontend/src/chat-messenger/public/index.php");
-});
-
 /**
 //Delete an user
 router.delete("/:id", (req, res, next) => {

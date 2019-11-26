@@ -11,19 +11,19 @@
 |
 */
 
-Route::get('/messenger', function() {
+Route::get('/', function() {
     return view('welcome');
 });
 
 
 
-Route::get('/messenger/contacts', 'ContactsController@get');
-Route::get('/messenger/conversation/{id}', 'ContactsController@getMessagesFor');
-Route::post('/messenger/conversation/send', 'ContactsController@send');
-Route::get('/messenger/contacts/onlineContacts', 'ContactsController@onlineContacts');
+Route::get('/contacts', 'ContactsController@get');
+Route::get('/conversation/{id}', 'ContactsController@getMessagesFor');
+Route::post('/conversation/send', 'ContactsController@send');
+Route::get('/contacts/onlineContacts', 'ContactsController@onlineContacts');
 
-Route::get('/messenger/messages', 'MessagesController@get');
+Route::get('/messages', 'MessagesController@get');
 
-Route::get('/messenger/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/messenger/{uid}', 'Auth\LoginController@postLogin');
+Route::get('/{uid}', 'Auth\LoginController@postLogin');
