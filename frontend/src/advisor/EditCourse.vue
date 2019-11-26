@@ -46,7 +46,7 @@
                     </v-row>
                     <v-chip 
                         v-for="prereq in prereq_list" 
-                        :key="prereq.id" 
+                        :key="prereq" 
                         v-model="prereq.isOpen"
                         >
                         {{prereq}}
@@ -65,15 +65,6 @@
 
 export default {
     computed: {
-        prereq_list : {
-            get : function() {
-                let prereq_list = [];
-                if(this.course.PREREQCODES){
-                    prereq_list= this.course.PREREQCODES.split(",");
-                }
-                return prereq_list
-            }
-        }
     },
      methods: {
        increment_credits () {
@@ -85,8 +76,14 @@ export default {
             if (this.class_credits > 0) {
                 this.class_credits = parseInt(this.class_credits,10)-1
             }
+        },
+        prereq_list : function() {
+            let prereq_list = [];
+            if(this.course.PREREQCODES){
+                prereq_list= this.course.PREREQCODES.split(",");
+            }
+            return prereq_list
         }
-        
 
      },
     props: {
