@@ -17,7 +17,6 @@
                     <v-divider></v-divider>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="green" text @click="dialog = false" v-on:click="$emit('transfer',course)">Transfer</v-btn>
                         <v-btn color="blue" text @click="dialog = false">Ok</v-btn>
                     </v-card-actions>
                 </v-card>
@@ -25,7 +24,7 @@
             </v-list-item-content>
             <v-list-item-action>
                     <v-row>
-                    <v-btn class="mx-2" fab dark small color="green" >
+                    <v-btn class="mx-2" fab dark small color="green" v-on:click="$emit('transfer',course)">
                         <v-icon dark>mdi-plus-circle-outline</v-icon>
                     </v-btn>
                     </v-row>
