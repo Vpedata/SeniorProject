@@ -53,7 +53,7 @@ router.get("/:id",authMiddleware, (req, res, next) => {
   })
 });
 
-/**  
+/**
 //Delete an user
 router.delete("/:id", (req, res, next) => {
   var sql = "DELETE FROM User WHERE user_ID = ?";

@@ -27,7 +27,7 @@
                     return;
                 }
 
-                axios.post('/messenger/conversation/send', {
+                axios.post('/conversation/send', {
                     contact_id: this.contact.user_ID,
                     text: text,
                     isFromUser: 1,

@@ -46,7 +46,7 @@
             this.$root.$on('updateMessages', () => {
                 this.updateMessages();
                 });
-            axios.get('/messenger/messages')
+            axios.get('/messages')
                 .then((response) => {
                     // console.log(response.data);
                     this.messages = response.data;
@@ -66,13 +66,13 @@
                 this.$emit('selected', contact);
             },
             updateMessages() {
-                    axios.get('/messenger/messages')
+                    axios.get('/messages')
                         .then((response) => {
                             this.messages = response.data;
                         });
             },
             updateOnline() {
-                axios.get('/messenger/contacts/onlineContacts')
+                axios.get('/contacts/onlineContacts')
                     .then((response) => {
                         this.onlineContacts = response.data;
                     });
