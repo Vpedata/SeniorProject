@@ -107,8 +107,8 @@ export default {
       axios.get('/user/student/courses/getUserRecommend')
       .then(response =>{
          var obj = response.data[0]; 
-         this.courses = Object.keys(obj).map(key => obj[key]);
-         console.info(this.courses);
+         this.selected = Object.keys(obj).map(key => obj[key]);
+         console.info(this.selected);
       })
       .catch(error =>{
           console.log(error)
