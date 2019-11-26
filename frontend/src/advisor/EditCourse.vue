@@ -68,7 +68,7 @@ export default {
         if(this.course.PREREQCODES){
             var temp_prereq_list= this.course.PREREQCODES.split(",");
             for (var i = 0; i < temp_prereq_list.length; i++){
-                prereq_list.push(temp_prereq_list[i]);
+                this.prereq_list.push(temp_prereq_list[i]);
             }
         }
     },
