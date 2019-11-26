@@ -64,14 +64,11 @@
 <script>
 
 export default {
-    computed: {
-        cleanPreReq : {
-            get : function() {
-                let prereq_list = [];
-                if(this.course.PREREQCODES){
-                    prereq_list= this.course.PREREQCODES.split(",");
-                }
-                return prereq_list
+    created: function() {
+        if(this.course.PREREQCODES){
+            var temp_prereq_list= this.course.PREREQCODES.split(",");
+            for (var i = 0; i < temp_prereq_list.length; i++){
+                prereq_list.push(temp_prereq_list[i]);
             }
         }
     },
@@ -99,7 +96,7 @@ export default {
             course_desc: this.course.description,
             course_credits: this.course.creditHours,
             isCore: this.course.isCore,
-            prereq_list: this.cleanPreReq,
+            prereq_list: [],
             courseCode: this.course.courseCode,
         } 
     }
