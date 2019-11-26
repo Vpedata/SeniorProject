@@ -67,10 +67,11 @@ export default {
     computed: {
         prereq_list : {
             get : function() {
+                let prereq_list = [];
                 if(this.course.PREREQCODES){
-                    this.prereq_list= this.course.PREREQCODES.split(",");
+                    prereq_list= this.course.PREREQCODES.split(",");
                 }
-                return this.prereq_list
+                return prereq_list
             }
         }
     },
@@ -97,7 +98,6 @@ export default {
             course_name: this.course.name,
             course_desc: this.course.description,
             course_credits: this.course.creditHours,
-            prereq_list : [],
             isCore: this.course.isCore,
             courseCode: this.course.courseCode,
         } 
