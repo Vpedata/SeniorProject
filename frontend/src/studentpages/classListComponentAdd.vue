@@ -19,6 +19,13 @@
                 </v-card>
                 </v-dialog>
             </v-list-item-content>
+            <v-list-item-action>
+                    <v-row>
+                    <v-btn class="mx-2" fab dark small color="green" >
+                        <v-icon dark>mdi-add</v-icon>
+                    </v-btn>
+                    </v-row>
+            </v-list-item-action>
         </v-list-item> 
 </template>
 
@@ -30,7 +37,32 @@ export default {
         course: Object,
     },
     data: () => ({
-        dialog: false
+        dialog: false,
+        name: ""
     }),
+    methods: {
+      addRecCourse: function() {
+          /*
+        axios.post("/user/student/course/addRecCourse", {
+                ??
+          }).then(function (response) {
+              console.log(response);
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+          */
+        }   
+    },
+    beforeMount(){
+      axios
+      .get('/user/getName')
+      .then(response => {
+        this.name = response.data.firstName + " " + response.data.lastName;
+      }).bind(this)
+      .catch(error => {
+        console.log(error)
+      })
+  }
 }
 </script>

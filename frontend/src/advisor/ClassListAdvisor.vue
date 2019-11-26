@@ -10,7 +10,6 @@
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
                     <v-btn  @click="$router.push('/fe/adv/createcourse')" dark>Create Course</v-btn>
-                    <editCourse/>
                     <v-btn  @click="$router.push('/fe/adv/advisor')" dark>Home</v-btn>
                     <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
@@ -30,11 +29,6 @@
                 </v-card>
                 </v-col>
             </v-row>
-            <v-row>
-                <v-col cols="8">
-                    <v-btn class="mt-12 ma-12" outlined color="blue" @click="$router.push('/fe/student')" dark>Back</v-btn>
-                </v-col>
-            </v-row>
         </div>
     </v-app>
     </div>
@@ -44,7 +38,6 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import classComponent from './classListComponentAdvisor.vue'
-import editCourse from'./EditCourse.vue'
 import axios from 'axios'
 export default {
     computed: {
@@ -59,7 +52,6 @@ export default {
     }),
 
     components: {
-        editCourse,
         classComponent,
     },
     methods: {
