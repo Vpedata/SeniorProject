@@ -167,7 +167,6 @@ export default {
       axios.get('/course/all')
       .then(response =>{
          var obj = response.data[0]; 
-         
          this.courses = Object.keys(obj).map(key => obj[key]);
          console.info(this.courses);
       })
