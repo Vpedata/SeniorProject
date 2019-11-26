@@ -24,7 +24,7 @@
                     </v-toolbar>
                     <p>List: {{ selected_courses }}</p>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
-                        <v-list-item v-for = "course in courses" :key="course.course_ID">
+                        <v-list-item v-for = "course in courses" :course="course" :key="course.course_ID">
                             
                                 <v-checkbox class="ml-4" label= course.name value= "course"></v-checkbox>
                             
