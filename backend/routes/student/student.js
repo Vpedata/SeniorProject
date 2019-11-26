@@ -22,6 +22,10 @@ router.get("/getmyadvisor",isStudent,(req, res, next)=>{
     })
 });
 
+router.get("/chatapp", (req, res, next) => {
+    res.sendFile("../../../frontend/src/chat-messenger/public/index.php");
+});
+
 // routes to student courses
 router.use('/courses',require('./courses'));
 
