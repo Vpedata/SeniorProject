@@ -44,6 +44,6 @@ class LoginController extends Controller
 //        auth()->login($user);
         auth()->loginUsingId($user->user_ID);
 
-        return redirect('/messenger/home');
+        return redirect('/home');
     }
 }
