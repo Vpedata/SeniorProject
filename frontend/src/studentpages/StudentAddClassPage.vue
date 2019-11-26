@@ -33,7 +33,7 @@
                         <v-toolbar-title>Add Course</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
-                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID" v-on:transfer="transfer_course(course)"/> 
+                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
                     </v-list>                  
                 </v-card>
                 </v-col>
@@ -66,7 +66,7 @@ export default {
         classComponent,
     },
     methods: {
-        logout: function () {
+        logout(e) {
             axios.get("/auth/logout").then(response =>{
                 this.$router.push('/');
             }).catch(err =>{
@@ -104,7 +104,15 @@ export default {
           console.log(error)
       })
 
-      // axios add selected = /student/courses/selected
+      axios.get('/user/student/courses/getUserRecommend')
+      .then(response =>{
+         var obj = response.data[0]; 
+         this.courses = Object.keys(obj).map(key => obj[key]);
+         console.info(this.courses);
+      })
+      .catch(error =>{
+          console.log(error)
+      })
   }
 };
 </script>
