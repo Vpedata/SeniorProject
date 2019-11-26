@@ -16,18 +16,29 @@
                 </v-toolbar>
             </v-row>
             <v-row>
-                <v-col cols="3"></v-col>
-                <v-col cols="9" lg="6">
+                <v-col cols="1"></v-col>
+                <v-col cols="5">
+                <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
+                    <v-toolbar flat dark>
+                        <v-toolbar-title>Selected Courses</v-toolbar-title>
+                    </v-toolbar>
+                    <v-list style="max-height: 600px" class="overflow-y-auto">
+                        <classComponent v-for="course in selected" :course="course" :key="course.course_ID"/> 
+                    </v-list>                  
+                </v-card>
+                </v-col>
+                <v-col cols="5">
                 <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
                     <v-toolbar flat dark>
                         <v-toolbar-title>Add Course</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
-                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID"/> 
+                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID" v-on:transfer="transfer_course(course)"/> 
                     </v-list>                  
                 </v-card>
                 </v-col>
             </v-row>
+            <v-btn class="mx-auto mt-12" width="140" dark color="orange">Save</v-btn>
         </div>
     </v-app>
     </div>
@@ -47,7 +58,8 @@ export default {
     data: () => ({
         dialog: false,
         name: " ",
-        courses: JSON
+        courses: JSON,
+        selected: JSON
     }),
 
     components: {
@@ -60,6 +72,16 @@ export default {
             }).catch(err =>{
                 console.log(err);
             });
+        },
+        transfer_course: function(course) {
+            if (selected.indexOF(course)!=-1){
+                selected.push(course)
+                courses.splice(courses.indexOF(course),1)
+            } else {
+                courses.push(course)
+                selected.splice(selected.indexOF(course),1)
+
+            }
         }
     },
     beforeMount(){
@@ -81,6 +103,8 @@ export default {
       .catch(error =>{
           console.log(error)
       })
+
+      // axios add selected = /student/courses/selected
   }
 };
 </script>

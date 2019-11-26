@@ -17,6 +17,7 @@
                     <v-divider></v-divider>
                     <v-card-actions>
                         <v-spacer></v-spacer>
+                        <v-btn color="green" text @click="dialog = false" v-on:click="$emit('transfer',course)">Transfer</v-btn>
                         <v-btn color="blue" text @click="dialog = false">Ok</v-btn>
                     </v-card-actions>
                 </v-card>
