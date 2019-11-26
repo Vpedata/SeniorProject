@@ -104,7 +104,15 @@ export default {
           console.log(error)
       })
 
-      // axios add selected = /student/courses/selected
+      axios.get('/user/student/courses/getUserRecommend')
+      .then(response =>{
+         var obj = response.data[0]; 
+         this.courses = Object.keys(obj).map(key => obj[key]);
+         console.info(this.courses);
+      })
+      .catch(error =>{
+          console.log(error)
+      })
   }
 };
 </script>
