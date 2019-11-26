@@ -75,6 +75,15 @@ export default {
                 this.class_credits = parseInt(this.class_credits,10)-1
             }
         },
+        cleanPreReqs(preReqs) {
+            if(preReqs){
+                prereq_list= preReqs.split(",");
+            }
+            else {
+                prereq_list =[];
+            }
+            return prereq_list
+        }
 
      },
     props: {
@@ -85,8 +94,8 @@ export default {
             dialog:false,
             course_name: this.course.name,
             course_desc: this.course.description,
-            course_credits: this.course.creditHours ,
-            prereq_list: this.course.PREREQCODES.split(","),
+            course_credits: this.course.creditHours,
+            prereq_list: cleanPreReqs(this.course.PREREQCODES),
             isCore: this.course.isCore,
             courseCode: this.course.courseCode,
         } 
