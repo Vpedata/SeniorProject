@@ -65,7 +65,7 @@
 
 export default {
     computed: {
-        prereq_list : {
+        cleanPreReq : {
             get : function() {
                 let prereq_list = [];
                 if(this.course.PREREQCODES){
@@ -99,6 +99,7 @@ export default {
             course_desc: this.course.description,
             course_credits: this.course.creditHours,
             isCore: this.course.isCore,
+            prereq_list: this.cleanPreReq,
             courseCode: this.course.courseCode,
         } 
     }
