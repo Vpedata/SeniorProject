@@ -86,7 +86,7 @@ export default {
             course_name: this.course.name,
             course_desc: this.course.description,
             course_credits: this.course.creditHours ,
-            prereq_list: [this.course.PREREQCODES],
+            prereq_list: this.course.PREREQCODES.split(","),
             isCore: this.course.isCore,
             courseCode: this.course.courseCode,
         } 

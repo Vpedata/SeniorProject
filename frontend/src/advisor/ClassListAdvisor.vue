@@ -100,7 +100,8 @@ export default {
     computed: {
         ...mapState({
             account: state => state.account,
-        })
+        }),
+    
     }, 
     data: () => ({
         dialog: false,
@@ -111,7 +112,7 @@ export default {
         class_desc: '',
         class_credits: 0,
         isCore: false,
-        courseCode: null
+        courseCode: null,
     }),
 
     components: {
@@ -166,7 +167,9 @@ export default {
       axios.get('/course/all')
       .then(response =>{
          var obj = response.data[0]; 
-         this.courses = Object.keys(obj).map(key => obj[key]);
+         this.courses = Object.keys(obj).map(function (key, value) {
+                return (value == null) ? "" : value
+        })
          console.info(this.courses);
       })
       .catch(error =>{
