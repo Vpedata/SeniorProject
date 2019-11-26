@@ -33,7 +33,7 @@
                         <v-toolbar-title>Add Course</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
-                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID" v-on:transfer="transfer_course(course)"/> 
+                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
                     </v-list>                  
                 </v-card>
                 </v-col>
@@ -66,7 +66,7 @@ export default {
         classComponent,
     },
     methods: {
-        logout: function () {
+        logout(e) {
             axios.get("/auth/logout").then(response =>{
                 this.$router.push('/');
             }).catch(err =>{
