@@ -1871,7 +1871,7 @@ __webpack_require__.r(__webpack_exports__);
 
       _this.handleIncoming(e.message);
     });
-    axios.get('/messenger/contacts').then(function (response) {
+    axios.get('/contacts').then(function (response) {
       // console.log(response.data);
       _this.contacts = response.data; // console.log(this.contacts);
     });
@@ -1881,7 +1881,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.updateUnreadCount(contact, true);
-      axios.get("/messenger/conversation/".concat(contact.user_ID)).then(function (response) {
+      axios.get("/conversation/".concat(contact.user_ID)).then(function (response) {
         _this2.messages = response.data;
         _this2.selectedContact = contact;
       });
@@ -1981,7 +1981,7 @@ __webpack_require__.r(__webpack_exports__);
     this.$root.$on('updateMessages', function () {
       _this.updateMessages();
     });
-    axios.get('/messenger/messages').then(function (response) {
+    axios.get('/messages').then(function (response) {
       // console.log(response.data);
       _this.messages = response.data;
     });
@@ -2004,14 +2004,14 @@ __webpack_require__.r(__webpack_exports__);
     updateMessages: function updateMessages() {
       var _this2 = this;
 
-      axios.get('/messenger/messages').then(function (response) {
+      axios.get('/messages').then(function (response) {
         _this2.messages = response.data;
       });
     },
     updateOnline: function updateOnline() {
       var _this3 = this;
 
-      axios.get('/messenger/contacts/onlineContacts').then(function (response) {
+      axios.get('/contacts/onlineContacts').then(function (response) {
         _this3.onlineContacts = response.data;
       });
     },
@@ -2120,7 +2120,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.post('/messenger/conversation/send', {
+      axios.post('/conversation/send', {
         contact_id: this.contact.user_ID,
         text: text,
         isFromUser: 1
