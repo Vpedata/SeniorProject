@@ -23,7 +23,7 @@ router.get("/getmyadvisor",isStudent,(req, res, next)=>{
 });
 
 router.get("/chatapp", (req, res, next) => {
-    res.sendFile("../../../frontend/src/chat-messenger/public/index.php");
+    res.sendFile("/home/ubuntu/SeniorProject/frontend/src/chat-messenger/public/index.php");
 });
 
 // routes to student courses
