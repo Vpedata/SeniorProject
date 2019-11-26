@@ -64,17 +64,6 @@
 <script>
 
 export default {
-    computed: {
-        prereq_list : {
-            get : function() {
-                let prereq_list = [];
-                if(this.course.PREREQCODES){
-                    prereq_list= this.course.PREREQCODES.split(",");
-                }
-                return prereq_list
-            }
-        }
-    },
      methods: {
        increment_credits () {
             if (this.class_credits <= 30) {
@@ -98,6 +87,15 @@ export default {
             course_name: this.course.name,
             course_desc: this.course.description,
             course_credits: this.course.creditHours,
+            prereq_list : {
+                get : function() {
+                    let prereq_list = [];
+                    if(this.course.PREREQCODES){
+                        prereq_list= this.course.PREREQCODES.split(",");
+                    }
+                    return prereq_list
+                }
+            },   
             isCore: this.course.isCore,
             courseCode: this.course.courseCode,
         } 
