@@ -137,14 +137,19 @@ export default {
             });
         },
         handleCreateCourse: function() {
-          this.dialog=false;  
-          axios.post("/user/advisor/course/addCourse", {
+          this.dialog=false;
+          var preReqString = "";
+          for (var i = 0; i < prereq_list.length; i++){
+                preReqString = preReqString + prereq_list[i] +",";
+            }
+        preReqString = preReqString.substring(0, preReqString.length - 1);  
+          axios.post("/user/advisor/course/", {
                 courseCode: this.courseCode,
                 name: this.class_name,      
                 isRequired: this.isCore,
                 creditHours: this.class_credits,
                 description: this.class_desc,  
-                preReq: this.prereq_list
+                preReq: preReqString
           }).then(function (response) {
               console.log(response);
           })
