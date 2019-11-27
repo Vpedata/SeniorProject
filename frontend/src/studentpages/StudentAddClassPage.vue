@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" class="amber lighten-5">
     <v-app id="inspire">
         <div class="amber lighten-5 pa-4" width="100%" height="100%">
             <v-row>
@@ -22,7 +22,7 @@
                     <v-toolbar flat dark>
                         <v-toolbar-title>Selected Courses</v-toolbar-title>
                     </v-toolbar>
-                    <v-list style="max-height: 500px" class="overflow-y-auto">
+                    <v-list style="max-height: 436px" class="overflow-y-auto">
                         <classComponent v-for="course in selected" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
                     </v-list>                  
                 </v-card>
@@ -32,7 +32,7 @@
                     <v-toolbar flat dark>
                         <v-toolbar-title>Add Course</v-toolbar-title>
                     </v-toolbar>
-                    <v-list style="max-height: 500px" class="overflow-y-auto">
+                    <v-list style="max-height: 436px" class="overflow-y-auto">
                         <classComponent v-for="course in courses" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
                     </v-list>                  
                 </v-card>
