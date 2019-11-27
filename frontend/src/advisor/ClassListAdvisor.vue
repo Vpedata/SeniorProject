@@ -140,7 +140,7 @@ export default {
           this.dialog=false;
           var preReqString = "";
           for (var i = 0; i < this.prereq_list.length; i++){
-                preReqString = preReqString + prereq_list[i] +",";
+                preReqString = preReqString + this.prereq_list[i] +",";
             }
         preReqString = preReqString.substring(0, preReqString.length - 1);  
           axios.post("/user/advisor/course/", {

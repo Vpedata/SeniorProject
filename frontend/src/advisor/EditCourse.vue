@@ -54,8 +54,8 @@
                     </v-col>
                     </v-row>
                     
-                    <v-btn flat class="success mx-0 mt-3" >Update Course </v-btn>
-                    <v-btn flat color="red" dark class="mx-0 mt-3" @click="dialog=false">Cancel </v-btn>
+                    <v-btn  class="success mx-0 mt-3" >Update Course </v-btn>
+                    <v-btn  color="red" dark class="mx-0 mt-3" @click="dialog=false">Cancel </v-btn>
                 </v-form>
             </v-card-text>
                 </v-card>
