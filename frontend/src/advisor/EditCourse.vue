@@ -74,13 +74,13 @@ export default {
     },
      methods: {
        increment_credits () {
-            if (this.class_credits <= 30) {
-                this.class_credits = parseInt(this.class_credits,10)+1
+            if (this.course_credits <= 30) {
+                this.course_credits = parseInt(this.course_credits,10)+1
             }
         },
         decrement_credits () {
-            if (this.class_credits > 0) {
-                this.class_credits = parseInt(this.class_credits,10)-1
+            if (this.course_credits > 0) {
+                this.course_credits = parseInt(this.course_credits,10)-1
             }
         }
         
