@@ -136,14 +136,14 @@ export default {
                 console.log(err);
             });
         },
-        handleCreateCourse: function() {
+        handleCreateCourse: async function() {
           this.dialog=false;
           var preReqString = "";
           for (var i = 0; i < this.prereq_list.length; i++){
                 preReqString = preReqString + this.prereq_list[i] +",";
             }
-        preReqString = preReqString.substring(0, preReqString.length - 1);  
-          axios.post("/user/advisor/course/", {
+          preReqString = preReqString.substring(0, preReqString.length - 1);  
+          await axios.post("/user/advisor/course/", {
                 courseCode: this.courseCode,
                 name: this.course_name,      
                 isRequired: this.isCore,
@@ -157,7 +157,17 @@ export default {
               console.log(error);
           });
           
-        } 
+          await axios
+          .get('/course/all')
+          .then(response =>{
+          var obj = response.data[0]; 
+          this.courses = Object.keys(obj).map(key => obj[key]);
+          console.info(this.courses);
+       })
+          .catch(error =>{
+        console.log(error)
+      });
+    } 
         
     },
     beforeMount(){
