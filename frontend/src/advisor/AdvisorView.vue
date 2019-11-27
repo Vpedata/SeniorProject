@@ -23,19 +23,15 @@
                 </v-col>
             </v-row>
             <v-row>
-                <v-col cols="4"></v-col>
-                <v-col cols="3">
-                    <v-card  elevation="12" height = "156" width = "512">
-                        <v-toolbar dark flat>
-                            <v-toolbar-title dense class="white--text">Current Semester: {{this.currSem.currSemester}}</v-toolbar-title>    
-                        </v-toolbar>
-                    </v-card>
+                <v-col cols="12">
+                    <v-toolbar dark flat dense class="mx-auto" width="300px">
+                        <v-toolbar-title dense class="white--text">Current Semester: {{this.currSem.currSemester}}</v-toolbar-title>    
+                    </v-toolbar>
                 </v-col>
             </v-row>
             <v-row>
-                <v-col cols="1"></v-col>
-                <v-col cols="4">
-                    <v-card class="mx-auto" elevation="12" height="600px">
+                <v-col cols="6">
+                    <v-card class="mx-12" elevation="12" height="600px" max-height="600px">
                         <v-toolbar dark flat>
                             <v-toolbar-title class="white--text">Courses Taken</v-toolbar-title>
                             <v-spacer></v-spacer>
@@ -46,9 +42,8 @@
                         </v-list>                  
                     </v-card>
                 </v-col>
-                <v-col cols="1"></v-col>
-                <v-col cols="4">
-                    <v-card class="mx-auto" elevation="12" height="600px">
+                <v-col cols="6">
+                    <v-card class="mx-12" elevation="12" height="600px" max-height="600px">
                         <v-toolbar dark flat>
                             <v-toolbar-title class="white--text">Recommended Courses</v-toolbar-title>    
                         </v-toolbar>

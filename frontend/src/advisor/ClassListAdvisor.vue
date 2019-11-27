@@ -76,7 +76,7 @@
             <v-row>
                 <v-col cols="3"></v-col>
                 <v-col cols="9" lg="6">
-                <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
+                <v-card class="mt-n16 mx-auto" elevation="12" height="600px" max-height="600px">
                     <v-toolbar flat>
                         <v-toolbar-title class="grey--text">Class List</v-toolbar-title>
                     </v-toolbar>

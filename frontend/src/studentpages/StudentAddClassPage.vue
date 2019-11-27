@@ -18,7 +18,7 @@
             <v-row>
                 <v-col cols="1"></v-col>
                 <v-col cols="5">
-                <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
+                <v-card class="mt-n16 mx-auto" elevation="12" height="600px" max-height="600px">
                     <v-toolbar flat dark>
                         <v-toolbar-title>Selected Courses</v-toolbar-title>
                     </v-toolbar>
@@ -28,7 +28,7 @@
                 </v-card>
                 </v-col>
                 <v-col cols="5">
-                <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
+                <v-card class="mt-n16 mx-auto" elevation="12" height="600px" max-height="600px">
                     <v-toolbar flat dark>
                         <v-toolbar-title>Add Course</v-toolbar-title>
                     </v-toolbar>

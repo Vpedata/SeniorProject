@@ -28,7 +28,7 @@
             </v-row>
             <v-row>
                 <v-col>
-                    <v-textarea class = 'mx-12 mt-n12' v-model = 'class_desc' full-width counter single-line label = 'Class Description' outlined maxlength = '128'></v-textarea>
+                    <v-textarea class = 'mx-12 mt-n12' v-model = 'class_desc' full-width counter single-line label = 'Class Description' outlined maxlength = '600'></v-textarea>
                 </v-col>
             </v-row>
             <v-row>
