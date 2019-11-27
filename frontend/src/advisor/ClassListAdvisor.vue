@@ -67,7 +67,7 @@
                     </v-col>
                     </v-row>
                     
-                    <v-btn flat class="success mx-0 mt-3">Create Course </v-btn>
+                    <v-btn flat class="success mx-0 mt-3" @click="handleCreateCourse">Create Course </v-btn>
                     <v-btn flat color="red" dark class="mx-0 mt-3" @click="dialog=false">Cancel </v-btn>
                 </v-form>
             </v-card-text>
@@ -136,7 +136,8 @@ export default {
                 console.log(err);
             });
         },
-        addCourse: function() {
+        handleCreateCourse: function() {
+          this.dialog=false;  
           axios.post("/user/advisor/course/addCourse", {
                 courseCode: this.courseCode,
                 name: this.class_name,      
