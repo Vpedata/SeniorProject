@@ -66,7 +66,6 @@
                     </v-chip>
                     </v-col>
                     </v-row>
-                    
                     <v-btn  class="success mx-0 mt-3" @click="handleCreateCourse">Create Course </v-btn>
                     <v-btn  color="red" dark class="mx-0 mt-3" @click="dialog=false">Cancel </v-btn>
                 </v-form>
@@ -157,18 +156,20 @@ export default {
               console.log(error);
           });
           
-          await axios
-          .get('/course/all')
-          .then(response =>{
-          var obj = response.data[0]; 
-          this.courses = Object.keys(obj).map(key => obj[key]);
-          console.info(this.courses);
-       })
-          .catch(error =>{
-        console.log(error)
-      });
+         
     } 
         
+    },
+    updated() {
+     axios.get('/course/all')
+      .then(response =>{
+         var obj = response.data[0]; 
+         this.courses = Object.keys(obj).map(key => obj[key]);
+         console.info(this.courses);
+      })
+      .catch(error =>{
+          console.log(error)
+      });   
     },
     beforeMount(){
       axios
