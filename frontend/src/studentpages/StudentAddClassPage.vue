@@ -23,7 +23,7 @@
                         <v-toolbar-title>Selected Courses</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
-                        <classComponent v-for="course in selected" :course="course" :key="course.course_ID"/> 
+                        <classComponent v-for="course in selected" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
                     </v-list>                  
                 </v-card>
                 </v-col>
