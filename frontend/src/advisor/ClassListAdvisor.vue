@@ -67,8 +67,8 @@
                     </v-col>
                     </v-row>
                     
-                    <v-btn flat class="success mx-0 mt-3" @click="handleCreateCourse">Create Course </v-btn>
-                    <v-btn flat color="red" dark class="mx-0 mt-3" @click="dialog=false">Cancel </v-btn>
+                    <v-btn  class="success mx-0 mt-3" @click="handleCreateCourse">Create Course </v-btn>
+                    <v-btn  color="red" dark class="mx-0 mt-3" @click="dialog=false">Cancel </v-btn>
                 </v-form>
             </v-card-text>
                 </v-card>
@@ -139,7 +139,7 @@ export default {
         handleCreateCourse: function() {
           this.dialog=false;
           var preReqString = "";
-          for (var i = 0; i < prereq_list.length; i++){
+          for (var i = 0; i < this.prereq_list.length; i++){
                 preReqString = preReqString + prereq_list[i] +",";
             }
         preReqString = preReqString.substring(0, preReqString.length - 1);  
