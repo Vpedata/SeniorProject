@@ -74,12 +74,12 @@ export default {
             });
         },
         transfer_course: function(course) {
-            if (selected.indexOF(course)!=-1){
-                selected.push(course)
-                courses.splice(courses.indexOF(course),1)
+            if (this.selected.indexOF(course)!=-1){
+                this.selected.push(course)
+                this.courses.splice(this.courses.indexOF(course),1)
             } else {
-                courses.push(course)
-                selected.splice(selected.indexOF(course),1)
+                this.courses.push(course)
+                this.selected.splice(this.selected.indexOF(course),1)
 
             }
         }
