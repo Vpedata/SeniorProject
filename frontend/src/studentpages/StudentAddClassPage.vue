@@ -74,7 +74,7 @@ export default {
             });
         },
         transfer_course: function(course) {
-            if (this.selected.indexOf(course)!=-1){
+            if (this.selected.indexOf(course)==-1){
                 this.selected.push(course)
                 this.courses.splice(this.courses.indexOf(course),1)
             } else {
