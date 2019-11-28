@@ -91,7 +91,7 @@ export default {
             }
             preReqString = preReqString.substring(0, preReqString.length - 1);
             let editedCourse = {
-                courseID :this.course.course_ID,
+                course_ID :this.course.course_ID,
                 courseCode: this.courseCode,
                 name: this.course_name,      
                 isRequired: this.isCore,

@@ -163,7 +163,6 @@ export default {
             .then(response =>{
                 var obj = response.data[0]; 
                 this.courses = Object.keys(obj).map(key => obj[key]);
-                console.info(this.courses);
             })
             .catch(error =>{
                 console.log(error)
@@ -183,7 +182,6 @@ export default {
             .then(response =>{
                 var obj = response.data[0]; 
                 this.courses = Object.keys(obj).map(key => obj[key]);
-                console.info(this.courses);
             })
             .catch(error =>{
                 console.log(error)
@@ -191,9 +189,7 @@ export default {
             
         },
          handleEditCourse: async function(editedCourse) {
-            let editCourseUrl = 'user/advisor/course/';
-            console.info(editedCourse);
-            await axios.put(editCourseUrl,editedCourse)
+            await axios.put('user/advisor/course/',editedCourse)
             .then(response =>{
             })
             .catch(error =>{
@@ -205,7 +201,6 @@ export default {
             .then(response =>{
                 var obj = response.data[0]; 
                 this.courses = Object.keys(obj).map(key => obj[key]);
-                console.info(this.courses);
             })
             .catch(error =>{
                 console.log(error)
