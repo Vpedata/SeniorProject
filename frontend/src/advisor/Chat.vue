@@ -29,10 +29,13 @@
                     <v-toolbar dark flat>
                     <v-toolbar-title class="white--text">Messages</v-toolbar-title>
                     </v-toolbar>
+                <v-card-text>
                 <v-list style="max-height: 500px" class="overflow-y-auto">
                     <messageComponent class="mt-n1" v-for="message in messages" :message="message" :key="message"/>
                 </v-list>
+                </v-card-text>
                 <v-spacer></v-spacer>
+
                 <v-card-actions>
                 <v-textarea append-outer-icon="mdi-send" class="mx-2" v-model="newMessage" filled rows="1" auto-grow>
                 </v-textarea>
