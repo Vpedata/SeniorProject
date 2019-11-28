@@ -66,6 +66,7 @@
                     </v-chip>
                     </v-col>
                     </v-row>
+
                     <v-btn  class="success mx-0 mt-3" @click="handleCreateCourse">Create Course </v-btn>
                     <v-btn  color="red" dark class="mx-0 mt-3" @click="dialog=false">Cancel </v-btn>
                 </v-form>
@@ -80,7 +81,7 @@
                         <v-toolbar-title class="grey--text">Class List</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
-                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID"/> 
+                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID" @handleDeleteCourse="handleDeleteCourse" /> 
                     </v-list>                  
                 </v-card>
                 </v-col>
@@ -136,40 +137,58 @@ export default {
             });
         },
         handleCreateCourse: async function() {
-          this.dialog=false;
-          var preReqString = "";
-          for (var i = 0; i < this.prereq_list.length; i++){
+            this.dialog=false;
+            var preReqString = "";
+            for (var i = 0; i < this.prereq_list.length; i++){
                 preReqString = preReqString + this.prereq_list[i] +",";
             }
-          preReqString = preReqString.substring(0, preReqString.length - 1);  
-          await axios.post("/user/advisor/course/", {
+            preReqString = preReqString.substring(0, preReqString.length - 1);  
+            await axios.post("/user/advisor/course/", {
                 courseCode: this.courseCode,
                 name: this.course_name,      
                 isRequired: this.isCore,
                 creditHours: this.course_credits,
                 description: this.course_desc,  
                 preReq: preReqString
-          }).then(function (response) {
-              console.log(response);
-          })
-          .catch(function (error) {
-              console.log(error);
-          });
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error);
+            });
           
-         
-    } 
+            await axios
+            .get('/course/all')
+            .then(response =>{
+                var obj = response.data[0]; 
+                this.courses = Object.keys(obj).map(key => obj[key]);
+                console.info(this.courses);
+            })
+            .catch(error =>{
+                console.log(error)
+            });
+        },
+        handleDeleteCourse: async function(course_ID) {
+            let deleteCourseUrl = 'user/advisor/course/'+course_ID;
+            await axios.delete(deleteCourseUrl)
+            .then(response =>{
+            })
+            .catch(error =>{
+                console.log(error)
+            });
+
+            await axios
+            .get('/course/all')
+            .then(response =>{
+                var obj = response.data[0]; 
+                this.courses = Object.keys(obj).map(key => obj[key]);
+                console.info(this.courses);
+            })
+            .catch(error =>{
+                console.log(error)
+            });
+            
+        } 
         
-    },
-    updated() {
-     axios.get('/course/all')
-      .then(response =>{
-         var obj = response.data[0]; 
-         this.courses = Object.keys(obj).map(key => obj[key]);
-         console.info(this.courses);
-      })
-      .catch(error =>{
-          console.log(error)
-      });   
     },
     beforeMount(){
       axios
