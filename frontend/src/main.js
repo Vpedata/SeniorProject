@@ -13,6 +13,8 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import '@mdi/font/css/materialdesignicons.css'
 
 
+var socket = io();
+
 Vue.use(Autocomplete);
 Vue.use(Vuetify, {
   iconfont: 'mdi'
