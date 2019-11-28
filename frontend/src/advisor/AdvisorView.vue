@@ -10,6 +10,7 @@
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
                     <v-btn  @click="$router.push('/fe/classlistadvisor')" dark>View Class List</v-btn>
+                    <chat />
                     <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
                 </v-toolbar-items>
@@ -66,7 +67,7 @@ import { mapState, mapActions } from 'vuex'
 import axios from 'axios';
 import router from '../router/index.js'
 import classComponent from '../studentpages/classListComponent.vue'
-
+import chat from './Chat'
 
 export default {
     computed: {
