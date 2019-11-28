@@ -117,8 +117,8 @@ export default {
         },
         sendMessage() {
             axios.post('/user/advisor/messages/new',{
-                messageString=this.newMessage,
-                student_ID=this.student.student_ID
+                messageString:this.newMessage,
+                student_ID:this.student.student_ID
             }).then(function (response) {
                 console.info(response);
                 console.log(response);
