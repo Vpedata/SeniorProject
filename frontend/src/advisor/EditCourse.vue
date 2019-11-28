@@ -54,7 +54,7 @@
                     </v-col>
                     </v-row>
                     
-                    <v-btn  class="success mx-0 mt-3"  v-on:click="$emit('handleEditCourse',course.course_ID)">Update Course </v-btn>
+                    <v-btn  class="success mx-0 mt-3"  v-on:click="handleEditCourse">Update Course </v-btn>
                     <v-btn  color="red" dark class="mx-0 mt-3" @click="dialog=false">Cancel </v-btn>
                 </v-form>
             </v-card-text>
@@ -82,8 +82,26 @@ export default {
             if (this.course_credits > 0) {
                 this.course_credits = parseInt(this.course_credits,10)-1
             }
+        },
+        handleEditCourse() {
+            this.dialog=false;
+            var preReqString = "";
+            for (var i = 0; i < this.prereq_list.length; i++){
+                preReqString = preReqString + this.prereq_list[i] +",";
+            }
+            preReqString = preReqString.substring(0, preReqString.length - 1);
+            let editedCourse = {
+                courseID :this.course.course_ID,
+                courseCode: this.courseCode,
+                name: this.course_name,      
+                isRequired: this.isCore,
+                creditHours: this.course_credits,
+                description: this.course_desc,  
+                preReq: preReqString
+            };
+            console.info(editedCourse);
+            this.$emit('handleEditCourse',editedCourse);
         }
-        
 
      },
     props: {

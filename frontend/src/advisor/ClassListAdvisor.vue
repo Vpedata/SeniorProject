@@ -192,6 +192,7 @@ export default {
         },
          handleEditCourse: async function(editedCourse) {
             let editCourseUrl = 'user/advisor/course/';
+            console.info(editedCourse);
             await axios.put(editCourseUrl,editedCourse)
             .then(response =>{
             })
