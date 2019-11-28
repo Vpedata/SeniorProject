@@ -98,12 +98,11 @@ export default {
             var obj = response.data[0]; 
             this.messages= Object.keys(obj).map(key => obj[key]);
             for (var i = 0; i < this.messages.length; i++){
-                var sendingUser = "";
+                var sendingUser = this.name;
+                var userType = 0; //Advisor is sending the message
                 if(this.messages[i].sender === this.student.user_ID){
                     sendingUser=this.student.name;
-                }
-                else{
-                    sendingUser=this.name;
+                    userType = 1; //Student is sending the message
                 }
                 let previousMessage = {
                     message:  this.messages[i].content,

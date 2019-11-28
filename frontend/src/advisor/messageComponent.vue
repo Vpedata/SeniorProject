@@ -23,11 +23,11 @@ export default {
     },
     computed: {
         classObject: function() {
-            if(this.message.sender === this.student.user_ID){
-                return "float-left";
+            if(this.message.userType){
+                return "float-left"; //student is sending the message
             }
             else{
-                return "float-right";
+                return "float-right"; //advisor is sending the message
             }
         }
 
