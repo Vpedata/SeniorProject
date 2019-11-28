@@ -27,7 +27,7 @@
                 <v-col cols="8">
                 <v-card class="mx-12" elevation="12" max-height="600px">
                     <v-toolbar dark flat>
-                    <v-toolbar-title class="white--text">Messages</v-toolbar-title>
+                    <v-toolbar-title class="white--text">{{student.name}}</v-toolbar-title>
                     </v-toolbar>
                 <v-card-text>
                 <v-list style="max-height: 500px" class="overflow-y-auto">
@@ -36,7 +36,8 @@
                 </v-list>
                 </v-card-text>
                 <v-card-actions>
-                <v-textarea append-outer-icon="mdi-send" class="mx-2" v-model="newMessage" filled rows="1" auto-grow>
+                <v-textarea append-outer-icon="mdi-send" @click:append-outer="sendMessage" 
+                class="mx-2" v-model="newMessage" filled rows="1" auto-grow>
                 </v-textarea>
                 </v-card-actions>
                 </v-card>
@@ -63,6 +64,8 @@ export default {
             students: JSON,
             student: JSON,
             messages: JSON,
+            newMessage: "",
+            messagesList:[], 
         }
     },
     methods: {
@@ -91,12 +94,67 @@ export default {
             .then(response =>{
             var obj = response.data[0]; 
             this.messages= Object.keys(obj).map(key => obj[key]);
-            console.info(this.student);
+            for (var i = 0; i < this.messages.length; i++){
+                var sendingUser = "";
+                var receivingUser= "";
+                if(this.message[i].sender === this.student.user_ID){
+                    sendingUser=this.student.name;
+                }
+                else{
+                    sendingUser=this.name;
+                }
+                let previousMessages = {
+                    messages =  this.messages[i],
+                    user = sendingUser,
+                }
+                this.messagesList.push(previousMessages);
+            }
             })
             .catch(error =>{
                 console.log(error)
             });
         },
+        sendMessage() {
+            axios.post('/user/advisor/messages/new',{
+                messageString=this.newMessage,
+                student_ID=this.student.student_ID
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error);
+            });
+            
+            socket.emit('chat', {
+                message: this.newMessage,
+                user: this.name
+            });
+            this.newMessage = null;
+        },
+    },
+    created() {
+            
+        socket.on('chat', (data) => {
+            this.messages.push({
+            message: data.message,
+            type: 1,
+            user: data.user,
+            });
+        });
+        
+        socket.on('typing', (data) => {
+            this.typing = data;
+        });
+        
+        socket.on('stopTyping', () => {
+            this.typing = false;
+        });
+
+    },
+
+    watch: {
+        newMessage(value) {
+            value ? socket.emit('typing', this.username) : socket.emit('stopTyping');
+        }
     },
     beforeMount(){
       axios

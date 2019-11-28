@@ -56,7 +56,18 @@ const server = app.listen(3000, () => {
 const io = require('socket.io')(server);
 io.on('connection', function(socket) {
     console.log(socket.id)
-    socket.on('SEND_MESSAGE', function(data) {
-        io.emit('MESSAGE', data)
+    socket.on('chat', function(data) {
+        io.sockets.emit('chat', data)
+    });
+    socket.on('chat', (data) => {
+        socket.broadcast.emit('chat-message', (data));
+    });
+
+    socket.on('typing', (data) => {
+        socket.broadcast.emit('typing', (data));
+    });
+
+    socket.on('stopTyping', () => {
+        socket.broadcast.emit('stopTyping');
     });
 });
