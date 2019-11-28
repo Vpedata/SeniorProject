@@ -25,11 +25,11 @@
             <v-row>
                 <v-col cols="2"></v-col>
                 <v-col cols="8">
-                <v-card class="mx-12" elevation="12" height="600px" max-height="600px">
+                <v-card elevation="12" height="600px" max-height="600px" class="primary flexcard">
                     <v-toolbar dark flat>
                     <v-toolbar-title class="white--text">Messages</v-toolbar-title>
                     </v-toolbar>
-                <v-card-text>
+                <v-card-text class="grow">>
                 <v-list style="max-height: 500px" class="overflow-y-auto">
                     <messageComponent class="mt-n1" v-for="message in messages" :message="message" :key="message"/>
                 </v-list>
