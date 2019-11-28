@@ -26,6 +26,7 @@
                  <v-row>
                 <editCourse :course="course"  @handleEditCourse="handleEditCourse" />
                 <v-btn class="mx-2" fab dark small color="purple" v-on:click="$emit('handleDeleteCourse',course.course_ID)">
+                    <v-icon dark>mdi-delete</v-icon>
                 </v-btn>
                  </v-row>
         </v-list-item-action>
