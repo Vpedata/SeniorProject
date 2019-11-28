@@ -19,6 +19,14 @@ export default {
         student: Object,
         name: String
     },
+    created: function() {
+        if(this.message.sender === this.student.user_ID){
+             this.user=this.student.name;
+        }
+        else{
+             this.user=this.name;
+        }
+    },
     computed: {
         classObject: function() {
             if(this.message.sender === this.student.user_ID){
@@ -32,6 +40,7 @@ export default {
     },
     data: function() {
         return {
+            user: "",
         } 
     }
 }
