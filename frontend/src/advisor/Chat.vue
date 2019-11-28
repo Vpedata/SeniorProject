@@ -30,7 +30,6 @@
                 </v-card>
                 <v-list style="max-height: 600px" class="overflow-y-auto">
                     <messageComponent class="mt-n1" v-for="message in messages" :message="message" :key="message"/>
-                    <classComponent class="mt-n1" v-for="course in coursesRecommended" :course="course" :key="course.course_ID"/>
                 </v-list>
             </v-row>
         </div>
@@ -76,6 +75,7 @@ export default {
             .then(response =>{
             var obj = response.data[0]; 
             this.messages= Object.keys(obj).map(key => obj[key]);
+            console.info(this.messages);
             })
             .catch(error =>{
                 console.log(error)
