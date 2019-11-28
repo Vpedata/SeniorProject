@@ -28,10 +28,15 @@
                     <v-toolbar dark flat>
                     <v-toolbar-title class="white--text">Messages</v-toolbar-title>
                     </v-toolbar>
-                </v-card>
                 <v-list style="max-height: 600px" class="overflow-y-auto">
                     <messageComponent class="mt-n1" v-for="message in messages" :message="message" :key="message"/>
                 </v-list>
+                <v-textarea class = 'mx-12 mt-n12' dense  v-model='newMessage' full-width counter single-line outlined maxlength = '300'></v-textarea>
+                <v-btn class="mx-2" fab dark small color="purple" >
+                    <v-icon dark>mdi-send</v-icon>
+                </v-btn>
+                
+                </v-card>
                 </v-col>
             </v-row>
         </div>
