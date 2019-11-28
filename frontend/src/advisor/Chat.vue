@@ -104,11 +104,12 @@ export default {
                     sendingUser=this.name;
                 }
                 let previousMessages = {
-                    messages =  this.messages[i],
-                    user = sendingUser,
+                    messages:  this.messages[i],
+                    user: sendingUser,
                 }
                 this.messagesList.push(previousMessages);
             }
+            console.info(this.messagesList);
             })
             .catch(error =>{
                 console.log(error)
@@ -119,6 +120,7 @@ export default {
                 messageString=this.newMessage,
                 student_ID=this.student.student_ID
             }).then(function (response) {
+                console.info(response);
                 console.log(response);
             }).catch(function (error) {
                 console.log(error);
@@ -136,7 +138,6 @@ export default {
         socket.on('chat', (data) => {
             this.messages.push({
             message: data.message,
-            type: 1,
             user: data.user,
             });
         });
