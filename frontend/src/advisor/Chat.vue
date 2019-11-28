@@ -28,6 +28,9 @@
                     <v-toolbar-title class="white--text">Messages</v-toolbar-title>
                     </v-toolbar>
                 </v-card>
+                <v-list style="max-height: 600px" class="overflow-y-auto">
+                    <messageComponent class="mt-n1" v-for="message in messages" :message="message" :key="message.message_ID"/>
+                </v-list>
             </v-row>
         </div>
     </v-app>
@@ -37,16 +40,14 @@
 
 
 <script>
-import io from 'socket.io-client';
 import axios from 'axios';
 import router from '../router/index.js';
+import messageComponent from './messageComponent'
 export default {
     data() {
         return {
-            user: '',
-            message: '',
-            messages: [],
-            socket : io('localhost:3001')
+            name: '',
+            messages: JSON,
         }
     },
     methods: {
@@ -69,6 +70,16 @@ export default {
             return result.name + " ("  + result.email  + ")"; 
         },
         handleSubmit(result) {
+            let studentMessagesUrl = '/user/advisor/messages/'+ result.student_ID;
+            axios.get(studentMessagesUrl)
+            .then(response =>{
+            var obj = response.data[0]; 
+            this.messages= Object.keys(obj).map(key => obj[key]);
+            console.info(this.coursesTaken);
+            })
+            .catch(error =>{
+                console.log(error)
+            });
         },
     },
     beforeMount(){
