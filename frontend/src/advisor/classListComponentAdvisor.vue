@@ -24,9 +24,8 @@
             </v-list-item-content>
              <v-list-item-action>
                  <v-row>
-                <editCourse :course="course"/>
-                <v-btn class="mx-2" fab dark small color="purple" v-on:click="$emit('handleDeleteCourse',course.course_ID)>
-                    <v-icon dark>mdi-delete</v-icon>
+                <editCourse :course="course"  @handleEditCourse="handleEditCourse" />
+                <v-btn class="mx-2" fab dark small color="purple" v-on:click="$emit('handleDeleteCourse',course.course_ID)">
                 </v-btn>
                  </v-row>
         </v-list-item-action>
@@ -45,7 +44,9 @@ export default {
         editCourse
     },
     methods: {
-       
+        handleEditCourse:  function(editedCourse){
+            this.$emit('handleEditCourse',editedCourse);
+        }
     },
     data: () => ({
         dialog: false,

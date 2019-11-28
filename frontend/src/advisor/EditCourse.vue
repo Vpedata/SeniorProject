@@ -54,7 +54,7 @@
                     </v-col>
                     </v-row>
                     
-                    <v-btn  class="success mx-0 mt-3" >Update Course </v-btn>
+                    <v-btn  class="success mx-0 mt-3"  v-on:click="$emit('handleEditCourse',course.course_ID)">Update Course </v-btn>
                     <v-btn  color="red" dark class="mx-0 mt-3" @click="dialog=false">Cancel </v-btn>
                 </v-form>
             </v-card-text>

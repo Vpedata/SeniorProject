@@ -81,7 +81,9 @@
                         <v-toolbar-title class="grey--text">Class List</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
-                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID" @handleDeleteCourse="handleDeleteCourse" /> 
+                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID" 
+                        @handleDeleteCourse="handleDeleteCourse" 
+                        @handleEditCourse="handleEditCourse"/> 
                     </v-list>                  
                 </v-card>
                 </v-col>
@@ -187,7 +189,28 @@ export default {
                 console.log(error)
             });
             
-        } 
+        },
+         handleEditCourse: async function(editedCourse) {
+            let editCourseUrl = 'user/advisor/course/'+course_ID;
+            await axios.put(editCourseUrl)
+            .then(response =>{
+            })
+            .catch(error =>{
+                console.log(error)
+            });
+
+            await axios
+            .get('/course/all')
+            .then(response =>{
+                var obj = response.data[0]; 
+                this.courses = Object.keys(obj).map(key => obj[key]);
+                console.info(this.courses);
+            })
+            .catch(error =>{
+                console.log(error)
+            });
+            
+        },
         
     },
     beforeMount(){
