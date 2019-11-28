@@ -121,12 +121,11 @@ export default {
       .catch(error => {
         console.log(error)
       });
-    },
-    mounted() {
-    axios.get('/user/student/getmyadvisor')
+      axios.get('/user/student/getmyadvisor')
       .then(response =>{
          var obj = response.data[0]; 
          this.advisor = Object.keys(obj).map(key => obj[key]);
+         console.log(this.advisor);
       })
       .catch(error =>{
           console.log(error)   
@@ -153,7 +152,6 @@ export default {
       .catch(error =>{
           console.log(error)   
       });
-
     },
 }
 
