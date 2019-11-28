@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser')
 //const cookieSession = require('cookie-session');
 const session = require('express-session');
 const keys = require('./config/keys');
-const io = require('socket.io')(server);
+const io = require('./node_modules/socket.io')(app);
 
 
 //google OAuth2.0 using passport
