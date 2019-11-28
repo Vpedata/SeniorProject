@@ -44,6 +44,9 @@ import axios from 'axios';
 import router from '../router/index.js';
 import messageComponent from './messageComponent'
 export default {
+    components: {
+        messageComponent
+    },
     data() {
         return {
             name: '',

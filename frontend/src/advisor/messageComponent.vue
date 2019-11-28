@@ -9,12 +9,11 @@
 <script>
 import axios from 'axios';
 export default {
-    name: "classComponent",
+    name: "messageComponent",
     props: {
         message: Object,
     },
     data: () => ({
-        dialog: false
     }),
 }
 </script>
