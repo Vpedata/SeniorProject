@@ -9,7 +9,8 @@ const cookieParser = require('cookie-parser')
 //const cookieSession = require('cookie-session');
 const session = require('express-session');
 const keys = require('./config/keys');
-const io = require('./node_modules/socket.io')(app);
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 
 
 //google OAuth2.0 using passport
@@ -55,6 +56,7 @@ io.on('connection', function(socket) {
         io.emit('MESSAGE', data)
     });
 });
+
 
 app.listen(3000, () => {
     console.log("proto  app listening on port 3000")
