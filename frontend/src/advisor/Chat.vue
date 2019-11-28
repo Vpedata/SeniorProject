@@ -91,15 +91,14 @@ export default {
         },
         handleSubmit(result) {
             this.student = result;
+            this.messagesList=[];
             let studentMessagesUrl = '/user/advisor/messages/'+ result.student_ID;
             axios.get(studentMessagesUrl)
             .then(response =>{
             var obj = response.data[0]; 
             this.messages= Object.keys(obj).map(key => obj[key]);
-            console.info(this.messages);
             for (var i = 0; i < this.messages.length; i++){
                 var sendingUser = "";
-                var receivingUser= "";
                 if(this.messages[i].sender === this.student.user_ID){
                     sendingUser=this.student.name;
                 }
@@ -107,7 +106,7 @@ export default {
                     sendingUser=this.name;
                 }
                 let previousMessage = {
-                    message:  this.messages[i],
+                    message:  this.messages[i].content,
                     user: sendingUser,
                 }
                 this.messagesList.push(previousMessage);
