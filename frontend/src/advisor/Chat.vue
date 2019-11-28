@@ -31,7 +31,7 @@
                     </v-toolbar>
                 <v-card-text>
                 <v-list style="max-height: 500px" class="overflow-y-auto">
-                    <messageComponent class="mt-n1" v-for="message in messages" 
+                    <messageComponent class="mt-n1" v-for="message in messagesList" 
                     :message="message" :student="student" :name="name" :key="message"/>
                 </v-list>
                 </v-card-text>
@@ -97,14 +97,14 @@ export default {
             for (var i = 0; i < this.messages.length; i++){
                 var sendingUser = "";
                 var receivingUser= "";
-                if(this.message[i].sender === this.student.user_ID){
+                if(this.messages[i].sender === this.student.user_ID){
                     sendingUser=this.student.name;
                 }
                 else{
                     sendingUser=this.name;
                 }
                 let previousMessages = {
-                    messages:  this.messages[i],
+                    message:  this.messages[i],
                     user: sendingUser,
                 }
                 this.messagesList.push(previousMessages);
@@ -136,7 +136,7 @@ export default {
     created() {
             
         socket.on('chat', (data) => {
-            this.messages.push({
+            this.messagesList.push({
             message: data.message,
             user: data.user,
             });
