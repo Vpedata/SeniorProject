@@ -14,9 +14,9 @@ const keys = require('./config/keys');
 //google OAuth2.0 using passport
 require('./config/passport.js');
 
-const publicRoot = '/home/ubuntu/SeniorProject/frontend/dist'
+const publicRoot = '/home/ubuntu/SeniorProject/frontend/dist';
 
-app.use(express.static(publicRoot))
+app.use(express.static(publicRoot));
 app.use( cookieParser()); 
 app.use( bodyParser.json());
 app.use( bodyParser.urlencoded({extended: true}));

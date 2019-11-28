@@ -5,13 +5,18 @@
 </template>
 
 <script>
+import Chat from './components/Chat.vue'
 export default {
   name: 'App',
   methods: {
     logout(){
         $http.get("http://onlineadvisor.tk:3000/auth/logout");      
         $router.push('http://onlineadvisor.tk:3000/#/');
-    }
+    },
+    components: {
+    Chat
+  }
+
 },
 }
 </script>
