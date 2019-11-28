@@ -11,7 +11,7 @@
                 <v-toolbar-items>
                     <v-btn  @click="$router.push('/fe/classlistadvisor')" dark>View Class List</v-btn>
                     <chat />
-                    <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
+                    <v-btn  @click="$router.push('/fe/adv/messages')" dark>Messages</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
                 </v-toolbar-items>
                 </v-toolbar>
