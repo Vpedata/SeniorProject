@@ -2,7 +2,7 @@
     <v-list-item>
             <v-list-item-content>
                 <v-list-item-title>
-                    <span :class="whichFloat">
+                    <span :class="classObject">
                         <small>{{user}}</small>:{{message.content}}
                     </span>
                 </v-list-item-title>
@@ -19,23 +19,19 @@ export default {
         student: Object,
         name: String
     },
-    computed:function() {
-        let user = ""
-        let whichFloat = ""
-        if(this.message.sender === this.student.user_ID){
-            user = this.student.name;
-            whichFloat = "float-left";
+    computed: {
+        classObject: function() {
+            if(this.message.sender === this.student.user_ID){
+             return "float-left"
+            }
+            else{
+                return "float-right";
+            }
         }
-        else{
-            user = this.name;
-            whichFloat = "float-right";
-        }
-
 
     },
     data: function() {
         return {
-            user="",
         } 
     }
 }
