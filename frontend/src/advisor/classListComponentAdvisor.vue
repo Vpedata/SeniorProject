@@ -46,7 +46,6 @@ export default {
     },
     methods: {
         handleEditCourse:  function(editedCourse){
-            console.info(editedCourse);
             this.$emit('handleEditCourse',editedCourse);
         }
     },

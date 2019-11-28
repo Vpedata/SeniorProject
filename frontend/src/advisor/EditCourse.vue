@@ -99,7 +99,6 @@ export default {
                 description: this.course_desc,  
                 preReq: preReqString
             };
-            console.info(editedCourse);
             this.$emit('handleEditCourse',editedCourse);
         }
 
