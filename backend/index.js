@@ -1,4 +1,5 @@
 const express = require('express');
+
  
 // creating an express instance
 const app = express()  
@@ -8,6 +9,8 @@ const cookieParser = require('cookie-parser')
 //const cookieSession = require('cookie-session');
 const session = require('express-session');
 const keys = require('./config/keys');
+const io = require('socket.io')(server);
+
 
 //google OAuth2.0 using passport
 require('./config/passport.js');
@@ -46,6 +49,12 @@ var connection = require ("./config/db.js");
 
 app.use(routes);
 
+io.on('connection', function(socket) {
+    console.log(socket.id)
+    socket.on('SEND_MESSAGE', function(data) {
+        io.emit('MESSAGE', data)
+    });
+});
 
 app.listen(3000, () => {
     console.log("proto  app listening on port 3000")
