@@ -32,7 +32,7 @@
                 <v-card-text>
                 <v-list style="max-height: 500px" class="overflow-y-auto">
                     <messageComponent class="mt-n1" v-for="message in messagesList" 
-                    :message="message" :student="student" :name="name" :key="message"/>
+                    :message="message" :student="student" :user="user" :key="message"/>
                 </v-list>
                 </v-card-text>
                 <v-card-actions>
@@ -66,7 +66,8 @@ export default {
             student: JSON,
             messages: JSON,
             newMessage: "",
-            messagesList:[], 
+            messagesList:[],
+
         }
     },
     methods: {
@@ -95,6 +96,7 @@ export default {
             .then(response =>{
             var obj = response.data[0]; 
             this.messages= Object.keys(obj).map(key => obj[key]);
+            console.info(this.messages);
             for (var i = 0; i < this.messages.length; i++){
                 var sendingUser = "";
                 var receivingUser= "";
@@ -104,11 +106,11 @@ export default {
                 else{
                     sendingUser=this.name;
                 }
-                let previousMessages = {
+                let previousMessage = {
                     message:  this.messages[i],
                     user: sendingUser,
                 }
-                this.messagesList.push(previousMessages);
+                this.messagesList.push(previousMessage);
             }
             console.info(this.messagesList);
             })
@@ -121,7 +123,6 @@ export default {
                 messageString:this.newMessage,
                 student_ID:this.student.student_ID
             }).then(function (response) {
-                console.info(response);
                 console.log(response);
             }).catch(function (error) {
                 console.log(error);

@@ -3,7 +3,7 @@
             <v-list-item-content>
                 <v-list-item-title>
                     <span :class="classObject">
-                        <small>{{user}}</small>:{{message.content}}
+                        <small>{{message.user}}</small>:{{message.message}}
                     </span>
                 </v-list-item-title>
             </v-list-item-content>
@@ -18,20 +18,13 @@ export default {
     props: {
         message: Object,
         student: Object,
-        name: String
     },
     created: function() {
-        if(this.message.sender === this.student.user_ID){
-             this.user=this.student.name;
-        }
-        else{
-             this.user=this.name;
-        }
     },
     computed: {
         classObject: function() {
             if(this.message.sender === this.student.user_ID){
-             return "float-left"
+                return "float-left";
             }
             else{
                 return "float-right";
@@ -41,7 +34,6 @@ export default {
     },
     data: function() {
         return {
-            user: "",
         } 
     }
 }
