@@ -67,7 +67,7 @@ import { mapState, mapActions } from 'vuex'
 import axios from 'axios';
 import router from '../router/index.js'
 import classComponent from '../studentpages/classListComponent.vue'
-import chat from './Chat'
+
 
 export default {
     computed: {
