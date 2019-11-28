@@ -23,7 +23,8 @@
                 </v-col>
             </v-row>
             <v-row>
-                <v-col cols="6">
+                <v-col cols="2"></v-col>
+                <v-col cols="8">
                 <v-card class="mx-12" elevation="12" height="600px" max-height="600px">
                     <v-toolbar dark flat>
                     <v-toolbar-title class="white--text">Messages</v-toolbar-title>
@@ -31,11 +32,8 @@
                 <v-list style="max-height: 600px" class="overflow-y-auto">
                     <messageComponent class="mt-n1" v-for="message in messages" :message="message" :key="message"/>
                 </v-list>
-                <v-textarea class = 'mx-12 mt-n12' dense  v-model='newMessage' full-width counter single-line outlined maxlength = '300'></v-textarea>
-                <v-btn class="mx-2" fab dark small color="purple" >
-                    <v-icon dark>mdi-send</v-icon>
-                </v-btn>
-                
+                <v-textarea append-outer-icon="mdi-send" class="mx-2" label="append-outer-icon" rows="1" auto-grow>
+                </v-textarea>
                 </v-card>
                 </v-col>
             </v-row>
