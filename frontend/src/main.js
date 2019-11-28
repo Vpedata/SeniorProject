@@ -11,7 +11,9 @@ import Autocomplete from '@trevoreyre/autocomplete-vue'
 import '@trevoreyre/autocomplete-vue/dist/style.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import '@mdi/font/css/materialdesignicons.css'
+import chat from './advisor/Chat'
 
+Vue.use(chat);
 Vue.use(Autocomplete);
 Vue.use(Vuetify, {
   iconfont: 'mdi'
