@@ -31,7 +31,8 @@
                     </v-toolbar>
                 <v-card-text>
                 <v-list style="max-height: 500px" class="overflow-y-auto">
-                    <messageComponent class="mt-n1" v-for="message in messages" :message="message" :student="student" :key="message"/>
+                    <messageComponent class="mt-n1" v-for="message in messages" 
+                    :message="message" :student="student" :name="name" :key="message"/>
                 </v-list>
                 </v-card-text>
                 <v-card-actions>
