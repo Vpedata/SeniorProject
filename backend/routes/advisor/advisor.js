@@ -18,7 +18,7 @@ router.get("/info",isAdvisor, (req, res, next)=>{
 router.use('/student',require('./student'));
 
 // routes to advisor chatrooms
-router.use('/chatroom',require('./messages'));
+router.use('/messages',require('./messages'));
 
 // routes to advisor course (course in Course Table)
 router.use('/course',require('./course'));
