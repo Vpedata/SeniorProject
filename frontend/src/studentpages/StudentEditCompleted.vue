@@ -101,7 +101,7 @@ export default {
       axios.get('/user/student/courses/taken')
       .then(response =>{
          var obj = response.data[0]; 
-         this.courses = Object.keys(obj).map(key => obj[key]);
+         this.taken = Object.keys(obj).map(key => obj[key]);
          console.info(this.courses);
       })
       .catch(error =>{
@@ -111,7 +111,7 @@ export default {
       axios.get('/user/student/courses/yetToTake')
       .then(response =>{
          var obj = response.data[0]; 
-         this.selected = Object.keys(obj).map(key => obj[key]);
+         this.yetToTake = Object.keys(obj).map(key => obj[key]);
          console.info(this.selected);
       })
       .catch(error =>{
