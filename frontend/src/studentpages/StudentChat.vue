@@ -57,7 +57,7 @@ export default {
     data() {
         return {
             name: '',
-            advisor: JSON,
+            advisor: Object,
             messages: JSON,
             newMessage: "",
             messagesList:[],
