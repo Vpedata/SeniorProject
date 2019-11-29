@@ -130,7 +130,7 @@ export default {
             socket.emit('chat', {
                 message: this.newMessage,
                 user: this.name,
-                userType: 1
+                userType: 0 //advisor is sending the message
             });
             this.newMessage = null;
         },

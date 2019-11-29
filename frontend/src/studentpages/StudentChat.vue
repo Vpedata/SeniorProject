@@ -84,7 +84,7 @@ export default {
             socket.emit('chat', {
                 message: this.newMessage,
                 user: this.name,
-                userType: 1
+                userType: 1 //student is sending the message
             });
             this.newMessage = null;
         },
