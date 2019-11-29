@@ -12,7 +12,7 @@
                     <!--- <v-btn  @click="$router.push('/fe/adv/createcourse')" dark>Create Course</v-btn> --->
                     <v-btn  class ="success" @click="dialog=true" dark>Create Course</v-btn> 
                     <v-btn  @click="$router.push('/fe/adv/advisor')" dark>Home</v-btn>
-                    <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
+                    <v-btn  @click="$router.push('/fe/adv/messages')" dark>Messages</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
                 </v-toolbar-items>
                 </v-toolbar>
