@@ -129,7 +129,8 @@ export default {
             
             socket.emit('chat', {
                 message: this.newMessage,
-                user: this.name
+                user: this.name,
+                userType: 1
             });
             this.newMessage = null;
         },
