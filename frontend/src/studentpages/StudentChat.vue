@@ -125,8 +125,7 @@ export default {
     mounted: async function() {
       await axios.get('/user/student/getmyadvisor')
       .then(response =>{
-         var obj = response.data[0][0]; 
-         this.advisor = Object.keys(obj).map(key => obj[key]);
+         this.advisor = response.data[0][0]; 
       })
       .catch(error =>{
           console.log(error)   
@@ -139,7 +138,7 @@ export default {
                 var sendingUser = this.name;
                 var userType = 1; //student is sending the message
                 if(this.messages[i].sender === this.advisor.user_ID){
-                    sendingUser=this.student.name;
+                    sendingUser=this.advisor.name;
                     userType = 0; //advisor is sending the message
                 }
                 let previousMessage = {
