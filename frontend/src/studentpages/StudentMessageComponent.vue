@@ -18,22 +18,18 @@ export default {
     props: {
         message: Object,
     },
-    created: function() {
-    },
+ 
     computed: {
         classObject: function() {
             if(!this.message.userType){
-                return "float-left"; //advisor is sending the message
+                return "float-left"; //student is sending the message
             }
             else{
-                return "float-right"; //student is sending the message
+                return "float-right"; //advisor is sending the message
             }
         }
 
     },
-    data: function() {
-        return {
-        } 
-    }
+
 }
 </script>

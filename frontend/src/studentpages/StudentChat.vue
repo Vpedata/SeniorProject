@@ -95,6 +95,7 @@ export default {
             this.messagesList.push({
             message: data.message,
             user: data.user,
+            userType: data.userType
             });
         });
         
