@@ -121,16 +121,17 @@ export default {
       .catch(error => {
         console.log(error)
       });
-      axios.get('/user/student/getmyadvisor')
+    },
+    mounted: async function() {
+      await axios.get('/user/student/getmyadvisor')
       .then(response =>{
          var obj = response.data[0]; 
          this.advisor = Object.keys(obj).map(key => obj[key]);
-         console.log(this.advisor);
       })
       .catch(error =>{
           console.log(error)   
       });
-    axios.get('/user/student/messages/all')
+     await axios.get('/user/student/messages/all')
         .then(response =>{
          var obj = response.data[0]; 
          this.messages= Object.keys(obj).map(key => obj[key]);
@@ -146,6 +147,7 @@ export default {
                     user: sendingUser,
                     userType: userType
                 }
+
                 this.messagesList.push(previousMessage);
             }
         })
