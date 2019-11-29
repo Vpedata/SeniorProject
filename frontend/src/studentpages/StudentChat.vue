@@ -125,7 +125,7 @@ export default {
     mounted: async function() {
       await axios.get('/user/student/getmyadvisor')
       .then(response =>{
-         var obj = response.data[0]; 
+         var obj = response.data[0][0]; 
          this.advisor = Object.keys(obj).map(key => obj[key]);
       })
       .catch(error =>{
