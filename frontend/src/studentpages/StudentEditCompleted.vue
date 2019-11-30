@@ -38,7 +38,7 @@
                 </v-card>
                 </v-col>
             </v-row>
-            <v-btn class="mx-auto mt-12" width="140" dark color="orange">Save</v-btn>
+            <v-btn class="mx-auto mt-12" width="140" dark color="orange" @click="$router.push('/fe/student')">Save</v-btn>
         </div>
     </v-app>
     </div>
@@ -59,7 +59,8 @@ export default {
         dialog: false,
         name: " ",
         taken: JSON,
-        yetToTake: JSON
+        yetToTake: JSON,
+        id: ""
     }),
 
     components: {
@@ -86,13 +87,35 @@ export default {
                     this.yetToTake.splice(this.taken.indexOf(course),1)
                 }
             }
-        }
+        },
+        update_completed: function() {
+            axios.post("/user/student/courses/taken", {
+                classes: this.taken,
+                student_ID: this.id
+          }).then(function (response) {
+              console.log(response);
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+          
+            
+        } 
     },
     beforeMount(){
       axios
       .get('/user/getName')
       .then(response => {
         this.name = response.data.firstName + " " + response.data.lastName;
+      })
+      .catch(error => {
+        console.log(error)
+      });
+
+      axios
+      .get('/user/getmyid')
+      .then(response => {
+        this.id = response.data.user_ID;
       })
       .catch(error => {
         console.log(error)
