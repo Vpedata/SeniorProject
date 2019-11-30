@@ -75,18 +75,15 @@ export default {
             });
         },
         transfer_course: function(course,grade) {
-            course.grade = grade;
-            if (grade == '') {
+                course.grade = grade;
                 if (this.taken.indexOf(course)!=-1){
                     this.yetToTake.push(course)
                     this.taken.splice(this.taken.indexOf(course),1)
                 }
-            } else {
-                if (this.yetToTake.indexOf(course)!=-1){
+                else if (this.yetToTake.indexOf(course)!=-1){
                     this.taken.push(course)
                     this.yetToTake.splice(this.taken.indexOf(course),1)
-                }
-            }
+                };
         },
         update_completed: function() {
             axios.post("/user/student/courses/taken", {
@@ -135,6 +132,7 @@ export default {
       .then(response =>{
          var obj = response.data[0]; 
          this.yetToTake = Object.keys(obj).map(key => obj[key]);
+         this.$set(this.yetToTake, grade, '')
          console.info(this.selected);
       })
       .catch(error =>{
