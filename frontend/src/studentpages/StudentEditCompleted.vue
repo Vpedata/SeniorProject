@@ -33,7 +33,7 @@
                         <v-toolbar-title>Taken Courses</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
-                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
+                        <classComponent v-for="course in taken" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
                     </v-list>                  
                 </v-card>
                 </v-col>
@@ -83,7 +83,7 @@ export default {
                 }
                 else if (this.taken.indexOf(course)==-1){
                     this.taken.push(course)
-                    this.yetToTake.splice(this.taken.indexOf(course),1)
+                    this.yetToTake.splice(this.yetToTake.indexOf(course),1)
                 };
         },
         update_completed: function() {
