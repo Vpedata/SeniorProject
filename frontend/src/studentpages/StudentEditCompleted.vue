@@ -18,7 +18,7 @@
             <v-row>
                 <v-col cols="1"></v-col>
                 <v-col cols="5">
-                <v-card class="mt-n16 mx-auto" elevation="12" height="600px" max-height="600px">
+                <v-card class="mt-n16 mx-auto" elevation="12" height="500px" max-height="500px">
                     <v-toolbar flat dark>
                         <v-toolbar-title>Untaken Courses</v-toolbar-title>
                     </v-toolbar>
@@ -75,16 +75,20 @@ export default {
             });
         },
         transfer_course: function(course,grade) {
-                course.grade = grade;
-                course.dialog = false;
-                if (this.yetToTake.indexOf(course)==-1){
-                    this.yetToTake.push(course)
-                    this.taken.splice(this.taken.indexOf(course),1)
+                course.dialog = false
+                if (course.grade != '' && grade == '') {
+                    if (this.yetToTake.indexOf(course)==-1){
+                        this.yetToTake.push(course)
+                        this.taken.splice(this.taken.indexOf(course),1)
+                    }
                 }
-                else if (this.taken.indexOf(course)==-1){
-                    this.taken.push(course)
-                    this.yetToTake.splice(this.yetToTake.indexOf(course),1)
-                };
+                else if (course.grade == '' && grade != '') {
+                    if (this.taken.indexOf(course)==-1){
+                        this.taken.push(course)
+                        this.yetToTake.splice(this.yetToTake.indexOf(course),1)
+                    }
+                }
+                course.grade = grade;
         },
         update_completed: function() {
             //WIP
