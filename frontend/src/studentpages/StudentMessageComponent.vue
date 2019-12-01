@@ -1,8 +1,8 @@
 <template>
-    <v-list-item :class="message{{message.isFromUser ? (message.reciever == this.userID ? ' received' : ' sent') : ' system'}}">
+    <v-list-item>
             <v-list-item-content>
                 <v-list-item-title>
-                    <span :class="classObject">
+                    <span :class="classObject message{{message.isFromUser ? (message.reciever == this.userID ? ' received' : ' sent') : ' system'}}">
                         <small>{{message.user}}</small>
                         <div :class="text">
                             :{{message.message}}
@@ -47,7 +47,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .message {
     margin: 10px 0;
     width: 100%;
@@ -62,31 +62,31 @@ export default {
 
 .received {
     text-align: left;
-    
-    .text {
-        background: #602e00;
-        color: #ffffff;
-    }
+}
+
+.received .text {
+    background: #602e00;
+    color: #ffffff;
 }
 
 .sent {
     text-align: right;
-    
-    .text {
-        background: #ffee00;
-    }
 }
+
+.sent .text {
+     background: #ffee00;
+ }
 
 .system {
     text-align: center;
     border-top-style: solid;
     border-bottom-style: solid;
     border-color: #000000;
-    border-width: 2px;
+    border-width: 2px;  
+}
 
-    .text {
-        background: transparent;
-        color: #555555;
-    }
+.system .text {
+    background: transparent;
+    color: #555555;
 }
 </style>
