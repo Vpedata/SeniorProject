@@ -94,7 +94,11 @@ export default {
             }
             class_str = class_str.substring(0, class_str.length - 1);
             grade_str = grade_str.substring(0, grade_str.length - 1);
-        
+
+            console.log(class_str)
+            console.log(this.id)
+            console.log(grade_str)
+
             axios.post("/user/student/courses/taken", {
                 classes: class_str,
                 student_ID: this.id,
