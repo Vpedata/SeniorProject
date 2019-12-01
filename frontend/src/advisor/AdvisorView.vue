@@ -89,11 +89,12 @@ export default {
         coursesTaken:JSON,
         coursesRecommended:JSON,
         studentSelectedCourses:JSON,
-        studentSelectedCoursesCredits:" "
+        studentSelectedCoursesCredits:0
 
   }),
   components: {
-        classComponent
+        classComponent,
+        studentSelectedCoursesComponent
     },
     methods: {
         logout: function () {

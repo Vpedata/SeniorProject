@@ -14,7 +14,7 @@
 import axios from 'axios';
 import classComponent from '../studentpages/classListComponent.vue'
 export default {
-    name: "studentSelectCoursesComponenet",
+    name: "studentSelectedCoursesComponent",
     props: {
         studentSelectedCoursesCredits,
         studentSelectedCourses
