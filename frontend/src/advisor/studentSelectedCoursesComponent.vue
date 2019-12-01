@@ -14,16 +14,14 @@
 import axios from 'axios';
 import classComponent from '../studentpages/classListComponent.vue'
 export default {
-    name: "studentSelectedCoursesComponent" ,
-    props: {
-        studentSelectedCoursesCredits,
-        studentSelectedCourses
-    },
+    name: "studentSelectedCoursesComponent",
     components: {
         classComponent,
     },
     data: () => ({
         dialog: false,
+        studentSelectedCourses:JSON,
+        studentSelectedCoursesCredits:" "
     }),
     method: {
         getStudentSelectedCourses: function(){
