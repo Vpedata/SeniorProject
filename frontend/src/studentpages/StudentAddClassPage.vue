@@ -87,12 +87,12 @@ export default {
         save_selected: function() {
             var class_str = ""
             var grade_str = ""
-            for (var i=0; i<selected.length;i++){
+            for (var i=0; i<this.selected.length;i++){
                 if (i>0) {
                     class_str.append(",")
                     grade_str.append(",")
                 }
-                class_str.append(string(selected.get(i)))
+                class_str.append(string(this.selected.get(i)))
                 grade_str.append("-1")
             }
             axios.post("/user/student/courses/taken", {
