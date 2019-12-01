@@ -59,7 +59,7 @@ router.get("/:id/recommended",isAdvisor,(req,res,next)=> {
 });
 
 //get student's select recommeded courses by student_id
-router.get("/:id/studentRecommended", isStudent, (req, res, next)=>{
+router.get("/:id/studentRecommended", isAdvisor, (req, res, next)=>{
     var sql = "CALL callAllNegOnesForStudent(?);";
     db.query(sql,req.params.id, (err, rows, fields) => {
       if (err) throw err;

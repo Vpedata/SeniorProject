@@ -28,7 +28,9 @@
                         <v-toolbar-title dense class="white--text">Current Semester: {{this.currSem.currSemester}}</v-toolbar-title>    
                     </v-toolbar>
                 </v-col>
-                <v-col cols="6"><v-btn class="mb-4 mt-12 mx-auto" outlined color="#FF0000" @click="getStudentSelectedCourses" dark>Student Selected Courses</v-btn></v-col>
+                <v-col cols="6">
+                    <studentSelectedCoursesComponent :studentSelectedCoursesCredits="studentSelectedCoursesCredits" :studentSelectedCourses="studentSelectedCourses"/>
+                </v-col>
             </v-row>
             <v-row>
                 <v-col cols="6">
@@ -68,6 +70,7 @@ import { mapState, mapActions } from 'vuex'
 import axios from 'axios';
 import router from '../router/index.js'
 import classComponent from '../studentpages/classListComponent.vue'
+import studentSelectedCoursesComponent from "./studentSelectedCoursesComponent"
 
 
 export default {
@@ -86,7 +89,7 @@ export default {
         coursesTaken:JSON,
         coursesRecommended:JSON,
         studentSelectedCourses:JSON,
-        studentSelectedCOursesCredits:" "
+        studentSelectedCoursesCredits:" "
 
   }),
   components: {
@@ -163,7 +166,7 @@ export default {
             for (var i = 0; i < allCourses.length; i++){
                 credits = credits + allCourses[i].creditHours;
             }
-            this.studentSelectedCOursesCredits = credits;
+            this.studentSelectedCoursesCredits = credits;
             this.studentSelectedCourses = allCourses;
         })
         .catch(err =>{
