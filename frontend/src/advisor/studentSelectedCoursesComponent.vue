@@ -1,10 +1,9 @@
 <template>
-    <v-dialog v-model="dialog" >
-      <template v-slot:activator="{ on }">
-      <v-btn class="mb-4 mx-auto" outlined color="#FF0000" @click="getStudentSelectedCourses" dark v-on="on">
+    <div>
+    <v-btn class="mb-4 mx-auto" outlined color="#FF0000" @click="getStudentSelectedCourses" dark >
         Student Selected Courses
-      </v-btn>
-      </template>
+    </v-btn>
+    <v-dialog v-model="dialog" >
       <v-card class="mx-12" elevation="12" height="600px" max-height="600px">
         <v-toolbar dark flat>
         <v-toolbar-title class="white--text">Student Selected Courses</v-toolbar-title>    
@@ -13,8 +12,8 @@
             <classComponent class="mt-n1" v-for="course in studentSelectedCourses" :course="course" :key="course.course_ID"/>
         </v-list>       
       </v-card>
- 
     </v-dialog>
+    </div>
 </template>
 <script>
 import axios from 'axios';
@@ -35,6 +34,7 @@ export default {
     }),
     method: {
         getStudentSelectedCourses: function(){
+            dialog=true;
             this.$emit('getStudentSelectedCourses');
         },
     }
