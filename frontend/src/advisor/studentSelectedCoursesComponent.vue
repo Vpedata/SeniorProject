@@ -27,15 +27,15 @@ export default {
         getStudentSelectedCourses: function(){
             let studentSelectedCoursesUrl = '/user/advisor/student/'+result.student_ID+'/studentRecommended';
             axios.get(studentSelectedCoursesUrl).then(response =>{
-            var obj = response.data[0];
-            var allCourses = Object.keys(obj).map(key => obj[key]);
-            let credits = 0;
+                var obj = response.data[0];
+                var allCourses = Object.keys(obj).map(key => obj[key]);
+                let credits = 0;
 
-            for (var i = 0; i < allCourses.length; i++){
-                credits = credits + allCourses[i].creditHours;
-            }
-            this.studentSelectedCoursesCredits = credits;
-            this.studentSelectedCourses = allCourses;
+                for (var i = 0; i < allCourses.length; i++){
+                    credits = credits + allCourses[i].creditHours;
+                }
+                this.studentSelectedCoursesCredits = credits;
+                this.studentSelectedCourses = allCourses;
         })
         .catch(err =>{
             console.log(err);
