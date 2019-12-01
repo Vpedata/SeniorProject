@@ -29,7 +29,7 @@
                     </v-toolbar>
                 </v-col>
                 <v-col cols="6">
-                    <studentSelectedCoursesComponent :studentSelectedCoursesCredits="studentSelectedCoursesCredits" :studentSelectedCourses="studentSelectedCourses"/>
+                    <!---<studentSelectedCoursesComponent :studentSelectedCoursesCredits="studentSelectedCoursesCredits" :studentSelectedCourses="studentSelectedCourses"/>--->
                 </v-col>
             </v-row>
             <v-row>
@@ -70,7 +70,7 @@ import { mapState, mapActions } from 'vuex'
 import axios from 'axios';
 import router from '../router/index.js'
 import classComponent from '../studentpages/classListComponent.vue'
-import studentSelectedCoursesComponent from "./studentSelectedCoursesComponent"
+//import studentSelectedCoursesComponent from "./studentSelectedCoursesComponent"
 
 
 export default {
@@ -94,7 +94,7 @@ export default {
   }),
   components: {
         classComponent,
-        studentSelectedCoursesComponent
+        //studentSelectedCoursesComponent
     },
     methods: {
         logout: function () {
