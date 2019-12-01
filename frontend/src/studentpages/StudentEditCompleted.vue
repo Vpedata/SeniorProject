@@ -70,9 +70,10 @@ export default {
         },
         update_completed: function() {
             let temp_index = 0
+            let avail_parse = JSON.parse(avail_courses)
             for (let i=0;i<avail_courses.length;i++){
-                let check_course = avail_courses.get(i).name
-                let check_grade = avail_courses.get(i).grade
+                let check_course = avail_parse[i].name
+                let check_grade = avail_parse[i].grade
                 if (check_grade != '') {
                     if (temp_index > 0) {
                         this.update_courses.append(",")
