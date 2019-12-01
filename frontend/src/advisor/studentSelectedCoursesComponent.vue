@@ -16,8 +16,8 @@ import classComponent from '../studentpages/classListComponent.vue'
 export default {
     name: "studentSelectedCoursesComponent" ,
     props: {
-        studentSelectedCoursesCredits,
-        studentSelectedCourses
+        
+        studentSelectedCourses,
     },
     components: {
         classComponent,
