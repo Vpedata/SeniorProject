@@ -25,7 +25,7 @@
                     </v-list>                  
                 </v-card>
             </v-row>
-            <v-btn class="mx-auto mt-12" width="140" dark color="orange" @click="$router.push('/fe/student')">Save</v-btn>
+            <v-btn class="mx-auto mt-12" width="140" dark color="orange" @click="update_completed">Save</v-btn>
         </div>
     </v-app>
     <div class="mt-12"></div>
@@ -49,8 +49,8 @@ export default {
         taken: JSON,
         avail_courses: JSON,
         id: "",
-        update_courses: [],
-        update_grades: []
+        update_courses: "",
+        update_grades: ""
     }),
 
     components: {
@@ -74,8 +74,12 @@ export default {
                 let check_course = avail_courses.get(i).name
                 let check_grade = avail_courses.get(i).grade
                 if (check_grade != '') {
-                    this.update_courses[temp_index] = check_course
-                    this.update_grades[temp_index] = check_grade
+                    if (temp_index > 0) {
+                        this.update_courses.append(",")
+                        this.update_grades.append(",")
+                    }
+                    this.update_courses.append(string(check_course))
+                    this.update_grades.append(string(check_grade))
                     temp_index ++
                 }
             }
@@ -88,8 +92,8 @@ export default {
           })
           .catch(function (error) {
               console.log(error);
-          });
-          
+          })
+            $router.push('/fe/student')
             
         } 
     },
