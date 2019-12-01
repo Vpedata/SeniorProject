@@ -76,11 +76,11 @@ export default {
                 let check_grade = avail_parse[i].grade
                 if (check_grade != '') {
                     if (temp_index > 0) {
-                        this.update_courses.append(",")
-                        this.update_grades.append(",")
+                        this.update_courses.concat(",")
+                        this.update_grades.concat(",")
                     }
-                    this.update_courses.append(toString(check_course))
-                    this.update_grades.append(toString(check_grade))
+                    this.update_courses.concat(toString(check_course))
+                    this.update_grades.concat(toString(check_grade))
                     temp_index ++
                 }
             }

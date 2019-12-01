@@ -90,11 +90,11 @@ export default {
             var selected_parse = JSON.parse(JSON.stringify(this.selected))
             for (var i=0; i<this.selected.length;i++){
                 if (i>0) {
-                    class_str.append(",")
-                    grade_str.append(",")
+                    class_str.concat(",")
+                    grade_str.concat(",")
                 }
-                class_str.append(toString(selected_parse[i]))
-                grade_str.append("-1")
+                class_str.concat(toString(selected_parse[i]))
+                grade_str.concat("-1")
             }
             axios.post("/user/student/courses/taken", {
                 classes: class_str,
