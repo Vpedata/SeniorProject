@@ -89,13 +89,12 @@ export default {
             var grade_str = ""
             var selected_parse = JSON.parse(JSON.stringify(this.selected))
             for (var i=0; i<this.selected.length;i++){
-                if (i>0) {
-                    class_str.concat(",")
-                    grade_str.concat(",")
-                }
-                class_str.concat(toString(selected_parse[i]))
-                grade_str.concat("-1")
+                class_str.concat(toString(selected_parse[i]) + ",")
+                grade_str.concat("-1,")
             }
+            class_str = class_str.substring(0, class_str.length - 1);
+            grade_str = grade_str.substring(0, grade_str.length - 1);
+        
             axios.post("/user/student/courses/taken", {
                 classes: class_str,
                 student_ID: this.id,

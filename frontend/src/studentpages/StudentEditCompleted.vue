@@ -70,20 +70,20 @@ export default {
         },
         update_completed: function() {
             let temp_index = 0
+            this.update_courses = ""
+            this.update_grades = ""
             let avail_parse = JSON.parse(JSON.stringify(this.avail_courses))
             for (let i=0;i<avail_courses.length;i++){
                 let check_course = avail_parse[i].name
                 let check_grade = avail_parse[i].grade
                 if (check_grade != '') {
-                    if (temp_index > 0) {
-                        this.update_courses.concat(",")
-                        this.update_grades.concat(",")
-                    }
-                    this.update_courses.concat(toString(check_course))
-                    this.update_grades.concat(toString(check_grade))
+                    this.update_courses.concat(toString(check_course) + ",")
+                    this.update_grades.concat(toString(check_grade) + ",")
                     temp_index ++
                 }
             }
+            update_courses = grade_str.substring(0, grade_str.length - 1);
+            update_grades = grade_str.substring(0, grade_str.length - 1);
             axios.post("/user/student/courses/taken", {
                 classes: this.update_courses,
                 student_ID: this.id,
