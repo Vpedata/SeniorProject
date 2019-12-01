@@ -23,7 +23,7 @@
                         <v-toolbar-title>Untaken Courses</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
-                        <classComponent v-for="course in yetToTake" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
+                        <classComponent v-for="course in yetToTake" :course="course" :key="course.course_ID" :taken="false" @transfer="transfer_course"/> 
                     </v-list>                  
                 </v-card>
                 </v-col>
@@ -33,7 +33,7 @@
                         <v-toolbar-title>Taken Courses</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
-                        <classComponent v-for="course in taken" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
+                        <classComponent v-for="course in taken" :course="course" :key="course.course_ID" :taken="true" @transfer="transfer_course"/> 
                     </v-list>                  
                 </v-card>
                 </v-col>
@@ -76,19 +76,17 @@ export default {
         },
         transfer_course: function(course,grade) {
                 course.dialog = false
-                if (course.grade != '' && grade == '') {
+                if ((course.taken && course.grade == '') || (!course.taken && course.grade != '')) {
+                    course.taken = !course.taken
                     if (this.yetToTake.indexOf(course)==-1){
                         this.yetToTake.push(course)
                         this.taken.splice(this.taken.indexOf(course),1)
-                    }
-                }
-                else if (course.grade == '' && grade != '') {
+                    } 
                     if (this.taken.indexOf(course)==-1){
                         this.taken.push(course)
                         this.yetToTake.splice(this.yetToTake.indexOf(course),1)
                     }
                 }
-                course.grade = grade;
         },
         update_completed: function() {
             //WIP
@@ -138,7 +136,6 @@ export default {
       .then(response =>{
          var obj = response.data[0]; 
          this.yetToTake = Object.keys(obj).map(key => obj[key]);
-         this.$set(this.yetToTake, grade, '')
          console.info(this.selected);
       })
       .catch(error =>{
