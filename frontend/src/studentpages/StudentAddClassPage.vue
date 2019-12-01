@@ -108,7 +108,6 @@ export default {
             .catch(function (error) {
               console.log(error);
             })
-            $router.push('/fe/student')
         }
     },
     beforeMount(){
