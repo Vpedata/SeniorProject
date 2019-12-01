@@ -23,11 +23,12 @@
                 </v-col>
             </v-row>
             <v-row>
-                <v-col cols="12">
+                <v-col cols="6">
                     <v-toolbar dark flat dense class="mx-auto" width="300px">
                         <v-toolbar-title dense class="white--text">Current Semester: {{this.currSem.currSemester}}</v-toolbar-title>    
                     </v-toolbar>
                 </v-col>
+                <v-col cols="6"><v-btn class="mb-4 mt-12 mx-auto" outlined color="#FF0000" @click="getStudentSelectedCourses" dark>Student Selected Courses</v-btn></v-col>
             </v-row>
             <v-row>
                 <v-col cols="6">
@@ -80,10 +81,13 @@ export default {
         name: " ",
         students:JSON,
         student_ID:"",
-        currSem: "",
-        creditsTaken: "",
+        currSem: " ",
+        creditsTaken: " ",
         coursesTaken:JSON,
-        coursesRecommended:JSON
+        coursesRecommended:JSON,
+        studentSelectedCourses:JSON,
+        studentSelectedCOursesCredits:" "
+
   }),
   components: {
         classComponent
@@ -130,7 +134,7 @@ export default {
                 console.log(error)
             });
 
-            let currSemUrl = 'user/advisor/student/curSem/'+result.student_ID;
+            let currSemUrl = '/user/advisor/student/curSem/'+result.student_ID;
              axios.get(currSemUrl)
             .then(response =>{
             this.currSem= response.data[0][0];
@@ -139,7 +143,7 @@ export default {
                 console.log(error)
             });
             
-             let creditsTakenUrl = 'user/advisor/student/takenCredits/'+result.student_ID;
+             let creditsTakenUrl = '/user/advisor/student/takenCredits/'+result.student_ID;
              axios.get(creditsTakenUrl)
             .then(response =>{
             this.creditsTaken= response.data[0][0];
@@ -148,7 +152,24 @@ export default {
             .catch(error =>{
                 console.log(error)
             });
-        }
+        },
+        getStudentSelectedCourses: function(){
+            let studentSelectedCoursesUrl = '/user/advisor/student/'+result.student_ID+'/studentRecommended';
+            axios.get(studentSelectedCoursesUrl).then(response =>{
+            var obj = response.data[0];
+            var allCourses = Object.keys(obj).map(key => obj[key]);
+            let credits = 0;
+
+            for (var i = 0; i < allCourses.length; i++){
+                credits = credits + allCourses[i].creditHours;
+            }
+            this.studentSelectedCOursesCredits = credits;
+            this.studentSelectedCourses = allCourses;
+        })
+        .catch(err =>{
+            console.log(err);
+        });
+    },
         
     },
 
