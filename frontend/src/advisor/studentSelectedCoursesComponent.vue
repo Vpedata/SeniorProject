@@ -25,7 +25,8 @@ export default {
         classComponent,
     },
     props: {
-        student_ID : Number
+        studentSelectedCourses:JSON,
+        studentSelectedCoursesCredits:Number
     },
     data: () => ({
         dialog: false,
@@ -34,22 +35,8 @@ export default {
     }),
     method: {
         getStudentSelectedCourses: function(){
-            let studentSelectedCoursesUrl = '/user/advisor/student/'+result.student_ID+'/studentRecommended';
-            axios.get(studentSelectedCoursesUrl).then(response =>{
-                var obj = response.data[0];
-                var allCourses = Object.keys(obj).map(key => obj[key]);
-                let credits = 0;
-
-                for (var i = 0; i < allCourses.length; i++){
-                    credits = credits + allCourses[i].creditHours;
-                }
-                this.studentSelectedCoursesCredits = credits;
-                this.studentSelectedCourses = allCourses;
-        })
-        .catch(err =>{
-            console.log(err);
-        });
-    },
+            this.$emit('getStudentSelectedCourses');
+        },
     }
 }
 
