@@ -16,31 +16,19 @@
                 </v-toolbar>
             </v-row>
             <v-row>
-                <v-col cols="1"></v-col>
-                <v-col cols="5">
-                <v-card class="mt-n16 mx-auto" elevation="12" height="500px" max-height="500px">
+                <v-card class="mt-n16 mx-auto" width="800px" elevation="12" height="500px" max-height="500px">
                     <v-toolbar flat dark>
-                        <v-toolbar-title>Untaken Courses</v-toolbar-title>
+                        <v-toolbar-title>Courses</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
-                        <classComponent v-for="course in yetToTake" :course="course" :key="course.course_ID" :taken="false" @transfer="transfer_course"/> 
+                        <classComponent v-for="course in avail_courses" :course="course" :key="course.course_ID" :taken="false" @transfer="transfer_course"/> 
                     </v-list>                  
                 </v-card>
-                </v-col>
-                <v-col cols="5">
-                <v-card class="mt-n16 mx-auto" elevation="12" height="600px" max-height="600px">
-                    <v-toolbar flat dark>
-                        <v-toolbar-title>Taken Courses</v-toolbar-title>
-                    </v-toolbar>
-                    <v-list style="max-height: 600px" class="overflow-y-auto">
-                        <classComponent v-for="course in taken" :course="course" :key="course.course_ID" :taken="true" @transfer="transfer_course"/> 
-                    </v-list>                  
-                </v-card>
-                </v-col>
             </v-row>
             <v-btn class="mx-auto mt-12" width="140" dark color="orange" @click="$router.push('/fe/student')">Save</v-btn>
         </div>
     </v-app>
+    <div class="mt-12"></div>
     </div>
 </template>
 
@@ -59,8 +47,10 @@ export default {
         dialog: false,
         name: " ",
         taken: JSON,
-        yetToTake: JSON,
-        id: ""
+        avail_courses: JSON,
+        id: "",
+        update_courses: [],
+        update_grades: []
     }),
 
     components: {
@@ -76,25 +66,23 @@ export default {
         },
         transfer_course: function(course,grade) {
                 course.dialog = false
-                if ((course.taken && course.grade == '') || (!course.taken && course.grade != '')) {
-                    if (this.yetToTake.indexOf(course)==-1){
-                        course.taken=false
-                        this.yetToTake.push(course)
-                        this.taken.splice(this.taken.indexOf(course),1)
-                    } 
-                    if (this.taken.indexOf(course)==-1){
-                        this.taken=true
-                        this.taken.push(course)
-                        this.yetToTake.splice(this.yetToTake.indexOf(course),1)
-                    }
-                }
                 course.grade = grade;
         },
         update_completed: function() {
-            //WIP
+            let temp_index = 0
+            for (let i=0;i<avail_courses.length;i++){
+                let check_course = avail_courses.get(i).name
+                let check_grade = avail_courses.get(i).grade
+                if (check_grade != '') {
+                    this.update_courses[temp_index] = check_course
+                    this.update_grades[temp_index] = check_grade
+                    temp_index ++
+                }
+            }
             axios.post("/user/student/courses/taken", {
-                classes: this.taken,
-                student_ID: this.id
+                classes: this.update_courses,
+                student_ID: this.id,
+                grades: this.update_grades
           }).then(function (response) {
               console.log(response);
           })
@@ -128,17 +116,17 @@ export default {
       .then(response =>{
          var obj = response.data[0]; 
          this.taken = Object.keys(obj).map(key => obj[key]);
-         console.info(this.courses);
+         console.info(this.taken);
       })
       .catch(error =>{
           console.log(error)
       })
 
-      axios.get('/user/student/courses/yetToTake')
+      axios.get('/user/course/all')
       .then(response =>{
          var obj = response.data[0]; 
-         this.yetToTake = Object.keys(obj).map(key => obj[key]);
-         console.info(this.selected);
+         this.avail_courses = Object.keys(obj).map(key => obj[key]);
+         console.info(this.avail_courses);
       })
       .catch(error =>{
           console.log(error)
