@@ -1,7 +1,7 @@
 <template>
-    <v-dialog v-model="dialog" width="800px" persistent>
+    <v-dialog v-model="dialog" width="800px">
       <template v-slot:activator="{ on }">
-      <v-btn class="mb-4 mx-auto" outlined color="#FF0000" @click="$emitgetStudentSelectedCourses" dark v-on="on">
+      <v-btn class="mb-4 mx-auto" outlined color="#FF0000" @click="getStudentSelectedCourses" dark v-on="on">
         Student Selected Courses
       </v-btn>
       </template>
