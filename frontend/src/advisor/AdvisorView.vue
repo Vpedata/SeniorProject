@@ -29,7 +29,7 @@
                     </v-toolbar>
                 </v-col>
                 <v-col cols="6">
-                    <studentSelectedCoursesComponent :studentSelectedCoursesCredits="studentSelectedCoursesCredits" :studentSelectedCourses="studentSelectedCourses"/>
+                    <!---<studentSelectedCoursesComponent :studentSelectedCoursesCredits="studentSelectedCoursesCredits" :studentSelectedCourses="studentSelectedCourses"/>--->
                 </v-col>
             </v-row>
             <v-row>
@@ -70,7 +70,7 @@ import { mapState, mapActions } from 'vuex'
 import axios from 'axios';
 import router from '../router/index.js'
 import classComponent from '../studentpages/classListComponent.vue'
-import studentSelectedCoursesComponent from "./studentSelectedCoursesComponent"
+//import studentSelectedCoursesComponent from "./studentSelectedCoursesComponent"
 
 
 export default {
@@ -89,11 +89,12 @@ export default {
         coursesTaken:JSON,
         coursesRecommended:JSON,
         studentSelectedCourses:JSON,
-        studentSelectedCoursesCredits:" "
+        studentSelectedCoursesCredits:0,
 
   }),
   components: {
-        classComponent
+        classComponent,
+        //studentSelectedCoursesComponent
     },
     methods: {
         logout: function () {
@@ -156,23 +157,6 @@ export default {
                 console.log(error)
             });
         },
-        getStudentSelectedCourses: function(){
-            let studentSelectedCoursesUrl = '/user/advisor/student/'+result.student_ID+'/studentRecommended';
-            axios.get(studentSelectedCoursesUrl).then(response =>{
-            var obj = response.data[0];
-            var allCourses = Object.keys(obj).map(key => obj[key]);
-            let credits = 0;
-
-            for (var i = 0; i < allCourses.length; i++){
-                credits = credits + allCourses[i].creditHours;
-            }
-            this.studentSelectedCoursesCredits = credits;
-            this.studentSelectedCourses = allCourses;
-        })
-        .catch(err =>{
-            console.log(err);
-        });
-    },
         
     },
 
