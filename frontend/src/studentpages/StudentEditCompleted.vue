@@ -70,7 +70,7 @@ export default {
         },
         update_completed: function() {
             let temp_index = 0
-            let avail_parse = JSON.parse(this.avail_courses)
+            let avail_parse = JSON.parse(JSON.stringify(this.avail_courses))
             for (let i=0;i<avail_courses.length;i++){
                 let check_course = avail_parse[i].name
                 let check_grade = avail_parse[i].grade

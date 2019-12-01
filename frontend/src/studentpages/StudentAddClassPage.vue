@@ -87,7 +87,7 @@ export default {
         save_selected: function() {
             var class_str = ""
             var grade_str = ""
-            var selected_parse = JSON.parse(this.selected)
+            var selected_parse = JSON.parse(JSON.stringify(this.selected))
             for (var i=0; i<this.selected.length;i++){
                 if (i>0) {
                     class_str.append(",")
