@@ -126,7 +126,7 @@ export default {
           console.log(error)
       })
 
-      axios.get('/user/course/all')
+      axios.get('/user/student/courses/yetToTake')
       .then(response =>{
          var obj = response.data[0]; 
          this.avail_courses = Object.keys(obj).map(key => obj[key]);
