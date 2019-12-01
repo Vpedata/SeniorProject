@@ -30,12 +30,15 @@
                     :message="message"  :key="message"/>
                 </v-list>
                 </v-card-text>
-                <v-card-actions>
-                <v-textarea append-outer-icon="mdi-send" @click:append-outer="sendMessage" 
+                </v-card>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col cols="2"></v-col>
+                <v-col cols="8">
+            <v-textarea append-outer-icon="mdi-send" @click:append-outer="sendMessage" 
                 class="mx-2" v-model="newMessage" filled rows="1" auto-grow>
                 </v-textarea>
-                </v-card-actions>
-                </v-card>
                 </v-col>
             </v-row>
         </div>
