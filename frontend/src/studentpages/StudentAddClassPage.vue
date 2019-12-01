@@ -92,7 +92,7 @@ export default {
                     class_str.append(",")
                     grade_str.append(",")
                 }
-                class_str.append(string(this.selected.get(i)))
+                class_str.append(toString(this.selected.get(i)))
                 grade_str.append("-1")
             }
             axios.post("/user/student/courses/taken", {

@@ -78,8 +78,8 @@ export default {
                         this.update_courses.append(",")
                         this.update_grades.append(",")
                     }
-                    this.update_courses.append(string(check_course))
-                    this.update_grades.append(string(check_grade))
+                    this.update_courses.append(toString(check_course))
+                    this.update_grades.append(toString(check_grade))
                     temp_index ++
                 }
             }
