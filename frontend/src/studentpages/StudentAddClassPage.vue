@@ -85,23 +85,22 @@ export default {
             }
         },
         save_selected: function() {
-            var class_str = ""
-            var grade_str = ""
-            var selected_parse = JSON.parse(JSON.stringify(this.selected))
-            for (var i=0; i<this.selected.length;i++){
-                class_str.concat(toString(selected_parse[i]) + ",")
+            let class_str = ""
+            let grade_str = ""
+
+            console.info(selected)
+            for (let i=0; i<this.selected.length;i++){
+                class_str.concat(selected[i] + ",")
                 grade_str.concat("-1,")
             }
             class_str = class_str.substring(0, class_str.length - 1);
             grade_str = grade_str.substring(0, grade_str.length - 1);
 
-            console.log(class_str)
-            console.log(this.id)
-            console.log(grade_str)
+            console.info(class_str)
+            console.info(grade_str)
 
             axios.post("/user/student/courses/taken", {
                 classes: class_str,
-                student_ID: this.id,
                 grades: grade_str
             }).then(function (response) {
               console.log(response);
