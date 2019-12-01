@@ -2,7 +2,7 @@
     <v-list-item>
             <v-list-item-content>
                 <v-list-item-title>
-                    <span :class="classObject message{{message.isFromUser ? (message.reciever == this.userID ? ' received' : ' sent') : ' system'}}">
+                    <span :class="['classObject', 'message', this.messageType]">
                         <small>{{message.user}}</small>
                         <div :class="text">
                             :{{message.message}}
@@ -24,12 +24,22 @@ export default {
     data() {
         return {
             userID: -1,
+            messageType: '',
         }
     },
     beforeMount() {
       axios.get('/user/getmyid')
            .then(response => {
               this.userID = response.data;
+              if(message.isFromUser) {
+                  if(this.userID == message.reciever) {
+                      this.messageType = 'received';
+                  } else {
+                      this.messageType = 'sent';
+                  }
+               } else {
+                  this.messageType = 'system';
+               }
             });
     },
     computed: {
