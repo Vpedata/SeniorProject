@@ -5,9 +5,15 @@
         Student Selected Courses
       </v-btn>
       </template>
+      <v-card class="mx-12" elevation="12" height="600px" max-height="600px">
+        <v-toolbar dark flat>
+        <v-toolbar-title class="white--text">Student Selected Courses</v-toolbar-title>    
+        </v-toolbar>
         <v-list style="max-height: 600px" class="overflow-y-auto">
-            <classComponent class="mt-n1" v-for="course in studentSelectedCourses" :course="course" :key="course.course_ID"/>
-        </v-list> 
+            <classComponent class="mt-n1" v-for="course in coursesRecommended" :course="course" :key="course.course_ID"/>
+        </v-list>       
+      </v-card>
+ 
     </v-dialog>
 </template>
 <script>
