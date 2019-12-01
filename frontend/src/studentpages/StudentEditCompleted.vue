@@ -20,7 +20,7 @@
                     <v-toolbar flat dark>
                         <v-toolbar-title>Courses</v-toolbar-title>
                     </v-toolbar>
-                    <v-list style="max-height: 600px" class="overflow-y-auto">
+                    <v-list style="max-height: 500px" class="overflow-y-auto">
                         <classComponent v-for="course in avail_courses" :course="course" :key="course.course_ID" :taken="false" @transfer="transfer_course"/> 
                     </v-list>                  
                 </v-card>
