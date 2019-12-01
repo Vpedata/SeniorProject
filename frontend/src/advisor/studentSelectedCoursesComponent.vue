@@ -21,7 +21,7 @@ export default {
     data: () => ({
         dialog: false,
         studentSelectedCourses:JSON,
-        studentSelectedCoursesCredits:" "
+        studentSelectedCoursesCredits:""
     }),
     method: {
         getStudentSelectedCourses: function(){
