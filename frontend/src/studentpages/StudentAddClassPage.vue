@@ -88,9 +88,9 @@ export default {
             let class_str = ""
             let grade_str = ""
 
-            console.info(selected)
+            console.info(this.selected)
             for (let i=0; i<this.selected.length;i++){
-                class_str.concat(selected[i] + ",")
+                class_str.concat(this.selected[i] + ",")
                 grade_str.concat("-1,")
             }
             class_str = class_str.substring(0, class_str.length - 1);
