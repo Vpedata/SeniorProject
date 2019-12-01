@@ -38,7 +38,7 @@
                 </v-card>
                 </v-col>
             </v-row>
-            <v-btn class="mx-auto mt-12" width="140" dark color="orange">Save</v-btn>
+            <v-btn class="mx-auto mt-12" width="140" dark color="orange" @click="save_selected">Save</v-btn>
         </div>
     </v-app>
     <div class="mt-12"></div>
