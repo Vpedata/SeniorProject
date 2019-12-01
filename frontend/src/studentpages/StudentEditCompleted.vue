@@ -76,6 +76,7 @@ export default {
         },
         transfer_course: function(course,grade) {
                 course.grade = grade;
+                course.dialog = false;
                 if (this.yetToTake.indexOf(course)==-1){
                     this.yetToTake.push(course)
                     this.taken.splice(this.taken.indexOf(course),1)
