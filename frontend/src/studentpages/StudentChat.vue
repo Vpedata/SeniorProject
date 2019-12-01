@@ -11,7 +11,7 @@
                 <v-toolbar-items>
                     <v-btn  @click="$router.push('/fe/adv/advisor')" dark>Home</v-btn>
                     <v-btn  @click="$router.push('/fe/editcompleted')" dark>Edit Completed</v-btn>
-                    <v-btn  @click="$router.push('/fe/studentaddclasspage')" dark>Add Class</v-btn>
+                    <v-btn  @click="$router.push('/fe/studentaddclasspage')" dark>Add Course</v-btn>
                     <v-btn  @click="$router.push('/fe/classlist')" dark>Course List</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
                 </v-toolbar-items>

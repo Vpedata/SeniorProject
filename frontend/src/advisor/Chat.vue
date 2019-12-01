@@ -10,7 +10,7 @@
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
                     <v-btn  @click="$router.push('/fe/adv/advisor')" dark>Home</v-btn>
-                    <v-btn  @click="$router.push('/fe/classlistadvisor')" dark>View Class List</v-btn>
+                    <v-btn  @click="$router.push('/fe/classlistadvisor')" dark>View Course List</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
                 </v-toolbar-items>
                 </v-toolbar>

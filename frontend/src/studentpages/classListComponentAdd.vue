@@ -62,7 +62,7 @@ export default {
       .get('/user/getName')
       .then(response => {
         this.name = response.data.firstName + " " + response.data.lastName;
-      }).bind(this)
+      })
       .catch(error => {
         console.log(error)
       })
