@@ -38,7 +38,7 @@
                 </v-card>
                 </v-col>
             </v-row>
-            <v-btn class="mx-auto mt-12" width="140" dark color="orange">Save</v-btn>
+            <v-btn class="mx-auto mt-12" width="140" dark color="orange" @click="save_selected">Save</v-btn>
         </div>
     </v-app>
     <div class="mt-12"></div>
@@ -83,6 +83,29 @@ export default {
                 this.selected.splice(this.selected.indexOf(course),1)
 
             }
+        },
+        save_selected: function() {
+            var class_str = ""
+            var grade_str = ""
+            for (var i=0; i<selected.length;i++){
+                if (i>0) {
+                    class_str.append(",")
+                    grade_str.append(",")
+                }
+                class_str.append(string(selected.get(i)))
+                grade_str.append("-1")
+            }
+            axios.post("/user/student/courses/taken", {
+                classes: class_str,
+                student_ID: this.id,
+                grades: grade_str
+            }).then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            })
+            $router.push('/fe/student')
         }
     },
     beforeMount(){
@@ -95,7 +118,7 @@ export default {
         console.log(error)
       });
 
-      axios.get('/user/student/courses/yetToTake')
+      axios.get('/user/student/courses/getUserRecommend')
       .then(response =>{
          var obj = response.data[0]; 
          this.courses = Object.keys(obj).map(key => obj[key]);
@@ -105,7 +128,7 @@ export default {
           console.log(error)
       })
 
-      axios.get('/user/student/courses/getUserRecommend')
+      axios.get('/user/student/courses/recommended')
       .then(response =>{
          var obj = response.data[0]; 
          this.selected = Object.keys(obj).map(key => obj[key]);
