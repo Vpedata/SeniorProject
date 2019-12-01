@@ -39,7 +39,7 @@
                             </v-col>
                             <v-col>
                             <v-btn color="orange" text v-on:click="$emit('transfer',course,'F'); dialog=false; grade='F'">F</v-btn>
-                            <v-btn v-if="grade!=''" color="red" text v-on:click="$emit('transfer',course,''); dialog=false; grade=''">Remove</v-btn>
+                            <v-btn v-if="taken==true" color="red" text v-on:click="$emit('transfer',course,''); dialog=false; grade=''">Remove</v-btn>
                             <v-btn color="blue" text @click="dialog = false">Ok</v-btn>
                             </v-col>
                         </v-row>
@@ -65,7 +65,8 @@ export default {
     data: () => ({
         dialog: false,
         name: "",
-        grade: ''
+        grade: '',
+        taken: true
     }),
     methods: {
       addRecCourse: function() {

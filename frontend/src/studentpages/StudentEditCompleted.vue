@@ -77,16 +77,18 @@ export default {
         transfer_course: function(course,grade) {
                 course.dialog = false
                 if ((course.taken && course.grade == '') || (!course.taken && course.grade != '')) {
-                    course.taken = !course.taken
                     if (this.yetToTake.indexOf(course)==-1){
+                        course.taken=false
                         this.yetToTake.push(course)
                         this.taken.splice(this.taken.indexOf(course),1)
                     } 
                     if (this.taken.indexOf(course)==-1){
+                        this.taken=true
                         this.taken.push(course)
                         this.yetToTake.splice(this.yetToTake.indexOf(course),1)
                     }
                 }
+                course.grade = grade;
         },
         update_completed: function() {
             //WIP
