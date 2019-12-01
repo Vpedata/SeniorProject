@@ -20,7 +20,7 @@
                 <v-col cols="5">
                 <v-card class="mt-n16 mx-auto" elevation="12" height="500px" max-height="500px">
                     <v-toolbar flat dark>
-                        <v-toolbar-title>Selected Courses</v-toolbar-title>
+                        <v-toolbar-title>Recommended Courses</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 436px" class="overflow-y-auto">
                         <classComponent v-for="course in selected" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
@@ -30,7 +30,7 @@
                 <v-col cols="5">
                 <v-card class="mt-n16 mx-auto" elevation="12" height="500px" max-height="500px">
                     <v-toolbar flat dark>
-                        <v-toolbar-title>Add Course</v-toolbar-title>
+                        <v-toolbar-title>Selected Course</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 436px" class="overflow-y-auto">
                         <classComponent v-for="course in courses" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
