@@ -89,7 +89,7 @@ export default {
         coursesTaken:JSON,
         coursesRecommended:JSON,
         studentSelectedCourses:JSON,
-        studentSelectedCoursesCredits:0
+        studentSelectedCoursesCredits:0,
 
   }),
   components: {
