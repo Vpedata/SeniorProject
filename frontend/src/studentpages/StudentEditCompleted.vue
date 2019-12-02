@@ -49,6 +49,8 @@ export default {
         taken: JSON,
         avail_courses: JSON,
         id: "",
+        update_courses: "",
+        update_grades: ""
     }),
 
     components: {
@@ -67,10 +69,9 @@ export default {
                 course.grade = grade;
         },
         update_completed: function() {
-            let temp_index = 0;
-            let update_courses ="";
-            let update_grades ="";
- 
+            let temp_index = 0
+            this.update_courses = ""
+            this.update_grades = ""
             for (var i=0 ;i<this.avail_courses.length; i++){
                 let check_course = this.avail_courses[i].name
                 let check_grade = this.avail_courses[i].grade
@@ -84,6 +85,9 @@ export default {
             
             console.info(update_courses);
             console.info(update_grades);
+            
+            console.info(this.update_courses)
+            console.info(this.update_grades)
             
             
             axios.post("/user/student/courses/taken", {
