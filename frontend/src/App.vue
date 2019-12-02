@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class = "full-screen">
+  <div id="app" class = "full-screen amber">
     <router-view/>
   </div>
 </template>
@@ -23,6 +23,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  width: 100%;
+  height: 100%;
+  background-color: #fff8e1;
+}
+
+.full-screen{
+    width: 100%;
+    height: 100%;
+    background-color: #fff8e1;
 }
 
 </style>

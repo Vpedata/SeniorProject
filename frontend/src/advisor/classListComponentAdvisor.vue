@@ -5,11 +5,14 @@
                 <v-dialog v-model="dialog" width="500">
                 <v-card>
                     <v-card-title class="headline grey lighten-2" primary-title>
-                         {{course.name}}
+                        {{course.courseCode}}
+                        <v-spacer></v-spacer>
+                        Credits: {{course.creditHours}}
                     </v-card-title>
                     <v-divider></v-divider>
                     <v-card-text>
-                        Course Code: {{course.courseCode}}, Course Description: {{course.description}},Credit Hours: {{course.creditHours}}
+                        <div class="my-4 subtitle-1 black--text">{{course.name}}</div>
+                        <div class="grey-text">{{course.description}}</div>
                     </v-card-text>
                     <v-divider></v-divider>
                     <v-card-actions>
@@ -22,7 +25,7 @@
              <v-list-item-action>
                  <v-row>
                 <editCourse :course="course"/>
-                <v-btn class="mx-2" fab dark small color="purple" >
+                <v-btn class="mx-2" fab dark small color="purple" @click="handleDeleteCourse">
                     <v-icon dark>mdi-delete</v-icon>
                 </v-btn>
                  </v-row>
@@ -41,8 +44,19 @@ export default {
     components: {
         editCourse
     },
+    methods: {
+        handleDeleteCourse: function() {
+            let deleteCourseUrl = 'user/advisor/cousre/'+course.course_ID;
+             axios.delete(deleteCourseUrl)
+            .then(response =>{
+            })
+            .catch(error =>{
+                console.log(error)
+            });
+        }
+    },
     data: () => ({
-        dialog: false
+        dialog: false,
     }),
 }
 </script>

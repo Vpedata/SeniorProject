@@ -32,17 +32,10 @@
                 </v-col>
             </v-row>
             <v-row>
-                <v-card class="mx-auto" width = "800px">
-                <v-subheader>Course Code</v-subheader>
-                     <v-select
-                        class="ma-12"
-                        :items="available_codes"
-                        v-model="selected_code"
-                        label="Code"
-                        dense
-                    ></v-select>
-                <v-text-field class='ma-12 mt-n8' width="200px" v-model = 'courseCode' label = 'xxx' single-line type="number" hide-details></v-text-field>
-                </v-card>
+                <v-col cols="3"></v-col>
+                <v-col cols="5">
+                <v-text-field class='mx-12 mt-n8' width="200px" v-model = 'courseCode' label = 'Course Code (ex CS01001)' single-line type="number" hide-details></v-text-field>
+                </v-col>
             </v-row>
             <v-row>
                 <v-checkbox
@@ -57,14 +50,14 @@
             <v-row>
                  <v-col cols="5"></v-col>
                  <v-col cols="2">
-                <v-text-field class = 'mx-4 mt-n4' v-model = 'class_credits' single-line type="number" append-outer-icon="add" @click:append-outer="increment_credits" prepend-icon="remove" @click:prepend="decrement_credits"></v-text-field>
+                    <v-text-field class = 'mx-4 mt-n4' v-model = 'class_credits' single-line type="number" append-outer-icon="add" @click:append-outer="increment_credits" prepend-icon="remove" @click:prepend="decrement_credits"></v-text-field>
                  </v-col>
             </v-row>
             
             <v-row>
-                <v-col cols="3"></v-col>
-                <v-col cols="3">
-                <v-text-field label="Ex. CS04.113" v-model="prereq_current"></v-text-field>
+                <v-col cols="2"></v-col>
+                <v-col cols="4">
+                <v-text-field label="Prereq. Course Code (Ex. CS04113)" v-model="prereq_current"></v-text-field>
                 </v-col>
                 <v-btn @click="prereq_list.push(prereq_current)" >Add PreReq Course Code</v-btn>
                 <v-btn @click="prereq_list.pop()" >Undo</v-btn>
@@ -106,9 +99,7 @@ export default {
         prereq_list: [],
         isCore: false,
         courseCode: null,
-        name: " ",
-        available_codes: ["CS","MATH"],
-        selected_code: "CS"
+        name: " "
   }),
 
    methods: {
@@ -127,7 +118,7 @@ export default {
         },
     addCourse: function() {
           axios.post("/user/advisor/course/addCourse", {
-                courseCode: this.selected_code + this.courseCode,
+                courseCode: this.courseCode,
                 name: this.class_name,      
                 isRequired: this.isCore,
                 creditHours: this.class_credits,
