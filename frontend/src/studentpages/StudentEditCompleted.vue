@@ -81,11 +81,11 @@ export default {
                     temp_index ++
                 }
             }
-            update_courses = grade_str.substring(0, grade_str.length - 1);
-            update_grades = grade_str.substring(0, grade_str.length - 1);
+            this.update_courses = grade_str.substring(0, grade_str.length - 1);
+            this.update_grades = grade_str.substring(0, grade_str.length - 1);
             
-            console.info(update_courses)
-            console.info(update_grades)
+            console.info(this.update_courses)
+            console.info(this.update_grades)
             
             /*
             axios.post("/user/student/courses/taken", {
