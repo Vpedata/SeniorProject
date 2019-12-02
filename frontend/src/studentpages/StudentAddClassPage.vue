@@ -23,7 +23,7 @@
                         <v-toolbar-title>Selected Courses</v-toolbar-title>
                     </v-toolbar>         
                     <v-list style="max-height: 436px" class="overflow-y-auto">
-                        <classComponent v-for="course in selected" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
+                        <classComponent v-for="course in selected" :course="course" :sel="true" :key="course.course_ID" @transfer="transfer_course"/> 
                     </v-list>                  
                 </v-card>
                 </v-col>
@@ -33,7 +33,7 @@
                         <v-toolbar-title>Recommended Courses</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 436px" class="overflow-y-auto">
-                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
+                        <classComponent v-for="course in courses" :course="course" :sel="false" :key="course.course_ID" @transfer="transfer_course"/> 
                     </v-list>                           
                 </v-card>
                 </v-col>
@@ -79,9 +79,11 @@ export default {
             if (this.selected.indexOf(course)==-1){
                 this.selected.push(course)
                 this.courses.splice(this.courses.indexOf(course),1)
+                course.sel = true
             } else {
                 this.courses.push(course)
                 this.selected.splice(this.selected.indexOf(course),1)
+                course.sel = false
 
             }
         },

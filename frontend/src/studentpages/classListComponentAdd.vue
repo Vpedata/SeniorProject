@@ -23,11 +23,20 @@
                 </v-dialog>
             </v-list-item-content>
             <v-list-item-action>
-                    <v-row>
-                    <v-btn class="mx-2" fab dark small color="green" v-on:click="$emit('transfer',course)">
-                        <v-icon dark>mdi-plus-circle-outline</v-icon>
-                    </v-btn>
-                    </v-row>
+                    <div v-if="sel=true">
+                        <v-row>
+                            <v-btn class="mx-2" fab dark small color="green" v-on:click="$emit('transfer',course)">
+                            <v-icon dark>mdi-minus-circle-outline</v-icon>
+                            </v-btn>
+                        </v-row>
+                    </div>
+                    <div v-else>
+                        <v-row>
+                            <v-btn class="mx-2" fab dark small color="green" v-on:click="$emit('transfer',course)">
+                                <v-icon dark>mdi-plus-circle-outline</v-icon>
+                            </v-btn>
+                        </v-row>
+                    </div>
             </v-list-item-action>
         </v-list-item> 
 </template>
@@ -41,7 +50,8 @@ export default {
     },
     data: () => ({
         dialog: false,
-        name: ""
+        name: "",
+        sel
     }),
     methods: {
       addRecCourse: function() {
