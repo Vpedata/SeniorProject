@@ -22,7 +22,7 @@
                     :get-result-value="getResultValue" @submit="handleSubmit" ></autocomplete>
                 </v-col>
             </v-row>
-            <div v-if="this.student.length==0">
+            <div v-if="this.userFound">
                 <v-row>
                     <v-col cols="2"></v-col>
                     <v-col cols="8">
@@ -72,6 +72,7 @@ export default {
             messages: JSON,
             newMessage: "",
             messagesList:[],
+            userFound: false
 
         }
     },
@@ -95,6 +96,7 @@ export default {
             return result.name + " ("  + result.email  + ")"; 
         },
         handleSubmit(result) {
+            userFound = true;
             this.student = result;
             this.messagesList=[];
             let studentMessagesUrl = '/user/advisor/messages/'+ result.student_ID;
