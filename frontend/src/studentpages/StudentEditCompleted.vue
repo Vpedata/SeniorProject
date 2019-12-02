@@ -82,8 +82,8 @@ export default {
             update_courses = grade_str.substring(0, grade_str.length - 1);
             update_grades = grade_str.substring(0, grade_str.length - 1);
             
-            console.info(this.update_courses)
-            console.info(this.update_grades)
+            console.info(this.update_courses);
+            console.info(this.update_grades);
             
             
             axios.post("/user/student/courses/taken", {
