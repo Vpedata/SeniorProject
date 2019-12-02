@@ -60,15 +60,21 @@
                                 </v-dialog>
                             </v-list-item-content>
                         </v-list-item>
-
-                        
-            
-                        <v-list-item @click="$router.push('/classlist')">
-                            <v-list-item-content>
-                            <v-list-item-title>Repeat...</v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list>               
+                    </v-list>            
+                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID"/> 
+                    <v-list style="max-height: 436px" class="overflow-y-auto">
+                        <classComponent v-for="course in selected" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
+                    </v-list>                  
+                </v-card>
+                </v-col>
+                <v-col cols="5">
+                <v-card class="mt-n16 mx-auto" elevation="12" height="500px" max-height="500px">
+                    <v-toolbar flat dark>
+                        <v-toolbar-title>Recommended Courses</v-toolbar-title>
+                    </v-toolbar>
+                    <v-list style="max-height: 436px" class="overflow-y-auto">
+                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
+                    </v-list>                           
                 </v-card>
                 </v-col>
             </v-row>
@@ -154,30 +160,6 @@ export default {
             })
         }
     },
-    generateDefaults: function() {
-      axios
-        .get("/user/student/courses/recommendedCourses")
-        .then(response => {
-          var obj = response.data[0];                               
-          this.currentReccSemester = Object.keys(obj).map(key => obj[key]);   //literally all courses
-          var selectedCourses = [];
-          var numOfReccCourses = allCourses.length;                               
-          var i = 0;
-          while (i < numOfReccCourses) {
-            console.info(allCourses[i]);
-            selectedCourses.push(allCourses[i]);                    
-            console.info(selectedCourses);
-            i++;
-          }
-
-          this.courses = selectedCourses;
-          console.info(this.courses)
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
-
     beforeMount(){
       axios
       .get('/user/getName')
