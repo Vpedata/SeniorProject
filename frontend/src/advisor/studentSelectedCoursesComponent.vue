@@ -1,6 +1,6 @@
 <template>
     <div>
-    <v-btn class="mb-4 mx-auto" outlined color="#FF0000" v-on:click="getStudentSelectedCourses" dark >
+    <v-btn class="mb-4 mx-auto" outlined color="#FF0000" v-on:click="dialog=true" dark >
         Student Selected Courses
     </v-btn>
     <v-dialog v-model="dialog" width="600px" >
