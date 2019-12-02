@@ -22,30 +22,32 @@
                     :get-result-value="getResultValue" @submit="handleSubmit" ></autocomplete>
                 </v-col>
             </v-row>
-            <v-row>
-                <v-col cols="2"></v-col>
-                <v-col cols="8">
-                <v-card class="mx-12" elevation="12" max-height="600px">
-                    <v-toolbar dark flat>
-                    <v-toolbar-title class="white--text">{{student.name}}</v-toolbar-title>
-                    </v-toolbar>
-                <v-card-text>
-                <v-list style="max-height: 500px" class="overflow-y-auto">
-                    <messageComponent class="mt-n1" v-for="message in messagesList" 
-                    :message="message" :key="message"/>
-                </v-list>
-                </v-card-text>
-                </v-card>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col cols="2"></v-col>
-                <v-col cols="8">
-                <v-textarea append-outer-icon="mdi-send" @click:append-outer="sendMessage" 
-                class="mx-2" v-model="newMessage" filled rows="1" auto-grow>
-                </v-textarea>
-                </v-col>
-            </v-row>
+            <div v-if="this.student!=''">
+                <v-row>
+                    <v-col cols="2"></v-col>
+                    <v-col cols="8">
+                    <v-card class="mx-12" elevation="12" max-height="600px">
+                        <v-toolbar dark flat>
+                        <v-toolbar-title class="white--text">{{student.name}}</v-toolbar-title>
+                        </v-toolbar>
+                    <v-card-text>
+                    <v-list style="max-height: 500px" class="overflow-y-auto">
+                        <messageComponent class="mt-n1" v-for="message in messagesList" 
+                        :message="message" :key="message"/>
+                    </v-list>
+                    </v-card-text>
+                    </v-card>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col cols="2"></v-col>
+                    <v-col cols="8">
+                    <v-textarea append-outer-icon="mdi-send" @click:append-outer="sendMessage" 
+                    class="mx-2" v-model="newMessage" filled rows="1" auto-grow>
+                    </v-textarea>
+                    </v-col>
+                </v-row>
+            </div>
         </div>
     </v-app>
     </div>
