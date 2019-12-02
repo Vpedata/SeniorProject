@@ -42,12 +42,12 @@
                         <v-text-field class="mt-n4" label="Prereq. Course Code (Ex. CS04113)" v-model="prereq_current"></v-text-field>
                         </v-col>
                         <v-btn @click="prereq_list.push(prereq_current)" >Add PreReq Course Code</v-btn>
-                        <v-btn @click="prereq_list.pop()" >Undo</v-btn>
                     </v-row>
                     <v-chip 
                         v-for="prereq in prereq_list" 
                         :key="prereq.id" 
                         v-model="prereq.isOpen"
+                        @click:close="prereq_list.splice(prereq_list.indexOf(prereq),1)"
                         >
                         {{prereq}}
                     </v-chip>
