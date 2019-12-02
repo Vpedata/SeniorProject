@@ -76,13 +76,13 @@ export default {
                 let check_course = this.avail_courses[i].name
                 let check_grade = this.avail_courses[i].grade
                 if (check_grade != '') {
-                    this.update_courses = update_courses + check_course + ","
-                    this.update_grades = update_grades + check_grade + ","
+                    this.update_courses = this.update_courses + check_course + ","
+                    this.update_grades = this.update_grades + check_grade + ","
                     temp_index ++
                 }
             }
-            this.update_courses = grade_str.substring(0, grade_str.length - 1);
-            this.update_grades = grade_str.substring(0, grade_str.length - 1);
+            this.update_courses = this.update_courses.substring(0, this.update_courses.length- 1);
+            this.update_grades = this.update_grades.substring(0, this.update_grades.length - 1);
             
             console.info(this.update_courses)
             console.info(this.update_grades)
