@@ -22,7 +22,7 @@
                     :get-result-value="getResultValue" @submit="handleSubmit" ></autocomplete>
                 </v-col>
             </v-row>
-            <div v-if="this.student!=''">
+            <div v-if="this.student.length==0">
                 <v-row>
                     <v-col cols="2"></v-col>
                     <v-col cols="8">
