@@ -21,47 +21,7 @@
                 <v-card class="mt-n16 mx-auto" elevation="12" height="500px" max-height="500px">
                     <v-toolbar flat dark>
                         <v-toolbar-title>Selected Courses</v-toolbar-title>
-                    </v-toolbar>
-                    <v-list style="max-height: 600px" class="overflow-y-auto">
-                        <classComponent v-for="course in currentReccSemester" :course="course" :key="course.course_ID"/> 
-                    </v-list> 
-
-                    <v-list>
-                        <v-list-item>
-                            <v-list-item-content>
-                                <v-dialog v-model="dialog" width="500">
-                                    <template v-slot:activator="{ on }">
-                                    <v-btn color="amber darken-1" dark v-on="on">
-                                        GetClassName
-                                    </v-btn>
-                                    </template>
-                                    <v-card>
-                                        <v-card-title
-                                            class="headline grey lighten-2"
-                                            primary-title
-                                        >
-                                            GetClassName
-                                        </v-card-title>
-                                        <v-divider></v-divider>
-                                        <v-card-text>
-                                            GetClassSummary
-                                        </v-card-text>
-                                        <v-divider></v-divider>
-                                        <v-card-actions>
-                                            <v-spacer></v-spacer>
-                                            <v-btn color="blue" text @click="dialog = false">
-                                                Add Class
-                                            </v-btn>
-                                            <v-btn color="red" text @click="dialog = false">
-                                                Cancel
-                                            </v-btn>
-                                        </v-card-actions>
-                                    </v-card>
-                                </v-dialog>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list>            
-                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID"/> 
+                    </v-toolbar>         
                     <v-list style="max-height: 436px" class="overflow-y-auto">
                         <classComponent v-for="course in selected" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
                     </v-list>                  
