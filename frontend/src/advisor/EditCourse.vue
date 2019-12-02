@@ -47,6 +47,7 @@
                         v-for="prereq in prereq_list" 
                         :key="prereq.id" 
                         v-model="prereq.isOpen"
+                        close
                         @click:close="prereq_list.splice(prereq_list.indexOf(prereq),1)"
                         >
                         {{prereq}}
