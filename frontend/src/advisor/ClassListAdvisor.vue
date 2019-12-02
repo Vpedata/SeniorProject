@@ -57,6 +57,7 @@
                         <v-btn @click="prereq_list.push(prereq_current)" >Add PreReq Course Code</v-btn>
                         <v-btn @click="prereq_list.pop()" >Undo</v-btn>
                     </v-row>
+                    {{prereq_list}}
                     <v-chip 
                         v-for="prereq in prereq_list" 
                         :key="prereq.id" 
