@@ -99,7 +99,7 @@ export default {
             console.info(class_str)
             console.info(grade_str)
 
-            /*
+            
             axios.post("/user/student/courses/taken", {
                 classes: class_str,
                 grades: grade_str
@@ -109,7 +109,6 @@ export default {
             .catch(function (error) {
               console.log(error);
             })
-            */
         }
     },
     beforeMount(){
