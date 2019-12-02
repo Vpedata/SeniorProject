@@ -31,7 +31,7 @@
             </v-row>
             <v-row>
                 <v-col cols="4">
-                    <v-card class="mx-12" elevation="12" height="600px" max-height="600px" width="500px">
+                    <v-card class="ms-12" elevation="12" height="600px" max-height="600px" width="500px">
                         <v-toolbar dark flat>
                             <v-toolbar-title class="white--text">Courses Taken</v-toolbar-title>
                             <v-spacer></v-spacer>
@@ -43,7 +43,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="4">
-                    <v-card class="mx-12" elevation="12" height="600px" max-height="600px" width="500px">
+                    <v-card class="ms-12" elevation="12" height="600px" max-height="600px" width="500px">
                         <v-toolbar dark flat>
                             <v-toolbar-title class="white--text">Recommended Courses</v-toolbar-title>    
                         </v-toolbar>
@@ -54,7 +54,7 @@
                     </v-card>
                 </v-col>
                 <v-col cols="4">
-                    <v-card class="mx-12" elevation="12" height="600px" max-height="600px" width="500px">
+                    <v-card class="ms-12" elevation="12" height="600px" max-height="600px" width="500px">
                         <v-toolbar dark flat>
                             <v-toolbar-title class="white--text">Student Selected Courses</v-toolbar-title>
                             <v-spacer></v-spacer>
