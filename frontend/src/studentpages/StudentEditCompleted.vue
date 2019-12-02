@@ -75,26 +75,20 @@ export default {
                 let check_course = this.avail_courses[i].name
                 let check_grade = this.avail_courses[i].grade
                 if (check_grade) {
-<<<<<<< HEAD
-                    this.update_courses = this.update_courses + check_course + ","
-                    this.update_grades = this.update_grades + check_grade + ","
-                    temp_index ++
-=======
                     update_courses = update_courses + check_course + ","
                     update_grades = update_grades + check_grade + ","
->>>>>>> c68f29fbd920e3e861ca92e2325b8fe29eb9a988
                 }
             }
             update_courses = update_courses.substring(0, update_courses.length - 1);
             update_grades = update_grades.substring(0, update_grades.length - 1);
             
-            console.info(this.update_courses);
-            console.info(this.update_grades);
+            console.info(update_courses);
+            console.info(update_grades);
             
             
             axios.post("/user/student/courses/taken", {
-                classes: this.update_courses,
-                grades: this.update_grades
+                classes: update_courses,
+                grades: update_grades
             }).then(function (response) {
               console.log(response);
             })
