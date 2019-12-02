@@ -1,6 +1,6 @@
 <template>
     <div>
-    <v-btn class="mb-4 mx-auto" outlined color="#FF0000" @click="getStudentSelectedCourses" dark >
+    <v-btn class="mb-4 mx-auto" outlined color="#FF0000" v-on:click="getStudentSelectedCourses" dark >
         Student Selected Courses
     </v-btn>
     <v-dialog v-model="dialog" >
@@ -29,12 +29,11 @@ export default {
     },
     data: () => ({
         dialog: false,
-        studentSelectedCourses:JSON,
-        studentSelectedCoursesCredits:""
     }),
     method: {
         getStudentSelectedCourses: function(){
             dialog=true;
+            console.info(dialog);
             this.$emit('getStudentSelectedCourses');
         },
     }
