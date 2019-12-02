@@ -1,9 +1,9 @@
 <template>
-    <div id="app">
-    <v-btn class="mb-4 mx-auto" outlined color="#FF0000" v-on:click="getStudentSelectedCourses" dark >
+    <div>
+    <v-btn class="mb-4 mx-auto" outlined color="#FF0000" v-on:click.native="getStudentSelectedCourses" dark >
         Student Selected Courses
     </v-btn>
-    <v-dialog v-model="dialog" >
+    <v-dialog v-model="dialog" width="600px" >
       <v-card class="mx-12" elevation="12" height="600px" max-height="600px">
         <v-toolbar dark flat>
         <v-toolbar-title class="white--text">Student Selected Courses</v-toolbar-title>    
@@ -31,7 +31,7 @@ export default {
         dialog: false,
     }),
     method: {
-        getStudentSelectedCourses() { 
+        getStudentSelectedCourses: function() { 
             dialog=true;
             console.info(dialog);
             this.$emit('getStudentSelectedCourses');
