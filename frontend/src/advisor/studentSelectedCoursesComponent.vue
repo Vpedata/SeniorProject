@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="app">
     <v-btn class="mb-4 mx-auto" outlined color="#FF0000" v-on:click="getStudentSelectedCourses" dark >
         Student Selected Courses
     </v-btn>
@@ -31,7 +31,7 @@ export default {
         dialog: false,
     }),
     method: {
-        getStudentSelectedCourses: function(){
+        getStudentSelectedCourses() { 
             dialog=true;
             console.info(dialog);
             this.$emit('getStudentSelectedCourses');
