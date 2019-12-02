@@ -75,7 +75,7 @@ export default {
             for (var i=0 ;i<this.avail_courses.length; i++){
                 let check_course = this.avail_courses[i].name
                 let check_grade = this.avail_courses[i].grade
-                if (check_grade != '') {
+                if (check_grade) {
                     this.update_courses = this.update_courses + check_course + ","
                     this.update_grades = this.update_grades + check_grade + ","
                     temp_index ++
