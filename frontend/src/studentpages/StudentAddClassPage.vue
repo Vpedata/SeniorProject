@@ -20,7 +20,7 @@
                 <v-col cols="5">
                 <v-card class="mt-n16 mx-auto" elevation="12" height="500px" max-height="500px">
                     <v-toolbar flat dark>
-                        <v-toolbar-title>Recommended Courses</v-toolbar-title>
+                        <v-toolbar-title>Selected Courses</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 436px" class="overflow-y-auto">
                         <classComponent v-for="course in selected" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
@@ -30,7 +30,7 @@
                 <v-col cols="5">
                 <v-card class="mt-n16 mx-auto" elevation="12" height="500px" max-height="500px">
                     <v-toolbar flat dark>
-                        <v-toolbar-title>Selected Course</v-toolbar-title>
+                        <v-toolbar-title>Recommended Courses</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 436px" class="overflow-y-auto">
                         <classComponent v-for="course in courses" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
@@ -90,7 +90,7 @@ export default {
 
             console.info(this.selected)
             for (var i=0; i<this.selected.length; i++){
-                class_str = class_str + this.selected[i] + ","
+                class_str = class_str + this.selected[i].name + ","
                 grade_str = grade_str + "-1,"
             }
             class_str = class_str.substring(0, class_str.length - 1);
