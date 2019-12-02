@@ -10,9 +10,9 @@
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
                     <!--- <v-btn  @click="$router.push('/fe/adv/createcourse')" dark>Create Course</v-btn> --->
-                    <v-btn  @click="dialog=true" dark>Create Course</v-btn> 
+                    <v-btn  class ="success" @click="dialog=true" dark>Create Course</v-btn> 
                     <v-btn  @click="$router.push('/fe/adv/advisor')" dark>Home</v-btn>
-                    <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
+                    <v-btn  @click="$router.push('/fe/adv/messages')" dark>Messages</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
                 </v-toolbar-items>
                 </v-toolbar>
@@ -43,7 +43,7 @@
                         <v-col cols="4"></v-col>
                         <v-col cols="4">
                         <v-subheader> Credits </v-subheader>
-                        <v-text-field class = 'mx-4 mt-n4' readonly v-model = 'class_credits' single-line append-icon="add" @click:append="increment_credits" append-outer-icon="remove" @click:append-outer="decrement_credits"></v-text-field>
+                        <v-text-field class = 'mx-4 mt-n4' readonly v-model = 'course_credits' single-line append-icon="add" @click:append="increment_credits" append-outer-icon="remove" @click:append-outer="decrement_credits"></v-text-field>
                         </v-col>
                     </v-row>
                     <v-row>
@@ -66,9 +66,9 @@
                     </v-chip>
                     </v-col>
                     </v-row>
-                    
-                    <v-btn flat class="success mx-0 mt-3">Create Course </v-btn>
-                    <v-btn flat color="red" dark class="mx-0 mt-3" @click="dialog=false">Cancel </v-btn>
+
+                    <v-btn  class="success mx-0 mt-3" @click="handleCreateCourse">Create Course </v-btn>
+                    <v-btn  color="red" dark class="mx-0 mt-3" @click="dialog=false">Cancel </v-btn>
                 </v-form>
             </v-card-text>
                 </v-card>
@@ -76,18 +76,21 @@
             <v-row>
                 <v-col cols="3"></v-col>
                 <v-col cols="9" lg="6">
-                <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
+                <v-card class="mt-n16 mx-auto" elevation="12" height="600px" max-height="600px">
                     <v-toolbar flat>
                         <v-toolbar-title class="grey--text">Class List</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
-                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID"/> 
+                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID" 
+                        @handleDeleteCourse="handleDeleteCourse" 
+                        @handleEditCourse="handleEditCourse"/> 
                     </v-list>                  
                 </v-card>
                 </v-col>
             </v-row>
         </div>
     </v-app>
+    <div class="mt-12"></div>
     </div>
 </template>
 
@@ -108,9 +111,9 @@ export default {
         prereq_list: [],
         name: " ",
         courses: JSON,
-        class_name: '',
-        class_desc: '',
-        class_credits: 0,
+        course_name: '',
+        course_desc: '',
+        course_credits: 0,
         isCore: false,
         courseCode: null,
     }),
@@ -120,13 +123,13 @@ export default {
     },
     methods: {
         increment_credits () {
-            if (this.class_credits <= 30) {
-                this.class_credits = parseInt(this.class_credits,10)+1
+            if (this.course_credits <= 30) {
+                this.course_credits = parseInt(this.course_credits,10)+1
             }
         },
         decrement_credits () {
-            if (this.class_credits > 0) {
-                this.class_credits = parseInt(this.class_credits,10)-1
+            if (this.course_credits > 0) {
+                this.course_credits = parseInt(this.course_credits,10)-1
             }
         },
         logout: function () {
@@ -136,22 +139,75 @@ export default {
                 console.log(err);
             });
         },
-        addCourse: function() {
-          axios.post("/user/advisor/course/addCourse", {
+        handleCreateCourse: async function() {
+            this.dialog=false;
+            var preReqString = "";
+            for (var i = 0; i < this.prereq_list.length; i++){
+                preReqString = preReqString + this.prereq_list[i] +",";
+            }
+            preReqString = preReqString.substring(0, preReqString.length - 1);  
+            await axios.post("/user/advisor/course/", {
                 courseCode: this.courseCode,
-                name: this.class_name,      
+                name: this.course_name,      
                 isRequired: this.isCore,
-                creditHours: this.class_credits,
-                description: this.class_desc,  
-                preReq: this.prereq_list
-          }).then(function (response) {
-              console.log(response);
-          })
-          .catch(function (error) {
-              console.log(error);
-          });
+                creditHours: this.course_credits,
+                description: this.course_desc,  
+                preReq: preReqString
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error);
+            });
           
-        } 
+            await axios
+            .get('/course/all')
+            .then(response =>{
+                var obj = response.data[0]; 
+                this.courses = Object.keys(obj).map(key => obj[key]);
+            })
+            .catch(error =>{
+                console.log(error)
+            });
+        },
+        handleDeleteCourse: async function(course_ID) {
+            let deleteCourseUrl = 'user/advisor/course/'+course_ID;
+            await axios.delete(deleteCourseUrl)
+            .then(response =>{
+            })
+            .catch(error =>{
+                console.log(error)
+            });
+
+            await axios
+            .get('/course/all')
+            .then(response =>{
+                var obj = response.data[0]; 
+                this.courses = Object.keys(obj).map(key => obj[key]);
+            })
+            .catch(error =>{
+                console.log(error)
+            });
+            
+        },
+         handleEditCourse: async function(editedCourse) {
+            await axios.put('user/advisor/course/',editedCourse)
+            .then(response =>{
+            })
+            .catch(error =>{
+                console.log(error)
+            });
+
+            await axios
+            .get('/course/all')
+            .then(response =>{
+                var obj = response.data[0]; 
+                this.courses = Object.keys(obj).map(key => obj[key]);
+            })
+            .catch(error =>{
+                console.log(error)
+            });
+            
+        },
         
     },
     beforeMount(){
@@ -168,7 +224,6 @@ export default {
       .then(response =>{
          var obj = response.data[0]; 
          this.courses = Object.keys(obj).map(key => obj[key]);
-         console.info(this.courses);
       })
       .catch(error =>{
           console.log(error)

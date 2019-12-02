@@ -15,7 +15,7 @@
                     <v-col cols="1"></v-col>
                     <v-col cols="10">
                     <v-text-field class = 'ma-12' dense label='Course Name' v-model='course_name' outlined></v-text-field>
-                    <v-textarea class = 'mx-12 mt-n12' dense label="Course Description" v-model='course_desc' full-width counter single-line outlined maxlength = '128'></v-textarea>
+                    <v-textarea class = 'mx-12 mt-n12' dense label="Course Description" v-model='course_desc' full-width counter single-line outlined maxlength = '600'></v-textarea>
                     </v-col>
                     <v-col cols="1"></v-col>
                     <v-col cols="3"></v-col>
@@ -54,8 +54,8 @@
                     </v-col>
                     </v-row>
                     
-                    <v-btn flat class="success mx-0 mt-3" >Update Course </v-btn>
-                    <v-btn flat color="red" dark class="mx-0 mt-3" @click="dialog=false">Cancel </v-btn>
+                    <v-btn  class="success mx-0 mt-3"  v-on:click="handleEditCourse">Update Course </v-btn>
+                    <v-btn  color="red" dark class="mx-0 mt-3" @click="dialog=false">Cancel </v-btn>
                 </v-form>
             </v-card-text>
                 </v-card>
@@ -64,29 +64,43 @@
 <script>
 
 export default {
-    computed: {
-        prereq_list : {
-            get : function() {
-                let prereq_list = [];
-                if(this.course.PREREQCODES){
-                    prereq_list= this.course.PREREQCODES.split(",");
-                }
-                return prereq_list
+    created: function() {
+        if(this.course.PREREQCODES){
+            var temp_prereq_list= this.course.PREREQCODES.split(",");
+            for (var i = 0; i < temp_prereq_list.length; i++){
+                this.prereq_list.push(temp_prereq_list[i]);
             }
         }
     },
      methods: {
        increment_credits () {
-            if (this.class_credits <= 30) {
-                this.class_credits = parseInt(this.class_credits,10)+1
+            if (this.course_credits <= 30) {
+                this.course_credits = parseInt(this.course_credits,10)+1
             }
         },
         decrement_credits () {
-            if (this.class_credits > 0) {
-                this.class_credits = parseInt(this.class_credits,10)-1
+            if (this.course_credits > 0) {
+                this.course_credits = parseInt(this.course_credits,10)-1
             }
+        },
+        handleEditCourse() {
+            this.dialog=false;
+            var preReqString = "";
+            for (var i = 0; i < this.prereq_list.length; i++){
+                preReqString = preReqString + this.prereq_list[i] +",";
+            }
+            preReqString = preReqString.substring(0, preReqString.length - 1);
+            let editedCourse = {
+                course_ID :this.course.course_ID,
+                courseCode: this.courseCode,
+                name: this.course_name,      
+                isRequired: this.isCore,
+                creditHours: this.course_credits,
+                description: this.course_desc,  
+                preReq: preReqString
+            };
+            this.$emit('handleEditCourse',editedCourse);
         }
-        
 
      },
     props: {
@@ -99,6 +113,7 @@ export default {
             course_desc: this.course.description,
             course_credits: this.course.creditHours,
             isCore: this.course.isCore,
+            prereq_list: [],
             courseCode: this.course.courseCode,
         } 
     }

@@ -24,7 +24,7 @@
             </v-list-item-content>
             <v-list-item-action>
                     <v-row>
-                    <v-btn class="mx-2" fab dark small color="green" >
+                    <v-btn class="mx-2" fab dark small color="green" v-on:click="$emit('transfer',course)">
                         <v-icon dark>mdi-plus-circle-outline</v-icon>
                     </v-btn>
                     </v-row>
@@ -62,7 +62,7 @@ export default {
       .get('/user/getName')
       .then(response => {
         this.name = response.data.firstName + " " + response.data.lastName;
-      }).bind(this)
+      })
       .catch(error => {
         console.log(error)
       })

@@ -9,8 +9,8 @@
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
-                    <v-btn  @click="$router.push('/fe/classlistadvisor')" dark>View Class List</v-btn>
-                    <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
+                    <v-btn  @click="$router.push('/fe/classlistadvisor')" dark>View Course List</v-btn>
+                    <v-btn  @click="$router.push('/fe/adv/messages')" dark>Messages</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
                 </v-toolbar-items>
                 </v-toolbar>
@@ -23,19 +23,16 @@
                 </v-col>
             </v-row>
             <v-row>
-                <v-col cols="4"></v-col>
-                <v-col cols="3">
-                    <v-card  elevation="12" height = "156" width = "512">
-                        <v-toolbar dark flat>
-                            <v-toolbar-title dense class="white--text">Current Semester: {{this.currSem.currSemester}}</v-toolbar-title>    
-                        </v-toolbar>
-                    </v-card>
+                <v-col cols="3"></v-col>
+                <v-col cols="6">
+                    <v-toolbar dark flat dense class="mx-auto" width="300px">
+                        <v-toolbar-title dense class="white--text">Current Semester: {{this.currSem.currSemester}}</v-toolbar-title>    
+                    </v-toolbar>
                 </v-col>
             </v-row>
             <v-row>
-                <v-col cols="1"></v-col>
                 <v-col cols="4">
-                    <v-card class="mx-auto" elevation="12" height="600px">
+                    <v-card class="ms-2" elevation="12" height="600px" max-height="600px" width="500px">
                         <v-toolbar dark flat>
                             <v-toolbar-title class="white--text">Courses Taken</v-toolbar-title>
                             <v-spacer></v-spacer>
@@ -46,9 +43,8 @@
                         </v-list>                  
                     </v-card>
                 </v-col>
-                <v-col cols="1"></v-col>
                 <v-col cols="4">
-                    <v-card class="mx-auto" elevation="12" height="600px">
+                    <v-card class="ms-2" elevation="12" height="600px" max-height="600px" width="500px">
                         <v-toolbar dark flat>
                             <v-toolbar-title class="white--text">Recommended Courses</v-toolbar-title>    
                         </v-toolbar>
@@ -58,10 +54,24 @@
               
                     </v-card>
                 </v-col>
+                <v-col cols="4">
+                    <v-card class="ms-2" elevation="12" height="600px" max-height="600px" width="500px">
+                        <v-toolbar dark flat>
+                            <v-toolbar-title class="white--text">Student Selected Courses</v-toolbar-title>
+                            <v-spacer></v-spacer>
+                            <v-toolbar-title class="white--text">Credits: {{this.studentSelectedCoursesCredits}}</v-toolbar-title>    
+                        </v-toolbar>
+                        <v-list style="max-height: 600px" class="overflow-y-auto">
+                            <classComponent class="mt-n1" v-for="course in studentSelectedCourses" :course="course" :key="course.course_ID"/>
+                        </v-list>       
+              
+                    </v-card>
+                </v-col>
 
             </v-row>
         </div>
     </v-app>
+    <div class="mt-12"></div>
     </div>
 </template>
 
@@ -71,6 +81,7 @@ import { mapState, mapActions } from 'vuex'
 import axios from 'axios';
 import router from '../router/index.js'
 import classComponent from '../studentpages/classListComponent.vue'
+
 
 
 export default {
@@ -84,13 +95,16 @@ export default {
         name: " ",
         students:JSON,
         student_ID:"",
-        currSem: "",
-        creditsTaken: "",
+        currSem: " ",
+        creditsTaken: " ",
         coursesTaken:JSON,
-        coursesRecommended:JSON
+        coursesRecommended:JSON,
+        studentSelectedCourses:JSON,
+        studentSelectedCoursesCredits:""
+
   }),
   components: {
-        classComponent
+        classComponent,
     },
     methods: {
         logout: function () {
@@ -112,6 +126,7 @@ export default {
             return result.name + " ("  + result.email  + ")"; 
         },
         handleSubmit(result) {
+            this.student_ID= result.student_ID;
             let coursesTakenUrl = '/user/advisor/student/'+ result.student_ID +'/taken';
             axios.get(coursesTakenUrl)
             .then(response =>{
@@ -134,7 +149,7 @@ export default {
                 console.log(error)
             });
 
-            let currSemUrl = 'user/advisor/student/curSem/'+result.student_ID;
+            let currSemUrl = '/user/advisor/student/curSem/'+result.student_ID;
              axios.get(currSemUrl)
             .then(response =>{
             this.currSem= response.data[0][0];
@@ -143,7 +158,7 @@ export default {
                 console.log(error)
             });
             
-             let creditsTakenUrl = 'user/advisor/student/takenCredits/'+result.student_ID;
+             let creditsTakenUrl = '/user/advisor/student/takenCredits/'+result.student_ID;
              axios.get(creditsTakenUrl)
             .then(response =>{
             this.creditsTaken= response.data[0][0];
@@ -152,7 +167,23 @@ export default {
             .catch(error =>{
                 console.log(error)
             });
-        }
+
+            let studentSelectedCoursesUrl = '/user/advisor/student/'+this.student_ID+'/studentRecommended';
+            axios.get(studentSelectedCoursesUrl).then(response =>{
+                var obj = response.data[0];
+                var allCourses = Object.keys(obj).map(key => obj[key]);
+                let credits = 0;
+
+                for (var i = 0; i < allCourses.length; i++){
+                    credits = credits + allCourses[i].creditHours;
+                }
+                this.studentSelectedCoursesCredits = credits;
+                this.studentSelectedCourses = allCourses;
+            })
+            .catch(err =>{
+                console.log(err);
+            });
+        },
         
     },
 
@@ -161,7 +192,7 @@ export default {
       .get('/user/getName')
       .then(response => {
         this.name = response.data.firstName + " " + response.data.lastName;
-      }).bind(this)
+      })
       .catch(error => {
         console.log(error)
       })

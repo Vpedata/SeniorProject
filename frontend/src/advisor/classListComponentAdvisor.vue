@@ -24,8 +24,8 @@
             </v-list-item-content>
              <v-list-item-action>
                  <v-row>
-                <editCourse :course="course"/>
-                <v-btn class="mx-2" fab dark small color="purple" @click="handleDeleteCourse">
+                <editCourse :course="course"  @handleEditCourse="handleEditCourse" />
+                <v-btn class="mx-2" fab dark small color="purple" v-on:click="$emit('handleDeleteCourse',course.course_ID)">
                     <v-icon dark>mdi-delete</v-icon>
                 </v-btn>
                  </v-row>
@@ -45,14 +45,8 @@ export default {
         editCourse
     },
     methods: {
-        handleDeleteCourse: function() {
-            let deleteCourseUrl = 'user/advisor/cousre/'+course.course_ID;
-             axios.delete(deleteCourseUrl)
-            .then(response =>{
-            })
-            .catch(error =>{
-                console.log(error)
-            });
+        handleEditCourse:  function(editedCourse){
+            this.$emit('handleEditCourse',editedCourse);
         }
     },
     data: () => ({

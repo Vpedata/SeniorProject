@@ -10,7 +10,7 @@
                     <v-btn  @click="$router.push('/fe/editcompleted')" dark>Edit Completed</v-btn>
                     <v-btn  @click="$router.push('/fe/studentaddclasspage')" dark>Add Class</v-btn>
                     <v-btn  @click="$router.push('/fe/classlist')" dark>Class List</v-btn>
-                    <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
+                    <v-btn  @click="$router.push('/fe/messages')" dark>Messages</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
                 </v-toolbar-items>
                 </v-toolbar>
@@ -47,6 +47,7 @@
         </v-row>
       </div>
     </v-app>
+    <div class="mt-12"></div>
   </div>
 </template>
 

@@ -1,0 +1,164 @@
+<template>
+    <div id="app">
+    <v-app id="inspire">
+        <div class="amber lighten-5 pa-4">
+            <v-row>
+                <v-toolbar color="amber darken-1" dark>
+                <v-toolbar-title class="brown--text">
+                    {{name}}
+                </v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-toolbar-items>
+                    <v-btn  @click="$router.push('/fe/adv/advisor')" dark>Home</v-btn>
+                    <v-btn  @click="$router.push('/fe/editcompleted')" dark>Edit Completed</v-btn>
+                    <v-btn  @click="$router.push('/fe/studentaddclasspage')" dark>Add Course</v-btn>
+                    <v-btn  @click="$router.push('/fe/classlist')" dark>Course List</v-btn>
+                    <v-btn  @click="logout" dark>Logout</v-btn>
+                </v-toolbar-items>
+                </v-toolbar>
+            </v-row>
+            <v-row>
+                <v-col cols="2"></v-col>
+                <v-col cols="8">
+                <v-card class="mx-12" elevation="12" max-height="600px">
+                    <v-toolbar dark flat>
+                    <v-toolbar-title class="white--text">{{advisor.name}}</v-toolbar-title>
+                    </v-toolbar>
+                <v-card-text>
+                <v-list style="max-height: 500px" class="overflow-y-auto">
+                    <StudentMessageComponent class="mt-n1" v-for="message in messagesList" 
+                    :message="message"  :key="message"/>
+                </v-list>
+                </v-card-text>
+                </v-card>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col cols="2"></v-col>
+                <v-col cols="8">
+            <v-textarea append-outer-icon="mdi-send" @click:append-outer="sendMessage" 
+                class="mx-2" v-model="newMessage" filled rows="1" auto-grow>
+                </v-textarea>
+                </v-col>
+            </v-row>
+        </div>
+    </v-app>
+    </div>
+</template>
+                
+
+
+<script>
+var socket = io();
+import axios from 'axios';
+import router from '../router/index.js';
+import StudentMessageComponent from './StudentMessageComponent'
+export default {
+    components: {
+        StudentMessageComponent
+    },
+    data() {
+        return {
+            name: '',
+            advisor: Object,
+            messages: JSON,
+            newMessage: "",
+            messagesList:[],
+
+        }
+    },
+    methods: {
+        logout: function () {
+            axios.get("/auth/logout").then(response =>{
+                this.$router.push('/');
+            }).catch(err =>{
+                console.log(err);
+            });
+        },
+        sendMessage() {
+            axios.post('/user/student/messages/new',{
+                messageString:this.newMessage
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error);
+            });
+            
+            socket.emit('chat', {
+                message: this.newMessage,
+                user: this.name,
+                userType: 1 //student is sending the message
+            });
+            this.newMessage = null;
+        },
+    },
+    created() {
+            
+        socket.on('chat', (data) => {
+            this.messagesList.push({
+            message: data.message,
+            user: data.user,
+            userType: data.userType
+            });
+        });
+        
+        socket.on('typing', (data) => {
+            this.typing = data;
+        });
+        
+        socket.on('stopTyping', () => {
+            this.typing = false;
+        });
+
+    },
+
+    watch: {
+        newMessage(value) {
+            value ? socket.emit('typing', this.username) : socket.emit('stopTyping');
+        }
+    },
+    beforeMount(){
+      axios
+      .get('/user/getName')
+      .then(response => {
+        this.name = response.data.firstName + " " + response.data.lastName;
+      })
+      .catch(error => {
+        console.log(error)
+      });
+    },
+    mounted: async function() {
+      await axios.get('/user/student/getmyadvisor')
+      .then(response =>{
+         this.advisor = response.data[0][0]; 
+      })
+      .catch(error =>{
+          console.log(error)   
+      });
+     await axios.get('/user/student/messages/all')
+        .then(response =>{
+         var obj = response.data[0]; 
+         this.messages= Object.keys(obj).map(key => obj[key]);
+            for (var i = 0; i < this.messages.length; i++){
+                var sendingUser = this.name;
+                var userType = 1; //student is sending the message
+                if(this.messages[i].sender === this.advisor.user_ID){
+                    sendingUser=this.advisor.name;
+                    userType = 0; //advisor is sending the message
+                }
+                let previousMessage = {
+                    message:  this.messages[i].content,
+                    user: sendingUser,
+                    userType: userType
+                }
+
+                this.messagesList.push(previousMessage);
+            }
+        })
+      .catch(error =>{
+          console.log(error)   
+      });
+    },
+}
+
+</script>

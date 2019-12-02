@@ -1,7 +1,7 @@
 <template>
-    <div id="app">
+    <div id="app" class="amber lighten-5">
     <v-app id="inspire">
-        <div class="amber lighten-5 pa-4">
+        <div class="amber lighten-5 pa-4 full-screen">
             <v-row>
                 <v-toolbar color="amber darken-1" dark>
                 <v-toolbar-title class="brown--text">
@@ -10,18 +10,19 @@
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
                     <v-btn  @click="$router.push('/fe/student')" dark>Home</v-btn>
-                    <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
+                    <v-btn  @click="$router.push('/fe/messages')" dark>Messages</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
                 </v-toolbar-items>
                 </v-toolbar>
             </v-row>
             <v-row>
-                <v-col cols="3"></v-col>
-                <v-col cols="9" lg="6">
-                <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
+                <v-col cols="1"></v-col>
+                <v-col cols="5">
+                <v-card class="mt-n16 mx-auto" elevation="12" height="500px" max-height="500px">
                     <v-toolbar flat dark>
-                        <v-toolbar-title>Add Course</v-toolbar-title>
+                        <v-toolbar-title>Selected Courses</v-toolbar-title>
                     </v-toolbar>
+<<<<<<< HEAD
                     <v-list style="max-height: 600px" class="overflow-y-auto">
 <<<<<<< HEAD
                         <classComponent v-for="course in currentReccSemester" :course="course" :key="course.course_ID"/> 
@@ -73,13 +74,29 @@
                     
 =======
                         <classComponent v-for="course in courses" :course="course" :key="course.course_ID"/> 
+=======
+                    <v-list style="max-height: 436px" class="overflow-y-auto">
+                        <classComponent v-for="course in selected" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
+                    </v-list>                  
+                </v-card>
+                </v-col>
+                <v-col cols="5">
+                <v-card class="mt-n16 mx-auto" elevation="12" height="500px" max-height="500px">
+                    <v-toolbar flat dark>
+                        <v-toolbar-title>Recommended Courses</v-toolbar-title>
+                    </v-toolbar>
+                    <v-list style="max-height: 436px" class="overflow-y-auto">
+                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
+>>>>>>> d3835611327299157a5a89e78a37ebff6c6a7b03
                     </v-list>                  
 >>>>>>> 96cb5524bad73605da65579cb16f1d436074e52f
                 </v-card>
                 </v-col>
             </v-row>
+            <v-btn class="mx-auto mt-12" width="140" dark color="orange" @click="save_selected">Save</v-btn>
         </div>
     </v-app>
+    <div class="mt-12"></div>
     </div>
 </template>
 
@@ -98,19 +115,56 @@ export default {
     data: () => ({
         dialog: false,
         name: " ",
-        courses: JSON
+        courses: JSON,
+        selected: JSON
     }),
 
     components: {
         classComponent,
     },
     methods: {
-        logout: function () {
+        logout(e) {
             axios.get("/auth/logout").then(response =>{
                 this.$router.push('/');
             }).catch(err =>{
                 console.log(err);
             });
+        },
+        transfer_course: function(course) {
+            if (this.selected.indexOf(course)==-1){
+                this.selected.push(course)
+                this.courses.splice(this.courses.indexOf(course),1)
+            } else {
+                this.courses.push(course)
+                this.selected.splice(this.selected.indexOf(course),1)
+
+            }
+        },
+        save_selected: function() {
+            let class_str = ""
+            let grade_str = ""
+
+            console.info(this.selected)
+            for (var i=0; i<this.selected.length; i++){
+                class_str = class_str + this.selected[i].courseCode + ","
+                grade_str = grade_str + "-1,"
+            }
+            class_str = class_str.substring(0, class_str.length - 1);
+            grade_str = grade_str.substring(0, grade_str.length - 1);
+
+            console.info(class_str)
+            console.info(grade_str)
+
+            
+            axios.post("/user/student/courses/taken", {
+                classes: class_str,
+                grades: grade_str
+            }).then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            })
         }
     },
 <<<<<<< HEAD
@@ -150,6 +204,16 @@ export default {
       .catch(error => {
         console.log(error)
       });
+
+      axios.get('/user/student/courses/getUserRecommend')
+      .then(response =>{
+         var obj = response.data[0]; 
+         this.selected = Object.keys(obj).map(key => obj[key]);
+         console.info(this.selected);
+      })
+      .catch(error =>{
+          console.log(error)
+      })
 
       axios.get('/user/student/courses/recommended')
       .then(response =>{

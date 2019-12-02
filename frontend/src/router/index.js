@@ -9,6 +9,8 @@ import StudentEditCompleted from '@/studentpages/StudentEditCompleted'
 import Login from '@/login/LoginPage'
 import AdvisorView from '@/advisor/AdvisorView'
 import CreateCourse from '@/advisor/CreateCourse'
+import Chat from '@/advisor/Chat'
+import StudentChat from '@/studentpages/StudentChat'
 import axios from 'axios'
 //import Messages from '@/messaging/components/ChatApp'
 
@@ -54,14 +56,22 @@ let router = new Router({
         requiresAuth: true
       }
     },
-   /* {
+    {
       path: '/fe/messages',
-      name: 'messenger',
-      component: Messages,
+      name: 'StudentChat',
+      component: StudentChat,
       meta: {
         requiresAuth: true
       }
-    },*/
+    },
+    { 
+      path: '/fe/adv/messages',
+      name: 'Chat',
+      component: Chat,
+      meta: {
+        requiresAuth: true
+      }
+    },
     {
       path: '/fe/editcompleted',
       name: 'StudentEditCompleted',

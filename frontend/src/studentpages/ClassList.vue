@@ -1,7 +1,7 @@
 <template>
     <div id="app">
     <v-app id="inspire">
-        <div class="amber lighten-5 pa-4">
+        <div class="amber lighten-5 pa-4 full-screen">
             <v-row>
                 <v-toolbar color="amber darken-1" dark>
                 <v-toolbar-title class="brown--text">
@@ -10,7 +10,7 @@
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
                     <v-btn  @click="$router.push('/fe/student')" dark>Home</v-btn>
-                    <v-btn  @click="$router.push('/messages')" dark>Messages</v-btn>
+                    <v-btn  @click="$router.push('/fe/messages')" dark>Messages</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
                 </v-toolbar-items>
                 </v-toolbar>
@@ -22,7 +22,7 @@
                 <v-col cols="9" lg="6">
                 <v-card class="mt-n16 mx-auto" elevation="12" height="600px">
                     <v-toolbar flat dark>
-                        <v-toolbar-title>Class List</v-toolbar-title>
+                        <v-toolbar-title>Course List</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 600px" class="overflow-y-auto">
                         <classComponent v-for="course in courses" :course="course" :key="course.course_ID"/> 
@@ -37,6 +37,7 @@
             </v-row>
         </div>
     </v-app>
+    <div class="mt-12"></div>
     </div>
 </template>
 

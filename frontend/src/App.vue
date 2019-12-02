@@ -11,7 +11,9 @@ export default {
     logout(){
         $http.get("http://onlineadvisor.tk:3000/auth/logout");      
         $router.push('http://onlineadvisor.tk:3000/#/');
-    }
+    },
+    
+
 },
 }
 </script>
@@ -23,8 +25,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  width: 100%;
-  height: 100%;
   background-color: #fff8e1;
 }
 

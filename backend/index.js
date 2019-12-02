@@ -1,4 +1,5 @@
 const express = require('express');
+
  
 // creating an express instance
 const app = express()  
@@ -9,12 +10,13 @@ const cookieParser = require('cookie-parser')
 const session = require('express-session');
 const keys = require('./config/keys');
 
+
 //google OAuth2.0 using passport
 require('./config/passport.js');
 
-const publicRoot = '/home/ubuntu/SeniorProject/frontend/dist'
+const publicRoot = '/home/ubuntu/SeniorProject/frontend/dist';
 
-app.use(express.static(publicRoot))
+app.use(express.static(publicRoot));
 app.use( cookieParser()); 
 app.use( bodyParser.json());
 app.use( bodyParser.urlencoded({extended: true}));
@@ -47,6 +49,25 @@ var connection = require ("./config/db.js");
 app.use(routes);
 
 
-app.listen(3000, () => {
+const server = app.listen(3000, () => {
     console.log("proto  app listening on port 3000")
   });
+
+const io = require('socket.io')(server);
+io.on('connection', function(socket) {
+    console.log(socket.id)
+    socket.on('chat', function(data) {
+        io.sockets.emit('chat', data)
+    });
+    socket.on('chat', (data) => {
+        socket.broadcast.emit('chat-message', (data));
+    });
+
+    socket.on('typing', (data) => {
+        socket.broadcast.emit('typing', (data));
+    });
+
+    socket.on('stopTyping', () => {
+        socket.broadcast.emit('stopTyping');
+    });
+});

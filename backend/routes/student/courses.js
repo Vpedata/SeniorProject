@@ -43,6 +43,7 @@ router.get("/yetToTake",isStudent, (req, res, next) => {
 router.post("/taken",isStudent,(req, res, next) => {
     var sql = "CALL addTakenClasses(?,?,?);";
     const classInfo = [req.body.classes,req.user.student_ID,req.body.grades];
+    console.log(classInfo);
     db.query(sql,classInfo, (err, rows, fields) => {
         if (err) throw err;
         res.send(rows);

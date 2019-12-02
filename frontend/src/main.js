@@ -12,6 +12,7 @@ import '@trevoreyre/autocomplete-vue/dist/style.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import '@mdi/font/css/materialdesignicons.css'
 
+
 Vue.use(Autocomplete);
 Vue.use(Vuetify, {
   iconfont: 'mdi'
