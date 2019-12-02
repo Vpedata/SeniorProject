@@ -33,7 +33,7 @@
                 </v-col>
             </v-row>
             <v-row>
-                <v-col cols="6">
+                <v-col cols="4">
                     <v-card class="mx-12" elevation="12" height="600px" max-height="600px">
                         <v-toolbar dark flat>
                             <v-toolbar-title class="white--text">Courses Taken</v-toolbar-title>
@@ -45,13 +45,26 @@
                         </v-list>                  
                     </v-card>
                 </v-col>
-                <v-col cols="6">
+                <v-col cols="4">
                     <v-card class="mx-12" elevation="12" height="600px" max-height="600px">
                         <v-toolbar dark flat>
                             <v-toolbar-title class="white--text">Recommended Courses</v-toolbar-title>    
                         </v-toolbar>
                         <v-list style="max-height: 600px" class="overflow-y-auto">
                             <classComponent class="mt-n1" v-for="course in coursesRecommended" :course="course" :key="course.course_ID"/>
+                        </v-list>       
+              
+                    </v-card>
+                </v-col>
+                <v-col cols="4">
+                    <v-card class="mx-12" elevation="12" height="600px" max-height="600px">
+                        <v-toolbar dark flat>
+                            <v-toolbar-title class="white--text">Student Selected Courses</v-toolbar-title>
+                            <v-spacer></v-spacer>
+                            <v-toolbar-title class="white--text">Credits: {{this.studentSelectedCoursesCredits}}</v-toolbar-title>    
+                        </v-toolbar>
+                        <v-list style="max-height: 600px" class="overflow-y-auto">
+                            <classComponent class="mt-n1" v-for="course in studentSelectedCourses" :course="course" :key="course.course_ID"/>
                         </v-list>       
               
                     </v-card>
@@ -70,7 +83,7 @@ import { mapState, mapActions } from 'vuex'
 import axios from 'axios';
 import router from '../router/index.js'
 import classComponent from '../studentpages/classListComponent.vue'
-import studentSelectedCoursesComponent from "./studentSelectedCoursesComponent"
+
 
 
 export default {
@@ -88,11 +101,12 @@ export default {
         creditsTaken: " ",
         coursesTaken:JSON,
         coursesRecommended:JSON,
+        studentSelectedCourses:JSON,
+        studentSelectedCoursesCredits:""
 
   }),
   components: {
         classComponent,
-        studentSelectedCoursesComponent
     },
     methods: {
         logout: function () {
@@ -154,6 +168,22 @@ export default {
             })
             .catch(error =>{
                 console.log(error)
+            });
+
+            let studentSelectedCoursesUrl = '/user/advisor/student/'+this.student_ID+'/studentRecommended';
+            axios.get(studentSelectedCoursesUrl).then(response =>{
+                var obj = response.data[0];
+                var allCourses = Object.keys(obj).map(key => obj[key]);
+                let credits = 0;
+
+                for (var i = 0; i < allCourses.length; i++){
+                    credits = credits + allCourses[i].creditHours;
+                }
+                this.studentSelectedCoursesCredits = credits;
+                this.studentSelectedCourses = allCourses;
+            })
+            .catch(err =>{
+                console.log(err);
             });
         },
         
