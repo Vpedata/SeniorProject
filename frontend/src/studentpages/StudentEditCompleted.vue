@@ -49,8 +49,6 @@ export default {
         taken: JSON,
         avail_courses: JSON,
         id: "",
-        update_courses: "",
-        update_grades: ""
     }),
 
     components: {
@@ -69,28 +67,27 @@ export default {
                 course.grade = grade;
         },
         update_completed: function() {
-            let temp_index = 0
-            this.update_courses = ""
-            this.update_grades = ""
+            let temp_index = 0;
+            let update_courses ="";
+            let update_grades ="";
+ 
             for (var i=0 ;i<this.avail_courses.length; i++){
                 let check_course = this.avail_courses[i].name
                 let check_grade = this.avail_courses[i].grade
-                if (check_grade != '') {
-                    this.update_courses = update_courses + check_course + ","
-                    this.update_grades = update_grades + check_grade + ","
-                    temp_index ++
+                if (check_grade) {
+                    update_courses = update_courses + check_course + ","
+                    update_grades = update_grades + check_grade + ","
                 }
             }
-            this.update_courses = grade_str.substring(0, grade_str.length - 1);
-            this.update_grades = grade_str.substring(0, grade_str.length - 1);
+            update_courses = grade_str.substring(0, grade_str.length - 1);
+            update_grades = grade_str.substring(0, grade_str.length - 1);
             
             console.info(this.update_courses)
             console.info(this.update_grades)
             
-            /*
+            
             axios.post("/user/student/courses/taken", {
                 classes: this.update_courses,
-                student_ID: this.id,
                 grades: this.update_grades
             }).then(function (response) {
               console.log(response);
@@ -98,7 +95,7 @@ export default {
             .catch(function (error) {
               console.log(error);
             })
-            */
+            
         } 
     },
     beforeMount(){
