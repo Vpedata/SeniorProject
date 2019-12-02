@@ -66,6 +66,8 @@
                 v-for="prereq in prereq_list" 
                 :key="prereq.id" 
                 v-model="prereq.isOpen"
+                close
+                @click:close="prereq_list.splice(prereq_list.indexOf(prereq))"
                 >
                 {{prereq}}
                 </v-chip>
@@ -73,7 +75,6 @@
                 <v-col cols="4">
                     <v-btn class="mt-12" outlined color="blue" @click="$router.push('/fe/classlistadvisor')" dark>Create</v-btn>
                 </v-col>
-
             </v-row>
             </v-card>
         </div>
