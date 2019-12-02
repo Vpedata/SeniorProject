@@ -1,6 +1,6 @@
 <template>
     <div>
-    <v-btn class="mb-4 mx-auto" outlined color="#FF0000" v-on:click="dialog=true" dark >
+    <v-btn class="mb-4 mx-auto" outlined color="#FF0000" v-on:click="dialog=true;getStudentSelectedCourses;" dark >
         Student Selected Courses
     </v-btn>
     <v-dialog v-model="dialog" width="600px" >
@@ -33,7 +33,6 @@ export default {
     }),
     method: {
         getStudentSelectedCourses: function(){
-            dialog = true; 
             let studentSelectedCoursesUrl = '/user/advisor/student/'+this.student_ID+'/studentRecommended';
             axios.get(studentSelectedCoursesUrl).then(response =>{
                 var obj = response.data[0];
