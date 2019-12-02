@@ -96,7 +96,7 @@ export default {
             return result.name + " ("  + result.email  + ")"; 
         },
         handleSubmit(result) {
-            userFound = true;
+            this.userFound = true;
             this.student = result;
             this.messagesList=[];
             let studentMessagesUrl = '/user/advisor/messages/'+ result.student_ID;
