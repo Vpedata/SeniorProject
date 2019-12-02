@@ -72,7 +72,7 @@ export default {
             let update_courses = ""
             let update_grades = ""
             for (var i=0 ;i<this.avail_courses.length; i++){
-                let check_course = this.avail_courses[i].name
+                let check_course = this.avail_courses[i].courseCode
                 let check_grade = this.avail_courses[i].grade
                 if (check_grade) {
                     update_courses = update_courses + check_course + ","
