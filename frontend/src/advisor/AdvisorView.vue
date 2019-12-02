@@ -29,10 +29,7 @@
                     </v-toolbar>
                 </v-col>
                 <v-col cols="6">
-                    <studentSelectedCoursesComponent 
-                    :studentSelectedCourses="studentSelectedCourses"
-                    :studentSelectedCoursesCredits="studentSelectedCoursesCredits"
-                    @getStudentSelectedCourses="getStudentSelectedCourses"/>
+                    <studentSelectedCoursesComponent :/>
                 </v-col>
             </v-row>
             <v-row>
@@ -91,8 +88,6 @@ export default {
         creditsTaken: " ",
         coursesTaken:JSON,
         coursesRecommended:JSON,
-        studentSelectedCourses:JSON,
-        studentSelectedCoursesCredits:""
 
   }),
   components: {
@@ -119,6 +114,7 @@ export default {
             return result.name + " ("  + result.email  + ")"; 
         },
         handleSubmit(result) {
+            this.student_ID= result.student_ID;
             let coursesTakenUrl = '/user/advisor/student/'+ result.student_ID +'/taken';
             axios.get(coursesTakenUrl)
             .then(response =>{
@@ -160,23 +156,6 @@ export default {
                 console.log(error)
             });
         },
-        getStudentSelectedCourses: function(){
-            let studentSelectedCoursesUrl = '/user/advisor/student/'+result.student_ID+'/studentRecommended';
-            axios.get(studentSelectedCoursesUrl).then(response =>{
-                var obj = response.data[0];
-                var allCourses = Object.keys(obj).map(key => obj[key]);
-                let credits = 0;
-
-                for (var i = 0; i < allCourses.length; i++){
-                    credits = credits + allCourses[i].creditHours;
-                }
-                this.studentSelectedCoursesCredits = credits;
-                this.studentSelectedCourses = allCourses;
-        })
-        .catch(err =>{
-            console.log(err);
-        });
-    },
         
     },
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-    <v-btn class="mb-4 mx-auto" outlined color="#FF0000" v-on:click.native="getStudentSelectedCourses" dark >
+    <v-btn class="mb-4 mx-auto" outlined color="#FF0000" v-on:click="getStudentSelectedCourses" dark >
         Student Selected Courses
     </v-btn>
     <v-dialog v-model="dialog" width="600px" >
@@ -24,17 +24,31 @@ export default {
         classComponent,
     },
     props: {
-        studentSelectedCourses:JSON,
-        studentSelectedCoursesCredits:Number
+        student_ID : Number
     },
     data: () => ({
         dialog: false,
+        studentSelectedCourses:JSON,
+        studentSelectedCoursesCredits:""
     }),
     method: {
-        getStudentSelectedCourses: function() { 
-            dialog=true;
-            console.info(dialog);
-            this.$emit('getStudentSelectedCourses');
+        getStudentSelectedCourses: function(){
+            dialog = true; 
+            let studentSelectedCoursesUrl = '/user/advisor/student/'+this.student_ID+'/studentRecommended';
+            axios.get(studentSelectedCoursesUrl).then(response =>{
+                var obj = response.data[0];
+                var allCourses = Object.keys(obj).map(key => obj[key]);
+                let credits = 0;
+
+                for (var i = 0; i < allCourses.length; i++){
+                    credits = credits + allCourses[i].creditHours;
+                }
+                this.studentSelectedCoursesCredits = credits;
+                this.studentSelectedCourses = allCourses;
+            })
+            .catch(err =>{
+                console.log(err);
+            });
         },
     }
 }
