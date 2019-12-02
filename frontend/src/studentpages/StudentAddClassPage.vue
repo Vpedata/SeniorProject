@@ -89,9 +89,9 @@ export default {
             let grade_str = ""
 
             console.info(this.selected)
-            for (let i=0; i<this.selected.length;i++){
-                class_str.concat(this.selected[i] + ",")
-                grade_str.concat("-1,")
+            for (var i=0; i<this.selected.length; i++){
+                class_str = class_str + this.selected[i] + ","
+                grade_str = grade_str + "-1,"
             }
             class_str = class_str.substring(0, class_str.length - 1);
             grade_str = grade_str.substring(0, grade_str.length - 1);
@@ -99,6 +99,7 @@ export default {
             console.info(class_str)
             console.info(grade_str)
 
+            /*
             axios.post("/user/student/courses/taken", {
                 classes: class_str,
                 grades: grade_str
@@ -108,6 +109,7 @@ export default {
             .catch(function (error) {
               console.log(error);
             })
+            */
         }
     },
     beforeMount(){
