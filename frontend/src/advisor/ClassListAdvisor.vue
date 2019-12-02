@@ -62,7 +62,7 @@
                         :key="prereq.id" 
                         v-model="prereq.isOpen"
                         close
-                        @click:close="prereq_list.splice(prereq_list.indexOf(prereq))"
+                        @click:close="prereq_list.splice(prereq_list.indexOf(prereq),1)"
                         >
                         {{prereq}}
                     </v-chip>
