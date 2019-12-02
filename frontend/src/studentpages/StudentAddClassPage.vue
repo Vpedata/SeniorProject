@@ -22,9 +22,7 @@
                     <v-toolbar flat dark>
                         <v-toolbar-title>Selected Courses</v-toolbar-title>
                     </v-toolbar>
-<<<<<<< HEAD
                     <v-list style="max-height: 600px" class="overflow-y-auto">
-<<<<<<< HEAD
                         <classComponent v-for="course in currentReccSemester" :course="course" :key="course.course_ID"/> 
                     </v-list> 
 
@@ -70,26 +68,7 @@
                             <v-list-item-title>Repeat...</v-list-item-title>
                             </v-list-item-content>
                         </v-list-item>
-                    </v-list>
-                    
-=======
-                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID"/> 
-=======
-                    <v-list style="max-height: 436px" class="overflow-y-auto">
-                        <classComponent v-for="course in selected" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
-                    </v-list>                  
-                </v-card>
-                </v-col>
-                <v-col cols="5">
-                <v-card class="mt-n16 mx-auto" elevation="12" height="500px" max-height="500px">
-                    <v-toolbar flat dark>
-                        <v-toolbar-title>Recommended Courses</v-toolbar-title>
-                    </v-toolbar>
-                    <v-list style="max-height: 436px" class="overflow-y-auto">
-                        <classComponent v-for="course in courses" :course="course" :key="course.course_ID" @transfer="transfer_course"/> 
->>>>>>> d3835611327299157a5a89e78a37ebff6c6a7b03
-                    </v-list>                  
->>>>>>> 96cb5524bad73605da65579cb16f1d436074e52f
+                    </v-list>               
                 </v-card>
                 </v-col>
             </v-row>
@@ -140,7 +119,7 @@ export default {
 
             }
         },
-        save_selected: function() {
+        save_selected: async function() {
             let class_str = ""
             let grade_str = ""
 
@@ -155,6 +134,14 @@ export default {
             console.info(class_str)
             console.info(grade_str)
 
+            await axios
+            .get("/user/student/courses/deleteNegOnes")
+            .then(response =>{
+                console.log(response);
+            })
+            .catch(err =>{
+                console.log(err);
+            });
             
             axios.post("/user/student/courses/taken", {
                 classes: class_str,
@@ -167,7 +154,6 @@ export default {
             })
         }
     },
-<<<<<<< HEAD
     generateDefaults: function() {
       axios
         .get("/user/student/courses/recommendedCourses")
@@ -190,11 +176,8 @@ export default {
         .catch(err => {
           console.log(err);
         });
-    }
-  },
+    },
 
-=======
->>>>>>> 96cb5524bad73605da65579cb16f1d436074e52f
     beforeMount(){
       axios
       .get('/user/getName')
