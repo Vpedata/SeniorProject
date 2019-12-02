@@ -29,7 +29,7 @@
                     </v-toolbar>
                 </v-col>
                 <v-col cols="6">
-                    <studentSelectedCoursesComponent :/>
+                    <studentSelectedCoursesComponent :student_ID="student_ID" />
                 </v-col>
             </v-row>
             <v-row>
