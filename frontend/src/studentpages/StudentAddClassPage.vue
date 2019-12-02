@@ -90,7 +90,7 @@ export default {
 
             console.info(this.selected)
             for (var i=0; i<this.selected.length; i++){
-                class_str = class_str + this.selected[i].name + ","
+                class_str = class_str + this.selected[i].courseCode + ","
                 grade_str = grade_str + "-1,"
             }
             class_str = class_str.substring(0, class_str.length - 1);
