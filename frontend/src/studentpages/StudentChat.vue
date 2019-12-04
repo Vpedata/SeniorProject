@@ -26,6 +26,7 @@
                     </v-toolbar>
                 <v-card-text>
                 <v-list style="max-height: 500px" class="overflow-y-auto">
+                    <small v-if="typing" >{{typing.user}} is typing</small>
                     <StudentMessageComponent class="mt-n1" v-for="message in messagesList" 
                     :message="message"  :key="message"/>
                 </v-list>
@@ -64,6 +65,7 @@ export default {
             messages: JSON,
             newMessage: "",
             messagesList:[],
+            typing: false
 
         }
     },
