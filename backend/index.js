@@ -57,16 +57,13 @@ const io = require('socket.io')(server);
 io.on('connection', function(socket) {
     console.log(socket.id)
     socket.on('chat', function(data) {
-        console.log(data);
         io.sockets.emit('chat', data)
     });
     socket.on('chat', (data) => {
-        console.log(data);
         socket.broadcast.emit('chat-message', (data));
     });
 
     socket.on('typing', (data) => {
-        console.log(data);
         socket.broadcast.emit('typing', (data));
     });
 
