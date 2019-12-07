@@ -128,10 +128,10 @@ export default {
                         delete allCourses[i];
                         i++;
                     }
-                    semesterView.push(courses);
+                    this.semesterView.push(courses);
                     console.info(courses);
                 }
-                console.info(semseterView);
+                console.info(this.semseterView);
             })
             .catch(error =>{
                 console.log(error)
