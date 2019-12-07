@@ -117,17 +117,19 @@ export default {
                 var obj = response.data[0]; 
                 var allCourses = Object.keys(obj).map(key => obj[key]);
                 this.coursesYetToTake= Object.keys(obj).map(key => obj[key]);
-                for(var semester = 1; semester <= 8; semester++){
+                while(allCourses.length){
                     var i = 0; 
                     var creditCount = 0;
                     var courses = []    
                     while (creditCount <= 17 ) {
+                        console.info(allCourses[i]);
                         creditCount = creditCount + allCourses[i].creditHours;
                         courses.push(allCourses[i]);
                         delete allCourses[i];
+                        i++;
                     }
                     semesterView.push(courses);
-                    console.info(semesterView[semester]);
+                    console.info(courses);
                 }
                 console.info(semseterView);
             })
