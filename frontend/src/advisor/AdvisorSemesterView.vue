@@ -111,27 +111,23 @@ export default {
                 console.log(error)
             });
 
-            let coursesYetToTakeUrl = '/user/advisor/student/'+ result.student_ID +'/yetToTake';
+            let coursesYetToTakeUrl = '/user/advisor/student/'+ result.student_ID +'/yetToTakePreReqs';
             axios.get(coursesYetToTakeUrl)
             .then(response =>{
                 var obj = response.data[0]; 
                 var allCourses = Object.keys(obj).map(key => obj[key]);
                 this.coursesYetToTake= Object.keys(obj).map(key => obj[key]);
-                while(allCourses.length){
-                    var i = 0; 
-                    var creditCount = 0;
-                    var courses = []    
-                    while (creditCount <= 17 ) {
-                        console.info(allCourses[i]);
-                        creditCount = creditCount + allCourses[i].creditHours;
-                        courses.push(allCourses[i]);
-                        delete allCourses[i];
-                        i++;
+                var courses = [];
+                var creditCount = 0;
+                for (var i = 0; i < allCourses.length; i++){
+                    if(creditCount>=17){
+                        this.semesterView.push(courses);
+                        cousres=[];
+                        creditCount=0;
                     }
-                    this.semesterView.push(courses);
-                    console.info(courses);
+                    creditCount = creditCount + allCourses[i].creditHours;
+                    courses.push(allCourses[i]);
                 }
-                console.info(this.semseterView);
             })
             .catch(error =>{
                 console.log(error)

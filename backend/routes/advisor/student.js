@@ -49,6 +49,15 @@ router.get("/:id/yetToTake",isAdvisor, (req, res, next) => {
     });
 });
 
+//Get courses that are left to take for current students with preReqs; 
+router.get("/:id/yetToTakePreReqs",isAdvisor, (req, res, next) => {
+    var sql = "CALL yetToTakeWithPrereqs(7);";
+    db.query(sql,req.params.id, (err, rows, fields) => {
+      if (err) throw err;
+      res.send(rows);
+    });
+});
+
 //get student's list of recommended courses by student id
 router.get("/:id/recommended",isAdvisor,(req,res,next)=> {
     var sql = "CALL getReccomendedSemester(?);";
