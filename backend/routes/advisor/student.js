@@ -42,7 +42,7 @@ router.get("/takenCredits/:id",isAdvisor, (req, res, next)=> {
 
 //Get courses that are left to take for current students; 
 router.get("/:id/yetToTake",isAdvisor, (req, res, next) => {
-    var sql = "CALL getStudentClassesYetToTake(?); ";
+    var sql = "CALL classesYetToTake(?);";
     db.query(sql,req.params.id, (err, rows, fields) => {
       if (err) throw err;
       res.send(rows);
