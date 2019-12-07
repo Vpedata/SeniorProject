@@ -9,7 +9,6 @@
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
-                    <v-btn  class ="success"  @click="$router.push('/fe/adv/semesterView')"  dark>Semester View</v-btn>
                     <v-btn  @click="$router.push('/fe/classlistadvisor')" dark>View Course List</v-btn>
                     <v-btn  @click="$router.push('/fe/adv/messages')" dark>Messages</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
@@ -32,14 +31,38 @@
                 </v-col>
             </v-row>
             <v-row>
-                <v-col cols="3"></v-col>
-                <v-col cols="6">
+                <v-col cols="4">
+                    <v-card class="ms-2" elevation="12" height="600px" max-height="600px" width="500px">
+                        <v-toolbar dark flat>
+                            <v-toolbar-title class="white--text">Courses Taken</v-toolbar-title>
+                            <v-spacer></v-spacer>
+                            <v-toolbar-title class="white--text">Credits: {{this.creditsTaken.Credits}}</v-toolbar-title>
+                        </v-toolbar>
+                        <v-list style="max-height: 600px" class="overflow-y-auto">
+                            <classComponent class="mt-n1" v-for="course in coursesTaken" :course="course" :key="course.course_ID"/>
+                        </v-list>                  
+                    </v-card>
+                </v-col>
+                <v-col cols="4">
                     <v-card class="ms-2" elevation="12" height="600px" max-height="600px" width="500px">
                         <v-toolbar dark flat>
                             <v-toolbar-title class="white--text">Recommended Courses</v-toolbar-title>    
                         </v-toolbar>
                         <v-list style="max-height: 600px" class="overflow-y-auto">
-                            <classComponent class="mt-n1" v-for="course in coursesYetToTake" :course="course" :key="course.course_ID"/>
+                            <classComponent class="mt-n1" v-for="course in coursesRecommended" :course="course" :key="course.course_ID"/>
+                        </v-list>       
+              
+                    </v-card>
+                </v-col>
+                <v-col cols="4">
+                    <v-card class="ms-2" elevation="12" height="600px" max-height="600px" width="500px">
+                        <v-toolbar dark flat>
+                            <v-toolbar-title class="white--text">Student Selected Courses</v-toolbar-title>
+                            <v-spacer></v-spacer>
+                            <v-toolbar-title class="white--text">Credits: {{this.studentSelectedCoursesCredits}}</v-toolbar-title>    
+                        </v-toolbar>
+                        <v-list style="max-height: 600px" class="overflow-y-auto">
+                            <classComponent class="mt-n1" v-for="course in studentSelectedCourses" :course="course" :key="course.course_ID"/>
                         </v-list>       
               
                     </v-card>

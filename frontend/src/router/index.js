@@ -9,6 +9,7 @@ import StudentEditCompleted from '@/studentpages/StudentEditCompleted'
 import Login from '@/login/LoginPage'
 import AdvisorView from '@/advisor/AdvisorView'
 import CreateCourse from '@/advisor/CreateCourse'
+import AdvisorSemesterView from '@/advisor/AdvisorSemesterView'
 import Chat from '@/advisor/Chat'
 import StudentChat from '@/studentpages/StudentChat'
 import axios from 'axios'
@@ -96,7 +97,14 @@ let router = new Router({
         requiresAuth: true
       }
     },
-
+    {
+      path: '/fe/adv/semesterView',
+      name: 'AdvisorSemesterView',
+      component: AdvisorSemesterView,
+      meta: {
+        requiresAuth: true
+      }
+    },
   ]
 })
 
