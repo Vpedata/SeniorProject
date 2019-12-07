@@ -9,6 +9,7 @@
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
+                    <v-btn  class ="success"  @click="$router.push('/fe/adv/advisor')"  dark>Back</v-btn>
                     <v-btn  @click="$router.push('/fe/classlistadvisor')" dark>View Course List</v-btn>
                     <v-btn  @click="$router.push('/fe/adv/messages')" dark>Messages</v-btn>
                     <v-btn  @click="logout" dark>Logout</v-btn>
@@ -31,38 +32,14 @@
                 </v-col>
             </v-row>
             <v-row>
-                <v-col cols="4">
+                <v-col cols="3"></v-col>
+                <v-col cols="6">
                     <v-card class="ms-2" elevation="12" height="600px" max-height="600px" width="500px">
                         <v-toolbar dark flat>
-                            <v-toolbar-title class="white--text">Courses Taken</v-toolbar-title>
-                            <v-spacer></v-spacer>
-                            <v-toolbar-title class="white--text">Credits: {{this.creditsTaken.Credits}}</v-toolbar-title>
+                            <v-toolbar-title class="white--text">Courses Yet To Take</v-toolbar-title>    
                         </v-toolbar>
                         <v-list style="max-height: 600px" class="overflow-y-auto">
-                            <classComponent class="mt-n1" v-for="course in coursesTaken" :course="course" :key="course.course_ID"/>
-                        </v-list>                  
-                    </v-card>
-                </v-col>
-                <v-col cols="4">
-                    <v-card class="ms-2" elevation="12" height="600px" max-height="600px" width="500px">
-                        <v-toolbar dark flat>
-                            <v-toolbar-title class="white--text">Recommended Courses</v-toolbar-title>    
-                        </v-toolbar>
-                        <v-list style="max-height: 600px" class="overflow-y-auto">
-                            <classComponent class="mt-n1" v-for="course in coursesRecommended" :course="course" :key="course.course_ID"/>
-                        </v-list>       
-              
-                    </v-card>
-                </v-col>
-                <v-col cols="4">
-                    <v-card class="ms-2" elevation="12" height="600px" max-height="600px" width="500px">
-                        <v-toolbar dark flat>
-                            <v-toolbar-title class="white--text">Student Selected Courses</v-toolbar-title>
-                            <v-spacer></v-spacer>
-                            <v-toolbar-title class="white--text">Credits: {{this.studentSelectedCoursesCredits}}</v-toolbar-title>    
-                        </v-toolbar>
-                        <v-list style="max-height: 600px" class="overflow-y-auto">
-                            <classComponent class="mt-n1" v-for="course in studentSelectedCourses" :course="course" :key="course.course_ID"/>
+                            <classComponent class="mt-n1" v-for="course in coursesYetToTake" :course="course" :key="course.course_ID"/>
                         </v-list>       
               
                     </v-card>
@@ -96,11 +73,8 @@ export default {
         students:JSON,
         student_ID:"",
         currSem: " ",
-        creditsTaken: " ",
-        coursesTaken:JSON,
-        coursesRecommended:JSON,
-        studentSelectedCourses:JSON,
-        studentSelectedCoursesCredits:""
+        coursesYetToTake:JSON,
+
 
   }),
   components: {
@@ -127,27 +101,17 @@ export default {
         },
         handleSubmit(result) {
             this.student_ID= result.student_ID;
-            let coursesTakenUrl = '/user/advisor/student/'+ result.student_ID +'/taken';
-            axios.get(coursesTakenUrl)
+            let coursesYetToTakeUrl = '/user/advisor/student/'+ result.student_ID +'/yetToTake';
+            axios.get(coursesYetToTakeUrl)
             .then(response =>{
             var obj = response.data[0]; 
-            this.coursesTaken= Object.keys(obj).map(key => obj[key]);
-            console.info(this.coursesTaken);
+            this.coursesYetToTake= Object.keys(obj).map(key => obj[key]);
+            console.info(this.coursesYetToTake);
             })
             .catch(error =>{
                 console.log(error)
             });
-            let coursesRecommendedUrl = '/user/advisor/student/'+ result.student_ID +'/recommended';
-            axios.get(coursesRecommendedUrl)
-            .then(response =>{
-            var obj = response.data[0]; 
-            this.coursesRecommended= Object.keys(obj).map(key => obj[key]);
-            console.info(this.coursesRecommended)
-            })
-            
-            .catch(error =>{
-                console.log(error)
-            });
+         
 
             let currSemUrl = '/user/advisor/student/curSem/'+result.student_ID;
              axios.get(currSemUrl)
@@ -158,31 +122,9 @@ export default {
                 console.log(error)
             });
             
-             let creditsTakenUrl = '/user/advisor/student/takenCredits/'+result.student_ID;
-             axios.get(creditsTakenUrl)
-            .then(response =>{
-            this.creditsTaken= response.data[0][0];
-            console.info(this.creditsTaken);
-            })
-            .catch(error =>{
-                console.log(error)
-            });
+         
 
-            let studentSelectedCoursesUrl = '/user/advisor/student/'+this.student_ID+'/studentRecommended';
-            axios.get(studentSelectedCoursesUrl).then(response =>{
-                var obj = response.data[0];
-                var allCourses = Object.keys(obj).map(key => obj[key]);
-                let credits = 0;
-
-                for (var i = 0; i < allCourses.length; i++){
-                    credits = credits + allCourses[i].creditHours;
-                }
-                this.studentSelectedCoursesCredits = credits;
-                this.studentSelectedCourses = allCourses;
-            })
-            .catch(err =>{
-                console.log(err);
-            });
+           
         },
         
     },
