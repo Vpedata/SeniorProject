@@ -74,6 +74,7 @@ export default {
         student_ID:"",
         currSem: " ",
         coursesYetToTake:JSON,
+        semesterView : [[]], 
 
 
   }),
@@ -101,18 +102,6 @@ export default {
         },
         handleSubmit(result) {
             this.student_ID= result.student_ID;
-            let coursesYetToTakeUrl = '/user/advisor/student/'+ result.student_ID +'/yetToTake';
-            axios.get(coursesYetToTakeUrl)
-            .then(response =>{
-            var obj = response.data[0]; 
-            this.coursesYetToTake= Object.keys(obj).map(key => obj[key]);
-            console.info(this.coursesYetToTake);
-            })
-            .catch(error =>{
-                console.log(error)
-            });
-         
-
             let currSemUrl = '/user/advisor/student/curSem/'+result.student_ID;
              axios.get(currSemUrl)
             .then(response =>{
@@ -121,9 +110,34 @@ export default {
             .catch(error =>{
                 console.log(error)
             });
-            
+
+            let coursesYetToTakeUrl = '/user/advisor/student/'+ result.student_ID +'/yetToTake';
+            axios.get(coursesYetToTakeUrl)
+            .then(response =>{
+                var obj = response.data[0]; 
+                var allCourses = Object.keys(obj).map(key => obj[key]);
+                this.coursesYetToTake= Object.keys(obj).map(key => obj[key]);
+                for(var semester = 1; semester <= 8; semester++){
+                    var i = 0; 
+                    var creditCount = 0;
+                    var courses = []    
+                    while (creditCount <= 17 ) {
+                        creditCount = creditCount + allCourses[i].creditHours;
+                        courses.push(allCourses[i]);
+                        delete allCourses[i];
+                    }
+                    semesterView.push(courses);
+                    console.info(semesterView[semester]);
+                }
+                console.info(semseterView);
+            })
+            .catch(error =>{
+                console.log(error)
+            });
          
 
+            
+            
            
         },
         
