@@ -22,6 +22,16 @@ router.get("/getmyadvisor",isStudent,(req, res, next)=>{
     })
 });
 
+//Returns Student's Current Semester
+router.get("/getmyCurrSem",isStudent,(req, res, next)=>{
+  var sql = "CALL getStudentCurrentSem(?);";
+  db.query(sql, [req.user.student_ID], (err, rows, fields) => {
+    if (err) throw(err);
+    res.json(rows);
+  })
+});
+
+
 router.get("/chatapp", (req, res, next) => {
     res.sendFile("/home/ubuntu/SeniorProject/frontend/src/chat-messenger/public/index.php");
 });
