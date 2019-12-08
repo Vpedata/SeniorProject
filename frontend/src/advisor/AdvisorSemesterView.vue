@@ -102,6 +102,7 @@ export default {
         },
         handleSubmit(result) {
             this.student_ID= result.student_ID;
+            this.semesterView = [[]]
             let currSemUrl = '/user/advisor/student/curSem/'+result.student_ID;
              axios.get(currSemUrl)
             .then(response =>{
@@ -117,8 +118,7 @@ export default {
             .then(response =>{
                 var obj = response.data[0]; 
                 var allCourses = Object.keys(obj).map(key => obj[key]);
-                var courses = [];
-                var remainningCourses = []; 
+                var courses = []; 
                 var totalCredits = 0;
                 var creditCount = 0;
                 for (var i = 0; i < allCourses.length; i++){
@@ -127,6 +127,7 @@ export default {
                 for (var i = 0; i < allCourses.length; i++){
                     creditCount = creditCount + allCourses[i].creditHours;
                     totalCredits = totalCredits - allCourses[i].creditHours;
+                    console.info(allCourses[i]);
                     if(creditCount<=17){
                         courses.push(allCourses[i]);
                         delete allCourses[i];
@@ -147,8 +148,8 @@ export default {
                         delete allCourses[i];
                     }
                 }
-                console.info(allCourses);
-                for (var course in allCourses){
+                for ( var course in allCourses){
+                    console.info(course)
                     creditCount = creditCount + course.creditHours;
                     courses.push(course);
                 }
