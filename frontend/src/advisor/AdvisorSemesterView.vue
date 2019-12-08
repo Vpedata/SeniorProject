@@ -32,9 +32,9 @@
                 </v-col>
             </v-row>
 
-            <v-row v-if="this.semesterView !== [[]]">
+            <v-row v-if="this.currSem !== ' '">
                 <v-col cols="4" v-for="(semester,index) in semesterView" :key="semester" >
-                    <v-card class="ms-2" elevation="12" height="600px" max-height="600px" width="500px">
+                    <v-card class="ms-2" elevation="12" max-height="350px" width="500px">
                         <v-toolbar dark flat>
                             <v-toolbar-title class="white--text">Semester {{index}}</v-toolbar-title>
                             <v-spacer></v-spacer>
