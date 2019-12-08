@@ -34,18 +34,16 @@
 
             <v-row v-if="semesterView.length">
                 <v-col cols="4" v-for="(semester,index) in semesterView" :key="semester" >
-                    <span v-for="credits in semesterCredits" :key="credits">
                     <v-card class="ms-2" elevation="12" height="600px" max-height="600px" width="500px">
                         <v-toolbar dark flat>
                             <v-toolbar-title class="white--text">Semester {{index}}</v-toolbar-title>
                             <v-spacer></v-spacer>
-                            <v-toolbar-title class="white--text" >Credits: {{credits}}  </v-toolbar-title>    
+                            <v-toolbar-title class="white--text" >Credits: {{semester.semCredits}}  </v-toolbar-title>    
                         </v-toolbar>
                         <v-list style="max-height: 600px" class="overflow-y-auto">
-                            <classComponent class="mt-n1" v-for="course in semester" :course="course" :key="course.course_ID"/>
+                            <classComponent class="mt-n1" v-for="course in semester.semCourses" :course="course" :key="course.course_ID"/>
                         </v-list>       
                     </v-card>
-                    </span>
                 </v-col>               
             </v-row>
 
@@ -77,7 +75,6 @@ export default {
         student_ID:"",
         currSem: " ",
         semesterView : [[]],
-        semesterCredits:[] 
 
 
   }),
@@ -130,18 +127,26 @@ export default {
                         delete allCourses[i];
                     }
                     else{
-                        this.semesterView.push(courses);
-                        this.semesterCredits.push(creditCount-allCourses[i].creditHours)
+                        var semester = {
+                            semCourses : courses, 
+                            semCredits: creditCount-allCourses[i].creditHours
+                        }
+                        this.semesterView.push(semester);
+                        
                         courses=[];
                         creditCount=0;
                     }
                 }
+                console.info(allCourses);
                 for (var i = 0; i < allCourses.length; i++){
                     creditCount = creditCount + allCourses[i].creditHours;
                     courses.push(allCourses[i]);
                 }
-                this.semesterView.push(courses);
-                this.semesterCredits.push(creditCount)
+                var semester = {
+                    semCourses : courses, 
+                    semCredits: creditCount-allCourses[i].creditHours
+                }
+                this.semesterView.push(semester);
             })
             .catch(error =>{
                 console.log(error)
