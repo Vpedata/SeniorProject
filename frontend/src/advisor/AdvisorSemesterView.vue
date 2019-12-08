@@ -32,7 +32,7 @@
                 </v-col>
             </v-row>
 
-            <v-row v-if="semesterView.length > 0 ">
+            <v-row v-if="currSem !== null">
                 <v-col cols="4" v-for="(semester,index) in semesterView" :key="semester" >
                     <v-card class="ms-2" elevation="12" height="600px" max-height="600px" width="500px">
                         <v-toolbar dark flat>
@@ -119,7 +119,6 @@ export default {
                 var allCourses = Object.keys(obj).map(key => obj[key]);
                 var courses = [];
                 var creditCount = 0;
-                console.info(allCourses);
                 for (var i = 0; i < allCourses.length; i++){
                     creditCount = creditCount + allCourses[i].creditHours;
                     if(creditCount<=17){
@@ -135,10 +134,12 @@ export default {
                         courses=[];
                         creditCount=allCourses[i].creditHours;
                         courses.push(allCourses[i]);
+                        delete allCourses[i];
                     }
                 }
                 console.info(allCourses);
                 for (var i = 0; i < allCourses.length; i++){
+                    console.info(allCourses[i]);
                     creditCount = creditCount + allCourses[i].creditHours;
                     courses.push(allCourses[i]);
                 }
