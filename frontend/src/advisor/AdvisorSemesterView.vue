@@ -31,21 +31,22 @@
                     </v-toolbar>
                 </v-col>
             </v-row>
+
             <v-row>
-                <v-col cols="3"></v-col>
-                <v-col cols="6">
+                <v-col cols="6" v-for="(semester,index) in semesterView" :key="semester">
                     <v-card class="ms-2" elevation="12" height="600px" max-height="600px" width="500px">
                         <v-toolbar dark flat>
-                            <v-toolbar-title class="white--text">Courses Yet To Take</v-toolbar-title>    
+                            <v-toolbar-title class="white--text">Semester {{this.currSem+index}}</v-toolbar-title>
+                            <v-spacer></v-spacer>
+                            <v-toolbar-title class="white--text">Credits: </v-toolbar-title>    
                         </v-toolbar>
                         <v-list style="max-height: 600px" class="overflow-y-auto">
-                            <classComponent class="mt-n1" v-for="course in coursesYetToTake" :course="course" :key="course.course_ID"/>
+                            <classComponent class="mt-n1" v-for="course in semester" :course="course" :key="course.course_ID"/>
                         </v-list>       
-              
                     </v-card>
-                </v-col>
-
+                </v-col>               
             </v-row>
+
         </div>
     </v-app>
     <div class="mt-12"></div>
@@ -73,8 +74,8 @@ export default {
         students:JSON,
         student_ID:"",
         currSem: " ",
-        coursesYetToTake:JSON,
-        semesterView : [[]], 
+        semesterView : [[]],
+        semesterCredits:[] 
 
 
   }),
@@ -111,32 +112,31 @@ export default {
                 console.log(error)
             });
 
+
             let coursesYetToTakeUrl = '/user/advisor/student/'+ result.student_ID +'/yetToTakePreReqs';
             axios.get(coursesYetToTakeUrl)
             .then(response =>{
                 var obj = response.data[0]; 
                 var allCourses = Object.keys(obj).map(key => obj[key]);
-                this.coursesYetToTake= Object.keys(obj).map(key => obj[key]);
                 var courses = [];
                 var creditCount = 0;
                 for (var i = 0; i < allCourses.length; i++){
-                    if(creditCount>=17){
+                    creditCount = creditCount + allCourses[i].creditHours;
+                    if(creditCount<=17){
+                        courses.push(allCourses[i])
+                    }
+                    else{
                         this.semesterView.push(courses);
-                        cousres=[];
+                        this.semesterCredits.push(creditCount-allCourses[i].creditHours)
+                        courses=[];
                         creditCount=0;
                     }
-                    creditCount = creditCount + allCourses[i].creditHours;
-                    courses.push(allCourses[i]);
                 }
             })
             .catch(error =>{
                 console.log(error)
             });
-         
 
-            
-            
-           
         },
         
     },
