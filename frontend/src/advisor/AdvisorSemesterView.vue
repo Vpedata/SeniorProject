@@ -126,7 +126,6 @@ export default {
                 }
                 for (var i = 0; i < allCourses.length; i++){
                     creditCount = creditCount + allCourses[i].creditHours;
-                    console.info(allCourses[i]);
                     if(creditCount<=17){
                         courses.push(allCourses[i]);
                         totalCredits = totalCredits - allCourses[i].creditHours;
@@ -141,7 +140,7 @@ export default {
                         courses=[];
                         if(totalCredits <= 17){
                             creditCount = 0;
-                            return
+                            break;
                         }
                         creditCount=allCourses[i].creditHours;
                         courses.push(allCourses[i]);
@@ -150,11 +149,11 @@ export default {
                     }
                     
                 }
-                console.info(allCourses)
+                console.info(allCourses);
                 for ( var course in allCourses){
-                    console.info(course)
-                    creditCount = creditCount + course.creditHours;
-                    courses.push(course);
+                    console.info(allCourses[course])
+                    creditCount = creditCount + allCourses[course].creditHours;
+                    courses.push(allCourses[course]);
                 }
                 var semester = {
                     semCourses : courses, 
