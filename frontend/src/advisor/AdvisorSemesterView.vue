@@ -32,7 +32,7 @@
                 </v-col>
             </v-row>
 
-            <v-row v-if="semesterView.length">
+            <v-row v-if="semesterView.length > 0 ">
                 <v-col cols="4" v-for="(semester,index) in semesterView" :key="semester" >
                     <v-card class="ms-2" elevation="12" height="600px" max-height="600px" width="500px">
                         <v-toolbar dark flat>
@@ -132,9 +132,9 @@ export default {
                             semCredits: creditCount-allCourses[i].creditHours
                         }
                         this.semesterView.push(semester);
-                        
                         courses=[];
-                        creditCount=0;
+                        creditCount=allCourses[i].creditHours;
+                        courses.push(allCourses[i]);
                     }
                 }
                 console.info(allCourses);
