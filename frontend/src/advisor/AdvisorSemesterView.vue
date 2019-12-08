@@ -33,17 +33,19 @@
             </v-row>
 
             <v-row v-if="semesterView.length">
-                <v-col cols="4" v-for="(semester,index) in semesterView" :key="semester">
+                <v-col cols="4" v-for="(semester,index) in semesterView" :key="semester" >
+                    <span v-for="credits in semesterCredits" :key="credits">
                     <v-card class="ms-2" elevation="12" height="600px" max-height="600px" width="500px">
                         <v-toolbar dark flat>
                             <v-toolbar-title class="white--text">Semester {{index}}</v-toolbar-title>
                             <v-spacer></v-spacer>
-                            <v-toolbar-title class="white--text" v-for="credits in semesterCredits" :key="credits">Credits: {{credits}}  </v-toolbar-title>    
+                            <v-toolbar-title class="white--text" >Credits: {{credits}}  </v-toolbar-title>    
                         </v-toolbar>
                         <v-list style="max-height: 600px" class="overflow-y-auto">
                             <classComponent class="mt-n1" v-for="course in semester" :course="course" :key="course.course_ID"/>
                         </v-list>       
                     </v-card>
+                    </span>
                 </v-col>               
             </v-row>
 
@@ -124,7 +126,8 @@ export default {
                 for (var i = 0; i < allCourses.length; i++){
                     creditCount = creditCount + allCourses[i].creditHours;
                     if(creditCount<=17){
-                        courses.push(allCourses[i])
+                        courses.push(allCourses[i]);
+                        delete allCourses[i];
                     }
                     else{
                         this.semesterView.push(courses);
@@ -133,6 +136,12 @@ export default {
                         creditCount=0;
                     }
                 }
+                for (var i = 0; i < allCourses.length; i++){
+                    creditCount = creditCount + allCourses[i].creditHours;
+                    courses.push(allCourses[i]);
+                }
+                this.semesterView.push(courses);
+                this.semesterCredits.push(creditCount)
             })
             .catch(error =>{
                 console.log(error)
