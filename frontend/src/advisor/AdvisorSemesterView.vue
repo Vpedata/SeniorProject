@@ -126,7 +126,6 @@ export default {
                 }
                 for (var i = 0; i < allCourses.length; i++){
                     creditCount = creditCount + allCourses[i].creditHours;
-                    totalCredits = totalCredits - allCourses[i].creditHours;
                     console.info(allCourses[i]);
                     if(creditCount<=17){
                         courses.push(allCourses[i]);
@@ -147,8 +146,9 @@ export default {
                         courses.push(allCourses[i]);
                         delete allCourses[i];
                     }
+                    totalCredits = totalCredits - allCourses[i].creditHours;
                 }
-                for ( var course in allCourses){
+                for ( var course of allCourses){
                     console.info(course)
                     creditCount = creditCount + course.creditHours;
                     courses.push(course);
