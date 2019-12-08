@@ -32,13 +32,13 @@
                 </v-col>
             </v-row>
 
-            <v-row>
-                <v-col cols="6" v-for="(semester,index) in semesterView" :key="semester">
+            <v-row v-if="semesterView.length">
+                <v-col cols="4" v-for="(semester,index) in semesterView" :key="semester">
                     <v-card class="ms-2" elevation="12" height="600px" max-height="600px" width="500px">
                         <v-toolbar dark flat>
-                            <v-toolbar-title class="white--text">Semester {{this.currSem+index}}</v-toolbar-title>
+                            <v-toolbar-title class="white--text">Semester {{index}}</v-toolbar-title>
                             <v-spacer></v-spacer>
-                            <v-toolbar-title class="white--text">Credits: </v-toolbar-title>    
+                            <v-toolbar-title class="white--text" v-for="credits in semesterCredits" :key="credits">Credits: {{credits}}  </v-toolbar-title>    
                         </v-toolbar>
                         <v-list style="max-height: 600px" class="overflow-y-auto">
                             <classComponent class="mt-n1" v-for="course in semester" :course="course" :key="course.course_ID"/>
@@ -120,6 +120,7 @@ export default {
                 var allCourses = Object.keys(obj).map(key => obj[key]);
                 var courses = [];
                 var creditCount = 0;
+                console.info(allCourses);
                 for (var i = 0; i < allCourses.length; i++){
                     creditCount = creditCount + allCourses[i].creditHours;
                     if(creditCount<=17){
