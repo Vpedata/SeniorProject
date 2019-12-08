@@ -12,6 +12,7 @@ import CreateCourse from '@/advisor/CreateCourse'
 import AdvisorSemesterView from '@/advisor/AdvisorSemesterView'
 import Chat from '@/advisor/Chat'
 import StudentChat from '@/studentpages/StudentChat'
+import StudentSemesterView from '@/studentpages/StudentSemesterView'
 import axios from 'axios'
 //import Messages from '@/messaging/components/ChatApp'
 
@@ -53,6 +54,14 @@ let router = new Router({
       path: '/fe/studentaddclasspage',
       name: 'StudentAddClassPage',
       component: StudentAddClassPage,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/fe/studentSemesterView',
+      name: 'StudentSemesterView',
+      component: StudentSemesterView,
       meta: {
         requiresAuth: true
       }

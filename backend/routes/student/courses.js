@@ -39,6 +39,15 @@ router.get("/yetToTake",isStudent, (req, res, next) => {
     });
 });
 
+//Get courses that are left to take for current students with preReqs; 
+router.get("/yetToTakePreReqs",isStudent, (req, res, next) => {
+  var sql = "CALL yetToTakeWithPrereqs(?);";
+  db.query(sql,req.user.student_ID, (err, rows, fields) => {
+    if (err) throw err;
+    res.json(rows);
+  });
+});
+
 //update the list of couses taken by the current student
 router.post("/taken",isStudent,(req, res, next) => {
     var sql = "CALL addTakenClasses(?,?,?);";

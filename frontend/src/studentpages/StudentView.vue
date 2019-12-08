@@ -7,6 +7,7 @@
             <v-toolbar-title class="brown--text">{{name}}</v-toolbar-title>
           <v-spacer></v-spacer>
                 <v-toolbar-items>
+                    <v-btn  @click="$router.push('/fe/studentSemesterView')" dark>Semester View</v-btn>
                     <v-btn  @click="$router.push('/fe/editcompleted')" dark>Edit Completed</v-btn>
                     <v-btn  @click="$router.push('/fe/studentaddclasspage')" dark>Add Class</v-btn>
                     <v-btn  @click="$router.push('/fe/classlist')" dark>Class List</v-btn>
