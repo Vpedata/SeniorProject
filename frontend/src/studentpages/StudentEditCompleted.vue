@@ -16,20 +16,32 @@
                 </v-toolbar>
             </v-row>
             <v-row>
-                <v-card class="mt-n16 mx-auto" width="800px" elevation="12" height="500px" max-height="500px">
+                <v-col cols="6">
+                <v-card class=" mx-auto" width="800px" elevation="12" height="500px" max-height="500px">
                     <v-toolbar flat dark>
-                        <v-toolbar-title>Courses</v-toolbar-title>
+                        <v-toolbar-title>Core Courses</v-toolbar-title>
                     </v-toolbar>
-                    <v-list style="max-height: 500px" class="overflow-y-auto">
-                        <classComponent v-for="course in avail_courses" :course="course" :key="course.course_ID" :taken="false" @transfer="transfer_course"/> 
+                    <v-list style="max-height: 436px" class="overflow-y-auto">
+                        <classComponent v-for="course in avail_courses.filter(avail_iscore)" :course="course" :key="course.course_ID" :taken="false" @transfer="transfer_course"/> 
                     </v-list>                  
                 </v-card>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col cols="6">
+                <v-card class=" mx-auto" width="800px" elevation="12" height="500px" max-height="500px">
+                    <v-toolbar flat dark>
+                        <v-toolbar-title>Non-Core Courses</v-toolbar-title>
+                    </v-toolbar>
+                    <v-list style="max-height: 436px" class="overflow-y-auto">
+                        <classComponent v-for="course in avail_courses.filter(!avail_iscore)" :course="course" :key="course.course_ID" :taken="false" @transfer="transfer_course"/> 
+                    </v-list>                  
+                </v-card>
+                </v-col>
             </v-row>
             <v-btn class="mx-auto mt-12" width="140" dark color="orange" @click="update_completed">Save</v-btn>
         </div>
     </v-app>
-    <div class="mt-12"></div>
-    </div>
 </template>
 
 
@@ -41,7 +53,10 @@ export default {
     computed: {
         ...mapState({
             account: state => state.account,
-        })
+        }),
+        avail_iscore: function(c) {
+            return c.isCore
+        }
     }, 
     data: () => ({
         dialog: false,
