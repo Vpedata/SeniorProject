@@ -92,10 +92,13 @@ export default {
                 if (check_grade) {
                     update_courses = update_courses + check_course + ","
                     update_grades = update_grades + check_grade + ","
+                    temp_index ++
                 }
             }
-            update_courses = update_courses.substring(0, update_courses.length - 1);
-            update_grades = update_grades.substring(0, update_grades.length - 1);
+            if (temp_index > 0) {
+                update_courses = update_courses.substring(0, update_courses.length - 1);
+                update_grades = update_grades.substring(0, update_grades.length - 1);
+            }
             
             console.info(update_courses);
             console.info(update_grades);          
