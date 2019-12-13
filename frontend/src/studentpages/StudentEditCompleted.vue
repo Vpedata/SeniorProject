@@ -62,7 +62,7 @@ export default {
         dialog: false,
         name: " ",
         taken: JSON,
-        avail_courses: VAR,
+        avail_courses: Array,
         id: "",
 
     }),
