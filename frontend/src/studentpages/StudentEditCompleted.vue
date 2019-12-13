@@ -16,7 +16,8 @@
                 </v-toolbar>
             </v-row>
             <v-row>
-                <v-col cols="6">
+                <v-col cols="1"></v-col>
+                <v-col cols="5">
                 <v-card class=" mx-auto" width="800px" elevation="12" height="500px" max-height="500px">
                     <v-toolbar flat dark>
                         <v-toolbar-title>Core Courses</v-toolbar-title>
@@ -39,9 +40,11 @@
                 </v-card>
                 </v-col>
             </v-row>
+            <v-spacer></v-spacer>
             <v-btn class="mx-auto mt-12" width="140" dark color="orange" @click="update_completed">Save</v-btn>
         </div>
     </v-app>
+    </div>
 </template>
 
 
@@ -67,7 +70,7 @@ export default {
         dialog: false,
         name: " ",
         taken: JSON,
-        avail_courses: JSON,
+        avail_courses: Array,
         id: "",
 
     }),
@@ -82,6 +85,9 @@ export default {
             }).catch(err =>{
                 console.log(err);
             });
+        },
+        avail_iscore: function(c) {
+            return c.isCore
         },
         transfer_course: function(course,grade) {
                 course.dialog = false
