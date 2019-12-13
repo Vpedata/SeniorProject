@@ -23,7 +23,7 @@
                         <v-toolbar-title>Core Courses</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 436px" class="overflow-y-auto">
-                        <classComponent v-for="course in avail_courses.filter(avail_iscore(course))" :course="course" :key="course.course_ID" :taken="false" @transfer="transfer_course"/> 
+                        <classComponent v-for="course in avail_courses.filter(avail_iscore)" :course="course" :key="course.course_ID" :taken="false" @transfer="transfer_course"/> 
                     </v-list>                  
                 </v-card>
                 </v-col>
@@ -35,7 +35,7 @@
                         <v-toolbar-title>Non-Core Courses</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 436px" class="overflow-y-auto">
-                        <classComponent v-for="course in avail_courses.filter(!avail_iscore(course))" :course="course" :key="course.course_ID" :taken="false" @transfer="transfer_course"/> 
+                        <classComponent v-for="course in avail_courses.filter(!avail_iscore)" :course="course" :key="course.course_ID" :taken="false" @transfer="transfer_course"/> 
                     </v-list>                  
                 </v-card>
                 </v-col>
@@ -57,9 +57,6 @@ export default {
         ...mapState({
             account: state => state.account,
         }),
-        avail_iscore: function(c) {
-            return c.isCore
-        }
     }, 
     data: () => ({
         dialog: false,
@@ -80,6 +77,9 @@ export default {
             }).catch(err =>{
                 console.log(err);
             });
+        },
+        avail_iscore: function(c) {
+            return c.isCore
         },
         transfer_course: function(course,grade) {
                 course.dialog = false
