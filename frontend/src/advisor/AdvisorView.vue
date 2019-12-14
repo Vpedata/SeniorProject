@@ -70,6 +70,7 @@
                 </v-col>
 
             </v-row>
+            <v-row></v-row>
         </div>
     </v-app>
     <div class="mt-12"></div>
