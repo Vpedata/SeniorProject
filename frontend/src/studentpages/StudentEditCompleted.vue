@@ -23,7 +23,7 @@
                         <v-toolbar-title>Core Courses</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 436px" class="overflow-y-auto">
-                        <classComponent v-for="course in avail_iscore" :course="course" :key="course.course_ID" :taken="false" @transfer="transfer_course"/> 
+                        <classComponent v-for="course in courses_iscore" :course="course" :key="course.course_ID" :taken="false" @transfer="transfer_course"/> 
                     </v-list>                  
                 </v-card>
                 </v-col>
@@ -35,7 +35,7 @@
                         <v-toolbar-title>Non-Core Courses</v-toolbar-title>
                     </v-toolbar>
                     <v-list style="max-height: 436px" class="overflow-y-auto">
-                        <classComponent v-for="course in avail_notcore" :course="course" :key="course.course_ID" :taken="false" @transfer="transfer_course"/> 
+                        <classComponent v-for="course in courses_notcore" :course="course" :key="course.course_ID" :taken="false" @transfer="transfer_course"/> 
                     </v-list>                  
                 </v-card>
                 </v-col>
@@ -56,15 +56,7 @@ export default {
     computed: {
         ...mapState({
             account: state => state.account,
-        }),
-        avail_notcore() {
-            let c = this.avail_courses.filter(({isCore}) => !isCore)
-            return c
-        },
-        avail_iscore() {
-            let c = this.avail_courses.filter(({isCore}) => isCore)
-            return c
-        }
+        })
     }, 
     data: () => ({
         dialog: false,
@@ -72,7 +64,8 @@ export default {
         taken: JSON,
         avail_courses: Array,
         id: "",
-
+        courses_iscore: null,
+        courses_notcore: null
     }),
 
     components: {
@@ -86,8 +79,12 @@ export default {
                 console.log(err);
             });
         },
-        avail_iscore: function(c) {
-            return c.isCore
+        avail_iscore() {
+            this.courses_iscore = this.avail_courses.filter((course) => { return (course.isCore == true)})
+        },
+        avail_notcore() {
+            this.courses_notcore = this.avail_courses.filter((course) => { return (course.isCore == false)})
+
         },
         transfer_course: function(course,grade) {
                 course.dialog = false
