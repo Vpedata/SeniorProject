@@ -107,7 +107,7 @@ export default {
         });
 
 
-        let coursesYetToTakeUrl = '/user/student/course/yetToTakePreReqs';
+        let coursesYetToTakeUrl = '/user/student/courses/yetToTakePreReqs';
         axios.get(coursesYetToTakeUrl)
         .then(response =>{
             var obj = response.data[0]; 
