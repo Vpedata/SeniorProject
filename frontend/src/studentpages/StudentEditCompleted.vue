@@ -91,7 +91,7 @@ export default {
                 course.grade = grade;
         },
         update_completed: function() {
-            avail_courses = avail_iscore.concat(avail_notcore)
+            this.avail_courses = this.courses_iscore.concat(this.courses_notcore)
             let temp_index = 0
             let update_courses = ""
             let update_grades = ""
@@ -164,8 +164,8 @@ export default {
       })
   },
   mounted() {
-      avail_iscore()
-      avail_notcore()
+      this.avail_iscore()
+      this.avail_notcore()
   }
 };
 </script>
