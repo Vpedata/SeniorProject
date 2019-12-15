@@ -62,10 +62,10 @@ export default {
         dialog: false,
         name: " ",
         taken: JSON,
-        avail_courses: Array,
+        avail_courses: [],
         id: "",
-        courses_iscore: null,
-        courses_notcore: null
+        courses_iscore: [],
+        courses_notcore: []
     }),
 
     components: {
