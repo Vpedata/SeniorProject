@@ -25,12 +25,12 @@
             <v-list-item-action>
                     <div v-if="sel=true">
                         <v-row>
-                            <v-btn class="mx-2" fab dark small color="green" v-on:click="$emit('transfer',course)">
+                            <v-btn class="mx-2" fab dark small color="red" v-on:click="$emit('transfer',course)">
                             <v-icon dark>mdi-minus-circle-outline</v-icon>
                             </v-btn>
                         </v-row>
                     </div>
-                    <div v-else>
+                    <div v-else-if="sel=false">
                         <v-row>
                             <v-btn class="mx-2" fab dark small color="green" v-on:click="$emit('transfer',course)">
                                 <v-icon dark>mdi-plus-circle-outline</v-icon>
@@ -47,26 +47,12 @@ export default {
     name: "classComponent",
     props: {
         course: Object,
+        sel: false
     },
     data: () => ({
         dialog: false,
         name: "",
-        sel
     }),
-    methods: {
-      addRecCourse: function() {
-          /*
-        axios.post("/user/student/course/addRecCourse", {
-                ??
-          }).then(function (response) {
-              console.log(response);
-          })
-          .catch(function (error) {
-              console.log(error);
-          });
-          */
-        }   
-    },
     beforeMount(){
       axios
       .get('/user/getName')
