@@ -47,7 +47,7 @@ export default {
     name: "classComponent",
     props: {
         course: Object,
-        sel: false
+        sel: Boolean
     },
     data: () => ({
         dialog: false,
