@@ -60,7 +60,6 @@ export default {
         dialog: false,
         name: " ",
         taken: JSON,
-        avail_courses: [],
         id: "",
         courses_iscore: [],
         courses_notcore: []
@@ -77,33 +76,34 @@ export default {
                 console.log(err);
             });
         },
-        avail_iscore() {
-            this.courses_iscore = Object.values(this.avail_courses).filter(course => { return (course.isCore == true)})
-            console.info(this.courses_iscore);
-        },
-        avail_notcore() {
-            this.courses_notcore = Object.values(this.avail_courses).filter(course => { return (course.isCore == false)})
-            console.info(this.courses_notcore);   
-        },
         transfer_course: function(course,grade) {
                 course.dialog = false
                 course.grade = grade;
         },
         update_completed: function() {
-            this.avail_courses = this.courses_iscore.concat(this.courses_notcore)
-            let temp_index = 0
+            let len_core = 0
+            let len_noncore = 0
             let update_courses = ""
             let update_grades = ""
-            for (var i=0 ;i<this.avail_courses.length; i++){
+            for (var i=0 ;i<this.courses_iscore.length; i++){
                 let check_course = this.avail_courses[i].courseCode
                 let check_grade = this.avail_courses[i].grade
                 if (check_grade) {
                     update_courses = update_courses + check_course + ","
                     update_grades = update_grades + check_grade + ","
-                    temp_index ++
+                    len_core ++
                 }
             }
-            if (temp_index > 0) {
+            for (var i=0 ;i<this.courses_notcore.length; i++){
+                let check_course = this.avail_courses[i].courseCode
+                let check_grade = this.avail_courses[i].grade
+                if (check_grade) {
+                    update_courses = update_courses + check_course + ","
+                    update_grades = update_grades + check_grade + ","
+                    len_noncore ++
+                }
+            }
+            if (len_noncore > 0 || (len_core > 0 && len_noncore == 0)) {
                 update_courses = update_courses.substring(0, update_courses.length - 1);
                 update_grades = update_grades.substring(0, update_grades.length - 1);
             }       
@@ -139,31 +139,25 @@ export default {
         console.log(error)
       });
 
+      axios.get('/user/course/getNonCores')
+      .then(response =>{
+         var obj = response.data[0]; 
+         this.courses_iscore = Object.keys(obj).map(key => obj[key]);
+         console.info(this.taken);
+      })
+      .catch(error =>{
+          console.log(error)
+      }),
       axios.get('/user/student/courses/taken')
       .then(response =>{
          var obj = response.data[0]; 
-         this.taken = Object.keys(obj).map(key => obj[key]);
+         this.courses_notcore = Object.keys(obj).map(key => obj[key]);
          console.info(this.taken);
       })
       .catch(error =>{
           console.log(error)
       })
-
-      axios.get('/user/student/courses/yetToTake')
-      .then(response =>{
-         var obj = response.data[0]; 
-         this.avail_courses = Object.keys(obj).map(key => obj[key]);
-         console.info(this.avail_courses);
-      })
-      .catch(error =>{
-          console.log(error)
-      })
   },
-  mounted() {
-      console.info(this.avail_courses);   
-      this.avail_iscore()
-      this.avail_notcore()
-  }
 };
 </script>
 

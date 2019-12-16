@@ -11,6 +11,24 @@ router.get("/all",authMiddleware, (req, res, next)=>{
   })
 });
 
+//Get all core courses
+router.get("/all",authMiddleware, (req, res, next)=>{
+  var sql = "CALL getCores();";
+  db.query(sql,(err, rows, fields)=>{
+  if (err) throw err;
+  res.json(rows);
+})
+});
+
+//Get all noncore courses
+router.get("/all",authMiddleware, (req, res, next)=>{
+  var sql = "CALL getNonCores();";
+  db.query(sql,(err, rows, fields)=>{
+  if (err) throw err;
+  res.json(rows);
+})
+});
+
 //Get an course by id 
 router.get("/:id",authMiddleware, (req, res, next) => {
   var sql = "CALL getCourseById(?);";
