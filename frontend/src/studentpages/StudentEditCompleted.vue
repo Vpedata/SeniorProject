@@ -58,7 +58,7 @@ export default {
     }, 
     data: () => ({
         dialog: false,
-        name: " ",
+        name: "",
         taken: JSON,
         id: "",
         courses_iscore: JSON,
@@ -121,14 +121,16 @@ export default {
         } 
     },
     beforeMount(){
-      axios
-      .get('/user/getName')
-      .then(response => {
-        this.name = response.data.firstName + " " + response.data.lastName;
-      })
-      .catch(error => {
-        console.log(error)
-      });
+      if (this.name){
+        axios
+        .get('/user/getName')
+        .then(response => {
+            this.name = response.data.firstName + " " + response.data.lastName;
+        })
+        .catch(error => {
+            console.log(error)
+        });
+      }
 
       axios
       .get('/user/getmyid')
