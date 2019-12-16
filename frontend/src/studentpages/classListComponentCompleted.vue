@@ -84,15 +84,5 @@ export default {
           */
         }   
     },
-    beforeMount(){
-      axios
-      .get('/user/getName')
-      .then(response => {
-        this.name = response.data.firstName + " " + response.data.lastName;
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
 }
 </script>
