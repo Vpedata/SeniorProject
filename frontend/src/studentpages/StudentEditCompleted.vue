@@ -147,7 +147,8 @@ export default {
       })
       .catch(error =>{
           console.log(error)
-      }),
+      });
+
       axios.get('/course/allNonCore')
       .then(response =>{
          var obj = response.data[0]; 
@@ -156,16 +157,8 @@ export default {
       })
       .catch(error =>{
           console.log(error)
-      }),
-      axios.get('/user/student/courses/taken')
-      .then(response =>{
-         var obj = response.data[0]; 
-         this.courses_notcore = Object.keys(obj).map(key => obj[key]);
-         console.info(this.taken);
-      })
-      .catch(error =>{
-          console.log(error)
-      })
+      });
+
   },
 };
 </script>
