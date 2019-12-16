@@ -50,18 +50,7 @@ export default {
         sel: Boolean
     },
     data: () => ({
-        dialog: false,
-        name: "",
-    }),
-    beforeMount(){
-      axios
-      .get('/user/getName')
-      .then(response => {
-        this.name = response.data.firstName + " " + response.data.lastName;
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
+        dialog: false
+    })
 }
 </script>
