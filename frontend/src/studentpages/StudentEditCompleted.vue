@@ -27,9 +27,7 @@
                     </v-list>                  
                 </v-card>
                 </v-col>
-            </v-row>
-            <v-row>
-                <v-col cols="6">
+                <v-col cols="5">
                 <v-card class=" mx-auto" width="800px" elevation="12" height="500px" max-height="500px">
                     <v-toolbar flat dark>
                         <v-toolbar-title>Non-Core Courses</v-toolbar-title>
