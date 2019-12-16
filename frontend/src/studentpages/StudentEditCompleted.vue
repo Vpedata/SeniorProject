@@ -83,7 +83,7 @@ export default {
             this.courses_iscore = this.avail_courses.values().filter(course => { return (course.isCore == true)})
         },
         avail_notcore() {
-            this.courses_notcore = this.avail_courses.values().filter(course => { return (course.isCore == false)})
+            this.courses_notcore = Object.values(this.avail_courses).filter(course => { return (course.isCore == false)})
 
         },
         transfer_course: function(course,grade) {
