@@ -121,17 +121,14 @@ export default {
         } 
     },
     beforeMount(){
-      if (this.name){
-        axios
-        .get('/user/getName')
-        .then(response => {
-            this.name = response.data.firstName + " " + response.data.lastName;
-        })
-        .catch(error => {
-            console.log(error)
-        });
-        console.log(this.name);
-      }
+         axios
+      .get("/user/getName")
+      .then(response => {
+        this.name = response.data.firstName + " " + response.data.lastName;
+      })
+      .catch(error => {
+        console.log(error);
+      });
 
       axios
       .get('/user/getmyid')
