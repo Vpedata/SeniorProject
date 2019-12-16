@@ -78,11 +78,12 @@ export default {
             });
         },
         avail_iscore() {
-            this.courses_iscore = this.avail_courses.values().filter(course => { return (course.isCore == true)})
+            this.courses_iscore = Object.values(this.avail_courses).filter(course => { return (course.isCore == true)})
+            console.info(this.courses_iscore);
         },
         avail_notcore() {
             this.courses_notcore = Object.values(this.avail_courses).filter(course => { return (course.isCore == false)})
-
+            console.info(this.courses_notcore);   
         },
         transfer_course: function(course,grade) {
                 course.dialog = false
@@ -105,10 +106,7 @@ export default {
             if (temp_index > 0) {
                 update_courses = update_courses.substring(0, update_courses.length - 1);
                 update_grades = update_grades.substring(0, update_grades.length - 1);
-            }
-            
-            console.info(update_courses);
-            console.info(update_grades);          
+            }       
             
             axios.post("/user/student/courses/taken", {
                 classes: update_courses,
@@ -162,6 +160,7 @@ export default {
       })
   },
   mounted() {
+      console.info(this.avail_courses);   
       this.avail_iscore()
       this.avail_notcore()
   }
