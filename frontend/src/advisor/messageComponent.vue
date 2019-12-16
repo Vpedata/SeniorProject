@@ -3,7 +3,7 @@
             <v-list-item-content>
                 <v-list-item-title>
                     <span :class="classObject">
-                        <large>{{message.user}}:{{message.message}}</large>
+                        <p style="font-size:36;">{{message.user}}:{{message.message}}</p>
                     </span>
                 </v-list-item-title>
             </v-list-item-content>
