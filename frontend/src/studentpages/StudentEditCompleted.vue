@@ -61,8 +61,8 @@ export default {
         name: " ",
         taken: JSON,
         id: "",
-        courses_iscore: [],
-        courses_notcore: []
+        courses_iscore: JSON,
+        courses_notcore: JSON
     }),
 
     components: {
@@ -139,11 +139,20 @@ export default {
         console.log(error)
       });
 
-      axios.get('/user/course/getNonCores')
+      axios.get('/course/allCore')
       .then(response =>{
          var obj = response.data[0]; 
          this.courses_iscore = Object.keys(obj).map(key => obj[key]);
-         console.info(this.taken);
+         console.info(this.courses_iscore);
+      })
+      .catch(error =>{
+          console.log(error)
+      }),
+      axios.get('/course/allNonCore')
+      .then(response =>{
+         var obj = response.data[0]; 
+         this.courses_notcore = Object.keys(obj).map(key => obj[key]);
+         console.info(this.courses_notcore);
       })
       .catch(error =>{
           console.log(error)

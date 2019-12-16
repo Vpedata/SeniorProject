@@ -12,7 +12,7 @@ router.get("/all",authMiddleware, (req, res, next)=>{
 });
 
 //Get all core courses
-router.get("/all",authMiddleware, (req, res, next)=>{
+router.get("/allCore",authMiddleware, (req, res, next)=>{
   var sql = "CALL getCores();";
   db.query(sql,(err, rows, fields)=>{
   if (err) throw err;
@@ -21,7 +21,7 @@ router.get("/all",authMiddleware, (req, res, next)=>{
 });
 
 //Get all noncore courses
-router.get("/all",authMiddleware, (req, res, next)=>{
+router.get("/allNonCore",authMiddleware, (req, res, next)=>{
   var sql = "CALL getNonCores();";
   db.query(sql,(err, rows, fields)=>{
   if (err) throw err;
