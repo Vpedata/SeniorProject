@@ -53,9 +53,6 @@ export default {
     },
     data: () => ({
         dialog: false
-    }),
-    mounted() {
-        console.info(sel)
-    }
+    })
 }
 </script>
