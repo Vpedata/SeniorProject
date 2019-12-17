@@ -23,20 +23,22 @@
                 </v-dialog>
             </v-list-item-content>
             <v-list-item-action>
-                    <div v-if="this.sel=true">
+                <template>
+                    <div v-if="sel">
                         <v-row>
                             <v-btn class="mx-2" fab dark small color="red" v-on:click="$emit('transfer',course)">
                             <v-icon dark>mdi-minus-circle-outline</v-icon>
                             </v-btn>
                         </v-row>
                     </div>
-                    <div v-else-if="this.sel=false">
+                    <div v-else>
                         <v-row>
                             <v-btn class="mx-2" fab dark small color="green" v-on:click="$emit('transfer',course)">
                                 <v-icon dark>mdi-plus-circle-outline</v-icon>
                             </v-btn>
                         </v-row>
                     </div>
+                </template>
             </v-list-item-action>
         </v-list-item> 
 </template>
