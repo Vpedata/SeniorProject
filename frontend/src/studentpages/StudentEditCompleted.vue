@@ -86,8 +86,8 @@ export default {
             let update_courses = ""
             let update_grades = ""
             for (var i=0 ;i<this.courses_iscore.length; i++){
-                let check_course = this.avail_courses[i].courseCode
-                let check_grade = this.avail_courses[i].grade
+                let check_course = this.courses_iscore[i].courseCode
+                let check_grade = this.courses_iscore[i].grade
                 if (check_grade) {
                     update_courses = update_courses + check_course + ","
                     update_grades = update_grades + check_grade + ","
@@ -95,8 +95,8 @@ export default {
                 }
             }
             for (var i=0 ;i<this.courses_notcore.length; i++){
-                let check_course = this.avail_courses[i].courseCode
-                let check_grade = this.avail_courses[i].grade
+                let check_course = this.courses_notcore[i].courseCode
+                let check_grade = this.courses_notcore[i].grade
                 if (check_grade) {
                     update_courses = update_courses + check_course + ","
                     update_grades = update_grades + check_grade + ","
