@@ -3,13 +3,14 @@
             <v-list-item-content>
                 <v-list-item-title>
                     <span :class="classObject">
-                        <p style="font-size:20px; border:2px; border-radius:25px;"><span style="color:blue">{{message.user}}: </span>{{message.message}}</p>
+                        <p style="font-size:20px;"><span style="color:blue">{{message.user}}: </span>{{message.message}}</p>
                     </span>
                 </v-list-item-title>
             </v-list-item-content>
         </v-list-item> 
 </template>
 
+<script>
 
 import axios from 'axios';
 export default { 
@@ -17,7 +18,6 @@ export default {
     props: {
         message: Object,
     },
- 
     computed: {
         classObject: function() {
             if(!this.message.userType){

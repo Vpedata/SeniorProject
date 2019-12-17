@@ -16,17 +16,6 @@ export default {
     props: {
         message: Object,
     },
-    data() {
-        return {
-            userID: -1,
-        }
-    },
-    beforeMount() {
-        axios.get('/user/getmyid')
-             .then(response => {
-                this.userID = response.data;
-              });
-    },
     computed: {
         classObject: function() {
             if(this.message.userType){
