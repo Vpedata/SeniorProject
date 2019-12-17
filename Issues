@@ -1,0 +1,4 @@
+Messenger currently doesn't function 100% correctly as it will work with
+  some users, but not with others.
+Updating a course as an advisor will delete it's pre and post-requisites,
+  but only recovers one of the two, leaving information out.
