@@ -31,7 +31,7 @@
                         <v-toolbar-title class="white--text">{{student.name}}</v-toolbar-title>
                         </v-toolbar>
                     <v-card-text>
-                    <v-list :elevated="15" rounded three-line style="max-height: 500px" class="overflow-y-auto">
+                    <v-list style="max-height: 500px" class="overflow-y-auto">
                         <messageComponent class="mt-n1" v-for="message in messagesList" 
                         :message="message" :key="message"/>
                         <small v-if="typing" >{{typing}} is typing</small>

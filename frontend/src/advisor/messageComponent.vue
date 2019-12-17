@@ -1,13 +1,12 @@
 <template>
-    <v-list-item>
+    <v-list-item dense :elevated="15" two-line >
             <v-list-item-content>
                 <v-list-item-title>
                     <span :class="classObject">
-                        <p style="font-size:20px;">{{message.user}}:{{message.message}}</p>
+                        <span style="font-size:20px;"><p style="color:blue">{{message.user}}</p>{{message.message}}</span>
                     </span>
                 </v-list-item-title>
             </v-list-item-content>
-        </v-list-item> 
 </template>
 <script>
 
